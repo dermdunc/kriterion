@@ -59,7 +59,8 @@ architecture:
   target_state_relevance: experimental
   depends_on: []
   enables: []
-  consumes: []
+  consumes:
+    - "hekton-local-llm (provider surface, platform/hekton-local-llm — hekton_llm import namespace, bound to source signature at src/hekton_llm/ollama_client.py:34, imported only in src/kriterion/executors/ per ADR-005/non-negotiable invariant 6)"
   promotion_candidate: false
   promotion_target: none
   next_architecture_step: ""

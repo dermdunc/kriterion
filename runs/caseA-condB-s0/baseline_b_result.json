@@ -1,0 +1,17 @@
+{
+  "minority_positions": [],
+  "modal_action": "DEFER",
+  "modal_action_count": 5,
+  "total_positions": 5,
+  "unioned_blocking_unknowns": [
+    "Long-run behaviour of agent-suggested code quality as the underlying model provider updates its model version is not established.",
+    "No agreed methodology exists yet for attributing observed cycle-time or defect-rate changes at enterprise scale specifically to agent usage versus concurrent process changes.",
+    "Long-run behaviour of agent-suggested code quality as model versions update",
+    "Real-world incident rate for the open prompt-injection concern at full rollout scale",
+    "Real-world incident rate for the open prompt-injection concern at full rollout scale is unknown; the pilot recorded zero exploited incidents, but pilot scope and duration may be too limited to observe a low-frequency event.",
+    "Long-run behavior of agent-suggested code quality with model version updates",
+    "Real-world incident rate for open prompt-injection concern at full rollout scale",
+    "The long-run behavior of agent-suggested code quality as the underlying model provider updates its model version is unknown (ev-025).",
+    "The real-world incident rate for the open prompt-injection concern at full rollout scale is unknown, despite no incidents observed in the pilot (ev-026)"
+  ]
+}

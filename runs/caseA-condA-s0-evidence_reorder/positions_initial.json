@@ -1,0 +1,37 @@
+[
+  {
+    "blocking_unknowns": [
+      "Real-world incident rate for the open prompt-injection concern at full rollout scale is unknown",
+      "Long-run behaviour of agent-suggested code quality as model version updates is not established"
+    ],
+    "confidence_band": "LOW",
+    "created_at": "2026-09-07T10:46:34Z",
+    "distrusted_assumption": "Assumed attrition-risk reduction from improved engineer experience: 1-2 percentage points off the current 14% annual voluntary attrition rate, based on the pilot exit survey's stated preference for continued access.",
+    "id": "caseA-condA-s0-evidence_reorder-baseline_a-baseline_a-initial",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-015"
+        ],
+        "text": "The current pilot scope did not exercise the agent against systems handling regulated customer data, leaving open security questions that must be addressed before scaling."
+      },
+      {
+        "evidence_refs": [
+          "ev-024"
+        ],
+        "text": "There is no agreed methodology for attributing observed cycle-time or defect-rate changes at enterprise scale specifically to agent usage versus concurrent process changes."
+      },
+      {
+        "evidence_refs": [
+          "ev-017",
+          "ev-009"
+        ],
+        "text": "The pilot's adoption rate and conditions do not fully generalize to a full-scale rollout, with weaker onboarding support expected to reduce active usage rates."
+      }
+    ],
+    "member": "baseline_a",
+    "phase": "initial",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  }
+]

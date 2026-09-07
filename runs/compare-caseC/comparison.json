@@ -1,0 +1,54 @@
+{
+  "conditions": {
+    "A": {
+      "belief_update_rationality": 1.0,
+      "category_inflation_count": 0,
+      "condition": "A",
+      "dissent_nonempty_rate": 1.0,
+      "numeric_alteration_count": 0,
+      "p0_pass_rate": 1.0,
+      "run_count": 5,
+      "unique_evidence_refs_per_seat": {
+        "baseline_a": 5
+      },
+      "unsupported_claim_rate": 0.0
+    },
+    "B": {
+      "belief_update_rationality": null,
+      "category_inflation_count": 0,
+      "condition": "B",
+      "dissent_nonempty_rate": null,
+      "numeric_alteration_count": 0,
+      "p0_pass_rate": 1.0,
+      "run_count": 5,
+      "unique_evidence_refs_per_seat": {
+        "business_executive": 3,
+        "cfo": 4,
+        "ciso": 4,
+        "cro_compliance": 4,
+        "cto": 5
+      },
+      "unsupported_claim_rate": 0.0
+    },
+    "C": {
+      "belief_update_rationality": 0.9166666666666666,
+      "category_inflation_count": 0,
+      "condition": "C",
+      "dissent_nonempty_rate": 1.0,
+      "numeric_alteration_count": 0,
+      "p0_pass_rate": 1.0,
+      "run_count": 5,
+      "unique_evidence_refs_per_seat": {
+        "business_executive": 3,
+        "cfo": 4,
+        "ciso": 4,
+        "cro_compliance": 4,
+        "cto": 5
+      },
+      "unsupported_claim_rate": 0.0
+    }
+  },
+  "honest_negative_detail": "C beats both A and B on 0/2-of-3-available sub-metrics ([]), by bare aggregate comparison -- NOT the pre-registered 2x-seed-stddev margin (not implemented; seed_to_seed_stddev() is unused here) or the >2x-inference-cost condition (cost is not tracked at all, a separately documented gap). A true margin-and-cost check could only make it HARDER for C to beat a sub-metric, never easier, so this is a stricter-than-shown result if fully evaluated, not a weaker one. perturbation-robustness sub-metric not computed (needs the P1 batch).",
+  "honest_negative_fired": true,
+  "perturbation_drift_rate": null
+}

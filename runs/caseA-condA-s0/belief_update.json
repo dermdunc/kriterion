@@ -1,0 +1,16 @@
+{
+  "change_type": "evidence_driven",
+  "created_at": "2026-09-06T06:44:20Z",
+  "drift_flags": [],
+  "id": "caseA-condA-s0-baseline_a-belief-update",
+  "initial_confidence": "MEDIUM",
+  "initial_position": "DEFER",
+  "member": "baseline_a",
+  "revised_confidence": "MEDIUM",
+  "revised_position": "DEFER",
+  "schema_version": "kriterion/v0.1",
+  "stated_reason": "The controlled study (ev-027) found a productivity uplift of only 8-11%, which is materially below the pilot's extrapolation of 18%. This suggests that the initial assumptions about broader adoption benefits may be overly optimistic. Additionally, concerns around security and varying levels of technical debt across different codebases remain unresolved.",
+  "trigger_refs": [
+    "ev-027"
+  ]
+}

@@ -1,0 +1,95 @@
+[
+  {
+    "author_role": "cfo",
+    "content": "The staged rollout proposal presents a measured approach to expanding an enterprise coding agent to 5,000 engineers based on promising pilot results, which demonstrated a significant reduction in cycle time and high user satisfaction among participants (ev-001, ev-002, ev-007). While there are acknowledged uncertainties around full-scale adoption rates and security concerns for regulated systems (ev-015, ev-026), the incremental funding of GBP4.2 million over 24 months allows for iterative learning and risk mitigation before committing to a larger investment. This staged approach aligns with prudent financial management by enabling continuous assessment and adjustment based on real-world outcomes and emerging evidence.",
+    "created_at": "2026-09-06T21:05:30Z",
+    "evidence_refs": [
+      "ev-001",
+      "ev-002",
+      "ev-007",
+      "ev-015",
+      "ev-026"
+    ],
+    "id": "ch:case_for-cfo",
+    "schema_version": "kriterion/v0.1",
+    "type": "case_for"
+  },
+  {
+    "author_role": "ciso",
+    "content": " Given the current state of evidence, there are several unresolved security concerns that need to be addressed before scaling the enterprise coding agent rollout. These include an open prompt-injection vulnerability (ev-008), a lack of documented human review processes for AI-suggested changes in regulated systems (ev-012), and the fact that the pilot did not exercise the agent against any system handling regulated customer data, leaving unclear if the security review's findings generalize to a full rollout (ev-015). Until these issues are adequately addressed, there is a significant risk of exposing the organization to potential security breaches at scale. Therefore, it is strongly recommended to request additional evidence and address these open security questions before proceeding with the proposed rollout.",
+    "created_at": "2026-09-06T21:05:30Z",
+    "evidence_refs": [
+      "ev-008",
+      "ev-012",
+      "ev-015"
+    ],
+    "id": "ch:case_against-ciso",
+    "schema_version": "kriterion/v0.1",
+    "type": "case_against"
+  },
+  {
+    "author_role": "cfo",
+    "content": "Given the CFO's objective of protecting capital efficiency and financial credibility, the staged funding ladder for the enterprise coding agent appears to have significant uncertainties that could undermine its viability. The wide range in NPV projections (GBP-5,351,240 / GBP5,085,455 / GBP38,138,347) suggests high uncertainty and risk, particularly around the assumptions of productivity uplift and attrition-risk reduction benefits. If this decision were funded and later turned out to be a mistake, one plausible reason would be that the initial pilot's conditions did not accurately reflect the challenges and complexities of scaling up to 5,000 engineers, leading to underestimated costs and overestimated benefits at enterprise scale.",
+    "created_at": "2026-09-06T21:05:30Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-cfo",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "cto",
+    "content": "**Decision Recommendation: DEFER (confidence MEDIUM)**\n\n### Rationale:\n1. **Technical Feasibility and Generalization Risks**:\n   - The pilot\u2019s success metrics ([ev-001]\u2013[ev-005]) are promising but may not generalize to the full estate due to the legacy/untyped codebase gap ([ev-013], 30% of work) and weaker onboarding support at scale ([ev-017]). The agent\u2019s performance degrades significantly outside well-tested, typed codebases, which could limit adoption and benefits.\n   - Security and regulatory gaps remain unresolved: the open prompt-injection concern ([ev-008], [ev-026]) and lack of review for regulated systems ([ev-015]) introduce unacceptable risk. The pilot\u2019s scope did not exercise critical scenarios (e.g., secrets handling in production), and the real-world incident rate for vulnerabilities is unknown.\n\n2. **Engineering Capacity and Opportunity Cost**:\n   - Sustaining a 5,000-seat rollout requires GBP1.1m\u20131.6m annually in internal tooling/support costs ([ev-016]), displacing other technical priorities. The adoption forecast ([ev-017]) suggests targeted rollouts (e.g., 1,200 engineers) would achieve higher active usage with lower overhead.\n   - Attribution of benefits is unclear: the pilot\u2019s cycle-time reductions ([ev-002]) may conflate agent impact with concurrent process changes ([ev-014], [ev-024]), and productivity uplift assumptions ([ev-018]) are extrapolated without validation at scale.\n\n3. **Financial Uncertainty**:\n   - The NPV range spans negative to highly positive ([ev-019] low/mid/high), driven by untested assumptions (e.g., attrition reduction [ev-019], flat licensing costs [ev-021]). The wide variance reflects high uncertainty, particularly around long-term model quality stability ([ev-025]) and adoption rates.\n\n### Premortem Analysis:\n*\"One year later, the rollout failed because we underestimated the legacy codebase\u2019s impact. The agent\u2019s suggestions were accepted at 61% in the pilot (well-typed code), but in practice, 30% of engineers spent most of their time on untyped modules where the agent\u2019s output was error-prone. This led to a surge in support tickets",
+    "created_at": "2026-09-06T21:05:30Z",
+    "evidence_refs": [
+      "ev-001",
+      "ev-005",
+      "ev-013",
+      "ev-017",
+      "ev-008",
+      "ev-026",
+      "ev-015",
+      "ev-016",
+      "ev-002",
+      "ev-014",
+      "ev-024",
+      "ev-018",
+      "ev-019",
+      "ev-021",
+      "ev-025"
+    ],
+    "id": "ch:premortem-cto",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "ciso",
+    "content": " The single most plausible reason for this decision to turn out as a mistake, from a CISO's perspective, would be the failure to address and resolve the open prompt-injection concern raised during the pilot security review before scaling up to 5,000 engineers. This vulnerability, if exploited at scale, could pose a significant enterprise risk to the organization's security posture.",
+    "created_at": "2026-09-06T21:05:30Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-ciso",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "cro_compliance",
+    "content": "The failure resulted from the absence of mandatory \"go/no-go\" gates within the staged funding structure to address the transition from non-regulated pilot environments to systems handling regulated customer data (ev-015). By failing to mandate a documented human review process for AI-suggested changes before full rollout, we ignored emerging regulatory guidance (ev-012) and allowed known security risks like prompt-injection (ev-008) to persist at enterprise scale.",
+    "created_at": "2026-09-06T21:05:30Z",
+    "evidence_refs": [
+      "ev-015",
+      "ev-012",
+      "ev-008"
+    ],
+    "id": "ch:premortem-cro_compliance",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "business_executive",
+    "content": "The most plausible reason why funding this staged rollout of an enterprise coding agent would turn out to be a mistake is that the organisation failed to adequately address the significant unknowns and assumptions surrounding its financial viability, change-management realism, and engineer experience impact. Specifically, the proposal's reliance on uncertain adoption projections, unproven attrition-risk reduction benefits, and unrealistically low training cost estimates proved too optimistic, leading to a costly and resource-intensive rollout that did not deliver the desired strategic objectives.",
+    "created_at": "2026-09-06T21:05:30Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-business_executive",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  }
+]

@@ -1,0 +1,47 @@
+{
+  "action": "DEFER",
+  "amount": 4200000,
+  "conditions": [
+    "whether the security review covers regulated-data systems",
+    "real-world incident rate for prompt-injection vulnerability at full scale",
+    "whether the open prompt-injection vulnerability can be mitigated at full rollout scale",
+    "how the agent will perform on untyped/legacy code (30% of work)",
+    "the real-world incident rate for security risks in a full-scale deployment",
+    "the documented process for human review of AI-suggested changes to regulated systems",
+    "the generalizability of pilot productivity gains to enterprise-wide adoption",
+    "whether the real-world incident rate for the open prompt-injection concern at full rollout scale is known",
+    "whether regulatory guidance recommendations for human review of AI-suggested code changes to regulated systems before merge have been addressed",
+    "whether the agent can be scaled effectively across a legacy codebase gap",
+    "how to attribute observed cycle-time or defect-rate changes at enterprise scale specifically to agent usage versus concurrent process changes",
+    "the real-world incident rate for the open prompt-injection concern at full rollout scale"
+  ],
+  "confidence_band": "LOW",
+  "created_at": "2026-09-06T21:53:03Z",
+  "duration": "24 months",
+  "id": "caseA-condD-s3-synthesis-recommendation",
+  "schema_version": "kriterion/v0.1",
+  "stop_conditions": [],
+  "strongest_dissent": {
+    "refs": [
+      "ev-008",
+      "ev-015",
+      "ev-026",
+      "ev-012"
+    ],
+    "verbatim": " Given the current state of evidence, there are several significant concerns that warrant further investigation before proceeding with a full-scale rollout of the enterprise coding agent. Firstly, an open prompt-injection vulnerability remains unaddressed at scale, posing an enterprise risk (ev-008). Secondly, the pilot did not exercise the agent against any system handling regulated customer data, leaving unanswered questions about the generalizability of the security review's findings to a full rollout (ev-015). Thirdly, the real-world incident rate for the open prompt-injection concern at full rollout scale is unknown, which could impact security posture (ev-026). Lastly, regulatory guidance recommends documented human review of AI-suggested code changes to regulated systems before merge, but a documented process for this is not yet in place (ev-012). Until these issues are adequately addressed, the potential risks associated with a full rollout outweigh the benefits."
+  },
+  "unresolved_unknowns": [
+    "whether the security review covers regulated-data systems",
+    "real-world incident rate for prompt-injection vulnerability at full scale",
+    "whether the open prompt-injection vulnerability can be mitigated at full rollout scale",
+    "how the agent will perform on untyped/legacy code (30% of work)",
+    "the real-world incident rate for security risks in a full-scale deployment",
+    "the documented process for human review of AI-suggested changes to regulated systems",
+    "the generalizability of pilot productivity gains to enterprise-wide adoption",
+    "whether the real-world incident rate for the open prompt-injection concern at full rollout scale is known",
+    "whether regulatory guidance recommendations for human review of AI-suggested code changes to regulated systems before merge have been addressed",
+    "whether the agent can be scaled effectively across a legacy codebase gap",
+    "how to attribute observed cycle-time or defect-rate changes at enterprise scale specifically to agent usage versus concurrent process changes",
+    "the real-world incident rate for the open prompt-injection concern at full rollout scale"
+  ]
+}

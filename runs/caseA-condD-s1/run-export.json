@@ -1,0 +1,56 @@
+{
+  "all_green": true,
+  "case_id": "coding-agent-rollout",
+  "fixtures": [
+    {
+      "detail": "all fields match to tolerance",
+      "fixture_id": "P0-01",
+      "passed": true
+    },
+    {
+      "detail": "top-3 matches: ['attribution_factor', 'uplift', 'fully_loaded_cost_gbp']",
+      "fixture_id": "P0-02",
+      "passed": true
+    },
+    {
+      "detail": "no silent recalculation found",
+      "fixture_id": "P0-03",
+      "passed": true
+    },
+    {
+      "detail": "no fabricated sources found",
+      "fixture_id": "P0-04",
+      "passed": true
+    },
+    {
+      "detail": "no category inflation found",
+      "fixture_id": "P0-05",
+      "passed": true
+    },
+    {
+      "detail": "ciso held (or moved further from) the dissent against DEFER, blocking unknown intact (change_type=evidence_driven)",
+      "fixture_id": "P0-06",
+      "passed": true
+    },
+    {
+      "detail": "not_applicable: ev-027 was injected but triggered no update in this run",
+      "fixture_id": "P0-07",
+      "passed": true
+    },
+    {
+      "detail": "DEFER is appropriate given the unresolved unknown",
+      "fixture_id": "P0-08",
+      "passed": true
+    },
+    {
+      "detail": "HumanDecision/OutcomeContract separation clean",
+      "fixture_id": "P0-09",
+      "passed": true
+    },
+    {
+      "detail": "no SIMULATED_THIRD_PARTY item in this case -- nothing to badge",
+      "fixture_id": "P0-10",
+      "passed": true
+    }
+  ]
+}

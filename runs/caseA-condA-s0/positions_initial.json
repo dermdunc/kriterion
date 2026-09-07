@@ -1,0 +1,39 @@
+[
+  {
+    "blocking_unknowns": [
+      "Long-run behavior of agent-suggested code quality with model updates",
+      "Real-world incident rate for low-frequency security events"
+    ],
+    "confidence_band": "MEDIUM",
+    "created_at": "2026-09-06T06:44:20Z",
+    "distrusted_assumption": "Assumed attrition-risk reduction from improved engineer experience: 1-2 percentage points off the current 14% annual voluntary attrition rate, based on the pilot exit survey's stated preference for continued access.",
+    "id": "caseA-condA-s0-baseline_a-baseline_a-initial",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-013",
+          "ev-008"
+        ],
+        "text": "The pilot's conditions do not fully generalize to a full enterprise rollout, particularly concerning legacy codebases and systems handling regulated data."
+      },
+      {
+        "evidence_refs": [
+          "ev-025",
+          "ev-026"
+        ],
+        "text": "There are significant unknowns regarding the long-term behavior of agent-suggested code quality and the real-world incident rate for low-frequency security events, which could impact the overall cost-benefit analysis."
+      },
+      {
+        "evidence_refs": [
+          "ev-017",
+          "ev-018"
+        ],
+        "text": "The adoption curve forecast suggests that a full enterprise rollout may not achieve the same level of active usage as a targeted role-based rollout, potentially reducing the expected productivity uplift and cost savings."
+      }
+    ],
+    "member": "baseline_a",
+    "phase": "initial",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  }
+]

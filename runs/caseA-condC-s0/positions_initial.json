@@ -1,0 +1,166 @@
+[
+  {
+    "blocking_unknowns": [
+      "Long-run behaviour of agent-suggested code quality as the underlying model provider updates its model version is not established.",
+      "No agreed methodology exists yet for attributing observed cycle-time or defect-rate changes at enterprise scale specifically to agent usage versus concurrent process changes."
+    ],
+    "confidence_band": "LOW",
+    "created_at": "2026-09-06T07:43:30Z",
+    "distrusted_assumption": "Assumed licence unit cost holds flat for 24 months before any renewal escalator applies, despite ev-011's analyst note on typical escalator timing.",
+    "id": "caseA-condC-s0-cfo-initial",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-018",
+          "ev-019"
+        ],
+        "text": "The NPV range is too wide, indicating high uncertainty about the financial viability of this project."
+      },
+      {
+        "evidence_refs": [
+          "ev-024",
+          "ev-025"
+        ],
+        "text": "There are significant unknowns and assumptions that need further investigation before proceeding with a full-scale rollout."
+      }
+    ],
+    "member": "cfo",
+    "phase": "initial",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  },
+  {
+    "blocking_unknowns": [
+      "Long-run behaviour of agent-suggested code quality as model version updates occur",
+      "Real-world incident rate for the open prompt-injection concern at full rollout scale"
+    ],
+    "confidence_band": "MEDIUM",
+    "created_at": "2026-09-06T07:43:30Z",
+    "distrusted_assumption": "Assumed engineering productivity uplift from broad agent access: 18%, range 5-30% (ev-018)",
+    "id": "caseA-condC-s0-cto-initial",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-013",
+          "ev-024"
+        ],
+        "text": "The pilot's codebase and team mix may not fully represent the organization's engineering estate, particularly in terms of legacy/untyped codebases which cover a significant portion of daily work."
+      },
+      {
+        "evidence_refs": [
+          "ev-009",
+          "ev-017"
+        ],
+        "text": "The projected adoption trajectory for an unrestricted enterprise rollout is below industry median due to weaker onboarding support per engineer, suggesting potential lower-than-expected benefits from full-scale deployment."
+      },
+      {
+        "evidence_refs": [
+          "ev-025",
+          "ev-015"
+        ],
+        "text": "There are significant unknowns regarding the long-term behavior of agent-suggested code quality and security concerns that have not been fully addressed in the pilot scope, particularly concerning systems handling regulated customer data."
+      }
+    ],
+    "member": "cto",
+    "phase": "initial",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  },
+  {
+    "blocking_unknowns": [
+      "Real-world incident rate for the open prompt-injection concern at full rollout scale is unknown; the pilot recorded zero exploited incidents, but pilot scope and duration may be too limited to observe a low-frequency event.",
+      "Long-run behaviour of agent-suggested code quality as the underlying model provider updates its model version is not established."
+    ],
+    "confidence_band": "MEDIUM",
+    "created_at": "2026-09-06T07:43:30Z",
+    "distrusted_assumption": null,
+    "id": "caseA-condC-s0-ciso-initial",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-008",
+          "ev-012"
+        ],
+        "text": "The pilot's security review raised a prompt-injection concern that remains unresolved, and the review did not cover systems handling regulated customer data."
+      },
+      {
+        "evidence_refs": [
+          "ev-024"
+        ],
+        "text": "There is no established methodology to attribute observed cycle-time or defect-rate changes at enterprise scale specifically to agent usage versus concurrent process changes."
+      }
+    ],
+    "member": "ciso",
+    "phase": "initial",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  },
+  {
+    "blocking_unknowns": [
+      "Long-run behavior of agent-suggested code quality as model versions update",
+      "Real-world incident rate for open prompt-injection concern at full scale"
+    ],
+    "confidence_band": "MEDIUM",
+    "created_at": "2026-09-06T07:43:30Z",
+    "distrusted_assumption": "Assumed licence unit cost holds flat for 24 months before any renewal escalator applies, despite ev-011's analyst note on typical escalator timing.",
+    "id": "caseA-condC-s0-cro_compliance-initial",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-002",
+          "ev-015",
+          "ev-025"
+        ],
+        "text": "The pilot results show a positive impact on cycle time and engineer satisfaction, but the evidence does not fully address concerns around security for regulated systems and the potential long-term behavior of agent-suggested code quality."
+      },
+      {
+        "evidence_refs": [
+          "ev-008",
+          "ev-026"
+        ],
+        "text": "There is a significant unknown regarding the real-world incident rate for the open prompt-injection concern, which could pose a risk to the full rollout."
+      }
+    ],
+    "member": "cro_compliance",
+    "phase": "initial",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  },
+  {
+    "blocking_unknowns": [
+      "The long-run behavior of agent-suggested code quality as the underlying model provider updates its model version is unknown (ev-025).",
+      "The real-world incident rate for the open prompt-injection concern at full rollout scale is unknown, despite no incidents observed in the pilot (ev-026)"
+    ],
+    "confidence_band": "MEDIUM",
+    "created_at": "2026-09-06T07:43:30Z",
+    "distrusted_assumption": "Assumed attrition-risk reduction from improved engineer experience: 1-2 percentage points off the current 14% annual voluntary attrition rate, based on the pilot exit survey's stated preference for continued access.",
+    "id": "caseA-condC-s0-business_executive-initial",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-002",
+          "ev-017"
+        ],
+        "text": "The pilot's cycle-time reduction and usage metrics are promising, but they do not fully account for the complexity of a full-scale rollout. The projected adoption rate is below industry norms, suggesting potential challenges in scaling."
+      },
+      {
+        "evidence_refs": [
+          "ev-008",
+          "ev-015"
+        ],
+        "text": "The security review's findings are limited to the pilot scope and do not cover systems handling regulated customer data. A full-scale rollout would require a more comprehensive security assessment, especially given the open prompt-injection concern."
+      },
+      {
+        "evidence_refs": [
+          "ev-019",
+          "ev-007"
+        ],
+        "text": "The attrition-risk reduction benefit is based on a low-strength assumption and should not be treated as a certain financial benefit. The pilot exit survey's stated preference for continued access does not necessarily translate to productivity gains at scale."
+      }
+    ],
+    "member": "business_executive",
+    "phase": "initial",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  }
+]

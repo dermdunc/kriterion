@@ -1,0 +1,65 @@
+[
+  {
+    "author_role": "cfo",
+    "content": "The proposed staged rollout of an enterprise coding agent to 5,000 engineers presents a strategic opportunity to reduce engineering cycle time and retain talent by automating routine tasks. The pilot demonstrated a significant median time-to-merge reduction from 9.6 hours to 4.1 hours for routine changes, indicating potential productivity gains that could translate into substantial cost savings over time. Additionally, the high acceptance rate of 61% among participating engineers suggests strong user adoption and satisfaction, which is crucial for long-term success. However, given the current limitations in security review scope and lack of a clear methodology to attribute cycle-time improvements specifically to agent usage, it is imperative to proceed with caution and conduct further specialized reviews before scaling up.",
+    "created_at": "2026-09-07T11:24:54Z",
+    "evidence_refs": [],
+    "id": "ch:case_for-cfo",
+    "schema_version": "kriterion/v0.1",
+    "type": "case_for"
+  },
+  {
+    "author_role": "business_executive",
+    "content": "The current evidence indicates significant gaps in understanding the full security implications of a widespread rollout, particularly concerning systems handling regulated customer data and an unresolved prompt-injection concern. Additionally, there is no established methodology to attribute observed cycle-time or defect-rate changes specifically to agent usage at enterprise scale, making it difficult to quantify the economic benefits accurately. Given these uncertainties and the reliance on several low-strength assumptions in the economics model, funding a staged rollout of 5,000 seats appears premature without further validation through targeted reviews and detailed feasibility studies.",
+    "created_at": "2026-09-07T11:24:54Z",
+    "evidence_refs": [],
+    "id": "ch:case_against-business_executive",
+    "schema_version": "kriterion/v0.1",
+    "type": "case_against"
+  },
+  {
+    "author_role": "cfo",
+    "content": "Given the CFO's objective of protecting capital efficiency and financial credibility, the staged funding ladder for the enterprise coding agent appears to lack rigorous go/no-go gates at each stage, particularly concerning security reviews and benefit attribution methodologies. The NPV range cited seems overly optimistic given the high uncertainty around real-world incident rates for unresolved security concerns and the potential for licence cost escalators post-renewal. If this decision were funded and later deemed a mistake, one plausible reason would be that the initial pilot's scope did not adequately represent the full complexity of regulated systems, leading to unforeseen security vulnerabilities and compliance issues upon enterprise-wide rollout.",
+    "created_at": "2026-09-07T11:24:54Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-cfo",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "cto",
+    "content": "The staged rollout of the enterprise coding agent to 5,000 engineers was funded, but one year later, it became evident that the pilot conditions did not accurately reflect the complexities and challenges of a full-scale deployment across diverse codebases, particularly those with legacy untyped modules. This led to significant underestimation of ongoing platform-engineering and support costs, as well as an overestimation of adoption rates and productivity gains, resulting in substantial financial losses and resource misallocation.",
+    "created_at": "2026-09-07T11:24:54Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-cto",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "ciso",
+    "content": "The most plausible reason for the staged rollout of the enterprise coding agent being a mistake from the CISO\u2019s perspective is that the initial security review did not cover systems handling regulated customer data, leading to unforeseen vulnerabilities and compliance issues once rolled out at scale. This oversight allowed a low-frequency but critical security event, such as prompt injection, to occur without proper mitigation strategies in place, resulting in significant data breaches and regulatory penalties.",
+    "created_at": "2026-09-07T11:24:54Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-ciso",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "cro_compliance",
+    "content": "The most plausible reason for the staged rollout of the enterprise coding agent being a mistake is that the initial security review did not adequately cover systems handling regulated customer data, leading to unforeseen compliance issues and regulatory penalties when the full-scale deployment was later scrutinized by auditors. This oversight highlights a critical gap in the decision-making process regarding risk assessment and governance, particularly concerning the staged funding approach which lacked clear go/no-go gates for subsequent phases based on real-time risk evaluations.",
+    "created_at": "2026-09-07T11:24:54Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-cro_compliance",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "business_executive",
+    "content": "The staged rollout of the enterprise coding agent to 5,000 engineers was likely a mistake because the initial pilot did not adequately represent the complexity and variability of the entire engineering estate, particularly in handling legacy untyped codebases and systems with regulated customer data. This led to an underestimation of the necessary security reviews and support infrastructure costs at scale, resulting in unexpected delays and resource constraints that hindered the strategic objectives of cycle-time reduction and engineer retention.",
+    "created_at": "2026-09-07T11:24:54Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-business_executive",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  }
+]

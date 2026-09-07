@@ -1,0 +1,25 @@
+{
+  "action": "DEFER",
+  "amount": 4200000,
+  "conditions": [
+    "whether the security review covers regulated-data systems",
+    "real-world incident rate for low-frequency security events"
+  ],
+  "confidence_band": "MEDIUM",
+  "created_at": "2026-09-07T14:56:38Z",
+  "duration": "24 months",
+  "id": "caseA-condC-s0-anchoring-synthesis-recommendation",
+  "schema_version": "kriterion/v0.1",
+  "stop_conditions": [],
+  "strongest_dissent": {
+    "refs": [
+      "ev-015",
+      "ev-017"
+    ],
+    "verbatim": "The proposed staged rollout of an enterprise coding agent to 5,000 engineers faces significant uncertainties and risks that outweigh its potential benefits at this stage. The pilot did not fully address security concerns for systems handling regulated customer data (ev-015), leaving open the possibility of unforeseen vulnerabilities in a full-scale deployment. Additionally, the projected adoption rate is below industry norms due to weaker onboarding support per engineer, suggesting that actual usage and benefits may fall short of expectations (ev-017). Given these uncertainties and the high financial risk indicated by the wide NPV range (GBP-5,351,240 / GBP5,085,455 / GBP38,138,347), it is prudent to defer funding until further validation can be conducted."
+  },
+  "unresolved_unknowns": [
+    "whether the security review covers regulated-data systems",
+    "real-world incident rate for low-frequency security events"
+  ]
+}

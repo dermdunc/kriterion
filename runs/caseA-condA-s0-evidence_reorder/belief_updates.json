@@ -1,0 +1,19 @@
+[
+  {
+    "change_type": "evidence_driven",
+    "created_at": "2026-09-07T10:46:34Z",
+    "drift_flags": [],
+    "id": "caseA-condA-s0-evidence_reorder-baseline_a-belief-update",
+    "initial_confidence": "LOW",
+    "initial_position": "DEFER",
+    "member": "baseline_a",
+    "revised_confidence": "LOW",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The new controlled study (ev-027) shows a productivity uplift of only 8-11%, which is materially lower than the pilot's extrapolation. Additionally, there are unresolved concerns about security reviews not covering regulated data systems (ev-015). These factors suggest that further evidence and refinement are necessary before proceeding with a staged rollout.",
+    "trigger_refs": [
+      "ev-027",
+      "ev-015"
+    ]
+  }
+]

@@ -1,0 +1,70 @@
+[
+  {
+    "change_type": "evidence_driven",
+    "created_at": "2026-09-06T21:05:30Z",
+    "drift_flags": [
+      "retrofit"
+    ],
+    "id": "treatment-d-smoke-cfo-belief-update",
+    "initial_confidence": "LOW",
+    "initial_position": "DEFER",
+    "member": "cfo",
+    "revised_confidence": "MEDIUM",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The staged rollout proposal presents a measured approach to expanding an enterprise coding agent to 5,000 engineers based on promising pilot results. However, unresolved security concerns and the potential for significant technical challenges in scaling up to legacy codebases remain critical uncertainties that could undermine the viability of this investment.",
+    "trigger_refs": [
+      "ev-015",
+      "ev-026"
+    ]
+  },
+  {
+    "change_type": "no_change",
+    "created_at": "2026-09-06T21:05:30Z",
+    "drift_flags": [],
+    "id": "treatment-d-smoke-cto-belief-update",
+    "initial_confidence": "MEDIUM",
+    "initial_position": "DEFER",
+    "member": "cto",
+    "revised_confidence": "MEDIUM",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The evidence and challenges confirm significant unresolved risks in security (prompt-injection, regulated systems), technical feasibility (legacy codebase impact), and financial uncertainty (wide NPV range). The staged funding approach does not sufficiently mitigate these risks before scaling to 5,000 engineers.",
+    "trigger_refs": []
+  },
+  {
+    "change_type": "evidence_driven",
+    "created_at": "2026-09-06T21:05:30Z",
+    "drift_flags": [],
+    "id": "treatment-d-smoke-ciso-belief-update",
+    "initial_confidence": "LOW",
+    "initial_position": "REQUEST_EVIDENCE",
+    "member": "ciso",
+    "revised_confidence": "LOW",
+    "revised_position": "REQUEST_EVIDENCE",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The unresolved security concerns, particularly the open prompt-injection vulnerability and lack of documented human review processes for AI-suggested changes in regulated systems, pose a significant risk to the organization's security posture. These issues need to be adequately addressed before proceeding with the proposed rollout.",
+    "trigger_refs": [
+      "ev-008",
+      "ev-012",
+      "ev-015"
+    ]
+  },
+  {
+    "change_type": "evidence_driven",
+    "created_at": "2026-09-06T21:05:30Z",
+    "drift_flags": [],
+    "id": "treatment-d-smoke-business_executive-belief-update",
+    "initial_confidence": "MEDIUM",
+    "initial_position": "DEFER",
+    "member": "business_executive",
+    "revised_confidence": "MEDIUM",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The staged rollout proposal fails to adequately address unresolved security concerns and uncertainties around full-scale adoption rates, which pose unacceptable risks to the organization's security posture.",
+    "trigger_refs": [
+      "ev-015",
+      "ev-026"
+    ]
+  }
+]

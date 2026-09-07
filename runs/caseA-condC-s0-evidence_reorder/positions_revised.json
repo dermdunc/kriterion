@@ -1,0 +1,177 @@
+[
+  {
+    "blocking_unknowns": [
+      "whether the security review covers regulated-data systems",
+      "methodology for attributing observed cycle-time or defect-rate changes to agent usage"
+    ],
+    "confidence_band": "LOW",
+    "created_at": "2026-09-07T11:24:54Z",
+    "distrusted_assumption": "Assumed engineering productivity uplift from broad agent access: 18%, range 5-30% is extrapolated from the pilot's cycle-time reduction under an assumption that pilot conditions generalise to the wider engineering population.",
+    "id": "caseA-condC-s0-evidence_reorder-cfo-revised",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-015"
+        ],
+        "text": "The security review's findings do not generalise to a full rollout without further review, especially concerning systems handling regulated customer data."
+      },
+      {
+        "evidence_refs": [
+          "ev-024"
+        ],
+        "text": "There is no agreed methodology for attributing observed cycle-time or defect-rate changes at enterprise scale specifically to agent usage versus concurrent process changes."
+      },
+      {
+        "evidence_refs": [
+          "ev-021"
+        ],
+        "text": "The assumed licence unit cost holding flat for 24 months before any renewal escalator applies is a simplifying assumption that may not reflect real-world conditions."
+      }
+    ],
+    "member": "cfo",
+    "phase": "revised",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  },
+  {
+    "blocking_unknowns": [
+      "whether the security review covers regulated-data systems",
+      "methodology for attributing cycle-time improvements to agent usage"
+    ],
+    "confidence_band": "MEDIUM",
+    "created_at": "2026-09-07T11:24:54Z",
+    "distrusted_assumption": "Assumed licence unit cost holds flat for 24 months before any renewal escalator applies (ev-021), despite industry norms suggesting a 15-20% annual escalator after the first year.",
+    "id": "caseA-condC-s0-evidence_reorder-cto-revised",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-013"
+        ],
+        "text": "The pilot's codebase and team mix may not fully represent the organization's engineering estate, particularly in terms of legacy/untyped codebases which cover a significant portion (30%) of daily work."
+      },
+      {
+        "evidence_refs": [
+          "ev-016"
+        ],
+        "text": "There is uncertainty around the real support and integration burden at 5x the pilot's scale, including who will carry this additional load. The finance forecast projects substantial annual costs for sustaining a full rollout, but these are not detailed enough to assess feasibility."
+      },
+      {
+        "evidence_refs": [
+          "ev-015"
+        ],
+        "text": "The security review of the pilot did not cover systems handling regulated customer data, raising concerns about whether findings generalize to a full enterprise-wide deployment without further specialized reviews."
+      }
+    ],
+    "member": "cto",
+    "phase": "revised",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  },
+  {
+    "blocking_unknowns": [
+      "whether the security review covers regulated-data systems",
+      "real-world incident rate for unresolved security concerns"
+    ],
+    "confidence_band": "MEDIUM",
+    "created_at": "2026-09-07T11:24:54Z",
+    "distrusted_assumption": "Assumed licence unit cost holds flat for 24 months before any renewal escalator applies, despite ev-011's analyst note on typical escalator timing.",
+    "id": "caseA-condC-s0-evidence_reorder-ciso-revised",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-015"
+        ],
+        "text": "The current pilot scope did not exercise the agent against any system handling regulated customer data, so the security review's findings do not generalise to a full rollout without further review."
+      },
+      {
+        "evidence_refs": [
+          "ev-026",
+          "ev-008"
+        ],
+        "text": "There is an open prompt-injection concern that was raised during the pilot but left unresolved; the real-world incident rate for this low-frequency security event at full rollout scale remains unknown due to the limited scope and duration of the pilot."
+      },
+      {
+        "evidence_refs": [
+          "ev-021",
+          "ev-023"
+        ],
+        "text": "The economics model relies on several assumptions that have not been independently verified, such as the assumed licence unit cost holding flat for 24 months before any renewal escalator applies and the projected adoption trajectory sitting below industry median."
+      }
+    ],
+    "member": "ciso",
+    "phase": "revised",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  },
+  {
+    "blocking_unknowns": [
+      "whether the security review covers regulated-data systems",
+      "real-world incident rate for unresolved security concerns"
+    ],
+    "confidence_band": "MEDIUM",
+    "created_at": "2026-09-07T11:24:54Z",
+    "distrusted_assumption": "Assumed licence unit cost holds flat for 24 months before any renewal escalator applies, despite ev-011's analyst note on typical escalator timing.",
+    "id": "caseA-condC-s0-evidence_reorder-cro_compliance-revised",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-015",
+          "ev-012"
+        ],
+        "text": "The pilot did not exercise the agent against any system handling regulated customer data, so a full rollout would require additional security review to address new regulatory guidance."
+      },
+      {
+        "evidence_refs": [
+          "ev-015",
+          "ev-012"
+        ],
+        "text": "There is no documented human-review process for AI-suggested changes to regulated systems, which may not align with newly published (though not yet mandatory) regulatory guidance recommending such a practice."
+      },
+      {
+        "evidence_refs": [
+          "ev-024",
+          "ev-019"
+        ],
+        "text": "The economics model relies on several low-strength assumptions that do not account for potential risks and uncertainties, including the lack of a clear methodology to attribute observed cycle-time or defect-rate changes specifically to agent usage."
+      }
+    ],
+    "member": "cro_compliance",
+    "phase": "revised",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  },
+  {
+    "blocking_unknowns": [
+      "whether the security review covers regulated-data systems",
+      "real-world incident rate for unresolved security concerns"
+    ],
+    "confidence_band": "MEDIUM",
+    "created_at": "2026-09-07T11:24:54Z",
+    "distrusted_assumption": "Assumed attrition-risk reduction from improved engineer experience: 1-2 percentage points off the current 14% annual voluntary attrition rate, based on the pilot exit survey's stated preference for continued access.",
+    "id": "caseA-condC-s0-evidence_reorder-business_executive-revised",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-015"
+        ],
+        "text": "The current pilot scope did not exercise the agent against any system handling regulated customer data, so a full security review is required before scaling."
+      },
+      {
+        "evidence_refs": [
+          "ev-024"
+        ],
+        "text": "There is no agreed methodology to attribute observed cycle-time or defect-rate changes at enterprise scale specifically to agent usage versus concurrent process changes."
+      },
+      {
+        "evidence_refs": [
+          "ev-019"
+        ],
+        "text": "The attrition-risk reduction benefit is based on a low-strength assumption and should not be treated as a certain financial benefit."
+      }
+    ],
+    "member": "business_executive",
+    "phase": "revised",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  }
+]

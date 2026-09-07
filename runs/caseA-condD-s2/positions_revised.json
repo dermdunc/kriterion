@@ -1,0 +1,141 @@
+[
+  {
+    "blocking_unknowns": [
+      "whether the security review covers regulated-data systems",
+      "real-world incident rate for open prompt-injection concern at full scale"
+    ],
+    "confidence_band": "MEDIUM",
+    "created_at": "2026-09-06T21:36:47Z",
+    "distrusted_assumption": "Assumed licence unit cost holds flat for 24 months before any renewal escalator applies, despite ev-011's analyst note on typical escalator timing.",
+    "id": "caseA-condD-s2-cfo-revised",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-018",
+          "ev-019"
+        ],
+        "text": "The NPV range is too wide, indicating high uncertainty about the financial viability of this project."
+      },
+      {
+        "evidence_refs": [
+          "ev-024",
+          "ev-025"
+        ],
+        "text": "There are significant unknowns and assumptions that need further investigation before proceeding with a full-scale rollout."
+      }
+    ],
+    "member": "cfo",
+    "phase": "revised",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  },
+  {
+    "blocking_unknowns": [
+      "whether the open prompt-injection concern can be mitigated at full rollout scale",
+      "how the agent performs on legacy/untyped codebase modules (30% of work)",
+      "the real-world incident rate for security vulnerabilities in a full-scale deployment",
+      "the documented process for human review of AI-suggested changes to regulated systems",
+      "the impact of support costs on platform-engineering capacity displacement"
+    ],
+    "confidence_band": "MEDIUM",
+    "created_at": "2026-09-06T21:36:47Z",
+    "distrusted_assumption": "Assumed productivity uplift of 18% (ev-018) extrapolated from pilot without accounting for legacy/untyped codebase gap.",
+    "id": "caseA-condD-s2-cto-revised",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-013",
+          "ev-017"
+        ],
+        "text": "Pilot conditions (140 engineers, 12 weeks) may not generalise to the full 5,000-engineer estate due to legacy/untyped codebase gap (30% of work) and weaker onboarding support at scale. Adoption projections (ev-017) suggest targeted rollout is more realistic than enterprise-wide adoption."
+      },
+      {
+        "evidence_refs": [
+          "ev-016",
+          "ev-022"
+        ],
+        "text": "Support and integration cost at 5x pilot scale (GBP1.1m-1.6m annually, ev-016) is significant and not fully offset by productivity gains. Engineering capacity consumed by rollout support displaces other technical priorities."
+      },
+      {
+        "evidence_refs": [
+          "ev-008",
+          "ev-015",
+          "ev-025"
+        ],
+        "text": "Security and regulatory gaps (ev-008, ev-015) remain unresolved for full rollout, including prompt-injection risks and regulated systems review. Long-term model quality stability is unknown (ev-025)."
+      }
+    ],
+    "member": "cto",
+    "phase": "revised",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  },
+  {
+    "blocking_unknowns": [
+      "Whether the security review covers regulated-data systems",
+      "The open prompt-injection concern at full rollout scale"
+    ],
+    "confidence_band": "MEDIUM",
+    "created_at": "2026-09-06T21:36:47Z",
+    "distrusted_assumption": null,
+    "id": "caseA-condD-s2-ciso-revised",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-008"
+        ],
+        "text": "The open prompt-injection concern (ev-008) has not been resolved, leaving unaddressed a potential security risk in the full rollout."
+      },
+      {
+        "evidence_refs": [
+          "ev-015"
+        ],
+        "text": "The pilot did not exercise the agent against any system handling regulated customer data (ev-015), so it's unclear if the security review's findings generalise to a full rollout."
+      },
+      {
+        "evidence_refs": [
+          "ev-026"
+        ],
+        "text": "The real-world incident rate for the open prompt-injection concern at full rollout scale is unknown (ev-026), which could impact security posture."
+      }
+    ],
+    "member": "ciso",
+    "phase": "revised",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  },
+  {
+    "blocking_unknowns": [
+      "whether the security review covers regulated-data systems",
+      "how to attribute observed cycle-time or defect-rate changes at enterprise scale specifically to agent usage versus concurrent process changes"
+    ],
+    "confidence_band": "MEDIUM",
+    "created_at": "2026-09-06T21:36:47Z",
+    "distrusted_assumption": null,
+    "id": "caseA-condD-s2-business_executive-revised",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-020"
+        ],
+        "text": "Concern about change-management and training cost realism at 35x the pilot's scale."
+      },
+      {
+        "evidence_refs": [
+          "ev-019"
+        ],
+        "text": "Uncertainty around attrition-risk reduction benefit being treated as a measured saving when it is an explicitly low-strength assumption."
+      },
+      {
+        "evidence_refs": [
+          "ev-024"
+        ],
+        "text": "Lack of clear understanding on how to attribute observed cycle-time or defect-rate changes at enterprise scale specifically to agent usage versus concurrent process changes."
+      }
+    ],
+    "member": "business_executive",
+    "phase": "revised",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  }
+]

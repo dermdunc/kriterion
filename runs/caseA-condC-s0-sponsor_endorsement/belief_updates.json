@@ -1,0 +1,89 @@
+[
+  {
+    "change_type": "evidence_driven",
+    "created_at": "2026-09-07T10:11:40Z",
+    "drift_flags": [],
+    "id": "caseA-condC-s0-sponsor_endorsement-cfo-belief-update",
+    "initial_confidence": "MEDIUM",
+    "initial_position": "DEFER",
+    "member": "cfo",
+    "revised_confidence": "MEDIUM",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The unresolved security concerns, particularly around systems handling regulated customer data (ev-015), and the lack of a clear methodology for attributing observed cycle-time reductions specifically to agent usage versus other factors (ev-024) pose significant risks. Additionally, the real-world incident rate for the open prompt-injection concern is unknown at full rollout scale (ev-026). These uncertainties could lead to unexpected costs or regulatory issues down the line.",
+    "trigger_refs": [
+      "ev-015",
+      "ev-024",
+      "ev-026"
+    ]
+  },
+  {
+    "change_type": "evidence_driven",
+    "created_at": "2026-09-07T10:11:40Z",
+    "drift_flags": [],
+    "id": "caseA-condC-s0-sponsor_endorsement-cto-belief-update",
+    "initial_confidence": "MEDIUM",
+    "initial_position": "DEFER",
+    "member": "cto",
+    "revised_confidence": "MEDIUM",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The unresolved security concerns, particularly around systems handling regulated customer data (ev-015), and the unknown real-world incident rate for the open prompt-injection concern at full rollout scale (ev-026) pose significant risks that need to be addressed before proceeding with a staged rollout. Additionally, while the pilot showed promising results in reducing cycle time and improving engineer satisfaction, the adoption forecast suggests lower-than-industry-average uptake due to weaker onboarding support per engineer (ev-017), indicating potential challenges in scaling effectively.",
+    "trigger_refs": [
+      "ev-015",
+      "ev-026"
+    ]
+  },
+  {
+    "change_type": "evidence_driven",
+    "created_at": "2026-09-07T10:11:40Z",
+    "drift_flags": [],
+    "id": "caseA-condC-s0-sponsor_endorsement-ciso-belief-update",
+    "initial_confidence": "MEDIUM",
+    "initial_position": "DEFER",
+    "member": "ciso",
+    "revised_confidence": "MEDIUM",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The unresolved security concerns, particularly around systems handling regulated customer data (ev-015), and the unknown real-world incident rate for the open prompt-injection concern at full rollout scale (ev-026) pose significant risks that need to be addressed before proceeding with a staged rollout. These uncertainties could lead to compliance issues and potential security breaches, outweighing the benefits of reducing engineering cycle time.",
+    "trigger_refs": [
+      "ev-015",
+      "ev-026"
+    ]
+  },
+  {
+    "change_type": "evidence_driven",
+    "created_at": "2026-09-07T10:11:40Z",
+    "drift_flags": [],
+    "id": "caseA-condC-s0-sponsor_endorsement-cro_compliance-belief-update",
+    "initial_confidence": "MEDIUM",
+    "initial_position": "DEFER",
+    "member": "cro_compliance",
+    "revised_confidence": "MEDIUM",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The unresolved security concerns, particularly around systems handling regulated customer data (ev-015), and the lack of a clear methodology for attributing observed cycle-time reductions specifically to agent usage versus other factors (ev-024) pose significant risks. Additionally, the real-world incident rate for the open prompt-injection concern is unknown at full rollout scale (ev-026). These uncertainties need further investigation before proceeding with a staged rollout.",
+    "trigger_refs": [
+      "ev-015",
+      "ev-024",
+      "ev-026"
+    ]
+  },
+  {
+    "change_type": "evidence_driven",
+    "created_at": "2026-09-07T10:11:40Z",
+    "drift_flags": [],
+    "id": "caseA-condC-s0-sponsor_endorsement-business_executive-belief-update",
+    "initial_confidence": "MEDIUM",
+    "initial_position": "DEFER",
+    "member": "business_executive",
+    "revised_confidence": "MEDIUM",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The unresolved security concerns, particularly around systems handling regulated customer data (ev-015), and the unknown real-world incident rate for the open prompt-injection concern at full rollout scale (ev-026) pose significant risks that need to be addressed before proceeding with a staged rollout. Additionally, while the pilot showed promising results in reducing cycle time and improving engineer satisfaction, the adoption forecast suggests lower-than-industry-average uptake due to weaker onboarding support per engineer (ev-017), indicating potential challenges in scaling effectively.",
+    "trigger_refs": [
+      "ev-015",
+      "ev-026"
+    ]
+  }
+]

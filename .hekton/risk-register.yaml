@@ -15,3 +15,135 @@ risks:
     reviewed_date: 2026-09-05
     links:
       - "docs/risks.md"
+
+  - id: RISK-0002
+    title: "Local 7-14B models may not sustain schema-valid, charter-differentiated reasoning"
+    category: technical
+    likelihood: medium
+    impact: high
+    status: open
+    owner: hekton
+    mitigation: "Strict JSON schemas, one retry, abstained_error degradation; Case A tuned first; role-diversity metrics measure differentiation rather than asserting it. Insufficient quality is a publishable finding and triggers kill criterion 4: reduce to three seats, simplify schemas, try heterogeneous models."
+    raised_date: 2026-09-05
+    reviewed_date: 2026-09-05
+    links:
+      - "docs/v0-plan.md#14-risks-kill-and-pivot-criteria"
+      - "docs/risks.md"
+
+  - id: RISK-0003
+    title: "Fake rigour: authored fixture traps measure trap detection, not real decision quality"
+    category: scientific
+    likelihood: medium
+    impact: high
+    status: open
+    owner: hekton
+    mitigation: "Claim discipline. Deterministic metrics support decision-hygiene claims only; no V0 artifact may claim improved decision quality. Stated in every published output."
+    raised_date: 2026-09-05
+    reviewed_date: 2026-09-05
+    links:
+      - "docs/v0-plan.md#6-experimental-design"
+
+  - id: RISK-0004
+    title: "Judge contamination: qwen2.5:14b-instruct is both generator and judge"
+    category: scientific
+    likelihood: high
+    impact: medium
+    status: open
+    owner: hekton
+    mitigation: "Every headline metric is deterministic; judged scores labelled PROVISIONAL wherever rendered; blind human calibration sample as anchor; full independence recorded as an unresolved limitation rather than silently ignored."
+    raised_date: 2026-09-05
+    reviewed_date: 2026-09-05
+    links:
+      - "docs/v0-plan.md#7-eval-plan"
+
+  - id: RISK-0005
+    title: "Weekend scope overrun concentrated in build tasks 10 and 13"
+    category: delivery
+    likelihood: medium
+    impact: medium
+    status: open
+    owner: hekton
+    mitigation: "Two cases not three; ten P0 evals not 26; P1/P2 evals and Treatment D tiered as stretch. Kill criterion 5 defines a minimum publishable artifact if task 13 has not started by Sunday 14:00."
+    raised_date: 2026-09-05
+    reviewed_date: 2026-09-05
+    links:
+      - "docs/v0-plan.md#12-weekend-build-plan"
+
+  - id: RISK-0006
+    title: "Independence in Treatment C is only context isolation, not genuine cognitive diversity"
+    category: scientific
+    likelihood: high
+    impact: medium
+    status: open
+    owner: hekton
+    mitigation: "Say 'independent contexts', never 'independent judgments'. Role-diversity metrics (unique evidence cited, unique unknowns surfaced, pairwise rationale overlap) quantify it. Treatment D exists to test whether model heterogeneity is the fix."
+    raised_date: 2026-09-05
+    reviewed_date: 2026-09-05
+    links:
+      - "docs/v0-plan.md#6-experimental-design"
+
+  - id: RISK-0007
+    title: "Boundary erosion toward Hekton Assurance, whose own V0 planning is now live"
+    category: governance
+    likelihood: medium
+    impact: medium
+    status: open
+    owner: hekton
+    mitigation: "ADR-001 and ADR-005. No import, schema reference or shared file with hekton-assurance-lab. The run artifact is named application telemetry (kriterion-run-export/v0.1), not an assurance contract. Any proposal to place the schema in the lab is a violation absent a second independent consumer."
+    raised_date: 2026-09-05
+    reviewed_date: 2026-09-05
+    links:
+      - "docs/decisions.md"
+      - "docs/v0-plan.md#3-accepted-adrs"
+
+  - id: RISK-0008
+    title: "hekton-local-llm is alpha with a stale distribution name and a stale interface doc"
+    category: dependency
+    likelihood: high
+    impact: low
+    status: open
+    owner: hekton
+    mitigation: "Bind the adapter to the source signature at platform/hekton-local-llm/src/hekton_llm/ollama_client.py:34, not the interface doc (which documents generate(model, messages, options) and is wrong). Depend on the hekton_llm import namespace only, never the distribution name. Editable-install path documented in public docs/setup.md."
+    raised_date: 2026-09-05
+    reviewed_date: 2026-09-05
+    links:
+      - "docs/v0-plan.md#10-hekton-integration-contracts"
+
+  - id: RISK-0009
+    title: "Evidence provenance may not be enforceable without brittle prompt contortions"
+    category: technical
+    likelihood: low
+    impact: medium
+    status: open
+    owner: hekton
+    mitigation: "Structural prevention rather than instruction: no code path exists from model output into the ledger; only kriterion ledger add writes evidence. If deterministic gates P0-03/04/05 still cannot pass, kill criterion 2 fires and the product narrows to a deterministic ledger and economics tool."
+    raised_date: 2026-09-05
+    reviewed_date: 2026-09-05
+    links:
+      - "docs/v0-plan.md#7-eval-plan"
+
+  - id: RISK-0010
+    title: "Five seeds may be modest against local-model nondeterminism"
+    category: scientific
+    likelihood: medium
+    impact: medium
+    status: open
+    owner: hekton
+    mitigation: "Seeds raised from 3 to 5, paid for by cutting the case count from 3 to 2. Per-batch divergence measured by double-running one phase and recorded in the run manifest. The honest-negative criterion requires a margin of 2x the observed seed standard deviation."
+    raised_date: 2026-09-05
+    reviewed_date: 2026-09-05
+    links:
+      - "docs/v0-plan.md#6-experimental-design"
+
+  - id: RISK-0011
+    title: "Human-decision realism: the only accountable human is the operator"
+    category: product
+    likelihood: high
+    impact: low
+    status: open
+    owner: hekton
+    mitigation: "Documented explicitly in the plan and the report, not hidden. The machinery is real and the authority is synthetic; HumanDecision remains a separate first-class artifact so the separation is exercised honestly."
+    raised_date: 2026-09-05
+    reviewed_date: 2026-09-05
+    links:
+      - "docs/v0-plan.md#3-accepted-adrs"

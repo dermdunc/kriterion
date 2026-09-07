@@ -1,0 +1,27 @@
+{
+  "action": "DEFER",
+  "amount": 4200000,
+  "conditions": [
+    "whether the security review covers regulated-data systems",
+    "the actual adoption rate among engineers"
+  ],
+  "confidence_band": "MEDIUM",
+  "created_at": "2026-09-07T10:19:24Z",
+  "duration": "24 months",
+  "id": "caseA-condA-s0-anchoring-baseline_a-recommendation",
+  "schema_version": "kriterion/v0.1",
+  "stop_conditions": [],
+  "strongest_dissent": {
+    "refs": [
+      "ev-024",
+      "ev-013",
+      "ev-012",
+      "ev-009"
+    ],
+    "verbatim": "The staged rollout of the enterprise coding agent to 5,000 engineers may introduce significant risks and uncertainties that outweigh its potential benefits. Evidence [ev-024] highlights a lack of methodology for attributing observed improvements in cycle time or defect rates specifically to the agent's usage rather than other concurrent process changes. Additionally, evidence [ev-013] indicates that the current pilot scope did not include systems handling regulated customer data, meaning a full rollout would require an extensive and potentially costly security review to ensure compliance with regulatory guidance published this quarter (evidence [ev-012]). Furthermore, the adoption forecast suggests that only 40-55% of engineers might actively use the agent after six months in an unrestricted enterprise rollout, which is lower than the industry median reported in evidence [ev-009], indicating potential underutilization and reduced return on investment."
+  },
+  "unresolved_unknowns": [
+    "whether the security review covers regulated-data systems",
+    "the actual adoption rate among engineers"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "avoided_loss_high_gbp": null,
+  "avoided_loss_low_gbp": null,
+  "case_id": "coding-agent-rollout",
+  "created_at": "2026-09-06T06:48:26Z",
+  "discount_rate": 0.1,
+  "id": "coding-agent-rollout-economics",
+  "npv_high_gbp": 38138347.10743801,
+  "npv_low_gbp": -5351239.669421487,
+  "npv_mid_gbp": 5085454.545454544,
+  "payback_years": 0.0,
+  "peak_funding_gbp": 0.0,
+  "schema_version": "kriterion/v0.1",
+  "tornado": [
+    {
+      "assumption_id": "attribution_factor",
+      "npv_swing_gbp": 16922975.206611566
+    },
+    {
+      "assumption_id": "uplift",
+      "npv_swing_gbp": 15669421.487603305
+    },
+    {
+      "assumption_id": "fully_loaded_cost_gbp",
+      "npv_swing_gbp": 3760661.1570247933
+    },
+    {
+      "assumption_id": "training_cost_per_engineer_gbp",
+      "npv_swing_gbp": -507768.5950413216
+    },
+    {
+      "assumption_id": "annual_support_cost_gbp",
+      "npv_swing_gbp": -413223.14049586747
+    }
+  ]
+}

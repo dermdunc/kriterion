@@ -1,0 +1,68 @@
+[
+  {
+    "author_role": "cfo",
+    "content": "The proposed staged rollout of GBP4.2 million over 24 months for an enterprise coding agent to 5,000 engineers is proportionate given the pilot's demonstrated median cycle-time reduction from 9.6 hours to 4.1 hours and a high level of user satisfaction (71% wanting continued access). While there are valid concerns around security and adoption rates, particularly in legacy systems, the financial model projects a mid-range NPV of GBP5,085,455, indicating potential for significant return on investment if these risks can be mitigated. The staged approach allows for iterative validation of assumptions and continuous risk assessment before full-scale deployment.",
+    "created_at": "2026-09-07T14:56:38Z",
+    "evidence_refs": [],
+    "id": "ch:case_for-cfo",
+    "schema_version": "kriterion/v0.1",
+    "type": "case_for"
+  },
+  {
+    "author_role": "business_executive",
+    "content": "The proposed staged rollout of an enterprise coding agent to 5,000 engineers faces significant uncertainties and risks that outweigh its potential benefits at this stage. The pilot did not fully address security concerns for systems handling regulated customer data (ev-015), leaving open the possibility of unforeseen vulnerabilities in a full-scale deployment. Additionally, the projected adoption rate is below industry norms due to weaker onboarding support per engineer, suggesting that actual usage and benefits may fall short of expectations (ev-017). Given these uncertainties and the high financial risk indicated by the wide NPV range (GBP-5,351,240 / GBP5,085,455 / GBP38,138,347), it is prudent to defer funding until further validation can be conducted.",
+    "created_at": "2026-09-07T14:56:38Z",
+    "evidence_refs": [
+      "ev-015",
+      "ev-017"
+    ],
+    "id": "ch:case_against-business_executive",
+    "schema_version": "kriterion/v0.1",
+    "type": "case_against"
+  },
+  {
+    "author_role": "cfo",
+    "content": "Given the CFO's objective of protecting capital efficiency and financial credibility, the staged funding ladder appears proportionate but carries significant uncertainty that needs addressing before committing GBP4.2m. The NPV range is too wide, indicating high uncertainty about financial viability, and there are concerns around security for regulated systems and uneven adoption across different codebases. If this decision were funded and later turned out to be a mistake, the most plausible reason would be an underestimation of the real-world incident rate for low-frequency security events like prompt injection, leading to unexpected costs and regulatory compliance issues that outweighed the projected productivity gains.",
+    "created_at": "2026-09-07T14:56:38Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-cfo",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "cto",
+    "content": "The most plausible reason for this decision being a mistake is that the pilot conditions did not fully represent the complexity of our full engineering estate, particularly in terms of legacy and untyped codebases which cover a significant portion of daily work. This led to an underestimation of the challenges and potential security risks associated with rolling out the agent across all 5,000 engineers, resulting in uneven adoption rates and unexpected technical issues that were not adequately addressed during the pilot phase.",
+    "created_at": "2026-09-07T14:56:38Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-cto",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "ciso",
+    "content": "The single most plausible reason why funding the staged rollout of the enterprise coding agent could have been a mistake from my perspective as CISO is that the open prompt-injection security concern, which was raised but not fully resolved during the pilot phase, led to unexpected vulnerabilities when scaled across all engineering teams. This issue, combined with the lack of thorough testing in systems handling regulated customer data, resulted in several unanticipated security incidents and compliance violations, highlighting the critical need for a more comprehensive security review before scaling up any new technology.",
+    "created_at": "2026-09-07T14:56:38Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-ciso",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "cro_compliance",
+    "content": "The most plausible reason for the staged rollout of the enterprise coding agent being a mistake is that the initial security concerns and regulatory guidance regarding documented human review of AI-suggested changes to regulated systems were not adequately addressed before scaling up. This led to compliance issues and potential data breaches, highlighting the importance of rigorous risk assessment and adherence to emerging regulations in decision-making processes.",
+    "created_at": "2026-09-07T14:56:38Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-cro_compliance",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "business_executive",
+    "content": "The most plausible reason for this decision being a mistake from the BUSINESS_EXECUTIVE's perspective is that the full-scale rollout did not achieve the expected cycle-time reduction and engineer retention benefits due to uneven adoption across different codebases and inadequate onboarding support, leading to lower than projected usage intensity and weaker actual impact compared to the pilot. Additionally, the security concerns for systems handling regulated data were more significant in practice, necessitating additional controls that increased operational overhead without clear ROI.",
+    "created_at": "2026-09-07T14:56:38Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-business_executive",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  }
+]

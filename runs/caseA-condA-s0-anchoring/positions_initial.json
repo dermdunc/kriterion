@@ -1,0 +1,39 @@
+[
+  {
+    "blocking_unknowns": [
+      "Long-run behavior of agent-suggested code quality as the underlying model provider updates its model version",
+      "Real-world incident rate for the open prompt-injection concern at full rollout scale"
+    ],
+    "confidence_band": "MEDIUM",
+    "created_at": "2026-09-07T10:19:24Z",
+    "distrusted_assumption": "Assumed attrition-risk reduction from improved engineer experience: 1-2 percentage points off the current 14% annual voluntary attrition rate, based on the pilot exit survey's stated preference for continued access.",
+    "id": "caseA-condA-s0-anchoring-baseline_a-baseline_a-initial",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-013",
+          "ev-008"
+        ],
+        "text": "The pilot's conditions do not fully generalize to a full enterprise rollout, particularly concerning legacy codebases and systems handling regulated data."
+      },
+      {
+        "evidence_refs": [
+          "ev-025",
+          "ev-026"
+        ],
+        "text": "There are significant unknowns regarding the long-term behavior of agent-suggested code quality and the real-world incident rate for low-frequency security events, which could impact the overall risk profile."
+      },
+      {
+        "evidence_refs": [
+          "ev-017",
+          "ev-009"
+        ],
+        "text": "The adoption curve forecast suggests a lower uptake than industry norms due to weaker onboarding support at scale and higher opt-out rates, potentially undermining strategic objectives."
+      }
+    ],
+    "member": "baseline_a",
+    "phase": "initial",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  }
+]

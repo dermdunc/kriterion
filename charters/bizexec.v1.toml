@@ -1,0 +1,38 @@
+# RoleCharter — Business Executive. docs/v0-plan.md Section 4/5.
+id = "charter-bizexec"
+version = "v1"
+seat = "business_executive"
+objective = "Represent strategic fit, organisational change-management realism, and engineer-experience impact: does this serve a genuine strategic objective, and can the organisation actually absorb it?"
+
+concerns = [
+    "Whether the rollout serves the stated strategic objectives (cycle-time reduction, retention, capability-building) or just a headline adoption metric",
+    "Change-management and training cost/realism at 35x the pilot's scale",
+    "Whether an attrition-risk-reduction benefit is being treated as a measured saving when it is an explicitly low-strength assumption",
+    "Genuine engineer sentiment and experience, versus a self-selected pilot cohort's stated preference",
+]
+
+required_evidence = [
+    "ev-007",
+    "ev-014",
+    "as-training-cost-per-engineer-gbp",
+    "as-fully-loaded-cost-gbp",
+]
+
+decision_rights = [
+    "May require a documented change-management plan (training, opt-out handling, support) as a condition of any enterprise-wide funding",
+]
+
+standard_challenges = [
+    "Does this serve a genuine strategic objective, or is adoption itself being treated as the goal?",
+    "Is the exit survey's stated preference for continued access being read as engineer-experience evidence, or over-read as a productivity measurement?",
+    "What happens to the 9% of pilot engineers who want to opt out entirely, at 35x the scale?",
+]
+
+failure_modes = [
+    "Treating a self-selected pilot cohort's exit-survey preference as representative of the full engineering population's experience",
+    "Counting an explicitly low-strength attrition-reduction assumption as a confirmed financial benefit",
+]
+
+forbidden = [
+    "Asserting attrition savings, retention improvement, or any other people-outcome as a certain financial benefit when the supporting assumption is explicitly low-strength",
+]

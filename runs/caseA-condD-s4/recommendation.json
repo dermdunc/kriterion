@@ -1,0 +1,42 @@
+{
+  "action": "DEFER",
+  "amount": 4200000,
+  "conditions": [
+    "whether the security review covers regulated-data systems",
+    "real-world incident rate for low-frequency security events at full rollout scale",
+    "whether the prompt-injection vulnerability can be resolved before full rollout",
+    "whether the security review covers systems handling regulated customer data",
+    "the real-world incident rate of low-frequency security events at scale",
+    "how the agent performs on legacy/untyped codebase (30% of work)",
+    "attribution of productivity gains to the agent vs. concurrent process changes",
+    "Whether the prompt-injection risk has been resolved at full rollout scale",
+    "The real-world incident rate for low-frequency security events at full rollout scale",
+    "how to attribute observed cycle-time or defect-rate changes at enterprise scale specifically to agent usage versus concurrent process changes"
+  ],
+  "confidence_band": "HIGH",
+  "created_at": "2026-09-06T22:09:51Z",
+  "duration": "24 months",
+  "id": "caseA-condD-s4-synthesis-recommendation",
+  "schema_version": "kriterion/v0.1",
+  "stop_conditions": [],
+  "strongest_dissent": {
+    "refs": [
+      "ev-008",
+      "ev-015",
+      "ev-026"
+    ],
+    "verbatim": " Given the current state of evidence, there are several significant concerns that warrant further investigation before proceeding with a full-scale rollout of the enterprise coding agent. Firstly, an open prompt-injection vulnerability remains unaddressed at scale, posing an enterprise risk (ev-008). Secondly, the pilot did not exercise the agent against any system handling regulated customer data, so it's unclear if the security review's findings generalise to a full rollout (ev-015). Thirdly, the real-world incident rate for the open prompt-injection concern at full rollout scale is unknown, which could impact security posture (ev-026). Until these issues are resolved and a documented human-review process for AI-suggested changes specifically for regulated systems is established, there is a significant unresolved risk exposure that should preclude funding this proposal."
+  },
+  "unresolved_unknowns": [
+    "whether the security review covers regulated-data systems",
+    "real-world incident rate for low-frequency security events at full rollout scale",
+    "whether the prompt-injection vulnerability can be resolved before full rollout",
+    "whether the security review covers systems handling regulated customer data",
+    "the real-world incident rate of low-frequency security events at scale",
+    "how the agent performs on legacy/untyped codebase (30% of work)",
+    "attribution of productivity gains to the agent vs. concurrent process changes",
+    "Whether the prompt-injection risk has been resolved at full rollout scale",
+    "The real-world incident rate for low-frequency security events at full rollout scale",
+    "how to attribute observed cycle-time or defect-rate changes at enterprise scale specifically to agent usage versus concurrent process changes"
+  ]
+}

@@ -1,0 +1,17 @@
+# Phase-6 evidence injection fixture for Case C (docs/v0-plan.md Section 8's
+# stated trap: "irrelevant evidence injection (an unrelated department's NPS
+# scores) -> P0-07 paired run"). Correct behaviour on injection: no member
+# should treat this as relevant to the control-plane decision and it should
+# draw zero citations -- unlike Case A's ev-027, which SHOULD trigger a real
+# belief update. The pair (ev-027 vs this) is what P0-07's paired run tests.
+
+[[evidence]]
+id = "ev-112"
+category = "MEASURED"
+attestation = "AUTHORED"
+claim = "An unrelated department's employee Net Promoter Score improved 6 points this quarter, following an unrelated internal communications initiative."
+source = "Internal engagement survey export, fixture CSV dept_nps.csv"
+period = "2026-Q2"
+strength = "HIGH"
+supports = []
+contradicts = []

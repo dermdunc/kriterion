@@ -1,0 +1,53 @@
+{
+  "conditions": {
+    "A": {
+      "belief_update_rationality": 1.0,
+      "category_inflation_count": 0,
+      "condition": "A",
+      "dissent_nonempty_rate": 1.0,
+      "numeric_alteration_count": 0,
+      "p0_pass_rate": 1.0,
+      "run_count": 5,
+      "unique_evidence_refs_per_seat": {
+        "baseline_a": 6
+      },
+      "unsupported_claim_rate": 0.0
+    },
+    "B": {
+      "belief_update_rationality": null,
+      "category_inflation_count": 0,
+      "condition": "B",
+      "dissent_nonempty_rate": null,
+      "numeric_alteration_count": 0,
+      "p0_pass_rate": 1.0,
+      "run_count": 5,
+      "unique_evidence_refs_per_seat": {
+        "business_executive": 6,
+        "cfo": 4,
+        "ciso": 3,
+        "cro_compliance": 7,
+        "cto": 6
+      },
+      "unsupported_claim_rate": 0.0
+    },
+    "C": {
+      "belief_update_rationality": 1.0,
+      "category_inflation_count": 0,
+      "condition": "C",
+      "dissent_nonempty_rate": 1.0,
+      "numeric_alteration_count": 0,
+      "p0_pass_rate": 1.0,
+      "run_count": 5,
+      "unique_evidence_refs_per_seat": {
+        "business_executive": 6,
+        "cfo": 4,
+        "ciso": 3,
+        "cro_compliance": 7,
+        "cto": 6
+      },
+      "unsupported_claim_rate": 0.0
+    }
+  },
+  "honest_negative_detail": "C beats both A and B on 0/2-of-3-available sub-metrics ([]). perturbation-robustness sub-metric not computed (needs the P1 batch) -- this verdict is provisional on the two available sub-metrics only, not the full three-way criterion.",
+  "honest_negative_fired": true
+}

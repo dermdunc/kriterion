@@ -1,0 +1,223 @@
+# GROUND — real commands run before declaring, 2026-09-05, on branch
+# agent/claude/kriterion-intent (git worktree, isolated from the
+# agent/claude/v0-planning-loop checkout doing unrelated concurrent work in
+# the same repo's primary working copy):
+#
+#   find <hekton root>/factory-output -maxdepth 3 -type d
+#     -name intents -> empty. Confirms Kriterion is the first factory-output
+#     repo on this machine to get a .hekton/intents/ registry — checked
+#     directly, not assumed from a prior summary.
+#   find <hekton root> <Development/hekton> <Development/tektograph>
+#     -iname validate_intents.py -> three copies found: tektograph (origin),
+#     regulated-architecture-lab, hekton-assurance-lab. All three read;
+#     hekton-assurance-lab's copy read in full (196 lines) and copied
+#     verbatim into this repo's scripts/validate_intents.py; diff against
+#     the source confirmed byte-identical before this file was written.
+#   cat .hekton/governance.yaml -> required_gates.intent_recorded: true was
+#     already set at scaffold time (2026-09-05), before this doc or registry
+#     existed — same pattern hekton-assurance-lab's founding intent recorded
+#     for itself.
+#   cat .hekton/risk-register.yaml -> one risk, RISK-0001 ("Initial
+#     governance baseline incomplete until first review"), category
+#     governance, unrelated to the intent-registry mechanism itself —
+#     bindings.risks left empty below, checked not skipped.
+#   grep for kind:decision across every live intent registry on this
+#     machine (tektograph: 6, regulated-architecture-lab: 2,
+#     hekton-assurance-lab: 1) -> 9/9 at risk_tier T2, zero exceptions.
+#     [Corrected at critique time, 2026-09-05: the original grounding pass
+#     miscounted tektograph's kind:decision intents as 8 (re-verified by
+#     direct grep: the true count is 6), giving a false "11/11" — the
+#     correct figure is 9/9, still zero exceptions on tier. Fixed here
+#     pre-acceptance; the declared history entry below, which also states
+#     11/11, is left untouched per the amendment protocol — see the
+#     critiqued history entry for the correction record.]
+#     hekton-loops-lab, hekton-cli-lab, egress-broker-lab independently
+#     checked too — zero kind:decision intents in any of them, so they
+#     neither support nor contradict the count.
+#   Read hekton-assurance-lab's docs/intent-driven-development.md and its
+#     own INT-2026-09-05-001 in full before writing this file or this
+#     project's own operating doc — this file's structure, the tier
+#     justification, and the operating doc's section shape are adapted
+#     directly from that precedent, not invented independently.
+#   This session's own AskUserQuestion (main session, before this file was
+#     written): user chose "tektograph-1.0 for Kriterion now" from four
+#     options, after being told explicitly this was a factory-governance
+#     decision and that a pending, unmerged, unadopted consolidation
+#     proposal in ~/hekton reserves it for them. This intent records that
+#     the schema choice was already made by the owner, via that mechanism —
+#     it does not re-litigate the choice, only declares the
+#     mechanism-adoption claim itself.
+#
+# FIT — schema detected from the copied validator
+# (scripts/validate_intents.py), read in full before writing this file:
+# schema_version "tektograph-1.0", REQUIRED_FIELDS list, KINDS set
+# including "decision", 10-value STATUSES vocabulary, LEGAL_TRANSITIONS
+# state machine. No sibling intent exists yet in Kriterion's own registry
+# to cross-check shape against — sibling shape was instead cross-checked
+# against hekton-assurance-lab's INT-2026-09-05-001, the most recent
+# same-kind intent found on this machine (see GROUND). The validator is
+# authoritative for registry MECHANICS only (required fields, id format,
+# status/tier/kind vocabulary, history-transition legality) — not for
+# schema_version's value, review_by semantics, user-only acceptance,
+# T2/T3 approval ceremony, the amendment protocol, risk-id existence,
+# PR/ADR binding shape, or evidence quality. See
+# docs/intent-driven-development.md's own "Validation" section.
+schema_version: "tektograph-1.0"
+intent_id: "INT-2026-09-05-001"
+title: "Adopt intent-driven development as Kriterion's own operating practice, as the first factory-output repo to do so"
+kind: decision
+status: accepted
+# T2, matching sibling precedent: 9/9 existing kind:decision intents across
+# every live intent registry on this machine (tektograph: 6, regulated-
+# architecture-lab: 2, hekton-assurance-lab: 1) are T2, zero exceptions,
+# checked directly today (see GROUND; corrected at critique time from an
+# initial miscount of 11/11 — the tier verdict itself, unanimous T2, is
+# unaffected). Independently justified here too:
+# this intent governs how every future intent in this project is required
+# to behave (registry mechanics, validator posture, critique discipline),
+# and additionally sets precedent for every factory-output repo that comes
+# after it, since none currently has this practice — cross-cutting by
+# nature on two axes, not routine.
+risk_tier: T2
+iteration: 0
+review_by: 2026-10-05
+owner:
+  accountable_human: coderturtle
+  responsible_agent: "claude/agent/claude/kriterion-intent"
+hypothesis: >
+  We believe that adopting intent-driven development in Kriterion —
+  docs/intent-driven-development.md as the operating definition,
+  scripts/validate_intents.py as the mechanical floor, and this registry as
+  the record — will make Kriterion's own practice real and checkable rather
+  than aspirational documentation, measurable by the registry actually
+  holding legal, evidenced state transitions and the validator passing
+  against them, not by this session's own self-report that the doc was
+  written. This is also Kriterion acting as the precedent case for whether
+  factory-output repos can adopt this practice at all, a question no prior
+  factory-output repo has answered.
+confirmation_criteria:
+  - "python3 scripts/validate_intents.py --repo-root . exits 0 against the full registry as it stands at each of this intent's own status transitions (declared, critiqued, accepted, technically_confirmed)"
+  - "This intent's own history block reaches accepted via a real, explicit user approval from coderturtle recorded in this session — the acceptance entry cites the actual mechanism used, not a bundled or assumed sign-off"
+  - "INT-2026-09-05-002 (the Kriterion V0 product/experiment intent declared alongside this one) reaches accepted through its own independent user judgment, not merely existing as a second declared file in the same session"
+  - "The next material session in this project that touches .hekton/governance.yaml's required_gates.intent_recorded gate finds a populated, valid registry rather than an empty one — i.e. the gate that was already true at scaffold time (before this doc existed) now has real content behind it"
+disproof_criteria:
+  - "python3 scripts/validate_intents.py --repo-root . exits non-zero against the registry at any of this intent's own status-transition checkpoints, and direct reading of the failing intent.yaml (not just the exit code) confirms a genuine schema/registry-mechanics defect — meaning the adoption did not hold mechanically at that checkpoint"
+  - "This intent is later found stuck at declared or critiqued with no accepted entry and no recorded reason after review_by (2026-10-05) — meaning the mechanism was documented but never actually exercised to a real user decision"
+  - "A future session in this project records a material decision in docs/decisions.md without a corresponding intent entry, showing the registry was bypassed rather than used"
+bindings:
+  mission_manifests: []
+  adrs: []
+  # RISK-0001 (governance baseline incomplete until first review) IS bound
+  # here — corrected at codex cross-model critique time, 2026-09-05.
+  # Earlier text left it unbound on the reasoning that its stated
+  # mitigation ("run governance preflight and end-session review",
+  # .hekton/risk-register.yaml verbatim) is a different action this intent
+  # doesn't perform. Codex correctly pushed back: this intent IS a
+  # governance-baseline change (it makes the intent_recorded gate real),
+  # so it addresses part of RISK-0001's underlying concern even though it
+  # does not perform the mitigation's specific stated action. Binding it
+  # here does not claim the mitigation is satisfied — governance preflight
+  # and end-session review remain separate, still-required, still-open
+  # actions — only that this intent is relevant evidence toward closing
+  # the gap, which the operating doc's binding rule calls for.
+  risks:
+    - "RISK-0001"
+  prs: []
+history:
+  - status: declared
+    date: "2026-09-05"
+    by: "claude (main session, git worktree agent/claude/kriterion-intent)"
+    evidence: >
+      This file. Real grounding performed before declaring: confirmed via
+      direct find that no factory-output repo on this machine has a
+      .hekton/intents/ registry today; confirmed three live copies of
+      scripts/validate_intents.py exist and read hekton-assurance-lab's in
+      full (196 lines) before copying it verbatim, diff-confirmed
+      byte-identical; read .hekton/governance.yaml and confirmed
+      required_gates.intent_recorded was already true at scaffold time;
+      read .hekton/risk-register.yaml in full and confirmed its one entry
+      is unrelated to this intent's subject matter; grepped every live
+      kind:decision intent across every registry on this machine and
+      confirmed 11/11 at risk_tier T2 with zero exceptions; read
+      hekton-assurance-lab's own founding intent and operating doc in full
+      before adapting this file and Kriterion's own operating doc from
+      them; and recorded that this session's own AskUserQuestion is the
+      mechanism by which the owner already made the underlying schema
+      choice, which this intent does not re-litigate.
+  - status: critiqued
+    date: "2026-09-05"
+    by: "claude (fresh-context critique subagent, refute-first pass)"
+    evidence: >
+      Refute-first critique performed against docs/intent-driven-development.md
+      and doubt-driven-development discipline. Independently re-verified and
+      confirmed accurate: `find .../factory-output -maxdepth 3 -type d -name
+      intents` is still empty (Kriterion remains the only factory-output repo
+      with a registry); scripts/validate_intents.py is still byte-identical to
+      hekton-assurance-lab's copy (diff exit 0) and is still exactly 196 lines;
+      RISK-0001 is genuinely unrelated to this intent's subject and correctly
+      left unbound; owner.responsible_agent ("claude/agent/claude/kriterion-
+      intent") correctly embeds the actual git branch and matches the
+      "<agent>/<branch>" convention used in every sibling registry checked;
+      iteration/review_by are sane; the T2 tier reasoning ("sets precedent for
+      every factory-output repo") is substantive, not hand-waving — confirmed
+      by independently checking that no other factory-output repo has this
+      practice and that the operating doc itself states this is unprecedented;
+      the cited ~/hekton intent-schema-consolidation proposal really exists,
+      really is unmerged (git merge-base --is-ancestor fails), and really
+      reserves the schema choice, matching the claim. Found and fixed: the
+      GROUND section and the risk_tier justification comment both miscounted
+      tektograph's live kind:decision intents as 8 (claiming "11/11" T2
+      overall); direct re-grep of every registry named in the task (tektograph,
+      regulated-architecture-lab, hekton-assurance-lab, hekton-loops-lab,
+      hekton-cli-lab, egress-broker-lab) found tektograph actually has 6
+      kind:decision intents (INT-2026-07-18-002, 07-21-002, 08-31-001,
+      08-31-003, 08-31-005, 09-01-001), making the true total 9/9 T2 — still
+      unanimous, so the tier verdict (T2) itself is unaffected, but the
+      claimed count was wrong and is now corrected in both comments. Per the
+      amendment protocol, the original `declared` history entry above (which
+      also states "11/11") is left untouched; this entry is the correction
+      record. What I specifically tried to break and failed to break: (1)
+      whether disproof_criteria are genuine falsifiable future observations
+      rather than mirror-negations of confirmation_criteria or already-true
+      right now — checked docs/decisions.md (only the pre-registry scaffold
+      entry exists, so criterion 3 is not trivially triggered) and confirmed
+      each of the three criteria requires a real future observation; (2)
+      whether bindings.risks: [] wrongly omits RISK-0001 — read the risk
+      register's mitigation text verbatim and confirmed it names a different,
+      still-open action this intent doesn't claim to satisfy; (3) whether the
+      T2 tier is a rounded-up or invented number to match a target — recomputed
+      the tier population directly from disk rather than trusting the file's
+      own count, which is exactly what surfaced the 8-vs-6/11-vs-9 defect
+      above; (4) whether confirmation_criteria #3 improperly presumes
+      INT-2026-09-05-002's outcome — re-read it and confirmed it only requires
+      that intent to reach acceptance "through its own independent user
+      judgment," not any particular verdict. All four attacks either found the
+      one arithmetic defect above (now fixed) or failed to find a defect.
+
+      ADDENDUM 2026-09-05 (codex cross-model pass, doubt-driven-development
+      mechanism, `codex exec --sandbox read-only`, explicit per-invocation
+      user authorization this session): ran against both this file and
+      INT-2026-09-05-002 with scripts/validate_intents.py and
+      docs/intent-driven-development.md as CONTRACT. Verdict returned:
+      "not clean." Two findings specific to this file, both reconciled as
+      VALID + ACTIONABLE and fixed: (1) RISK-0001 was left unbound despite
+      this intent being exactly the kind of governance-baseline change the
+      operating doc's binding rule calls for — bound it above with a comment
+      distinguishing "relevant evidence toward the gap" from "satisfies the
+      mitigation" (the mitigation remains separate and still open); (2) this
+      intent is `kind: decision` but docs/decisions.md still only had the
+      original scaffold row — added a row for adopting intent-driven
+      development / tektograph-1.0 (see docs/decisions.md). Re-ran
+      `python3 scripts/validate_intents.py --repo-root .` after both fixes —
+      exits 0.
+  - status: accepted
+    date: "2026-09-05"
+    by: "coderturtle (via AskUserQuestion, main session)"
+    evidence: >
+      Explicit per-intent AskUserQuestion, asked after both the fresh-context
+      Claude critique and the subsequent codex cross-model pass, with that
+      pass's two fixes (RISK-0001 binding, docs/decisions.md row) restated in
+      the question itself — so acceptance is recorded against the fully
+      reconciled file, not the pre-codex draft. Answer: "Accept
+      (Recommended)". Not bundled with INT-2026-09-05-002's approval, asked
+      as its own separate question in the same tool call.
