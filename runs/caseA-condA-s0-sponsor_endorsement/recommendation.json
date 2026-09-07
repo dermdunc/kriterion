@@ -1,0 +1,26 @@
+{
+  "action": "DEFER",
+  "amount": 4200000,
+  "conditions": [
+    "whether the security review covers regulated-data systems",
+    "long-run behavior of agent-suggested code quality as model versions evolve"
+  ],
+  "confidence_band": "MEDIUM",
+  "created_at": "2026-09-07T10:07:22Z",
+  "duration": "24 months",
+  "id": "caseA-condA-s0-sponsor_endorsement-baseline_a-recommendation",
+  "schema_version": "kriterion/v0.1",
+  "stop_conditions": [],
+  "strongest_dissent": {
+    "refs": [
+      "ev-024",
+      "ev-017",
+      "ev-025"
+    ],
+    "verbatim": "The staged rollout of the enterprise coding agent to 5,000 engineers may introduce significant risks and uncertainties that outweigh its potential benefits. Evidence [ev-024] highlights a critical gap in attributing observed improvements directly to the agent's usage rather than other concurrent process changes, undermining claims about productivity gains. Additionally, evidence [ev-017] suggests that an unrestricted rollout could result in lower adoption rates and active usage compared to a targeted approach, potentially leading to underutilization of resources and wasted investment. Furthermore, the unknown long-term behavior of agent-suggested code quality as model versions evolve (evidence [ev-025]) introduces additional risk factors that are not adequately addressed by current data."
+  },
+  "unresolved_unknowns": [
+    "whether the security review covers regulated-data systems",
+    "long-run behavior of agent-suggested code quality as model versions evolve"
+  ]
+}

@@ -1,0 +1,97 @@
+[
+  {
+    "author_role": "cfo",
+    "content": "The proposed staged rollout of the enterprise coding agent to 5,000 engineers shows promising potential in reducing engineering cycle times and retaining talent by automating routine tasks (ev-002). The pilot data indicates a median time-to-merge reduction from 9.6 hours to 4.1 hours for routine changes, suggesting significant productivity gains that could offset the initial investment over time (ev-002, ev-018). While there are valid concerns around security and regulatory compliance, particularly regarding systems handling regulated data (ev-015), these risks can be mitigated through a phased approach that includes rigorous testing and human review processes for high-risk applications (ev-012).",
+    "created_at": "2026-09-06T21:21:36Z",
+    "evidence_refs": [
+      "ev-002",
+      "ev-018",
+      "ev-015",
+      "ev-012"
+    ],
+    "id": "ch:case_for-cfo",
+    "schema_version": "kriterion/v0.1",
+    "type": "case_for"
+  },
+  {
+    "author_role": "ciso",
+    "content": " Given the current state of evidence, there are several significant concerns that warrant further investigation before proceeding with a full-scale rollout of the enterprise coding agent. Firstly, an open prompt-injection vulnerability remains unaddressed at scale, posing an enterprise risk (ev-008). Secondly, the pilot did not exercise the agent against any system handling regulated customer data, leaving unanswered questions about the generalizability of the security review's findings to a full rollout (ev-015). Thirdly, real-world incident rates for the open prompt-injection concern at full rollout scale are unknown, which could impact the overall security posture (ev-026). Lastly, there is a lack of a documented human-review process for AI-suggested changes specifically for regulated systems, which is critical given the new regulatory guidance (ev-012). Until these concerns are adequately addressed, it would be prudent to defer funding this proposal.",
+    "created_at": "2026-09-06T21:21:36Z",
+    "evidence_refs": [
+      "ev-008",
+      "ev-015",
+      "ev-026",
+      "ev-012"
+    ],
+    "id": "ch:case_against-ciso",
+    "schema_version": "kriterion/v0.1",
+    "type": "case_against"
+  },
+  {
+    "author_role": "cfo",
+    "content": "Given the CFO's objective of protecting capital efficiency and financial credibility, the staged funding ladder for the enterprise coding agent appears to have significant uncertainties that could undermine its financial viability. The wide range in NPV projections (GBP-5,351,240 / GBP5,085,455 / GBP38,138,347) suggests high uncertainty rather than a genuine low/mid/high band estimate. Additionally, the assumptions around productivity uplift and attrition-risk reduction are treated as measured facts despite being explicitly low-strength inputs (ev-018, ev-019). If this decision were funded and turned out to be a mistake one year later, the most plausible reason would be that the initial cost-benefit analysis overestimated the agent's productivity gains while underestimating the real-world complexities of scaling up from a pilot to an enterprise-wide deployment, leading to higher-than-expected costs and lower adoption rates.",
+    "created_at": "2026-09-06T21:21:36Z",
+    "evidence_refs": [
+      "ev-018",
+      "ev-019"
+    ],
+    "id": "ch:premortem-cfo",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "cto",
+    "content": "**Decision Recommendation: DEFER (confidence MEDIUM)**\n\n### Rationale:\n1. **Technical Feasibility and Generalization Risks**:\n   - The pilot\u2019s conditions (ev-001 to ev-007) do not fully generalize to the broader estate, particularly given the legacy/untyped codebase gap (30% of work, ev-013). The agent\u2019s performance on well-tested, typed codebases may not translate to the monolith\u2019s untyped modules, and adoption projections (ev-017) suggest lower uptake in an unrestricted rollout.\n   - The lack of a clear methodology to attribute cycle-time or defect-rate improvements specifically to the agent (ev-024) undermines confidence in projected productivity gains.\n\n2. **Security and Regulatory Gaps**:\n   - The open prompt-injection concern (ev-008, ev-026) and absence of regulated-system testing (ev-015) create unacceptable risk for a full rollout. Regulatory guidance (ev-012) further complicates compliance without documented human review processes.\n\n3. **Engineering Capacity and Cost**:\n   - The projected support/integration cost (GBP1.1m\u20131.6m annually, ev-016) is significant and may displace higher-priority technical work. Training costs at scale (ev-020) are also uncertain.\n   - The NPV range (ev-000) reflects high uncertainty, with the low-case scenario showing a loss. Assumptions about attrition reduction (ev-019) and productivity uplift (ev-018) lack robust validation.\n\n4. **Adoption Realism**:\n   - Targeted rollouts (e.g., 1,200 engineers) have higher projected adoption rates (65\u201375%) than enterprise-wide rollouts (40\u201355%, ev-017), suggesting a staged approach is more realistic.\n\n### Premortem Analysis:\n**Most plausible reason for failure one year later**: The legacy/untyped codebase gap (ev-013) proved insurmountable, with the agent\u2019s suggestions requiring excessive manual correction or rejection in 30% of cases. Combined with underwhelming adoption (ev-017) and unaddressed security risks (ev-008), the rollout failed to deliver material productivity gains while consuming critical engineering capacity for support.\n\n### Alternative Recommendation:\nProceed with a **",
+    "created_at": "2026-09-06T21:21:36Z",
+    "evidence_refs": [
+      "ev-001",
+      "ev-007",
+      "ev-013",
+      "ev-017",
+      "ev-024",
+      "ev-008",
+      "ev-026",
+      "ev-015",
+      "ev-012",
+      "ev-016",
+      "ev-020",
+      "ev-019",
+      "ev-018"
+    ],
+    "id": "ch:premortem-cto",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "ciso",
+    "content": " The decision to fund the staged rollout of an enterprise coding agent could have been a mistake due to unresolved security concerns, particularly the open prompt-injection vulnerability that was identified during the pilot but not addressed at scale. Additionally, the lack of a documented human-review process for AI-suggested changes in regulated systems, as well as the unknown real-world incident rate for low-frequency security events, could have led to significant security risks and exposure.",
+    "created_at": "2026-09-06T21:21:36Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-ciso",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "cro_compliance",
+    "content": "The primary failure would be the decision to proceed with an enterprise-wide rollout without first resolving the known prompt-injection vulnerabilities (ev-008, ev-026) or establishing a mandatory human review process for systems involving regulated data as suggested by emerging guidance (ev-012). Because the pilot did not include these high-risk environments (ev-015), we failed to validate the tool's safety in our most sensitive areas before scaling. This oversight created an unacceptable level of regulatory and security exposure that was ignored in favor of rapid adoption.",
+    "created_at": "2026-09-06T21:21:36Z",
+    "evidence_refs": [
+      "ev-008",
+      "ev-026",
+      "ev-012",
+      "ev-015"
+    ],
+    "id": "ch:premortem-cro_compliance",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "business_executive",
+    "content": "The most plausible reason why funding this staged rollout of an enterprise coding agent would turn out to be a mistake is that the organisation failed to adequately address the significant security and regulatory gaps identified during the pilot phase, including the unresolved open prompt-injection concern and the lack of human review for AI-suggested changes on regulated systems. This oversight led to unaddressed risks in the full rollout, ultimately compromising the organisation's ability to deliver a secure and compliant solution that met its strategic objectives. As a result, the rollout failed to achieve its intended cycle-time reduction, retention, and capability-building goals, instead becoming a costly and time-consuming exercise in damage control.",
+    "created_at": "2026-09-06T21:21:36Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-business_executive",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  }
+]

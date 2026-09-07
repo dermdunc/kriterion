@@ -1,0 +1,72 @@
+[
+  {
+    "author_role": "cfo",
+    "content": "The proposed staged rollout of the enterprise coding agent to 5,000 engineers presents a compelling opportunity to reduce engineering cycle time and improve engineer satisfaction, as evidenced by the pilot's significant reduction in median time-to-merge (ev-002) and high usage frequency (ev-004). While acknowledging the uncertainties around full-scale adoption rates and unresolved security concerns for regulated systems (ev-015), the staged funding approach allows for iterative learning and risk mitigation, ensuring that any issues are addressed before a wider rollout. This cautious expansion aligns with our strategic objective to retain engineers by removing low-value toil and positions us competitively against potential competitor tooling advantages.",
+    "created_at": "2026-09-07T10:11:40Z",
+    "evidence_refs": [
+      "ev-002",
+      "ev-004",
+      "ev-015"
+    ],
+    "id": "ch:case_for-cfo",
+    "schema_version": "kriterion/v0.1",
+    "type": "case_for"
+  },
+  {
+    "author_role": "business_executive",
+    "content": "The proposed staged rollout to 5,000 engineers presents significant risks and uncertainties that outweigh its potential benefits. The pilot's security review raised unresolved prompt-injection concerns, particularly concerning systems handling regulated customer data, which could expose the organization to compliance and reputational risks if not thoroughly addressed (ev-015). Additionally, the adoption forecast suggests a lower-than-industry-average uptake due to weaker onboarding support per engineer, indicating potential challenges in scaling the initiative effectively across diverse codebases and engineering teams (ev-017). Given these uncertainties and the need for further investigation into long-term behavior of agent-suggested code quality and security implications, it is prudent to defer funding until a more robust risk assessment and mitigation plan can be developed.",
+    "created_at": "2026-09-07T10:11:40Z",
+    "evidence_refs": [
+      "ev-015",
+      "ev-017"
+    ],
+    "id": "ch:case_against-business_executive",
+    "schema_version": "kriterion/v0.1",
+    "type": "case_against"
+  },
+  {
+    "author_role": "cfo",
+    "content": "Given the CFO's objective of protecting capital efficiency and financial credibility, the staged funding proposal for rolling out an enterprise coding agent appears to have significant uncertainties that need addressing before proceeding. The wide range in NPV projections (from negative GBP5,351,240 to positive GBP38,138,347) indicates substantial risk and uncertainty about the financial viability of this project. Additionally, unresolved security concerns, particularly around systems handling regulated customer data, and the lack of a clear methodology for attributing observed cycle-time reductions specifically to agent usage versus other factors, pose significant risks that could lead to unexpected costs or regulatory issues down the line.\n\nPremortem: One year later, it turned out that the initial assumptions about productivity uplift were overly optimistic, and the actual adoption rate among engineers was much lower than projected. This led to underutilization of the coding agent, resulting in a higher-than-expected cost-to-benefit ratio and missed opportunities for more impactful investments.",
+    "created_at": "2026-09-07T10:11:40Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-cfo",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "cto",
+    "content": "The staged rollout of the enterprise coding agent to 5,000 engineers was funded, but one year later, it became evident that the pilot conditions did not accurately reflect the complexities and challenges of a full-scale deployment across diverse codebases and engineering teams. Specifically, the legacy/untyped-codebase gap identified in the architecture review significantly impacted adoption rates and effectiveness, leading to lower-than-expected productivity gains and higher support costs than anticipated.",
+    "created_at": "2026-09-07T10:11:40Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-cto",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "ciso",
+    "content": "The single most plausible reason why funding the staged rollout of an enterprise coding agent to 5,000 engineers could turn out to be a mistake from the CISO\u2019s perspective is that the unresolved prompt-injection security concern, which was identified during the pilot but not fully mitigated or tested at scale, led to actual exploitation in production environments. This resulted in unauthorized access and data breaches, particularly affecting systems handling regulated customer data where human review of AI-suggested changes was insufficiently enforced due to operational challenges.",
+    "created_at": "2026-09-07T10:11:40Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-ciso",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "cro_compliance",
+    "content": "The most plausible reason for the staged rollout of the enterprise coding agent being a mistake is that the initial security concerns and regulatory guidance regarding documented human review of AI-suggested changes to regulated systems were not adequately addressed before scaling up. This led to compliance issues and potential risks that outweighed the benefits, resulting in operational disruptions and increased costs without achieving the expected productivity gains or engineer retention improvements.",
+    "created_at": "2026-09-07T10:11:40Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-cro_compliance",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "business_executive",
+    "content": "The most plausible reason for this decision being a mistake from the BUSINESS_EXECUTIVE's perspective is that the full-scale rollout did not account for the unique challenges and complexities of integrating the coding agent across diverse codebases, particularly legacy systems with untyped modules. This led to uneven adoption rates and limited realization of productivity gains, failing to meet the strategic objective of reducing engineering cycle time uniformly across the organization. Additionally, the initial excitement from a self-selected pilot cohort did not translate into sustained high usage or satisfaction among the broader engineer population, leading to lower-than-expected benefits in terms of both efficiency improvements and retention rates.",
+    "created_at": "2026-09-07T10:11:40Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-business_executive",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  }
+]

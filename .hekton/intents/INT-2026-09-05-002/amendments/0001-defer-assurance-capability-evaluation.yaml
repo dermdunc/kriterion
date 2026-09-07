@@ -1,0 +1,134 @@
+# Amendment record for INT-2026-09-05-002.
+#
+# No formal amendment schema is documented for tektograph-1.0 anywhere on this
+# machine (checked: tektograph's own docs/planning/iteration-plans/intent-
+# driven-development.md says only "an amendment file beside the intent" with
+# no prescribed shape; the only concrete amendment-file precedent found,
+# hekton-cli-lab/.hekton/intents/INT-2026-07-15-001/amendments/0001-clarify.yaml,
+# belongs to the OTHER schema family, "1.0" nested, with its own separate
+# amendment.contract.md this repo does not have or adopt). Fields below are
+# adapted from that precedent's spirit — what changed, why, evidence, impact,
+# approval, provenance — sized to what tektograph-1.0 actually defines,
+# without inventing a digest/contract mechanism this schema doesn't have.
+amendment_id: "AMEND-2026-09-05-001"
+intent_id: "INT-2026-09-05-002"
+sequence: 1
+date: "2026-09-05"
+
+pivot_type: "narrow"
+is_material: true  # changes a confirmation criterion and a disproof criterion —
+                    # unconditionally material, not a judgment call.
+
+reason: >
+  A separate Fable -> Codex -> Opus planning loop, run concurrently and without
+  awareness of this intent (see the intent's own GROUND note anticipating
+  exactly this risk), produced kriterion/docs/v0-plan.md. Its ADR-005 ("Hekton
+  Assurance integration is export, not contract") makes "no edge to
+  hekton-assurance-lab in V0" a non-negotiable invariant (v0-plan.md Section
+  15, invariant #6: violating it "is a re-planning event"), strips all
+  AICapability language, and renames the run artifact to
+  kriterion-run-export/v0.1 with "nothing reads it in V0" — directly
+  contradicting this intent's original confirmation_criteria #4 (Assurance
+  evaluates a run as a capability in V0) and rendering disproof_criteria #3
+  (Assurance domain-coupling) untestable, since no integration attempt exists
+  for coupling to ever be observed in or out of.
+
+  A dedicated reconciliation pass (general-purpose subagent, main session,
+  2026-09-05) read both documents in full and confirmed this is a genuine,
+  reasoned disagreement, not an oversight in either document: v0-plan.md's own
+  Section 0 verification record notes Assurance's context pack already uses
+  `investment-committee` as its worked AICapability example, and treats that
+  fact as a reason to wall off rather than integrate — the opposite conclusion
+  this intent's confirmation_criteria #4 had assumed when declared.
+
+  Presented to the project owner (coderturtle) via AskUserQuestion with three
+  options: amend the intent to match the plan, send the plan back to soften
+  ADR-005, or review a drafted amendment before deciding. Owner chose to amend
+  the intent. Rationale accepted: ADR-005's boundary is arguably sounder than
+  this intent's original criterion — it avoids exactly the premature-coupling
+  failure mode the underlying research pack warned about (see
+  kriterion-private/docs/context/ai-investment-committee-planning-loop-prompts-2026-09-05.md
+  Section 6, "boundary violations" review lens), and Hekton Assurance itself
+  has no eval code yet and its own V0 planning separately in flight (per the
+  original Fable stage's Current-State Inventory) — forcing a capability
+  integration into Kriterion's V0 now would risk exactly the kind of
+  premature, one-sided coupling the factory-output boundary exists to prevent.
+
+triggering_evidence:
+  - evidence_id: "E-001"
+    type: "cross_document_reconciliation"
+    summary: >
+      Fresh-context subagent read INT-2026-09-05-002/intent.yaml, INT-2026-09-05-001/intent.yaml,
+      docs/intent-driven-development.md, and docs/v0-plan.md (1019 lines) in full and
+      systematically classified all 8 confirmation/disproof criteria as MATCHES,
+      NARROWS, or DIVERGES against the plan's actual commitments. Confirmation
+      #4 and disproof #3 were the only two classified DIVERGES with no
+      anticipation in the intent's own text (a third, disproof #4's missing
+      pre-registered numeric threshold, was classified a plan-completeness gap,
+      not a genuine disagreement, and is left for docs/experiment-plan.md to
+      fix directly — no amendment needed for that one).
+
+revised_claim: >
+  No change to this intent's core hypothesis text (structured, evidence-first
+  AI-assisted deliberation vs. a strong single-agent baseline) — that claim is
+  untouched. This amendment narrows confirmation_criteria #4 and
+  disproof_criteria #3 to defer real Hekton Assurance capability-evaluation
+  past V0, matching v0-plan.md's ADR-005 boundary, rather than requiring it
+  inside this weekend-scale experiment.
+
+criteria_changed:
+  - field: "confirmation_criteria[4]"
+    old_text: >
+      Hekton Assurance (or the closest available interface, given it remains
+      an unpromoted lab at declaration time) evaluates at least one run of the
+      committee as a capability, without Kriterion's own domain types
+      (DecisionCase, CommitteePosition, BeliefUpdate, Motion,
+      DecisionRecommendation, OutcomeContract) leaking into Assurance's own
+      generic architecture
+    new_text: >
+      Kriterion V0 emits a self-contained, versioned run-export artifact
+      (kriterion-run-export/v0.1 per v0-plan.md ADR-005) capturing everything
+      a future Assurance integration would need (case fingerprint, evidence
+      ledger fingerprint, role/protocol/executor versions, positions,
+      challenges, belief updates, recommendation, costs), with zero import
+      from or schema dependency on hekton-assurance-lab. Real Assurance
+      evaluation of a Kriterion run as a capability is explicitly deferred
+      past V0 to a future intent, contingent on Assurance itself reaching a
+      state (real eval code, an accepted public interface) that makes
+      integration safe rather than premature coupling
+  - field: "disproof_criteria[3]"
+    old_text: >
+      Integrating Hekton Assurance requires Assurance to learn Kriterion-
+      specific domain semantics rather than evaluating it as a generic
+      capability — per Section 7's third kill/pivot criterion and the non-
+      negotiable factory-output boundary in Section 1. If this fires, the
+      documented pivot is to narrow the integration surface, not to let the
+      boundary erode
+    new_text: >
+      Kriterion's run-export schema is found, on inspection at any point
+      before a future integration attempt, to already assume or embed
+      Assurance-specific structure (rather than being a self-contained
+      artifact Assurance could consume without change) — meaning the
+      boundary was compromised in advance of the integration this amendment
+      defers, not just left untested. If this fires, the documented pivot is
+      to redesign the export artifact as genuinely generic before any future
+      Assurance work proceeds
+
+impact:
+  risk_tier_change: null  # stays T2 — the underlying experiment is unchanged in scope/stakes,
+                           # only the Assurance-integration sub-claim narrows
+  constraints_changed:
+    - "V0 no longer requires any Hekton Assurance integration; real capability-evaluation moves to a future intent"
+  confirmation_tests_affected:
+    - "confirmation_criteria[4]"
+    - "disproof_criteria[3]"
+
+approval:
+  requires_human_approval: true  # T2 intent, material change — approval required, not optional
+  approver: "coderturtle"
+  approved_via: "AskUserQuestion, main session, 2026-09-05 — option chosen: 'Amend the intent to match the plan'"
+  status: "approved"
+
+provenance:
+  recorded_by: "claude (main session)"
+  recorded_at: "2026-09-05"

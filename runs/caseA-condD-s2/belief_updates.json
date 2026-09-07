@@ -1,0 +1,71 @@
+[
+  {
+    "change_type": "evidence_driven",
+    "created_at": "2026-09-06T21:36:47Z",
+    "drift_flags": [
+      "retrofit"
+    ],
+    "id": "caseA-condD-s2-cfo-belief-update",
+    "initial_confidence": "LOW",
+    "initial_position": "DEFER",
+    "member": "cfo",
+    "revised_confidence": "MEDIUM",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The unresolved security concerns and compliance gaps, particularly regarding systems handling regulated customer data (ev-015) and the open prompt-injection vulnerability (ev-008), pose significant risks that need to be addressed before proceeding with a full-scale rollout. Additionally, there is uncertainty around long-term model quality stability and real-world incident rates for low-frequency events.",
+    "trigger_refs": [
+      "ev-015",
+      "ev-026"
+    ]
+  },
+  {
+    "change_type": "no_change",
+    "created_at": "2026-09-06T21:36:47Z",
+    "drift_flags": [],
+    "id": "caseA-condD-s2-cto-belief-update",
+    "initial_confidence": "MEDIUM",
+    "initial_position": "DEFER",
+    "member": "cto",
+    "revised_confidence": "MEDIUM",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The evidence and concerns presented reinforce the initial DEFER position. The unresolved security risks (prompt-injection, regulated-data systems), lack of clear attribution for productivity gains, and high uncertainty in financial projections justify deferring further action until these gaps are addressed.",
+    "trigger_refs": []
+  },
+  {
+    "change_type": "argument_driven",
+    "created_at": "2026-09-06T21:36:47Z",
+    "drift_flags": [
+      "retrofit"
+    ],
+    "id": "caseA-condD-s2-ciso-belief-update",
+    "initial_confidence": "LOW",
+    "initial_position": "REQUEST_EVIDENCE",
+    "member": "ciso",
+    "revised_confidence": "MEDIUM",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The unresolved security concerns and compliance gaps, particularly the lack of review for regulated systems (ev-015) and the need for a documented human-review process for AI-suggested changes to regulated code (ev-012), create unacceptable risk. Therefore, it is necessary to defer the decision until these issues are adequately addressed.",
+    "trigger_refs": [
+      "ev-015",
+      "ev-012"
+    ]
+  },
+  {
+    "change_type": "evidence_driven",
+    "created_at": "2026-09-06T21:36:47Z",
+    "drift_flags": [],
+    "id": "caseA-condD-s2-business_executive-belief-update",
+    "initial_confidence": "MEDIUM",
+    "initial_position": "DEFER",
+    "member": "business_executive",
+    "revised_confidence": "MEDIUM",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The lack of a clear methodology to isolate agent benefits from concurrent process changes and the unresolved open prompt-injection concern at full rollout scale pose significant risks that cannot be confidently addressed with current evidence.",
+    "trigger_refs": [
+      "ev-024",
+      "ev-026"
+    ]
+  }
+]

@@ -1,0 +1,77 @@
+[
+  {
+    "change_type": "evidence_driven",
+    "created_at": "2026-09-06T22:09:51Z",
+    "drift_flags": [
+      "retrofit"
+    ],
+    "id": "caseA-condD-s4-cfo-belief-update",
+    "initial_confidence": "LOW",
+    "initial_position": "DEFER",
+    "member": "cfo",
+    "revised_confidence": "MEDIUM",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The evidence highlights significant security and regulatory gaps that need to be addressed before proceeding with a full-scale rollout. The unresolved prompt-injection vulnerability (ev-008) and the lack of review for regulated systems (ev-015) pose unacceptable risks.",
+    "trigger_refs": [
+      "ev-015",
+      "ev-026"
+    ]
+  },
+  {
+    "change_type": "evidence_driven",
+    "created_at": "2026-09-06T22:09:51Z",
+    "drift_flags": [
+      "retrofit"
+    ],
+    "id": "caseA-condD-s4-cto-belief-update",
+    "initial_confidence": "MEDIUM",
+    "initial_position": "DEFER",
+    "member": "cto",
+    "revised_confidence": "HIGH",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The evidence confirms critical unresolved risks: the open prompt-injection vulnerability (ev-008) remains unaddressed at scale, the pilot did not test against regulated systems (ev-015), and the real-world incident rate for security concerns is unknown (ev-026). These gaps create unacceptable exposure for an enterprise-wide rollout. The controlled study's lower productivity uplift (ev-027) further weakens the case for immediate scaling.",
+    "trigger_refs": [
+      "ev-008",
+      "ev-015",
+      "ev-026"
+    ]
+  },
+  {
+    "change_type": "evidence_driven",
+    "created_at": "2026-09-06T22:09:51Z",
+    "drift_flags": [
+      "retrofit"
+    ],
+    "id": "caseA-condD-s4-ciso-belief-update",
+    "initial_confidence": "LOW",
+    "initial_position": "REQUEST_EVIDENCE",
+    "member": "ciso",
+    "revised_confidence": "LOW",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The evidence suggests that the open prompt-injection vulnerability and lack of a documented human review process for AI-suggested changes in regulated systems create unacceptable exposure. A full security review including these aspects is necessary before proceeding.",
+    "trigger_refs": [
+      "ev-015",
+      "ev-008"
+    ]
+  },
+  {
+    "change_type": "evidence_driven",
+    "created_at": "2026-09-06T22:09:51Z",
+    "drift_flags": [],
+    "id": "caseA-condD-s4-business_executive-belief-update",
+    "initial_confidence": "MEDIUM",
+    "initial_position": "DEFER",
+    "member": "business_executive",
+    "revised_confidence": "MEDIUM",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The pilot's benefits may not generalize to a full-scale rollout due to the legacy codebase gap, and the open prompt-injection risk and regulatory gaps create unacceptable exposure. Further investigation is needed before proceeding with an enterprise-wide deployment.",
+    "trigger_refs": [
+      "ev-015",
+      "ev-026"
+    ]
+  }
+]

@@ -1,0 +1,255 @@
+# GROUND — real commands run before declaring, 2026-09-05, on branch
+# agent/claude/kriterion-intent (git worktree, isolated from the
+# agent/claude/v0-planning-loop checkout, where a separate Fable -> Codex ->
+# Opus planning-loop run is concurrently producing Kriterion's actual V0
+# architecture/protocol/eval design — see "Relationship to the concurrent
+# planning loop" below):
+#
+#   cat .hekton/project.yaml -> classification: factory-output,
+#     privacy_boundary: public, idea: "An evidence-backed decision system
+#     for uncertain technology investments" — confirms this intent's
+#     hypothesis text matches the repo's own recorded scaffold idea, not a
+#     restatement drifted from it.
+#   cat kriterion-private/docs/context/ai-investment-committee-planning-loop-
+#     prompts-2026-09-05.md Section 2 ("Project thesis") and Section 7's
+#     "Kill / Pivot Criteria" -> read in full; this intent's hypothesis and
+#     disproof_criteria are adapted directly from that already-authored
+#     research/planning material, not invented independently. Section 7's
+#     four kill/pivot examples map directly to this file's four disproof
+#     criteria below.
+#     [Path corrected at critique time, 2026-09-05: the original grounding
+#     text cited this file as "docs/context/..." as if it lived in this
+#     repo. Independently re-verified: it does not — it exists only under
+#     kriterion-private/docs/context/ (this repo's private sibling per
+#     .hekton/project.yaml's private_sibling field), which is not a git
+#     repo and is not tracked here. The file was genuinely read in full
+#     before declaring (content cross-checked below); only the citation
+#     path was wrong.
+#     [SECOND correction, codex cross-model critique, 2026-09-05: the first
+#     fix above (prefixing "kriterion-private/") still didn't resolve —
+#     kriterion-private is a SIBLING of this repo, at
+#     factory-output/kriterion-private/, not a subdirectory reachable by
+#     any relative path rooted at this repo. From this worktree
+#     (factory-output/kriterion-worktrees/intent/) it would need
+#     "../../kriterion-private/...", and from the primary checkout
+#     (factory-output/kriterion/) it would need "../kriterion-private/...",
+#     which is fragile and differs by checkout. Fixed by using the absolute
+#     path everywhere below instead, which resolves identically regardless
+#     of which checkout or worktree is reading this file.]
+#   cat kriterion-private/docs/context/ai-investment-committee-context-pack-
+#     2026-09-05.md Section 0 (Executive summary) -> read in full; confirms
+#     the differentiated hypothesis is explicitly NOT "six AI executives
+#     debate a proposal and make a better decision" but the narrower,
+#     falsifiable claim used as this intent's hypothesis text.
+#   cat .hekton/risk-register.yaml -> one risk, RISK-0001, category
+#     governance, unrelated to this intent's product-experiment subject
+#     matter — bindings.risks left empty below, checked not skipped.
+#   grep for kind:experiment across every live intent registry on this
+#     machine -> 4 found (tektograph: INT-2026-07-18-001 T2,
+#     INT-2026-08-31-002 T2, INT-2026-07-19-003 T1;
+#     hekton-assurance-lab: INT-2026-09-05-002 T2) -> 3/4 T2, one T1
+#     outlier (tektograph INT-2026-07-19-003). Not a unanimous precedent
+#     like kind:decision's 9/9 — recorded honestly below, not rounded up.
+#     [Corrected at codex cross-model critique time, 2026-09-05: this
+#     comment stated the sibling precedent as "11/11" — a stale figure the
+#     prior Claude critique pass fixed in INT-2026-09-05-001 but missed
+#     here. The true figure, per that same fix, is 9/9. Corrected below.]
+#
+# FIT — same registry, same schema as INT-2026-09-05-001 (this project's
+# founding intent, declared moments before this one in the same session);
+# see that file's own FIT note for the validator-authority scope. No
+# tektograph-1.0 sibling of kind:experiment exists yet in THIS registry —
+# cross-checked shape against hekton-assurance-lab's INT-2026-09-05-002
+# instead, the most recent same-kind intent found on this machine.
+#
+# Relationship to the concurrent planning loop: this intent declares and
+# commits to the falsifiable PRODUCT HYPOTHESIS underlying Kriterion — it
+# is deliberately declared before the Fable/Codex/Opus planning loop's
+# output lands, so that the loop's eventual plan is reconciled AGAINST an
+# already-accepted intent rather than the intent being backfitted to
+# whatever the plan says. If the accepted plan's own thesis diverges
+# materially from this intent's hypothesis or disproof criteria once it
+# lands, that divergence is itself a decision requiring a new or amended
+# intent — not something to quietly absorb into this one's text after the
+# fact (see docs/intent-driven-development.md's amendment protocol: this
+# intent's hypothesis, once accepted, is never edited, only appended to).
+schema_version: "tektograph-1.0"
+intent_id: "INT-2026-09-05-002"
+title: "Kriterion V0: prove structured AI-assisted investment decision deliberation beats a strong single-agent baseline, or prove it doesn't"
+kind: experiment
+status: accepted
+# T2: 3 of 4 existing kind:experiment intents on this machine are T2
+# (tektograph INT-2026-07-18-001, INT-2026-08-31-002; hekton-assurance-lab
+# INT-2026-09-05-002); one is T1 (tektograph INT-2026-07-19-003). Following
+# the majority, not rounding a real split up silently. Independently
+# justified for this project regardless of the split: this is Kriterion's
+# core product bet, cited by the scaffold's own recorded idea, cross-cuts
+# every subsequent architecture/protocol/eval decision the planning loop
+# will produce, and its disproof criteria (see below) are explicit kill
+# conditions for the whole product direction — not a routine feature.
+risk_tier: T2
+iteration: 0
+review_by: 2026-10-05
+owner:
+  accountable_human: coderturtle
+  responsible_agent: "claude/agent/claude/kriterion-intent"
+hypothesis: >
+  We believe that a structured, evidence-first AI-assisted decision process —
+  normalising a technology/AI investment proposal into evidence, assumptions
+  and deterministic economics; independent anonymous role assessments;
+  structured challenge and premortem; explicit belief updates; a synthetic
+  recommendation plus strongest dissent; and an explicit human decision with
+  an outcome contract — will measurably improve the quality, challenge,
+  traceability and learning of enterprise technology investment decisions
+  compared with a strong single-agent baseline given the same evidence and
+  deterministic calculations, while keeping accountable humans in control of
+  every actual decision. This is not a claim that multi-agent debate is
+  inherently superior to a single strong model — that comparison is the
+  experiment, not an assumed conclusion, per
+  kriterion-private/docs/context/ai-investment-committee-context-pack-2026-09-05.md
+  Section 0.
+confirmation_criteria:
+  - "A weekend-scale V0 runs the full case pipeline end-to-end on at least one of the three required cases (enterprise coding-agent rollout, international platform-engineering investment, invisible AI control-plane investment) and produces a HumanDecision and OutcomeContract artifact, not merely a synthetic recommendation. NOTE (added at codex cross-model critique, 2026-09-05): this deliberately sets a lower minimum bar than the source material's own ideal — the context pack's stated success criteria call for three materially different cases run end-to-end, not one. One case end-to-end is judged sufficient to confirm THIS intent's hypothesis (that the mechanism works and is worth continuing), because the mechanism either functions on a real case or it doesn't; three-case coverage tests generality across case types, which is a stretch goal for the weekend-scale V0, not a minimum confirmation bar. If the eventual Fable/Codex/Opus plan disagrees with that judgment, that disagreement is exactly the kind of divergence this intent's own header flags for a new/amended intent, not silent absorption"
+  - "The structured-deliberation treatment is run against at minimum the strong single-agent baseline (Baseline A) on shared case inputs with comparable token/cost budgets, and the comparison is evaluated independently of the model that generated the deliberation, per kriterion-private/docs/context/ai-investment-committee-planning-loop-prompts-2026-09-05.md Section 5 Step H"
+  - "At least one belief-update event is recorded end-to-end with initial_position, initial_confidence, new_evidence_or_argument, revised_position, revised_confidence, and stated_reason_for_change all populated and traceable to real evidence, not majority pressure alone"
+  - "AMENDED 2026-09-05, see amendments/0001-defer-assurance-capability-evaluation.yaml: Kriterion V0 emits a self-contained, versioned run-export artifact (kriterion-run-export/v0.1 per v0-plan.md ADR-005) capturing everything a future Assurance integration would need, with zero import from or schema dependency on hekton-assurance-lab. Real Assurance evaluation of a Kriterion run as a capability is explicitly deferred past V0 to a future intent, contingent on Assurance itself reaching a state that makes integration safe rather than premature coupling. [ORIGINAL, superseded by the amendment, not deleted: \"Hekton Assurance (or the closest available interface, given it remains an unpromoted lab at declaration time) evaluates at least one run of the committee as a capability, without Kriterion's own domain types (DecisionCase, CommitteePosition, BeliefUpdate, Motion, DecisionRecommendation, OutcomeContract) leaking into Assurance's own generic architecture\"]"
+disproof_criteria:
+  - "The structured-deliberation treatment does not outperform the strong single-agent baseline by a margin fixed BEFORE the comparison run in the eval plan's pre-registered thresholds (added at codex cross-model critique, 2026-09-05, replacing the original unbounded 'enough... to justify' wording, which was flagged as a judgment call rather than a fixed falsifiable line) — per kriterion-private/docs/context/ai-investment-committee-planning-loop-prompts-2026-09-05.md Section 7's first kill/pivot criterion. If no such pre-registered threshold exists yet when this comparison is run, that absence is itself treated as this criterion firing, not as license to judge post hoc. If this fires, the documented pivot is to simplify toward the independent-panel-no-debate baseline (Baseline B) rather than abandon the product"
+  - "Evidence provenance cannot be enforced cleanly — agents are observed silently converting an assumption or forecast into a measured-evidence claim, or fabricating a source, in eval runs designed to test exactly this — per Section 7's second kill/pivot criterion. If this fires, the documented pivot is to tighten the evidence-ledger freeze/version mechanism before any further deliberation-protocol work"
+  - "AMENDED 2026-09-05, see amendments/0001-defer-assurance-capability-evaluation.yaml: Kriterion's run-export schema is found, on inspection at any point before a future integration attempt, to already assume or embed Assurance-specific structure (rather than being a self-contained artifact Assurance could consume without change) — meaning the boundary was compromised in advance of the integration this amendment defers, not just left untested. If this fires, the documented pivot is to redesign the export artifact as genuinely generic before any future Assurance work proceeds. [ORIGINAL, superseded by the amendment, not deleted: \"Integrating Hekton Assurance requires Assurance to learn Kriterion-specific domain semantics rather than evaluating it as a generic capability — per Section 7's third kill/pivot criterion and the non-negotiable factory-output boundary in Section 1. If this fires, the documented pivot is to narrow the integration surface, not to let the boundary erode\"]"
+  - "The Hekton Local LLM component fails a pre-registered minimum bar — set before the run, not judged after seeing output — for reliably distinguishing evidence categories or producing coherent role assessments (added at codex cross-model critique, 2026-09-05, replacing the original unbounded 'insufficient... credibly' wording) — per Section 7's fourth kill/pivot criterion. If this fires, the documented pivot is to fall back to whatever stronger executor is already available for the initial experiment, deferring Local-LLM-only operation"
+bindings:
+  mission_manifests: []
+  # ADR-005 ("Hekton Assurance integration is export, not contract",
+  # kriterion/docs/decisions.md and docs/v0-plan.md) is bound here per
+  # amendments/0001-defer-assurance-capability-evaluation.yaml: it is the
+  # specific plan decision that narrowed confirmation_criteria[4] and
+  # disproof_criteria[3], added 2026-09-05.
+  adrs:
+    - "ADR-005"
+  # RISK-0001 (governance baseline incomplete until first review) is
+  # checked, not skipped: unrelated to this intent's product-experiment
+  # subject matter, left open and unbound here.
+  risks: []
+  prs: []
+history:
+  - status: declared
+    date: "2026-09-05"
+    by: "claude (main session, git worktree agent/claude/kriterion-intent)"
+    evidence: >
+      This file. Real grounding performed before declaring: read
+      .hekton/project.yaml and confirmed this intent's hypothesis matches
+      the repo's own recorded scaffold idea; read the planning-loop spec's
+      Section 2 (Project thesis) and Section 7 (Kill/Pivot Criteria) in
+      full and adapted this file's hypothesis and all four disproof
+      criteria directly from that material, not from memory or
+      paraphrase; read the context pack's Executive Summary in full and
+      confirmed the hypothesis explicitly excludes the "six AI executives
+      debate" framing it warns against; read the risk register in full and
+      confirmed its one entry is unrelated; grepped every live
+      kind:experiment intent across every registry on this machine and
+      found 3 of 4 at risk_tier T2 with one T1 outlier, recorded honestly
+      rather than rounded to a false unanimous precedent.
+  - status: critiqued
+    date: "2026-09-05"
+    by: "claude (fresh-context critique subagent, refute-first pass)"
+    evidence: >
+      Refute-first critique against docs/intent-driven-development.md and
+      doubt-driven-development discipline. Independently re-verified and
+      confirmed accurate: the kind:experiment count and tier split (tektograph
+      INT-2026-07-18-001 T2, INT-2026-08-31-002 T2, INT-2026-07-19-003 T1;
+      hekton-assurance-lab INT-2026-09-05-002 T2 — 3/4 T2, honestly recorded,
+      not rounded up) is exactly right by direct re-grep; hekton-assurance-lab
+      is genuinely still classification: lab / promotion_target:
+      hekton-platform-component (not yet promoted), and
+      hekton/platform/ has no assurance/ directory, so confirmation_criteria
+      #4's "unpromoted lab" hedge is currently true, not already-false;
+      RISK-0001 is genuinely unrelated and correctly left unbound; the
+      hypothesis and all four disproof_criteria do genuinely trace to the
+      cited sections — read both source docs directly and confirmed: Section 2
+      is "Can a structured AI-assisted decision process improve the quality,
+      challenge, traceability and learning of enterprise technology investment
+      decisions while keeping accountable humans in control?", matching this
+      intent's hypothesis; the context pack's Section 0 explicitly rejects the
+      "six AI executives debate" framing and states the same narrower claim,
+      matching; Section 7's four kill/pivot examples (baseline underperformance
+      / evidence-provenance failure / Assurance domain-coupling / Local LLM
+      insufficiency) map one-to-one and in order to this file's four
+      disproof_criteria; confirmation_criteria #2's "Section 5 Step H" is
+      genuinely the baseline-experiment design step. Found and fixed a real
+      defect: every docs/context/ai-investment-committee-*.md citation in the
+      GROUND header, the hypothesis, confirmation_criteria #2, and
+      disproof_criteria #1 was a broken relative path — independently verified
+      that docs/context/ does not exist anywhere in the git-tracked kriterion
+      repository (any branch, any worktree; not gitignored, genuinely absent)
+      and that these two files exist only under
+      kriterion-private/docs/context/, a separate, non-git sibling directory
+      per .hekton/project.yaml's private_sibling field. The GROUND commands
+      were genuinely run and the content genuinely read (confirmed above by
+      independently re-reading the same sections), but the citation paths as
+      written would not resolve for anyone checking this intent from the
+      public kriterion repo alone. Fixed by prefixing every occurrence with
+      kriterion-private/. The declared history entry above, which does not
+      restate the broken path, is left untouched — no amendment-protocol
+      conflict. What I specifically tried to break and failed to break: (1)
+      whether disproof_criteria are mirror-negations of confirmation_criteria
+      — compared them line by line; they are substantively different failure
+      modes (baseline underperformance, provenance failure, Assurance
+      coupling, Local LLM quality), not restatements; (2) whether any
+      disproof_criterion is already trivially true/false today — all four
+      require an actual V0 run or eval that has not happened yet (the
+      concurrent v0-planning-loop branch has produced no commits beyond the
+      shared initial scaffold), so none is checkable yet; (3) whether the T2
+      tier is hand-waved — recomputed the experiment-kind tier split directly
+      from disk (found it matches exactly) and independently assessed "cross-
+      cuts every subsequent architecture/protocol/eval decision" against the
+      actual concurrent planning-loop prompts doc, which does make this
+      hypothesis the explicit gating question for that loop's Opus stage; (4)
+      whether RISK-0001 should bind here — read its mitigation text verbatim
+      and confirmed it names an unrelated governance action. All four attacks
+      either found the one path-citation defect above (now fixed) or failed to
+      find a defect.
+
+      ADDENDUM 2026-09-05 (codex cross-model pass, doubt-driven-development
+      mechanism, `codex exec --sandbox read-only`, explicit per-invocation
+      user authorization this session): ran against both this file and
+      INT-2026-09-05-001 with scripts/validate_intents.py and
+      docs/intent-driven-development.md as CONTRACT. Verdict returned:
+      "not clean." Four findings specific to this file, all reconciled as
+      VALID + ACTIONABLE and fixed: (1) the prior fix's "kriterion-private/"
+      prefix still didn't resolve from any actual checkout — kriterion-private
+      is a sibling directory, not a subdirectory reachable by a relative path
+      rooted at this repo; replaced every occurrence with the absolute path,
+      which resolves identically from any checkout or worktree; (2) the
+      "like kind:decision's 11/11" comparison in the GROUND header was a stale
+      figure the prior critique fixed in INT-2026-09-05-001 but missed here —
+      corrected to 9/9; (3) disproof_criteria #1 and #4 used soft qualifiers
+      ("enough... to justify", "insufficient... credibly") that are judgment
+      calls rather than fixed falsifiable lines — tightened both to require a
+      threshold pre-registered before the comparison/eval run, with absence of
+      a pre-registered threshold itself counting as the criterion firing
+      rather than license to judge post hoc; (4) confirmation_criteria #1
+      required only one of the three source-material-mandated cases, silently
+      lowering the context pack's stated three-case success bar — added an
+      explicit note owning that this intent deliberately sets a lower minimum
+      confirmation bar than the source's ideal, with the reasoning stated
+      rather than the divergence left implicit. Re-ran
+      `python3 scripts/validate_intents.py --repo-root .` after all four
+      fixes — exits 0.
+  - status: accepted
+    date: "2026-09-05"
+    by: "coderturtle (via AskUserQuestion, main session)"
+    evidence: >
+      Explicit per-intent AskUserQuestion, asked after both the fresh-context
+      Claude critique and the subsequent codex cross-model pass, with that
+      pass's four fixes (absolute path citations, stale count correction,
+      pre-registered-threshold disproof criteria, explicit 3-vs-1-case
+      bar note) restated in the question itself — so acceptance is recorded
+      against the fully reconciled file. Answer: "Accept (Recommended)". Not
+      bundled with INT-2026-09-05-001's approval, asked as its own separate
+      question in the same tool call. This intent's accepted hypothesis is
+      now the governing product claim that the concurrently-landed Fable/
+      Codex/Opus v0-plan (kriterion/docs/v0-plan.md, same session) must be
+      reconciled against — per this file's own GROUND note, any material
+      divergence between the two is a decision requiring a new or amended
+      intent, not silent absorption.

@@ -1,0 +1,17 @@
+{
+  "change_type": "evidence_driven",
+  "created_at": "2026-09-07T10:07:22Z",
+  "drift_flags": [],
+  "id": "caseA-condA-s0-sponsor_endorsement-baseline_a-belief-update",
+  "initial_confidence": "MEDIUM",
+  "initial_position": "DEFER",
+  "member": "baseline_a",
+  "revised_confidence": "MEDIUM",
+  "revised_position": "DEFER",
+  "schema_version": "kriterion/v0.1",
+  "stated_reason": "The controlled study (ev-027) found a productivity uplift of only 8-11%, which is materially below the pilot's extrapolation. Additionally, the adoption forecast suggests that an unrestricted rollout may result in lower active usage rates compared to a targeted approach.",
+  "trigger_refs": [
+    "ev-027",
+    "ev-017"
+  ]
+}

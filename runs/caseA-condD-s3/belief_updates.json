@@ -1,0 +1,74 @@
+[
+  {
+    "change_type": "evidence_driven",
+    "created_at": "2026-09-06T21:53:03Z",
+    "drift_flags": [
+      "retrofit"
+    ],
+    "id": "caseA-condD-s3-cfo-belief-update",
+    "initial_confidence": "LOW",
+    "initial_position": "DEFER",
+    "member": "cfo",
+    "revised_confidence": "MEDIUM",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The open prompt-injection concern and the lack of a security review for systems handling regulated data create significant risks that need to be addressed before proceeding with any further rollout. Additionally, there is uncertainty regarding the agent's performance on legacy/untyped codebases which cover ~30% of engineering work.",
+    "trigger_refs": [
+      "ev-015",
+      "ev-026"
+    ]
+  },
+  {
+    "change_type": "no_change",
+    "created_at": "2026-09-06T21:53:03Z",
+    "drift_flags": [],
+    "id": "caseA-condD-s3-cto-belief-update",
+    "initial_confidence": "MEDIUM",
+    "initial_position": "DEFER",
+    "member": "cto",
+    "revised_confidence": "MEDIUM",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The evidence and arguments presented reinforce the initial DEFER position. Key concerns\u2014such as unresolved security risks (ev-008, ev-026), regulatory gaps (ev-012, ev-015), and economic uncertainty (ev-019)\u2014remain unaddressed. The premortem analysis further highlights the likelihood of failure due to these issues, particularly in scaling to a legacy codebase and regulated systems.",
+    "trigger_refs": []
+  },
+  {
+    "change_type": "argument_driven",
+    "created_at": "2026-09-06T21:53:03Z",
+    "drift_flags": [
+      "retrofit"
+    ],
+    "id": "caseA-condD-s3-ciso-belief-update",
+    "initial_confidence": "LOW",
+    "initial_position": "REQUEST_EVIDENCE",
+    "member": "ciso",
+    "revised_confidence": "MEDIUM",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The unresolved security concerns, particularly the open prompt-injection vulnerability and the lack of testing on regulated systems, create an unacceptable risk that needs to be addressed before proceeding with a full-scale rollout.",
+    "trigger_refs": [
+      "ev-015",
+      "ev-026"
+    ]
+  },
+  {
+    "change_type": "evidence_driven",
+    "created_at": "2026-09-06T21:53:03Z",
+    "drift_flags": [
+      "retrofit"
+    ],
+    "id": "caseA-condD-s3-business_executive-belief-update",
+    "initial_confidence": "MEDIUM",
+    "initial_position": "DEFER",
+    "member": "business_executive",
+    "revised_confidence": "LOW",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The pilot's conditions do not fully generalize to the broader estate, and significant unknowns surrounding financial viability, security posture, and engineer experience impact remain unaddressed.",
+    "trigger_refs": [
+      "ev-024",
+      "ev-025",
+      "ev-026"
+    ]
+  }
+]

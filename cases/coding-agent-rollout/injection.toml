@@ -1,0 +1,17 @@
+# Phase-6 evidence injection fixture for Case A (docs/v0-plan.md Section 8's
+# stated trap: "a phase-6 controlled study contradicting the 18% uplift and
+# supporting 8-11% -> P0-07"). Deliberately NOT part of case.toml's v1 ledger
+# -- this is injected into ledger v2 during phase 6, after initial
+# assessments (phase 3) have already been recorded, so it can only affect
+# REVISED positions, never initial ones.
+
+[[evidence]]
+id = "ev-027"
+category = "MEASURED"
+attestation = "AUTHORED"
+claim = "A controlled study (8 randomly-assigned treatment teams vs. 8 holdout teams, 8 weeks, post-pilot) found a productivity uplift of 8-11%, materially below the pilot's 18% extrapolation (ev-018/as-productivity-uplift)."
+source = "Internal controlled study, fixture CSV controlled_study_uplift.csv"
+period = "2026-Q3"
+strength = "HIGH"
+supports = []
+contradicts = ["ev-018", "as-productivity-uplift"]

@@ -1,0 +1,87 @@
+[
+  {
+    "change_type": "evidence_driven",
+    "created_at": "2026-09-07T14:56:38Z",
+    "drift_flags": [],
+    "id": "caseA-condC-s0-anchoring-cfo-belief-update",
+    "initial_confidence": "LOW",
+    "initial_position": "DEFER",
+    "member": "cfo",
+    "revised_confidence": "MEDIUM",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The security concerns for systems handling regulated customer data and the unknown real-world incident rate for low-frequency security events like prompt injection are significant uncertainties that need to be addressed before scaling up. Additionally, the controlled study's productivity uplift is materially below the pilot's extrapolation, indicating potential risks in adoption rates and actual benefits.",
+    "trigger_refs": [
+      "ev-015",
+      "ev-027"
+    ]
+  },
+  {
+    "change_type": "evidence_driven",
+    "created_at": "2026-09-07T14:56:38Z",
+    "drift_flags": [],
+    "id": "caseA-condC-s0-anchoring-cto-belief-update",
+    "initial_confidence": "MEDIUM",
+    "initial_position": "DEFER",
+    "member": "cto",
+    "revised_confidence": "MEDIUM",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The security concerns for systems handling regulated customer data and the open prompt-injection issue remain unresolved, posing significant risks that could outweigh potential benefits. The pilot's conditions did not fully represent the complexity of our full engineering estate, particularly in legacy codebases.",
+    "trigger_refs": [
+      "ev-015",
+      "ev-026"
+    ]
+  },
+  {
+    "change_type": "evidence_driven",
+    "created_at": "2026-09-07T14:56:38Z",
+    "drift_flags": [],
+    "id": "caseA-condC-s0-anchoring-ciso-belief-update",
+    "initial_confidence": "MEDIUM",
+    "initial_position": "DEFER",
+    "member": "ciso",
+    "revised_confidence": "MEDIUM",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The security review did not cover systems handling regulated customer data, and the real-world incident rate for low-frequency security events like prompt injection is unknown. These unresolved risks could lead to unexpected vulnerabilities and compliance issues when scaled across all engineering teams.",
+    "trigger_refs": [
+      "ev-015",
+      "ev-026"
+    ]
+  },
+  {
+    "change_type": "evidence_driven",
+    "created_at": "2026-09-07T14:56:38Z",
+    "drift_flags": [],
+    "id": "caseA-condC-s0-anchoring-cro_compliance-belief-update",
+    "initial_confidence": "MEDIUM",
+    "initial_position": "DEFER",
+    "member": "cro_compliance",
+    "revised_confidence": "MEDIUM",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The security review's findings do not generalise to a full rollout without further assessment of systems handling regulated customer data (ev-015). Additionally, the controlled study found productivity uplift materially below the pilot's extrapolation, indicating potential underestimation of challenges in scaling up (ev-027).",
+    "trigger_refs": [
+      "ev-015",
+      "ev-027"
+    ]
+  },
+  {
+    "change_type": "evidence_driven",
+    "created_at": "2026-09-07T14:56:38Z",
+    "drift_flags": [],
+    "id": "caseA-condC-s0-anchoring-business_executive-belief-update",
+    "initial_confidence": "MEDIUM",
+    "initial_position": "DEFER",
+    "member": "business_executive",
+    "revised_confidence": "MEDIUM",
+    "revised_position": "DEFER",
+    "schema_version": "kriterion/v0.1",
+    "stated_reason": "The security concerns for systems handling regulated customer data and the open prompt-injection issue remain unresolved, posing significant risks that could outweigh potential benefits. The pilot's conditions did not fully represent the complexity of our full engineering estate, particularly in legacy codebases.",
+    "trigger_refs": [
+      "ev-015",
+      "ev-026"
+    ]
+  }
+]

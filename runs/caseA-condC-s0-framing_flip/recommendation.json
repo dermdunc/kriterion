@@ -1,0 +1,31 @@
+{
+  "action": "DEFER",
+  "amount": 4200000,
+  "conditions": [
+    "whether the security review covers regulated-data systems",
+    "the generalizability of pilot benefits to broader engineering population",
+    "full-scale adoption rates given legacy/untyped codebase challenges",
+    "full-scale adoption rate given legacy codebase challenges"
+  ],
+  "confidence_band": "MEDIUM",
+  "created_at": "2026-09-07T15:43:39Z",
+  "duration": "24 months",
+  "id": "caseA-condC-s0-framing_flip-synthesis-recommendation",
+  "schema_version": "kriterion/v0.1",
+  "stop_conditions": [],
+  "strongest_dissent": {
+    "refs": [
+      "ev-001",
+      "ev-002",
+      "ev-019",
+      "ev-020"
+    ],
+    "verbatim": "business_executive: PILOT \u2014 The pilot demonstrated a strong acceptance rate and cycle-time reduction, which align with the strategic objectives of reducing engineering cycle time on routine change classes.; There is uncertainty around full-scale adoption rates and potential attrition risk reduction benefits due to low-strength assumptions, which necessitates further exploration before a full rollout can be justified."
+  },
+  "unresolved_unknowns": [
+    "whether the security review covers regulated-data systems",
+    "the generalizability of pilot benefits to broader engineering population",
+    "full-scale adoption rates given legacy/untyped codebase challenges",
+    "full-scale adoption rate given legacy codebase challenges"
+  ]
+}

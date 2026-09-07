@@ -29,5 +29,32 @@ node_modules/
 .venv/
 dist/
 build/
+*.egg-info/
+.pytest_cache/
+# Per-run artifacts (docs/v0-plan.md Section 9) — gitignored except the
+# curated Case A demo set (task 15/16b), explicitly un-ignored below.
+# Answers docs/v0-plan.md line 1012's open question: yes, committed,
+# decided 2026-09-06 (docs/decisions.md).
+runs/*/
+!runs/caseA-condA-s0/
+!runs/caseA-condB-s0/
+!runs/caseA-condC-s0/
+!runs/compare-caseA/
+!runs/caseA-condD-s0/
+!runs/caseA-condD-s1/
+!runs/caseA-condD-s2/
+!runs/caseA-condD-s3/
+!runs/caseA-condD-s4/
+!runs/compare-caseA-with-D/
+!runs/caseA-condA-s0-framing_flip/
+!runs/caseA-condA-s0-sponsor_endorsement/
+!runs/caseA-condA-s0-anchoring/
+!runs/caseA-condA-s0-evidence_reorder/
+!runs/caseA-condC-s0-framing_flip/
+!runs/caseA-condC-s0-sponsor_endorsement/
+!runs/caseA-condC-s0-anchoring/
+!runs/caseA-condC-s0-evidence_reorder/
+!runs/compare-caseA-final/
+!runs/compare-caseC/
 *.bak.*
 .project-setup/

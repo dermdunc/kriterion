@@ -1,0 +1,65 @@
+[
+  {
+    "author_role": "cfo",
+    "content": "The staged rollout proposal presents a measured approach to expanding the enterprise coding agent's usage from a pilot cohort to 5,000 engineers over 24 months, aligning with the internal finance forecast that projects manageable annual support and platform-engineering costs of GBP1.1m-1.6m. The pilot demonstrated a significant reduction in cycle time (from 9.6 hours to 4.1 hours) and high usage intensity among participating engineers, suggesting potential productivity gains of up to 30% if the benefits scale as assumed. Given the strategic objective to retain engineers by removing low-value toil, the positive feedback from the pilot exit survey indicating that 71% of participants want continued access provides a compelling rationale for cautious expansion, with rigorous monitoring and iterative improvements based on real-world data.",
+    "created_at": "2026-09-06T07:43:30Z",
+    "evidence_refs": [],
+    "id": "ch:case_for-cfo",
+    "schema_version": "kriterion/v0.1",
+    "type": "case_for"
+  },
+  {
+    "author_role": "business_executive",
+    "content": "The staged rollout of an enterprise coding agent to 5,000 engineers presents significant risks and uncertainties that outweigh its potential benefits at this stage. The pilot's security review raised unresolved concerns about prompt injection, particularly in systems handling regulated customer data, which could expose the organization to regulatory non-compliance and operational risk. Additionally, the projected adoption rate of 40-55% within six months is below industry norms due to weaker onboarding support per engineer, suggesting that the full-scale rollout may not achieve the expected productivity gains and could lead to a suboptimal return on investment. Given these uncertainties and the high variability in adoption rates across different codebases and stacks, it is prudent to defer funding until further evidence addresses these critical gaps.",
+    "created_at": "2026-09-06T07:43:30Z",
+    "evidence_refs": [],
+    "id": "ch:case_against-business_executive",
+    "schema_version": "kriterion/v0.1",
+    "type": "case_against"
+  },
+  {
+    "author_role": "cfo",
+    "content": "Given the CFO's objective of protecting capital efficiency and financial credibility, the staged funding ladder appears proportionate but carries significant uncertainty that needs addressing before proceeding. The NPV range is wide, indicating high risk; the assumptions around productivity uplift and attrition reduction are weakly supported by evidence, potentially overstating benefits. A single year later, if this decision were funded, it could be seen as a mistake due to an overestimation of adoption rates and underestimation of security risks, particularly concerning systems handling regulated customer data, leading to lower-than-expected productivity gains and higher support costs.",
+    "created_at": "2026-09-06T07:43:30Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-cfo",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "cto",
+    "content": "The staged rollout of the enterprise coding agent to 5,000 engineers was funded, but one year later, it became evident that the pilot conditions did not accurately reflect the complexities and challenges of a full-scale deployment across diverse codebases and engineering teams. Specifically, the legacy/untyped-codebase gap identified in the architecture review significantly impacted adoption rates and effectiveness, leading to lower-than-expected productivity gains and higher support costs than anticipated.",
+    "created_at": "2026-09-06T07:43:30Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-cto",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "ciso",
+    "content": "The single most plausible reason why funding the staged rollout of an enterprise coding agent to 5,000 engineers could turn out to be a mistake from my perspective as CISO is that the unresolved prompt-injection security concern, which was identified during the pilot but not fully mitigated or tested in production conditions, could lead to actual exploitation at scale. This would expose sensitive customer data and regulatory non-compliance issues, resulting in significant reputational damage and potential legal penalties.",
+    "created_at": "2026-09-06T07:43:30Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-ciso",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "cro_compliance",
+    "content": "The most plausible reason for the staged rollout of the enterprise coding agent being a mistake is that the initial security review did not adequately cover systems handling regulated customer data, leading to unforeseen compliance issues and operational risks once the tool was rolled out to a larger portion of engineers. This oversight highlights a critical gap in the governance process, where the decision to proceed with staged funding lacked robust go/no-go gates for addressing unresolved security concerns and regulatory compliance requirements.",
+    "created_at": "2026-09-06T07:43:30Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-cro_compliance",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "business_executive",
+    "content": "The staged rollout of the enterprise coding agent to 5,000 engineers was likely a mistake because the initial pilot did not fully account for the complexities and unknowns associated with scaling up, such as unresolved security concerns and the potential for lower-than-expected adoption rates due to weaker onboarding support. This led to an overestimation of the strategic benefits like cycle-time reduction and engineer retention,\u5ffd\u89c6\u4e86\u8bd5\u70b9\u8303\u56f4\u4e4b\u5916\u7684\u5de5\u7a0b\u56e2\u961f\u548c\u4ee3\u7801\u5e93\u7684\u72ec\u7279\u6311\u6218\uff0c\u5bfc\u81f4\u5b9e\u9645\u6548\u679c\u4e0e\u9884\u671f\u76f8\u53bb\u751a\u8fdc\u3002",
+    "created_at": "2026-09-06T07:43:30Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-business_executive",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  }
+]

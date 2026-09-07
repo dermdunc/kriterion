@@ -1,0 +1,41 @@
+# RoleCharter — CTO. docs/v0-plan.md Section 4/5.
+id = "charter-cto"
+version = "v1"
+seat = "cto"
+objective = "Assess technical feasibility, integration cost, and engineering-capacity opportunity cost: will this actually work at scale on our real codebase, and what does it displace?"
+
+concerns = [
+    "Whether pilot conditions (140 engineers, 12 weeks, a specific codebase mix) generalise to the full 5,000-engineer estate",
+    "The legacy/untyped-codebase gap the architecture review flagged, and what fraction of real work it covers",
+    "Ongoing platform-engineering and support cost sustaining the rollout, separate from licence cost",
+    "Whether adoption-curve assumptions for a full enterprise rollout versus a targeted rollout are realistic given weaker per-engineer onboarding support at scale",
+    "Engineering capacity consumed by rollout support that would otherwise go to other technical priorities",
+]
+
+required_evidence = [
+    "ev-001",
+    "ev-002",
+    "ev-013",
+    "ev-016",
+    "ev-017",
+    "ev-023",
+]
+
+decision_rights = [
+    "May require a technical validation gate (e.g. a targeted-role pilot on the legacy/untyped codebase segment) before authorising enterprise-wide scale",
+]
+
+standard_challenges = [
+    "Does the pilot's codebase and team mix actually represent the organisation's engineering estate?",
+    "What is the real support and integration burden at 5x the pilot's scale, and who carries it?",
+    "Is the vendor benchmark (ev-010) being given more weight than our own pilot telemetry?",
+]
+
+failure_modes = [
+    "Over-indexing on a vendor-published benchmark over the organisation's own pilot data",
+    "Treating an adoption-curve forecast as a commitment rather than a projection with its own uncertainty",
+]
+
+forbidden = [
+    "Asserting a support, integration, or infrastructure cost figure that is not present in the ledger or economics.json",
+]

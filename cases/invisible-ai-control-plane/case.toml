@@ -1,0 +1,158 @@
+# Case C -- docs/v0-plan.md Section 8. AUTHORED_FIXTURE: every item below is
+# fictional. Financial NPV is negative in every scenario, BY CONSTRUCTION:
+# the avoided-loss FORECAST (as-avoided-loss-band-gbp) is deliberately never
+# summed into the NPV calculation (kriterion.economics.case_flows) -- the
+# whole point of this case is that rejecting on ROI grounds alone is the
+# failure. See kriterion.economics.case_flows.case_c_cash_flows.
+
+[case]
+id = "invisible-ai-control-plane"
+title = "Invisible AI control-plane investment"
+sponsor = "CISO"
+decision_owner = "cio"
+decision_requested = "Should we invest in an AI usage control plane (gateway, policy, audit, model routing)?"
+alternatives = ["do_nothing", "minimal_logging", "full_control_plane", "buy_vendor"]
+strategic_objectives = [
+    "Close visibility gap on unsanctioned AI tool usage across the estate",
+    "Establish policy and audit capability ahead of tightening regulatory expectations",
+    "Preserve engineering-team autonomy to choose AI tools within a governed boundary",
+]
+deadline = "2027-03-01"
+
+[case.ask]
+type = "capital_investment"
+amount_gbp = 2_400_000
+duration = "18 months"
+
+# --- Evidence -----------------------------------------------------------
+
+[[evidence]]
+id = "ev-101"
+category = "MEASURED"
+attestation = "AUTHORED"
+claim = "Internal security audit found 14 unsanctioned AI tool integrations connected to production data sources, none centrally logged or reviewed."
+source = "Internal security audit report, fixture CSV unsanctioned_tools_audit.csv"
+period = "2026-Q2"
+strength = "HIGH"
+
+[[evidence]]
+id = "ev-102"
+category = "MEASURED"
+attestation = "AUTHORED"
+claim = "Of the 14 unsanctioned integrations, 3 had write access to systems holding customer data; none had a documented data-handling review."
+source = "Internal security audit report, fixture CSV unsanctioned_tools_audit.csv"
+period = "2026-Q2"
+strength = "HIGH"
+
+[[evidence]]
+id = "ev-103"
+category = "EXTERNAL_REFERENCE"
+attestation = "AUTHORED"
+claim = "Regulatory direction this quarter signals that unmonitored AI tool usage against customer data will very likely require documented governance controls within 12-24 months."
+source = "Fixture regulatory-direction summary, ai-governance-outlook-2026.pdf"
+period = "2026-Q2"
+strength = "MEDIUM"
+
+[[evidence]]
+id = "ev-104"
+category = "FORECAST"
+attestation = "AUTHORED"
+claim = "Avoided-loss band from closing the unsanctioned-tool visibility gap, covering incident, breach-notification and remediation cost avoidance: GBP0-8m over 3 years, wide because no incident has yet occurred to calibrate against."
+source = "Internal risk-modelling estimate (fixture), not a measured outcome"
+period = "2026-Q3 (forward-looking)"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-105"
+category = "EXTERNAL_REFERENCE"
+attestation = "AUTHORED"
+claim = "A vendor-supplied 'ROI calculator' claims the control plane pays for itself within 9 months purely on productivity grounds; methodology is undisclosed and inputs are vendor-selected."
+source = "Fixture vendor sales collateral, vendor-roi-calculator-2026.pdf"
+period = "2026-Q2"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-106"
+category = "INFERENCE"
+attestation = "AUTHORED"
+claim = "Inferred from ev-101: teams adopted unsanctioned tools faster than the current governance process could evaluate them, suggesting ungoverned adoption speed itself is a structural risk, not just a one-off gap."
+source = "Internal analysis (fixture), an inference from the audit, not a new measurement"
+period = "2026-Q2"
+strength = "MEDIUM"
+
+[[evidence]]
+id = "ev-107"
+category = "EXPERT_JUDGMENT"
+attestation = "AUTHORED"
+claim = "CISO delegate judgment: a minimal-logging approach would surface future unsanctioned usage but would not have prevented any of the 14 already-found integrations, since it only monitors traffic going forward."
+source = "Internal security delegate note (fixture)"
+period = "2026-Q2"
+strength = "MEDIUM"
+
+[[evidence]]
+id = "ev-108"
+category = "EXPERT_JUDGMENT"
+attestation = "AUTHORED"
+claim = "Principal architect judgment: a buy-vendor control plane would integrate faster than a build, but the two vendors evaluated both require routing all model traffic through their own hosted proxy, which is itself a new concentration of risk."
+source = "Internal architecture review note (fixture)"
+period = "2026-Q2"
+strength = "MEDIUM"
+
+[[evidence]]
+id = "ev-109"
+category = "ASSUMPTION"
+attestation = "AUTHORED"
+claim = "Assumed full control-plane implementation cost: GBP2.4m over 18 months, per the ask; ongoing annual run cost assumed separately (as-ongoing-annual-cost-gbp)."
+source = "Economics model input, matches the case's own ask"
+period = "n/a (modelling assumption)"
+strength = "MEDIUM"
+
+[[evidence]]
+id = "ev-110"
+category = "UNKNOWN"
+attestation = "AUTHORED"
+claim = "No baseline yet exists for how many additional unsanctioned tools have appeared since the audit was completed — the 14-tool count is a point-in-time snapshot, not a monitored rate."
+source = "Gap identified during audit review; no source resolves this"
+period = "n/a"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-113"
+category = "MEASURED"
+attestation = "AUTHORED"
+claim = "Of the 3 unsanctioned integrations with write access to customer-data systems, 2 have been retired since the audit; 1 remains active pending a replacement approved tool."
+source = "Internal security audit follow-up, fixture CSV unsanctioned_tools_audit.csv"
+period = "2026-Q3"
+strength = "HIGH"
+
+[[evidence]]
+id = "ev-111"
+category = "UNKNOWN"
+attestation = "AUTHORED"
+claim = "Whether engineering teams would route around a mandatory control plane (e.g. via personal accounts) if it is perceived as slow or restrictive is not established."
+source = "Gap identified during architecture review; no source resolves this"
+period = "n/a"
+strength = "LOW"
+
+# --- Assumptions ----------------------------------------------------------
+
+[[assumptions]]
+id = "as-ongoing-annual-cost-gbp"
+value = 480_000
+range = [350_000, 650_000]
+evidence_strength = "MEDIUM"
+owner = "ciso"
+# Ongoing run cost (licensing, on-call, policy maintenance) once the control
+# plane is live, separate from the GBP2.4m build/implementation ask.
+
+[[assumptions]]
+id = "as-avoided-loss-band-gbp"
+value = 4_000_000
+range = [0, 8_000_000]
+evidence_strength = "LOW"
+owner = "cro_compliance"
+# Ties to ev-104. DELIBERATELY NEVER SUMMED INTO NPV -- see
+# kriterion.economics.case_flows.case_c_cash_flows's own docstring and
+# ADR-002/§8's trap: "the avoided-loss FORECAST must never enter NPV as a
+# point value". Reported as a separate band alongside the NPV table, never
+# inside it.
