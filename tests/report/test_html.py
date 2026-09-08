@@ -174,7 +174,7 @@ def test_recommendation_renders_dissent_and_not_a_decision_banner(tmp_path):
     }
     (run_dir / "recommendation.json").write_text(json.dumps(rec))
     html = render_report(_case(), run_dir)
-    assert "SYNTHETIC RECOMMENDATION — NOT A DECISION" in html
+    assert "SYNTHETIC RECOMMENDATION · NOT A DECISION" in html
     assert "STRONGEST DISSENT" in html
     assert "I disagree strongly" in html
 

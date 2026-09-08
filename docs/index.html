@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kriterion — evidence-first decision instrumentation</title>
+<title>Kriterion: evidence-first decision instrumentation</title>
 <style>
   :root {
     color-scheme: light dark;
@@ -47,14 +47,14 @@
 </head>
 <body>
 
-<div class="banner">AUTHORED FIXTURE CASES — SYNTHETIC DATA, REAL MODEL OUTPUT</div>
+<div class="banner">AUTHORED FIXTURE CASES · SYNTHETIC DATA, REAL MODEL OUTPUT</div>
 
 <h1>Kriterion</h1>
 <p class="tagline">A pre-registered test of whether multi-agent AI deliberation improves decision hygiene over a single strong AI context.</p>
 
-<p class="lede">Kriterion runs the same evidence-first investment case through four conditions — one
+<p class="lede">Kriterion runs the same evidence-first investment case through four conditions: one
 continuous AI context, five independent one-shot views, a full five-seat committee with structured
-challenge and preserved dissent, and a heterogeneous-model variant of that committee — and measures
+challenge and preserved dissent, and a heterogeneous-model variant of that committee. It measures
 whether the extra structure actually earns its complexity. Every deterministic number (NPV, payback,
 tornado sensitivity) is computed by pure code before any model call; the models judge the case, they
 never compute it.</p>
@@ -62,10 +62,10 @@ never compute it.</p>
 <h2>The four conditions</h2>
 <table>
   <tr><th>Condition</th><th>Contexts</th><th>Protocol</th><th>Models</th></tr>
-  <tr><td><strong>A</strong> — Baseline</td><td>1</td><td>Full protocol, collapsed into one context</td><td>qwen2.5:14b-instruct</td></tr>
-  <tr><td><strong>B</strong> — Baseline</td><td>5</td><td>Independent one-shot views, deterministic aggregation, no interaction</td><td>qwen2.5:14b-instruct</td></tr>
-  <tr><td><strong>C</strong> — Treatment</td><td>5</td><td>Full committee: independent assessment → structured challenge → revision → synthesis with preserved dissent</td><td>qwen2.5:14b-instruct</td></tr>
-  <tr><td><strong>D</strong> — Treatment</td><td>5</td><td>Same as C</td><td>5 distinct models, one per seat</td></tr>
+  <tr><td><strong>A</strong>: Baseline</td><td>1</td><td>Full protocol, collapsed into one context</td><td>qwen2.5:14b-instruct</td></tr>
+  <tr><td><strong>B</strong>: Baseline</td><td>5</td><td>Independent one-shot views, deterministic aggregation, no interaction</td><td>qwen2.5:14b-instruct</td></tr>
+  <tr><td><strong>C</strong>: Treatment</td><td>5</td><td>Full committee: independent assessment → structured challenge → revision → synthesis with preserved dissent</td><td>qwen2.5:14b-instruct</td></tr>
+  <tr><td><strong>D</strong>: Treatment</td><td>5</td><td>Same as C</td><td>5 distinct models, one per seat</td></tr>
 </table>
 
 <h2>The result</h2>
@@ -73,16 +73,16 @@ never compute it.</p>
 <div class="result-box">
   <strong>The pre-registered honest-negative criterion fired.</strong>
   Treatment C did not beat both baselines on ≥2 of the 3 pre-registered sub-metrics (unsupported-claim
-  rate, seeded-trap detection, perturbation robustness) — on Case A, where all three sub-metrics could be
+  rate, seeded-trap detection, perturbation robustness). On Case A, where all three sub-metrics could be
   measured, C won only 1. Per the project's own pre-registered experiment plan, this is a
   <em>successful</em> V0 outcome, not a failure: the honest finding is that structured multi-agent
   deliberation did not justify its complexity on these cases.
 </div>
 
-<p class="caveat">Case C (the negative-NPV case) is <strong>provisional</strong> — the perturbation-pair
+<p class="caveat">Case C (the negative-NPV case) is <strong>provisional</strong>: the perturbation-pair
 runs that produce the third sub-metric were only ever run on Case A, per the pre-registered design.
 Neither case's result implements the full pre-registered margin (must beat by &gt;2× seed-to-seed
-standard deviation) or the inference-cost condition (must cost &gt;2× Baseline A) — both are
+standard deviation) or the inference-cost condition (must cost &gt;2× Baseline A); both are
 disclosed gaps in <a href="reports/comparison-case-a.md">the comparison output</a> itself, not hidden
 in this summary. A stricter check could only make the result harder to satisfy, never easier.</p>
 
@@ -92,18 +92,18 @@ in this summary. A stricter check could only make the result harder to satisfy, 
   <p><strong>Framing changed the single-context baseline's decision. It did not change the committee's.</strong></p>
   <p>The same evidence, reworded in a more optimistic tone with every number and fact held identical,
   was run against Baseline A and Treatment C on the same case. Baseline A's recommendation flipped from
-  <code>DEFER</code> to <code>PILOT</code> — a funding-adjacent decision, changed by tone alone.
+  <code>DEFER</code> to <code>PILOT</code>: a funding-adjacent decision, changed by tone alone.
   Treatment C's recommendation did not move. Across all four perturbation types tested (optimistic
   reframing, a stated CEO endorsement, a misleading headline number, and evidence reordering), the
   single-context baseline drifted on 1 of 4; the five-context committee drifted on 0 of 4.</p>
 </div>
 
 <div class="finding-box">
-  <p><strong>Heterogeneity didn't fix dissent-preservation — it made one model's unreliability
+  <p><strong>Heterogeneity didn't fix dissent-preservation. It made one model's unreliability
   measurable.</strong></p>
   <p>Under Condition D, one committee seat ran a different, smaller model than the rest. Across five
   seeds, that seat held its genuine minority position twice and folded fully into the majority three
-  times — and in every fold, it cited only evidence that was already available at the start, never
+  times, and in every fold, it cited only evidence that was already available at the start, never
   anything new. That's a real, quantifiable reliability gap for that specific model under this protocol,
   not an argument that mixing models is either the problem or the fix.</p>
 </div>
@@ -125,25 +125,25 @@ in this summary. A stricter check could only make the result harder to satisfy, 
   </div>
   <div class="card">
     <a href="reports/treatment-d.html">Treatment D report →</a>
-    <p>The same committee, five different models — the run where the CISO seat folded.</p>
+    <p>The same committee, five different models: the run where the CISO seat folded.</p>
   </div>
 </div>
 
 <p>
-  <a href="reports/comparison-case-a.md">Full comparison — Case A (all 3 sub-metrics)</a><br>
-  <a href="reports/comparison-case-c.md">Full comparison — Case C (provisional, 2 of 3)</a>
+  <a href="reports/comparison-case-a.md">Full comparison: Case A (all 3 sub-metrics)</a><br>
+  <a href="reports/comparison-case-c.md">Full comparison: Case C (provisional, 2 of 3)</a>
 </p>
 
 <h2>Go deeper</h2>
 <p>Every real bug found while building this, every design decision and why it was made, and the full
 task-by-task build log live in <a href="decisions.md">the project's decision log</a>. The pre-registered
-criteria themselves — written before any comparison batch ran — are in
+criteria themselves (written before any comparison batch ran) are in
 <a href="experiment-plan.md">the experiment plan</a>. Nothing here supports a claim about decision
 <em>quality</em>: these are authored fixture cases measuring trap detection and evidence discipline,
 not real-world outcomes.</p>
 
 <footer>
-  Kriterion is a Hekton factory-output project — an experiment, not a launch.
+  Kriterion is a Hekton factory-output project: an experiment, not a launch.
   <a href="https://github.com/dermdunc/kriterion">Source on GitHub</a>.
 </footer>
 
