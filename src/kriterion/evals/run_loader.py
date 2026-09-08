@@ -9,7 +9,7 @@ from __future__ import annotations
 from kriterion.domain.committee import BeliefUpdate, CommitteePosition, KeyReason
 from kriterion.domain.decision import Dissent, SyntheticRecommendation
 from kriterion.domain.economics import EconomicsResult, TornadoEntry
-from kriterion.domain.enums import ChangeType, CommitteeSeat, ConfidenceBand, DecisionAction, PositionPhase
+from kriterion.domain.enums import ChangeType, CommitteeSeat, ConfidenceBand, DecisionAction, DriftFlag, PositionPhase
 from kriterion.domain.evidence import Attestation, EvidenceCategory, EvidenceItem, Strength
 from kriterion.protocol.aggregate import BaselineBResult
 
@@ -52,7 +52,8 @@ def load_belief_update(data: dict) -> BeliefUpdate:
         initial_position=DecisionAction(data["initial_position"]), initial_confidence=ConfidenceBand(data["initial_confidence"]),
         revised_position=DecisionAction(data["revised_position"]), revised_confidence=ConfidenceBand(data["revised_confidence"]),
         change_type=ChangeType(data["change_type"]), trigger_refs=data.get("trigger_refs", []),
-        stated_reason=data.get("stated_reason", ""), drift_flags=data.get("drift_flags", []),
+        stated_reason=data.get("stated_reason", ""),
+        drift_flags=[DriftFlag(f) for f in data.get("drift_flags", [])],
     )
 
 
