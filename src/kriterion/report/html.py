@@ -138,7 +138,7 @@ def _render_decision_view(case: DecisionCase, artifacts: _RunArtifacts) -> str:
       <h2>1. The decision</h2>
       <p class="ask">{_esc(case.decision_requested)}</p>
       <dl class="facts">
-        <dt>Ask</dt><dd>{_esc(case.ask.type)} — {_gbp(case.ask.amount_gbp)} over {_esc(case.ask.duration)}</dd>
+        <dt>Ask</dt><dd>{_esc(case.ask.type)}: {_gbp(case.ask.amount_gbp)} over {_esc(case.ask.duration)}</dd>
         <dt>Deadline</dt><dd>{_esc(case.deadline or "none recorded")}</dd>
         <dt>Sponsor</dt><dd>{_esc(case.sponsor)}</dd>
         <dt>Decision owner</dt><dd>{_esc(case.decision_owner)}</dd>
@@ -311,7 +311,7 @@ def _render_decision_record_view(artifacts: _RunArtifacts) -> str:
         dissent_refs = f' <span class="refs">[{", ".join(rec.strongest_dissent.refs)}]</span>' if rec.strongest_dissent.refs else ""
         parts.append(f"""
           <div class="recommendation">
-            <div class="not-a-decision-banner">SYNTHETIC RECOMMENDATION — NOT A DECISION</div>
+            <div class="not-a-decision-banner">SYNTHETIC RECOMMENDATION · NOT A DECISION</div>
             {_badge(rec.action.value, "action")} {_gbp(rec.amount)} over {_esc(rec.duration)}
             {_badge(rec.confidence_band.value, "confidence")}
             {'<div class="conditions"><strong>Conditions:</strong><ul>' + conditions + '</ul></div>' if conditions else ''}
@@ -329,7 +329,7 @@ def _render_decision_record_view(artifacts: _RunArtifacts) -> str:
         minority = "".join(f"<li>{_esc(p.member.value)}: {_esc(p.recommendation.value)}</li>" for p in b.minority_positions)
         parts.append(f"""
           <div class="recommendation">
-            <p class="note">Baseline B has no synthesized recommendation — deterministic aggregation only, no chair/narrative step.</p>
+            <p class="note">Baseline B has no synthesized recommendation: deterministic aggregation only, no chair/narrative step.</p>
             {_badge(b.modal_action.value, "action")} ({b.modal_action_count}/{b.total_positions} members)
             {'<div class="unresolved"><strong>Unioned blocking unknowns:</strong><ul>' + unknowns + '</ul></div>' if unknowns else ''}
             {'<div class="unresolved"><strong>Minority positions:</strong><ul>' + minority + '</ul></div>' if minority else ''}
@@ -344,7 +344,7 @@ def _render_decision_record_view(artifacts: _RunArtifacts) -> str:
         parts.append(f"""
           <div class="human-decision">
             <strong>HUMAN DECISION</strong>
-            {_badge(d.action.value, "action")} {_esc(d.disposition)} — owner {_esc(d.owner)}, decided {_esc(d.decided_at)}
+            {_badge(d.action.value, "action")} {_esc(d.disposition)}, owner {_esc(d.owner)}, decided {_esc(d.decided_at)}
             <p>{_esc(d.rationale)}</p>
             {'<div><strong>Overrides:</strong><ul>' + overrides + '</ul></div>' if overrides else ''}
           </div>
@@ -441,11 +441,11 @@ def render_report(case: DecisionCase, run_dir: Path) -> str:
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>{_esc(case.title)} — kriterion report</title>
+<title>{_esc(case.title)}: kriterion report</title>
 <style>{_STYLE}</style>
 </head>
 <body>
-<div class="realism-banner">{_esc(case.case_realism.value.replace("_", " "))} CASE — SYNTHETIC DATA</div>
+<div class="realism-banner">{_esc(case.case_realism.value.replace("_", " "))} CASE · SYNTHETIC DATA</div>
 <h1>{_esc(case.title)}</h1>
 {body}
 </body>
