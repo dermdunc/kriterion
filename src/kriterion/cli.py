@@ -25,6 +25,22 @@ from kriterion.economics import CASE_ECONOMICS_FUNCTIONS
 from kriterion.ledger import freeze, write_frozen_ledger
 
 
+def _write_evidence_requests(out_dir: Path, requests: list) -> None:
+    """Persist phase-3 `EvidenceRequest`s (each carrying its `would_change`)
+    as a first-class run artifact.
+
+    Before 2026-09-11 these were parsed out of every member's assessment and
+    then discarded, so "what would change this seat's mind" was only ever
+    reconstructible from blocking unknowns and recommendation conditions. It
+    is written even when empty: a run where nobody asked for evidence is a
+    finding, and an absent file would be indistinguishable from a run made
+    before the artifact existed.
+    """
+    (out_dir / "evidence_requests.json").write_text(
+        json.dumps([to_dict(r) for r in requests], indent=2, sort_keys=True) + "\n"
+    )
+
+
 def _cmd_doctor(_args: argparse.Namespace) -> int:
     from kriterion.executors.hekton_local import HektonLocalExecutor
 
@@ -115,6 +131,7 @@ def _cmd_run(args: argparse.Namespace) -> int:
             (out_dir / "positions_initial.json").write_text(
                 json.dumps([to_dict(result.initial_position)], indent=2, sort_keys=True) + "\n"
             )
+        _write_evidence_requests(out_dir, result.evidence_requests)
         print(f"kriterion: Baseline A complete -> {out_dir} ({len(result.calls)} model calls)")
         print(f"kriterion: final action = {result.recommendation.action.value}")
         return 0
@@ -139,6 +156,7 @@ def _cmd_run(args: argparse.Namespace) -> int:
         (out_dir / "baseline_b_result.json").write_text(
             json.dumps(to_dict(result), indent=2, sort_keys=True) + "\n"
         )
+        _write_evidence_requests(out_dir, [r for o in outcomes for r in o.evidence_requests])
         print(f"kriterion: Baseline B complete -> {out_dir} ({len(ok_positions)}/5 members responded)")
         print(f"kriterion: modal action = {result.modal_action.value} ({result.modal_action_count}/{result.total_positions})")
         if abstained:
@@ -222,6 +240,9 @@ def _cmd_run(args: argparse.Namespace) -> int:
             json.dumps(to_dict(chair_result.recommendation), indent=2, sort_keys=True) + "\n"
         )
         (out_dir / "narrative.txt").write_text(chair_result.narrative + "\n")
+        _write_evidence_requests(
+            out_dir, [r for o in phase3_outcomes_d for r in o.evidence_requests]
+        )
 
         print(f"kriterion: Treatment D complete -> {out_dir}")
         print(f"kriterion: {len(initial_positions)}/5 initial, {len(revised_positions)}/5 revised")
@@ -298,6 +319,7 @@ def _cmd_run(args: argparse.Namespace) -> int:
         json.dumps(to_dict(chair_result.recommendation), indent=2, sort_keys=True) + "\n"
     )
     (out_dir / "narrative.txt").write_text(chair_result.narrative + "\n")
+    _write_evidence_requests(out_dir, [r for o in phase3_outcomes for r in o.evidence_requests])
 
     print(f"kriterion: Treatment C complete -> {out_dir}")
     print(f"kriterion: {len(initial_positions)}/5 initial, {len(revised_positions)}/5 revised")
@@ -637,7 +659,7 @@ def _cmd_assurance_import(args: argparse.Namespace) -> int:
             attestation=Attestation(args.attestation),
             created_at=created_at,
         )
-    except AssuranceImportError as exc:
+    except (AssuranceImportError, OSError, UnicodeDecodeError) as exc:
         print(f"kriterion: assurance import failed: {exc}", file=sys.stderr)
         return 1
 
@@ -652,8 +674,46 @@ def _cmd_assurance_import(args: argparse.Namespace) -> int:
         out_path.parent.mkdir(parents=True, exist_ok=True)
         out_path.write_text(text)
         print(f"kriterion: wrote {out_path}")
-    else:
+    elif not args.into_case:
         print(text, end="")
+
+    # The system-of-record path: fold the imported items into a NEW frozen
+    # ledger version alongside the case pack's own evidence. freeze() is the
+    # single ADR-003 write path; existing frozen ledgers are never edited.
+    if args.into_case:
+        case_dir = Path(args.into_case)
+        try:
+            case, case_items, _assumptions = load_case_pack(case_dir, created_at=created_at)
+        except CasePackError as exc:
+            print(f"kriterion: assurance import failed: {exc}", file=sys.stderr)
+            return 1
+
+        run_id = args.run_id or f"run-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
+        ledger_path = Path(args.runs_dir) / run_id / "ledger.frozen.json"
+        if ledger_path.exists():
+            print(
+                f"kriterion: assurance import failed: {ledger_path} already exists — a frozen "
+                "ledger version is never edited in place (ADR-003); choose a new --run-id",
+                file=sys.stderr,
+            )
+            return 1
+        try:
+            ledger = freeze(
+                case_items + items,
+                ledger_id=f"{case.id}-ledger",
+                created_at=created_at,
+                version=args.ledger_version,
+            )
+        except ValueError as exc:
+            print(f"kriterion: assurance import failed: {exc}", file=sys.stderr)
+            return 1
+
+        write_frozen_ledger(ledger, ledger_path)
+        print(
+            f"kriterion: froze {len(case_items)} case + {len(items)} imported assurance "
+            f"items into ledger v{ledger.version} -> {ledger_path}"
+        )
+        print(f"kriterion: ledger fingerprint {ledger.fingerprint}")
 
     print(
         f"kriterion: capability {summary.capability_name} v{summary.capability_version}: "
@@ -790,6 +850,29 @@ def build_parser() -> argparse.ArgumentParser:
     )
     assurance_import_parser.add_argument(
         "--out", default=None, help="Write the derived items JSON here instead of stdout"
+    )
+    assurance_import_parser.add_argument(
+        "--into-case",
+        default=None,
+        metavar="CASE_DIR",
+        help=(
+            "Freeze the imported items into a NEW ledger version alongside that case pack's "
+            "own evidence, written to <runs-dir>/<run-id>/ledger.frozen.json. This is the real "
+            "path into Kriterion's system of record; without it the command only serialises."
+        ),
+    )
+    assurance_import_parser.add_argument(
+        "--run-id", default=None, help="Run directory name under --runs-dir (with --into-case)"
+    )
+    assurance_import_parser.add_argument(
+        "--runs-dir", default="runs", help="Root directory for run artifacts (with --into-case)"
+    )
+    assurance_import_parser.add_argument(
+        "--ledger-version",
+        type=int,
+        default=2,
+        help="Ledger version to write with --into-case. Defaults to 2: the case pack's own "
+        "evidence is v1, and imported assurance evidence makes a superset vN+1 (ADR-003).",
     )
     assurance_import_parser.set_defaults(func=_cmd_assurance_import)
 
