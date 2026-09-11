@@ -75,6 +75,7 @@ def _envelope(**overrides):
 def _decision(**overrides):
     base = {
         "state": "PASS",
+        "capabilityRef": {"name": "example-capability", "version": "1.0.0"},
         "envelopeRef": "evidence/example/envelope.yaml",
         "reasons": [{"code": "no-blocking-findings", "message": "all gating results passed"}],
         "deciderVersion": "0.0.1",
@@ -243,6 +244,134 @@ def test_committed_fixture_pair_imports_cleanly():
     pi = _by_id(items)["asr-enterprise-coding-agent-prompt-injection-resilience-001"]
     assert pi.category is EvidenceCategory.MEASURED
     assert "FAIL" in pi.claim
+
+
+# ---------------------------------------------------------------------------
+# Integrity invariants added after the 2026-09-11 adversarial review, which
+# executed each of these cases against the previous adapter and got a PASS
+# summary, a silently-dropped result, or an uncaught AttributeError.
+# ---------------------------------------------------------------------------
+
+
+def test_omitted_critical_failures_is_refused_not_assumed_empty():
+    """A missing safety-critical field is not evidence of absence."""
+    envelope = _envelope()
+    del envelope["criticalFailures"]
+    with pytest.raises(AssuranceImportError, match="criticalFailures"):
+        _adapt(envelope, _decision(state="PASS"))
+    # ...and it is refused regardless of the decision state, including no decision.
+    with pytest.raises(AssuranceImportError, match="criticalFailures"):
+        _adapt(envelope, None)
+
+
+def test_wrongly_typed_critical_failures_is_refused():
+    with pytest.raises(AssuranceImportError, match="criticalFailures must be a JSON list"):
+        _adapt(_envelope(criticalFailures="none"), None)
+    with pytest.raises(AssuranceImportError, match=r"criticalFailures\[0\]"):
+        _adapt(_envelope(criticalFailures=["secrets_leak"]), None)
+
+
+def test_gating_fail_cannot_be_represented_as_pass():
+    """The previous guard only checked the denormalised criticalFailures list,
+    so a gating result with outcome 'fail' and an empty list imported as PASS."""
+    envelope = _envelope()
+    envelope["results"][1]["gating"] = True  # cf-check-001 has outcome 'fail'
+    with pytest.raises(AssuranceImportError, match="gating"):
+        _adapt(envelope, _decision(state="PASS"))
+
+
+def test_stale_pass_is_reported_as_stale_never_as_pass():
+    """Staleness may only ever downgrade a state."""
+    decision = _decision(state="PASS", freshness={"stale": True, "diffCount": 3})
+    summary, items = _adapt(_envelope(), decision)
+    assert summary.stale is True
+    assert summary.declared_decision_state == "PASS"
+    assert summary.decision_state == "STALE"
+    decision_item = _by_id(items)["asr-example-capability-decision"]
+    assert decision_item.category is EvidenceCategory.UNKNOWN
+    assert decision_item.strength is Strength.LOW
+    assert "a stale PASS is not a PASS" in decision_item.claim
+
+
+def test_decision_must_be_identity_bound_to_the_envelope():
+    # Different capability entirely.
+    other = _decision(state="PASS", capabilityRef={"name": "some-other-capability", "version": "1.0.0"})
+    with pytest.raises(AssuranceImportError, match="mismatched document pair"):
+        _adapt(_envelope(), other)
+    # Same capability, different version.
+    older = _decision(state="PASS", capabilityRef={"name": "example-capability", "version": "0.9.0"})
+    with pytest.raises(AssuranceImportError, match="version-mismatched"):
+        _adapt(_envelope(), older)
+    # No capabilityRef at all: cannot be bound, so cannot be trusted.
+    unbound = _decision(state="PASS")
+    del unbound["capabilityRef"]
+    with pytest.raises(AssuranceImportError, match="no capabilityRef"):
+        _adapt(_envelope(), unbound)
+
+
+def test_envelope_ref_mismatch_is_refused():
+    envelope = _envelope()
+    envelope["_envelopeRef"] = "evidence/example/envelope-2026-09-01.yaml"
+    with pytest.raises(AssuranceImportError, match="envelopeRef"):
+        _adapt(envelope, _decision(envelopeRef="evidence/other/envelope.yaml"))
+
+
+def test_malformed_containers_raise_controlled_import_errors_not_tracebacks():
+    """Every contract-shape failure must surface as AssuranceImportError:
+    'unknown' has to stay distinct from 'crashed'."""
+    # A decision document that is a JSON array, not an object.
+    with pytest.raises(AssuranceImportError, match="decision document must be a JSON object"):
+        _adapt(_envelope(), [])  # type: ignore[arg-type]
+    # An envelope that is a JSON array.
+    with pytest.raises(AssuranceImportError, match="envelope document must be a JSON object"):
+        _adapt([], None)  # type: ignore[arg-type]
+    # results entries that are not objects.
+    with pytest.raises(AssuranceImportError, match=r"results\[0\] must be a JSON object"):
+        _adapt(_envelope(results=["det-check-001"]), None)
+    # reasons that are neither objects nor strings.
+    with pytest.raises(AssuranceImportError, match=r"reasons\[0\]"):
+        _adapt(_envelope(), _decision(reasons=[42]))
+    # a fingerprint.uncovered that is not a list.
+    envelope = _envelope()
+    envelope["fingerprint"]["uncovered"] = "tool-schemas"
+    with pytest.raises(AssuranceImportError, match="uncovered must be a JSON list"):
+        _adapt(envelope, None)
+
+
+def test_string_reasons_are_tolerated_not_crashed_on():
+    """A bare-string reason is a shape the contract permits; it must import."""
+    summary, items = _adapt(_envelope(), _decision(reasons=["all gating results passed"]))
+    assert summary.reasons == ["all gating results passed"]
+    assert "all gating results passed" in _by_id(items)["asr-example-capability-decision"].claim
+
+
+def test_duplicate_derived_ids_are_refused_not_silently_dropped():
+    envelope = _envelope()
+    envelope["results"].append(dict(envelope["results"][0]))
+    with pytest.raises(AssuranceImportError, match="duplicate derived evidence id"):
+        _adapt(envelope, None)
+
+
+def test_undigested_provenance_becomes_an_explicit_unknown():
+    """digestsCaptured=false means the results are not bound to any artifact,
+    which is an unknown the importer must not absorb silently."""
+    envelope = _envelope(provenance={"digestsCaptured": False, "note": "authored fixture"})
+    summary, items = _adapt(envelope, _decision())
+    assert summary.digests_captured is False
+    prov = _by_id(items)["asr-example-capability-provenance"]
+    assert prov.category is EvidenceCategory.UNKNOWN
+    assert "not cryptographically bound" in prov.claim
+
+
+def test_load_assurance_documents_refuses_non_object_documents(tmp_path):
+    (tmp_path / "envelope.json").write_text(json.dumps([1, 2, 3]))
+    with pytest.raises(AssuranceImportError, match="envelope.json must be a JSON object"):
+        load_assurance_documents(tmp_path)
+
+    (tmp_path / "envelope.json").write_text(json.dumps(_envelope()))
+    (tmp_path / "decision.json").write_text(json.dumps("PASS"))
+    with pytest.raises(AssuranceImportError, match="decision.json must be a JSON object"):
+        load_assurance_documents(tmp_path)
 
 
 def test_assurance_is_optional_no_other_kriterion_module_imports_it():
