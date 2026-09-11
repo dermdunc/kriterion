@@ -1,0 +1,43 @@
+# Deployment manifest — Infrastructure Gremlin input (Agentic Infra Lab pattern).
+# The gremlin reads this, generates/validates the IaC, runs `terraform plan`,
+# classifies blast radius, and STOPS at the human-apply gate. The human applies.
+#
+# See: ~/Development/hekton/labs/agentic-infra-lab/workflows/provision-infra-from-manifest.md
+# Pattern definition: ~/Development/hekton/labs/agentic-infra-lab/patterns/github-pages-dns/pattern.yaml
+
+project: kriterion
+classification: factory-output
+intent: "Give Kriterion's existing GitHub Pages site its own subdomain of theagentictekton.com."
+
+pattern: github-pages-dns   # Route53 CNAME + TXT verification, no new hosting (Pages is unchanged)
+
+deployment:
+  provider: aws
+  region: eu-west-2                      # matches agentic-tekton's own infra, same account/zone
+  subdomain_fqdn: kriterion.theagentictekton.com
+  root_domain: theagentictekton.com
+  # Same hosted zone agentic-tekton itself and hekton.theagentictekton.com (the Field
+  # Journal) already use — confirmed via a read-only `aws route53 get-hosted-zone` call,
+  # and cross-checked against agentic-tekton/infra/aws-static-site/deploy-manifest.yaml's
+  # own already-applied value.
+  hosted_zone_id: Z00120023RP0P4IN9T3ZH
+  pages_host: dermdunc.github.io         # Kriterion's real GitHub Pages host, unchanged by this
+  dns:
+    managed_in_route53: true
+    create_records: true
+
+guardrails:
+  allowlist: [aws_route53_record]        # pattern.yaml's own allowlist -- nothing else in scope
+  existing_record_mutation_forces: RED   # any update/replace/delete here is a real anomaly
+  blast_radius_ceiling: AMBER            # expected: 2 creates (CNAME + TXT), well under soft ceiling 3
+  cost_awareness: true                   # ~$0 marginal cost, records only, in a pre-existing zone
+  apply_authority: human-only            # the gremlin never applies
+
+# Filled in by the human after the gate, for the audit trail:
+approval:
+  plan_reviewed_by: ""
+  plan_classification: ""                # GREEN | AMBER | RED (from plan-summary.sh)
+  plan_note: ""
+  approved_date: ""
+  applied_by: ""
+  deploy_note: ""

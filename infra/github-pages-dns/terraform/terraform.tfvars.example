@@ -1,0 +1,11 @@
+# Copy to terraform.tfvars (gitignored) and fill in the two values only a
+# human can supply, from GitHub's account-level "Add a domain" step:
+# github.com/settings/pages (dermdunc account) -> Add a domain ->
+# theagentictekton.com. Never derive or guess these -- see ../README.md.
+#
+# Everything else already has a correct default in variables.tf (the zone id,
+# subdomain, Pages host, and TTL are all known facts, not secrets) and does
+# not need to be restated here.
+
+domain_verification_name  = "_github-pages-challenge-dermdunc.kriterion.theagentictekton.com" # confirm against the exact name GitHub shows -- example only
+domain_verification_value = "REPLACE_WITH_GITHUB_ISSUED_VALUE"
