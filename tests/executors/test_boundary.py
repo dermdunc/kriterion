@@ -26,8 +26,12 @@ def test_hekton_llm_imported_only_in_executors_package():
 
 
 def test_no_import_or_shared_file_with_hekton_assurance_lab():
-    """Section 2's non-negotiable factory-output boundary: zero coupling to
-    hekton-assurance-lab, in either direction."""
+    """Section 2's non-negotiable factory-output boundary: zero CODE coupling
+    to hekton-assurance-lab, in either direction. ADR-007 (docs/decisions.md,
+    2026-09-11) allows consuming assurance evidence as versioned JSON
+    *documents* through src/kriterion/assurance/ — a data contract read by a
+    tolerant parser, not an import; this test still guarantees no Python edge
+    (no import, no repo-path reference) ever exists in either direction."""
     violations = []
     for path in SRC_ROOT.rglob("*.py"):
         text = path.read_text()

@@ -619,6 +619,54 @@ def _cmd_perturbation_diff(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_assurance_import(args: argparse.Namespace) -> int:
+    from kriterion.assurance.adapter import (
+        AssuranceImportError,
+        adapt_envelope,
+        load_assurance_documents,
+    )
+    from kriterion.domain.evidence import Attestation
+
+    envelope_dir = Path(args.envelope_dir)
+    created_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    try:
+        envelope, decision = load_assurance_documents(envelope_dir)
+        summary, items = adapt_envelope(
+            envelope,
+            decision,
+            attestation=Attestation(args.attestation),
+            created_at=created_at,
+        )
+    except AssuranceImportError as exc:
+        print(f"kriterion: assurance import failed: {exc}", file=sys.stderr)
+        return 1
+
+    payload = {
+        "schema_version": "kriterion/v0.1",
+        "summary": to_dict(summary),
+        "items": [to_dict(item) for item in items],
+    }
+    text = json.dumps(payload, indent=2, sort_keys=True) + "\n"
+    if args.out:
+        out_path = Path(args.out)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        out_path.write_text(text)
+        print(f"kriterion: wrote {out_path}")
+    else:
+        print(text, end="")
+
+    print(
+        f"kriterion: capability {summary.capability_name} v{summary.capability_version}: "
+        f"decision {summary.decision_state}"
+        + (" (STALE)" if summary.stale else "")
+        + f", {len(items)} evidence item(s) derived "
+        f"({summary.critical_failure_count} critical failure(s), "
+        f"{summary.uncovered_count} coverage gap(s))",
+        file=sys.stderr,
+    )
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="kriterion",
@@ -722,6 +770,28 @@ def build_parser() -> argparse.ArgumentParser:
     report_parser.add_argument("--runs-dir", default="runs", help="Root directory for run artifacts")
     report_parser.add_argument("--out", default=None, help="Defaults to <run-dir>/report.html")
     report_parser.set_defaults(func=_cmd_report)
+
+    assurance_parser = subparsers.add_parser(
+        "assurance", help="Generic assurance-evidence document operations (ADR-007)"
+    )
+    assurance_subparsers = assurance_parser.add_subparsers(dest="assurance_command", required=True)
+    assurance_import_parser = assurance_subparsers.add_parser(
+        "import",
+        help="Translate an assurance envelope.json (+ optional decision.json) into Kriterion evidence items",
+    )
+    assurance_import_parser.add_argument(
+        "envelope_dir", help="Directory containing envelope.json and optionally decision.json"
+    )
+    assurance_import_parser.add_argument(
+        "--attestation",
+        choices=["AUTHORED", "SIMULATED_THIRD_PARTY", "REAL"],
+        default="AUTHORED",
+        help="Provenance of the documents (ADR-003). Defaults to AUTHORED — never claims REAL silently.",
+    )
+    assurance_import_parser.add_argument(
+        "--out", default=None, help="Write the derived items JSON here instead of stdout"
+    )
+    assurance_import_parser.set_defaults(func=_cmd_assurance_import)
 
     pdiff_parser = subparsers.add_parser(
         "perturbation-diff", help="Compare a baseline and perturbed run's action (docs/v0-plan.md Section 6, P1)"
