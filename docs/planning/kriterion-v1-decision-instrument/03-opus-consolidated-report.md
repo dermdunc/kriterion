@@ -7,7 +7,7 @@ no PR opened, nothing merged.**
 
 | Repo | Worktree | Branch | Commits ahead of base |
 |---|---|---|---|
-| kriterion | `factory-output/kriterion--decision-instrument` | `agent/fable/kriterion-decision-instrument` | 8 (3 Fable, 1 Codex-critique, 4 Opus) |
+| kriterion | `factory-output/kriterion--decision-instrument` | `agent/fable/kriterion-decision-instrument` | 10 from `origin/main` `fe1b85b` (3 Fable, 1 Codex-critique, 6 Opus). Local `main` is two merges stale, so `git log main..HEAD` reports 13 — compare against `fe1b85b`, not local `main`. |
 | hekton-assurance-lab | `labs/hekton-assurance-lab--consumer-docs` | `agent/fable/assurance-consumer-contract-docs` | 2 (1 Fable, 1 Opus) — docs only, zero code |
 
 **Tests: 239 passing** (193 pre-V1 baseline → 208 after Fable → 239 after Opus).
@@ -124,7 +124,7 @@ That is a note in Assurance's next-actions, not a promise Assurance has made.
   verbatim-in-substance as `docs/lab.html` with every caveat and the honest-negative headline
   intact; README/architecture repositioned; ADR-007 and ADR-008.
 
-**Opus stage (4 commits):**
+**Opus stage (6 commits — the four below, plus this report and a commit-count correction):**
 - `fix(assurance)` — closed four PASS-laundering routes and the uncaught-error boundary.
   Required/typed `criticalFailures`; gating-fail-under-PASS refusal; envelope↔decision identity
   binding on `capabilityRef` name and version plus `envelopeRef`; staleness downgrades a
