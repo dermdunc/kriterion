@@ -1,5 +1,70 @@
 # Kriterion V1 (Decision Instrument) — Fable stage report
 
+> ## Errata, added at Opus stage (2026-09-11)
+>
+> This file is the historical record of the Fable stage and is left as written, with three
+> factual corrections applied inline and recorded here. The authoritative account of the
+> loop's outcome is [`03-opus-consolidated-report.md`](03-opus-consolidated-report.md).
+>
+> 1. **Test count.** The report said "16 adapter tests" in two places. There were **15**
+>    test functions. The 208 total was correct (193 baseline + 15). Corrected inline.
+> 2. **Provenance claim.** The report said imported assurance provenance survives the
+>    transformation. As written at Fable stage the adapter copied an *unverified*
+>    `decision.envelopeRef` string plus the spec id into each item's `source`; it did not
+>    read the producer's `provenance` block at all, so `digestsCaptured: false` — the fact
+>    that nothing was bound to a real artifact — was dropped. Corrected inline, and the
+>    adapter now carries `digestsCaptured`/`sourceState.commit` onto the summary and emits
+>    an explicit UNKNOWN item when digests were not captured.
+> 3. **Missing mission record.** The report did not contain or reference the original
+>    mission text, which made mission fidelity unverifiable from the prescribed source. A
+>    "Mission of record" section is added immediately below. It is an honest reconstruction,
+>    not a verbatim capture: the verbatim brief was not preserved at Fable stage and cannot
+>    now be recovered. Treat it as the best available record, not as the original.
+>
+> Two further Fable-stage claims were found false at Codex stage and are corrected in the
+> artifacts themselves rather than here: "one complete decision journey, produced end-to-end
+> by the real pipeline" (`docs/index.html` is hand-maintained; see the consolidated report's
+> *Decision journey* section), and the rendering of a source `fail` outcome as "PARTIAL" on
+> that page.
+
+---
+
+## Mission of record (reconstructed at Opus stage — NOT verbatim)
+
+The Fable-stage brief was not preserved verbatim. Reconstructed from the Codex and Opus
+stage briefs, which both quote it, the mission was:
+
+- **Goal.** Evolve Kriterion from "AI committee research demo" into an **evidence-backed
+  decision instrument**, by implementing one **V1 vertical slice** end to end, after
+  inspecting both the Kriterion and Hekton Assurance repositories.
+- **Architecture constraint.** Decide whether changes belong in Kriterion only or in
+  Kriterion + Hekton Assurance, and justify it. Assurance must keep its domain
+  independence: no investment/committee/allocation concept may enter Assurance code or
+  schema, and neither repo may import the other's package. Any coupling is at the
+  *document* level, through an anti-corruption adapter on the Kriterion side.
+- **Epistemic invariants to uphold.** Seven distinct epistemic classes, never collapsed into
+  one confidence score; a synthetic recommendation must stay separate from a human decision,
+  and no human decision may be fabricated; a critical failure must never be representable as
+  PASS; *unknown* must remain distinct from *failing* — and distinct from *crashed*; stale
+  evidence must be visibly stale; assurance must be entirely optional; economics must be
+  computed deterministically, never by a model.
+- **Scope discipline.** No generic portfolio platform, workflow engine, GRC system,
+  observability product, Assurance rewrite, chat UI, or longitudinal analytics platform.
+  Where a smaller honest proof and a larger rushed one compete, **prefer the smaller honest
+  proof** and name the rest as deferred.
+- **Claim discipline.** Fixtures must be labelled as fixtures; nothing may be described as
+  measured, independent, or generated when it is authored or hand-maintained.
+- **Required final-output structure.** What you found · Architecture decision · What changed
+  (by repository) · Decision journey · Assurance boundary · Validation · Deferred work ·
+  Most important remaining product risk. That structure is reproduced, consolidated across
+  all three stages, in `03-opus-consolidated-report.md`.
+- **House conventions.** Work on `agent/<stage>/<slug>` branches in both repos; Conventional
+  Commits with a `Why:`/`What changed:`/`Validation:` body and an `Agent:` footer; no
+  `Co-Authored-By:`; no push, no PR, no merge; protected paths untouched; each repo's own
+  documentation contract kept current.
+
+---
+
 **Loop:** Fable → Codex → Opus (implementation loop, not planning-only)
 **Date:** 2026-09-11
 **Branches (both local, unpushed, per the git contract):**
@@ -114,7 +179,7 @@ Assurance-side change: 3 docs files, no code, no schema edits, no new obligation
 | Economics-as-insight | **Exists but hidden** | Numbers existed; narrative framing added |
 | Recommendation ≠ decision UI | **Already exists** (report.html) / **surfaced** on the journey page, honestly showing "not yet recorded" |
 | Assurance envelope contract | **Already exists (producer side)** | Reused as a document shape; explicitly not re-invented |
-| Kriterion assurance adapter | **Needed implementation** | Built: `src/kriterion/assurance/` + CLI + fixture + 16 tests |
+| Kriterion assurance adapter | **Needed implementation** | Built: `src/kriterion/assurance/` + CLI + fixture + 15 tests [errata: was "16"] |
 | Homepage-as-decision | **Needed implementation** | Built: `docs/index.html` journey; old page preserved as `docs/lab.html` |
 | README/architecture repositioning | **Needed implementation** | Done, honest-negative intact |
 | Assurance evidence into a frozen ledger version | **Future / not V1** (this increment) | `assurance import` emits items; folding into a v2 ledger for a *new* run is the named next slice — committed V0 ledgers are research artifacts and were not touched |
@@ -163,12 +228,14 @@ domain-independent and sufficient — but explicitly labeled as having no stabil
    counterfactual→MEASURED/MEDIUM, model-judge→EXPERT_JUDGMENT/LOW,
    error/indeterminate/unrecognised→UNKNOWN/LOW, uncovered[]→UNKNOWN items,
    decision→INFERENCE; hard guards: stale visibly marks + downgrades every item, PASS over
-   criticalFailures raises, absent decision → UNKNOWN never PASS, provenance + caller-stated
+   criticalFailures raises, absent decision → UNKNOWN never PASS, envelope-ref +
+   spec-id source trail [errata: the report originally called this "provenance"; the
+   producer's own provenance block was NOT read at Fable stage] + caller-stated
    attestation on every item); `kriterion assurance import` CLI (lazy import, default
    attestation AUTHORED); authored fixture pair + README under
    `cases/coding-agent-rollout/assurance/` (fictional capability, placeholder digests,
    `digestsCaptured: false`, fixture note inside the JSON); `tests/assurance/test_adapter.py`
-   (16 tests incl. a structural works-when-absent test); boundary-test docstring updated.
+   (15 tests incl. a structural works-when-absent test) [errata: was "16"]; boundary-test docstring updated.
 2. `feat(product)` — `docs/index.html` rebuilt as the decision journey (details below);
    previous research page preserved as `docs/lab.html` with all caveats and its
    honest-negative headline intact; README repositioned to lead with the instrument thesis;

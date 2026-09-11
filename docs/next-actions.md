@@ -310,19 +310,54 @@ tasks from its Weekend Build Plan (§12), in dependency order. Do not re-plan pr
 - [x] **ADR-007 assurance adapter** — `src/kriterion/assurance/adapter.py` (generic
       `AssuranceEvidenceEnvelope` document pair → `EvidenceItem`s, tolerant reader, epistemic
       mapping preserved, hard anti-laundering guards), `kriterion assurance import` CLI, authored
-      fixture pair on the Case A pack, 16 adapter tests. Done 2026-09-11 (branch
-      `agent/fable/kriterion-decision-instrument`).
+      fixture pair on the Case A pack, 15 adapter tests. Done 2026-09-11 (branch
+      `agent/fable/kriterion-decision-instrument`). **Hardened the same day** after an
+      adversarial review found four PASS-laundering routes and an uncaught-exception path open:
+      `criticalFailures` is now required and typed (an omitted list no longer reads as "none"),
+      a gating `fail` under a PASS decision is refused, the decision must be identity-bound to
+      the envelope (`capabilityRef`/`envelopeRef`/version), a declared PASS over
+      producer-declared-stale evidence reports as STALE, every malformed document shape raises
+      `AssuranceImportError` instead of `AttributeError`, duplicate derived ids are refused, and
+      `digestsCaptured: false` emits its own explicit UNKNOWN item. 26 adapter tests.
 - [x] **Public site leads with the decision journey** — `docs/index.html` rebuilt around the
       coding-agent-rollout case using only committed run artifacts; the V0 research landing page
       preserved at `docs/lab.html` with all caveats intact; README/architecture repositioned
       (instrument first, Lab as the mechanism-evaluation layer). Done 2026-09-11, same branch.
-- [ ] **Persist evidence requests per run** — `EvidenceRequest.would_change` exists as a domain
-      type but no `evidence_requests.json` artifact is written, so "what would change your mind"
-      is currently reconstructed from recommendation conditions + blocking unknowns. Wire phase-3
-      output into a per-run artifact and render it as a first-class per-seat view.
-- [ ] **Ledger ingestion path for imported assurance items** — `assurance import` currently emits
-      items JSON; folding them into a new frozen ledger version (v2 superset via `freeze()`) for a
-      *new* run, without touching the committed V0 demo ledgers, is the natural next slice.
+      **Claim-corrected the same day**: a source `fail` was rendering as the invented word
+      "PARTIAL", coverage gaps were credited as decision reasons the decision document does not
+      contain, an authored fixture was described as an independent measurement, and the page
+      called itself "produced end-to-end by the real pipeline". All corrected, and
+      `tests/product/test_public_page_coherence.py` now binds every displayed outcome, figure
+      and position to its source artifact.
+- [x] **Persist evidence requests per run** — `evidence_requests.json` is now written for
+      conditions A/B/C/D (empty file when nobody asked, so "no requests" stays distinguishable
+      from "run predates the artifact"). Done 2026-09-11.
+- [x] **Ledger ingestion path for imported assurance items** — `kriterion assurance import
+      --into-case CASE_DIR` freezes imported items with the case pack's own evidence into a new
+      fingerprinted ledger version via `freeze()`, and refuses to overwrite an existing frozen
+      ledger. Verified end-to-end: import → ledger v2 → `econ` → `report`, with all 12 assurance
+      items rendered. Committed V0 demo ledgers untouched. Done 2026-09-11.
+- [ ] **Render the per-seat evidence requests** — the artifact now exists but nothing displays
+      it. Add an `EvidenceRequest` view to `report/html.py` (deferred once already because a new
+      report section changes every committed `report.html`, which are frozen research artifacts
+      — do this together with a deliberate regeneration pass), and re-run Case A so the journey
+      page can show stored per-seat records instead of derived copy.
+- [ ] **Generate the public journey page from the pipeline** — `docs/index.html` is
+      hand-maintained. The coherence test is a mechanical stand-in, not a substitute: it catches
+      drift from the artifacts, not a missing section or a stale narrative. A small renderer
+      reading `runs/caseA-condC-s0/` + `cases/coding-agent-rollout/assurance/` would retire both
+      the hand-maintenance and the test.
+- [ ] **Import a real producer artifact** — Kriterion has only ever consumed the hand-authored
+      JSON facsimile in `cases/coding-agent-rollout/assurance/`. Converting Hekton Assurance's
+      real committed `2026-09-07T19-31-41Z` FAIL pair (YAML → JSON, losslessly) and importing it
+      is the only thing that proves the contract is real rather than self-consistent. Blocks the
+      Assurance-side ADR's "first external consumer" language from being strengthened.
+- [ ] **Promote structural economic assumptions** — the 10% discount rate, the full-period
+      headcount treatment (1,200 then 5,000, no mid-year ramp) and the stage amounts are named
+      constants in `case_flows.py`, excluded from the tornado. The journey page now states this
+      explicitly; modelling them as ranged `Assumption` records is the real fix. Note it will
+      change `economics.json` output, so it needs a deliberate regeneration pass rather than a
+      quiet edit of committed run artifacts.
 - [ ] **Human decision + outcome contract demo beat** — needs the accountable human: record a real
       `kriterion decide` (e.g. modify DEFER → DISCOVERY at £50k) and its outcome contract on a
       fresh run, then render section 7 of the journey page from it. Not fabricatable by an agent

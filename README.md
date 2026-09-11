@@ -14,19 +14,32 @@ takes a consequential proposal and makes the things a decision actually rests on
 structured evidence kept in seven distinct epistemic categories (measured, external reference,
 expert judgment, forecast, assumption, inference, unknown), deterministic economics with named
 load-bearing assumptions and sensitivities, structured adversarial challenge with recorded belief
-updates, an explicit "what would change this position" record, staged capital allocation instead
-of a binary approve/reject vocabulary, a synthetic recommendation that is never the decision, a
-separately recorded human decision, and an outcome contract for anything that commits resources.
-The machine supplies analysis, challenge and evidence; the human remains accountable for the
-decision. The live decision journey is at
+updates, a per-seat `EvidenceRequest.would_change` record of what would change each position,
+staged capital allocation instead of a binary approve/reject vocabulary, a synthetic
+recommendation that is never the decision, a separately recorded human decision, and an outcome
+contract for anything that commits resources. The machine supplies analysis, challenge and
+evidence; the human remains accountable for the decision. The live decision journey is at
 [kriterion.theagentictekton.com](https://kriterion.theagentictekton.com/).
+
+> **Where that is, and isn't, true yet.** Runs made from 2026-09-11 persist their evidence
+> requests to `evidence_requests.json`; the committed V0 demo runs predate that, so the public
+> page's "what would change the decision" list is *derived* from the blocking unknowns and
+> recommendation conditions those runs did persist, and says so. Rendering the stored per-seat
+> requests as a first-class view is named work in `docs/next-actions.md`. The public page itself
+> is hand-maintained narrative checked against the committed artifacts by
+> `tests/product/test_public_page_coherence.py`; the *generated* artifact is the per-run report.
 
 Kriterion can also, optionally, import machine-verifiable **assurance evidence** about an AI
 capability through a generic document contract (`kriterion assurance import`, ADR-007): an
 assurance envelope plus decision document, translated by an anti-corruption adapter into
-Kriterion's own evidence domain with hard epistemic guards (a critical assurance failure can never
-import as PASS, stale evidence is visibly stale, a missing verdict maps to UNKNOWN). No assurance
-system is a runtime dependency; Kriterion works identically without one.
+Kriterion's own evidence domain. The adapter refuses rather than guesses: a critical *or gating*
+failure can never import as PASS, an envelope that does not state its `criticalFailures` list at
+all is refused rather than assumed clean, the decision must be identity-bound to the envelope it
+claims to describe, a producer-declared PASS over stale evidence reports as STALE, a missing
+verdict maps to UNKNOWN, and every malformed document shape is a controlled `AssuranceImportError`
+rather than a traceback. With `--into-case`, imported items are frozen into a new ledger version
+and flow through to the generated report. No assurance system is a runtime dependency; Kriterion
+works identically without one.
 
 The mechanics: it ingests an investment proposal, separates evidence from assumptions from
 unknowns, computes the economics deterministically, elicits independent role-specific assessments
@@ -109,6 +122,8 @@ kriterion ledger freeze cases/coding-agent-rollout --run-id my-run
 kriterion evals my-run --case-id coding-agent-rollout   # P0 governance checks -> run-export.json
 kriterion report my-run cases/coding-agent-rollout      # -> my-run/report.html
 kriterion assurance import cases/coding-agent-rollout/assurance  # assurance envelope -> evidence items
+kriterion assurance import cases/coding-agent-rollout/assurance \
+  --into-case cases/coding-agent-rollout --run-id assurance-run   # ...and freeze them into ledger v2
 kriterion compare --condition-runs A=... --condition-runs B=... --condition-runs C=...  # aggregate a batch
 ```
 
