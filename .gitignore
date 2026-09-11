@@ -58,3 +58,15 @@ runs/*/
 !runs/compare-caseC/
 *.bak.*
 .project-setup/
+# Terraform (infra/github-pages-dns): real values and state, never committed.
+# Matches agentic-tekton/.gitignore's own convention exactly. .terraform.lock.hcl
+# is NOT ignored -- that file is meant to be committed, for reproducible provider
+# versions.
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+*.tfplan
+*.tfplan.json
+infra/github-pages-dns/terraform/tfplan
