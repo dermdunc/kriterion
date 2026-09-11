@@ -337,12 +337,21 @@ tasks from its Weekend Build Plan (§12), in dependency order. Do not re-plan pr
       fingerprinted ledger version via `freeze()`, and refuses to overwrite an existing frozen
       ledger. Verified end-to-end: import → ledger v2 → `econ` → `report`, with all 12 assurance
       items rendered. Committed V0 demo ledgers untouched. Done 2026-09-11.
-- [ ] **Render the per-seat evidence requests** — the artifact now exists but nothing displays
+- [x] **Render the per-seat evidence requests** — done 2026-09-12 (V1.1). Each seat's card on
+      the generated decision page shows what it asked for and its own `would_change`, from
+      the stored artifact. `report/html.py` was deliberately NOT changed, so the committed V0
+      run reports stay byte-identical frozen research artifacts; the new view lives in the
+      decision-page renderer instead. Superseded detail below:
+- [x] ~~Render the per-seat evidence requests (original entry)~~ — the artifact now exists but nothing displays
       it. Add an `EvidenceRequest` view to `report/html.py` (deferred once already because a new
       report section changes every committed `report.html`, which are frozen research artifacts
       — do this together with a deliberate regeneration pass), and re-run Case A so the journey
       page can show stored per-seat records instead of derived copy.
-- [ ] **Generate the public journey page from the pipeline** — `docs/index.html` is
+- [x] **Generate the public journey page from the pipeline** — done 2026-09-12 (V1.1),
+      ADR-011. `kriterion decision-page` renders `docs/index.html` from a `DecisionState`
+      projection, with the ADR-012 narrative-integrity check as a publish gate. A test
+      asserts the committed page is byte-identical to a fresh render. Superseded detail:
+- [x] ~~Generate the public journey page (original entry)~~ — `docs/index.html` is
       hand-maintained. The coherence test is a mechanical stand-in, not a substitute: it catches
       drift from the artifacts, not a missing section or a stale narrative. A small renderer
       reading `runs/caseA-condC-s0/` + `cases/coding-agent-rollout/assurance/` would retire both
@@ -365,3 +374,51 @@ tasks from its Weekend Build Plan (§12), in dependency order. Do not re-plan pr
 - [ ] **Decision retrospective (expected vs observed)** — domain model carries `OutcomeContract`
       measures/review date; the retrospective comparison object and view remain future work
       (deliberately out of this increment's scope).
+
+## V1.1: Executable Decision Story (2026-09-12)
+
+**Purpose:** ensure the human-facing decision narrative is a faithful projection of the
+underlying evidence, economics and decision state. See
+`docs/planning/kriterion-v1.1-narrative-integrity/opus-plan-and-report.md`.
+
+- [x] **One decision state, everything else a view** — `src/kriterion/decision_state.py`
+      (ADR-011). No second data model; derived values computed once so no template can invent
+      one. Absence stays absence: three genuinely different evidence-request states, four
+      outcome-contract states, and a refusal rather than an empty render when the ledger
+      declares no items.
+- [x] **Narrative integrity as an invariant** — `src/kriterion/narrative.py` (ADR-012).
+      Binding plus re-derivation, unbound-prose rules, structural attribution rules, and
+      `kriterion decision-page` refusing to publish on any violation. 45 regression tests.
+- [x] **Generated public decision page** — `src/kriterion/report/decision_page.py`,
+      `scripts/build-decision-page.sh`, rendering `runs/caseA-condC-s5`.
+- [x] **Controlled refusal on malformed run artifacts** — found by adversarial probing, not
+      review: 16 of 16 malformed artifacts escaped as bare tracebacks. All now refuse cleanly
+      with the artifact and field named. This is the same defect shape ADR-009 closed in the
+      assurance adapter, reproduced in new code.
+- [x] **Human lifecycle verified end to end** — `tests/product/test_human_decision_lifecycle.py`
+      drives `decide` -> `contract` -> `validate-run` -> `decision-page` over a throwaway copy of
+      the canonical run. Found and fixed a real ambiguity: with a synthetic DEFER and a human
+      PILOT both recorded, one "capital at risk" figure read as the decision's exposure while
+      describing only the machine's suggestion.
+
+### Deferred from V1.1, deliberately
+
+- [ ] **A real human decision on the canonical case.** Still the single most valuable next act,
+      still not fabricatable by an agent (RISK-0011). The path is verified and the page states
+      the absence honestly; what is missing is the human.
+- [ ] **Link evidence requirements to the funding stage they unlock.** Kriterion records what
+      each stage costs and what each seat wants, but nothing records which requirement unlocks
+      which stage. The page says so rather than inferring a mapping. Needs a real case-pack
+      schema for the ladder (still a `case.toml` comment plus constants in `case_flows.py`).
+- [ ] **Promote the structural economic assumptions** (discount rate, full-period headcount
+      treatment, stage amounts) into ranged `Assumption` records. Unchanged from V1: the page
+      now states the ranking's scope explicitly, but modelling them changes `economics.json` and
+      needs a deliberate regeneration pass.
+- [ ] **Value-of-information.** The chain `Assumption -> range -> sensitivity -> evidence quality
+      -> EvidenceRequest` is now fully visible on one page, which is the precondition. Building
+      the engine was explicitly out of scope.
+- [ ] **Judge whether a derived sentence is *fair*.** The checker proves a statement is computed
+      from the record and cannot be hand-edited; it cannot prove the English is a fair summary.
+      Named as a limit of the approach, not a bug to fix later.
+- [ ] **Case B, additional treatments, retrospective analytics, portfolio views, more committee
+      agents, provider expansion, hard cross-repo artifact pinning** — all untouched, as scoped.

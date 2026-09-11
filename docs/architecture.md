@@ -10,6 +10,37 @@ Kriterion V1   Decision Instrument    the decision journey a CIO/CFO actually re
 Kriterion V0   Decision Laboratory    the pre-registered multi-agent experiment, preserved intact (docs/lab.html)
 ```
 
+The decision journey is a **projection**, not a second artifact maintained beside the state
+(ADR-011). There is one decision state; everything a human reads is a view of it:
+
+```text
+    case pack + frozen evidence ledger + assumptions + deterministic economics
+  + per-seat positions, belief updates and evidence requests
+  + synthetic recommendation + human decision + outcome contract
+  + (optional) imported assurance evidence
+                                 |
+                                 v
+                       DecisionState   (one read-only projection;
+                                        derived values computed once, here)
+                                 |
+                                 v
+            renderer  ->  narrative-integrity check  ->  refuse or publish
+                                 |
+                                 v
+                      the decision experience a human reads
+```
+
+rather than:
+
+```text
+              state   +   a hand-authored website describing it
+```
+
+The check in the middle is the load-bearing part (ADR-012): every material statement is stamped
+with the state path it was rendered from and re-derived from the authoritative record before
+publication, and the build refuses to write a page that fails. The Lab keeps its own renderer, so
+frozen research output is never rewritten by a change to the instrument's presentation.
+
 The five-seat AI committee is one challenge mechanism inside the instrument, not the product.
 That framing is earned, not asserted: V0's own honest-negative finding (the committee did not
 beat both baselines on at least 2 of 3 categories of the pre-registered bare-aggregate check) is

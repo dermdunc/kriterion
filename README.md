@@ -21,13 +21,15 @@ contract for anything that commits resources. The machine supplies analysis, cha
 evidence; the human remains accountable for the decision. The live decision journey is at
 [kriterion.theagentictekton.com](https://kriterion.theagentictekton.com/).
 
-> **Where that is, and isn't, true yet.** Runs made from 2026-09-11 persist their evidence
-> requests to `evidence_requests.json`; the committed V0 demo runs predate that, so the public
-> page's "what would change the decision" list is *derived* from the blocking unknowns and
-> recommendation conditions those runs did persist, and says so. Rendering the stored per-seat
-> requests as a first-class view is named work in `docs/next-actions.md`. The public page itself
-> is hand-maintained narrative checked against the committed artifacts by
-> `tests/product/test_public_page_coherence.py`; the *generated* artifact is the per-run report.
+> **Where that is, and isn't, true yet.** The public page is **generated** from one run's
+> committed artifacts (`kriterion decision-page`, ADR-011), not hand-maintained narrative. Every
+> material statement on it is stamped with the state path it came from, and the build refuses to
+> publish a page whose text does not re-derive from the record (ADR-012); a test asserts the
+> committed page is byte-identical to a fresh render. It renders `runs/caseA-condC-s5`, which
+> stores real per-seat evidence requests, so "what would change my mind" is each seat's own
+> recorded answer rather than reconstructed copy. What that does *not* prove: that a derived
+> sentence is a *fair* summary of the numbers it is computed from. That stays a human judgment —
+> and no human has yet recorded a decision on this case, which the page says plainly.
 
 Kriterion can also, optionally, import machine-verifiable **assurance evidence** about an AI
 capability through a generic document contract (`kriterion assurance import`, ADR-007): an

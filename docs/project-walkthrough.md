@@ -117,6 +117,42 @@ beating a single strong context, which is a real result and is treated as one.
 - Is the assurance document contract stable enough to consume a *real* producer artifact,
   rather than the hand-authored facsimile currently committed?
 
+## A finding worth keeping: the last metre
+
+Kriterion exists to reveal when a decision narrative overstates its evidence. Building it
+produced a clean example of the same failure, inside Kriterion itself.
+
+An adversarial review of the V1 increment found four defects in the public decision page. An
+assurance result whose source document said `fail` was displayed as the word "PARTIAL" —
+fourteen lines above a claim that the adapter guarantees failures cannot be softened in
+translation. A producer's `REVIEW_REQUIRED` was attributed to "three named coverage gaps" that
+its decision document does not contain and its decision model never reads. A hand-authored
+fixture was described as independently measuring resilience, when no assurance run had
+happened. And the cost of buying better evidence was quoted as two different ranges in two
+places on the same page.
+
+The striking part is what was *not* wrong. The economics were computed correctly by pure code
+throughout. The evidence ledger kept its seven epistemic categories distinct. The adapter
+mapped a `fail` to a FAIL. Every artifact was right. The sentences describing the artifacts
+were wrong, and nothing tested the prose against the record, so they shipped.
+
+> **In AI-assisted decisions, the dangerous error may not occur in the calculation. It may
+> occur in the final metre between evidence and language.**
+
+That is the reasoning behind treating narrative integrity as an invariant with deterministic
+checks (ADR-012) rather than as careful writing or a better prompt. It is an engineering and
+research finding about where to put the guardrail, not a marketing line, and it is recorded
+here rather than repeated through the product.
+
+Two honest qualifications. First, the guardrail proves a statement is *derived from* the
+record and cannot be hand-edited without detection; it does not prove the derived sentence is
+a *fair* summary. Judging fairness is still a human job. Second, the same failure class showed
+up again while building the guardrail: an adversarial pass over the new projection code found
+every malformed run artifact escaping as a bare traceback rather than a controlled refusal —
+sixteen of sixteen cases — which is the same defect the review had already found once in the
+assurance adapter. Knowing about a failure mode is not the same as being immune to it, which
+is the argument for mechanical checks over vigilance.
+
 ## Next recommended session
 
 Close the loop on a human: record one real `kriterion decide` on a fresh run (even at fixture
