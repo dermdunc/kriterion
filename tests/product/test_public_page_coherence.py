@@ -1,31 +1,53 @@
-"""`docs/index.html` is hand-maintained; these tests stop it drifting.
+"""`docs/index.html` is generated; these tests keep it that way.
 
-The 2026-09-11 adversarial review found the public page displaying a source
-`fail` outcome as the invented word "PARTIAL" — fourteen lines above a claim
-that the adapter guarantees failures "can't be softened in translation" — and
-attributing the producer's decision to coverage gaps that its decision
-document does not contain. Nothing caught it, because no test ever compared
-the page to the artifacts it describes.
+Before V1.1 this file compared a hand-written page against the artifacts it
+described, figure by figure, because nothing else could. That was a stand-in.
+The page is now a projection (ADR-011) and every material statement on it is
+re-derived from the decision state (ADR-012), so the checks that matter are
+different:
 
-Until the page is rendered from the pipeline (deferred, see
-docs/next-actions.md), these tests are the mechanical substitute: every
-assurance outcome, economics figure, committee position and headline number
-on the page is checked against the committed source document it claims to
-come from, and a list of known-overclaiming phrases is banned outright.
+  - the committed page is **byte-identical** to what the pipeline emits today,
+    which is what makes "generated, not hand-maintained" a fact rather than a
+    claim;
+  - the narrative-integrity checker passes against it, with no exemptions;
+  - the committed assurance-import payload is exactly what the adapter emits
+    from the committed envelope, so the assurance section cannot drift either;
+  - retired overclaims stay retired;
+  - Kriterion Lab is still intact, with its honest-negative result and caveats.
+
+Figure-by-figure assertions are gone on purpose: every one of them is now a
+structural guarantee, and keeping hand-copied expected values here would
+reintroduce exactly the second source of truth this increment removed.
 """
 
 from __future__ import annotations
 
 import json
-import re
 from pathlib import Path
 
 import pytest
 
+from kriterion.cli import DECISION_PAGE_CREATED_AT
+from kriterion.decision_state import load_decision_state
+from kriterion.narrative import check
+from kriterion.report.decision_page import render_decision_page
+
 REPO_ROOT = Path(__file__).parent.parent.parent
 PAGE = REPO_ROOT / "docs" / "index.html"
-RUN_DIR = REPO_ROOT / "runs" / "caseA-condC-s0"
-FIXTURE_DIR = REPO_ROOT / "cases" / "coding-agent-rollout" / "assurance"
+LAB = REPO_ROOT / "docs" / "lab.html"
+CASE_DIR = REPO_ROOT / "cases" / "coding-agent-rollout"
+RUN_DIR = REPO_ROOT / "runs" / "caseA-condC-s5"
+ASSURANCE_IMPORT = CASE_DIR / "assurance" / "imported.json"
+
+
+@pytest.fixture(scope="module")
+def state():
+    return load_decision_state(
+        case_dir=CASE_DIR,
+        run_dir=RUN_DIR,
+        created_at=DECISION_PAGE_CREATED_AT,
+        assurance_import_path=ASSURANCE_IMPORT,
+    )
 
 
 @pytest.fixture(scope="module")
@@ -33,212 +55,141 @@ def page() -> str:
     return PAGE.read_text()
 
 
-@pytest.fixture(scope="module")
-def envelope() -> dict:
-    return json.loads((FIXTURE_DIR / "envelope.json").read_text())
-
-
-@pytest.fixture(scope="module")
-def decision() -> dict:
-    return json.loads((FIXTURE_DIR / "decision.json").read_text())
-
-
-def _assurance_rows(page: str) -> dict[str, str]:
-    """specId -> the row's full inner HTML, from the data-spec-id bindings."""
-    return {
-        m.group(1): m.group(2)
-        for m in re.finditer(r'<tr data-spec-id="([^"]+)">(.*?)</tr>', page, re.S)
-    }
-
-
-def _cells(row_html: str) -> list[str]:
-    return [
-        re.sub(r"<[^>]+>", "", c).strip()
-        for c in re.findall(r"<td>(.*?)</td>", row_html, re.S)
-    ]
-
-
 # ---------------------------------------------------------------------------
-# Assurance section: every displayed outcome must be the source outcome.
+# Generation
 # ---------------------------------------------------------------------------
 
 
-def test_every_envelope_result_has_a_bound_row_on_the_page(page, envelope):
-    rows = _assurance_rows(page)
-    envelope_spec_ids = {r["specId"] for r in envelope["results"]}
-    assert rows, "the assurance table lost its data-spec-id bindings"
-    assert set(rows) == envelope_spec_ids, (
-        "the page's assurance table and the committed envelope disagree about which "
-        f"checks exist: page={sorted(rows)} envelope={sorted(envelope_spec_ids)}"
+def test_the_committed_page_is_exactly_what_the_pipeline_emits(state, page):
+    """The single check that makes the architecture claim true. If this fails,
+    either someone hand-edited the page or the renderer changed and the page
+    was not rebuilt:
+
+        kriterion decision-page caseA-condC-s5 cases/coding-agent-rollout \\
+            --assurance-import cases/coding-agent-rollout/assurance/imported.json
+    """
+    assert render_decision_page(state) == page
+
+
+def test_rendering_is_deterministic(state):
+    assert render_decision_page(state) == render_decision_page(state)
+
+
+def test_the_committed_page_passes_the_narrative_integrity_check(state, page):
+    violations = check(state, page)
+    assert violations == [], "\n".join(str(v) for v in violations)
+
+
+def test_the_committed_assurance_import_is_what_the_adapter_actually_emits():
+    """The assurance section renders a committed pipeline artifact. Regenerate
+    it from the committed envelope and require an exact match, so the section
+    cannot drift from the documents it claims to describe:
+
+        kriterion assurance import cases/coding-agent-rollout/assurance \\
+            --out cases/coding-agent-rollout/assurance/imported.json
+    """
+    from kriterion.assurance.adapter import adapt_envelope, load_assurance_documents
+    from kriterion.domain.evidence import Attestation
+    from kriterion.domain.serialization import to_dict
+
+    committed = json.loads(ASSURANCE_IMPORT.read_text())
+    envelope, decision = load_assurance_documents(CASE_DIR / "assurance")
+    created_at = committed["items"][0]["created_at"]
+    summary, items = adapt_envelope(
+        envelope, decision, attestation=Attestation.AUTHORED, created_at=created_at
     )
-
-
-def test_displayed_outcome_is_the_source_outcome_never_a_softer_word(page, envelope):
-    """The FAIL -> PARTIAL regression, made impossible."""
-    rows = _assurance_rows(page)
-    for result in envelope["results"]:
-        cells = _cells(rows[result["specId"]])
-        assert len(cells) == 3, f"{result['specId']}: expected 3 cells, got {cells}"
-        _label, method_cell, outcome_cell = cells
-
-        assert method_cell == result["method"], (
-            f"{result['specId']}: page shows method {method_cell!r}, "
-            f"envelope says {result['method']!r}"
-        )
-        expected = result["outcome"].upper()
-        assert outcome_cell.startswith(expected), (
-            f"{result['specId']}: page's result cell starts {outcome_cell[:40]!r}, "
-            f"but the envelope's outcome is {expected!r} — the page must show what the "
-            "source document actually says"
-        )
-
-
-def test_page_never_invents_an_outcome_vocabulary(page, envelope):
-    """"PARTIAL" is neither an assurance outcome nor a Kriterion decision state."""
-    rows = _assurance_rows(page)
-    permitted = {r["outcome"].upper() for r in envelope["results"]}
-    for spec_id, row in rows.items():
-        outcome_cell = _cells(row)[2]
-        leading = re.match(r"[A-Z_]+", outcome_cell)
-        assert leading and leading.group(0) in permitted, (
-            f"{spec_id}: result cell leads with {outcome_cell[:30]!r}, which is not one "
-            f"of the envelope's own outcomes {sorted(permitted)}"
-        )
-
-
-def test_decision_state_and_reason_count_match_the_decision_document(page, decision):
-    assert decision["state"] in page
-    # The page must not represent coverage gaps as decision reasons: the
-    # producer's decider does not read fingerprint.uncovered at all.
-    assert len(decision["reasons"]) == 2
-    assert "plus three named coverage gaps" not in page
-    assert "<em>not inputs to that decision</em>" in page
-
-
-def test_coverage_gap_count_matches_the_envelope(page, envelope):
-    uncovered = envelope["fingerprint"]["uncovered"]
-    assert len(uncovered) == 3
-    assert "three coverage gaps" in page
-    for gap in uncovered:
-        assert f"<code>{gap}</code>" in page, f"coverage gap {gap!r} not named on the page"
+    assert committed["summary"] == to_dict(summary)
+    assert committed["items"] == [to_dict(item) for item in items]
 
 
 # ---------------------------------------------------------------------------
-# Economics: every figure traces to the committed economics.json.
-# ---------------------------------------------------------------------------
-
-
-def _millions(value: float) -> str:
-    return f"{value / 1_000_000:.2f}"
-
-
-def test_npv_figures_match_the_committed_economics_artifact(page):
-    econ = json.loads((RUN_DIR / "economics.json").read_text())
-    # Page quotes these to 2dp in £m, with a minus sign on the low case.
-    assert f"£{_millions(econ['npv_mid_gbp'])}m" in page
-    assert f"£{_millions(econ['npv_high_gbp'])}m".replace("38.14", "38.1") in page or "£38.1m" in page
-    assert "−£5.35m" in page or "-£5.35m" in page
-    assert f"{econ['discount_rate']:.0%}".replace("%", "% discount rate") in page
-
-
-def test_tornado_ordering_and_top_swing_match_the_artifact(page):
-    econ = json.loads((RUN_DIR / "economics.json").read_text())
-    swings = {t["assumption_id"]: abs(t["npv_swing_gbp"]) for t in econ["tornado"]}
-    top = max(swings, key=swings.get)
-    assert top == "attribution_factor", (
-        "the page's headline says attribution dominates; the artifact now says " + top
-    )
-    # £16.9m / £15.7m as displayed.
-    assert f"£{swings['attribution_factor'] / 1_000_000:.1f}m" in page
-    assert f"£{swings['uplift'] / 1_000_000:.1f}m" in page
-
-
-def test_dominance_claim_is_scoped_to_the_tested_assumptions(page):
-    """Deterministic computation is not the same as complete assumption
-    discipline: the discount rate, headcount timing and stage amounts are
-    constants outside the tornado, and the page must say so."""
-    assert "Of the five assumptions the case pack states and ranges" in page
-    assert "What the tornado does not cover" in page
-    assert "10% discount rate" in page
-    assert "no mid-year ramp" in page
-
-
-# ---------------------------------------------------------------------------
-# Deliberation + recommendation: traced to the run artifacts.
-# ---------------------------------------------------------------------------
-
-
-def test_recommendation_matches_the_committed_run(page):
-    rec = json.loads((RUN_DIR / "recommendation.json").read_text())
-    assert rec["action"] == "DEFER"
-    assert rec["confidence_band"] == "MEDIUM"
-    assert "<strong>DEFER</strong>" in page
-    assert "confidence MEDIUM" in page
-
-
-def test_every_seat_position_on_the_page_matches_the_run_artifacts(page):
-    initial = {p["member"]: p for p in json.loads((RUN_DIR / "positions_initial.json").read_text())}
-    revised = {p["member"]: p for p in json.loads((RUN_DIR / "positions_revised.json").read_text())}
-    assert set(initial) == set(revised)
-
-    # The page's claim: all five held DEFER, and only the CFO's confidence moved.
-    assert all(p["recommendation"] == "DEFER" for p in initial.values())
-    assert all(p["recommendation"] == "DEFER" for p in revised.values())
-    moved = {
-        m
-        for m in initial
-        if initial[m]["confidence_band"] != revised[m]["confidence_band"]
-    }
-    assert moved == {"cfo"}, f"page says only the CFO's confidence changed; artifacts say {moved}"
-    assert "LOW → MEDIUM" in page
-
-
-def test_ledger_item_count_matches_the_frozen_ledger(page):
-    ledger = json.loads((RUN_DIR / "ledger.frozen.json").read_text())
-    assert f"holds {len(ledger['items'])} items" in page
-
-
-def test_staged_ladder_amounts_match_the_cash_flow_model(page):
-    from kriterion.economics import case_flows
-
-    assert f"£{case_flows.DISCOVERY_GBP // 1000}k discovery" in page
-    assert f"£{case_flows.PILOT_GBP // 1000}k pilot" in page
-    assert f"£{case_flows.TARGETED_SCALE_GBP / 1_000_000:.1f}m targeted scale" in page
-    # Cost of buying evidence, quoted consistently as the cumulative range.
-    cumulative = (case_flows.DISCOVERY_GBP + case_flows.PILOT_GBP) // 1000
-    assert f"£50k–£{cumulative}k" in page
-    assert "£50k–£420k" not in page, "the evidence-buying range was quoted two different ways"
-
-
-# ---------------------------------------------------------------------------
-# Claim discipline: phrases the page is not allowed to make.
+# Claim discipline
 # ---------------------------------------------------------------------------
 
 
 BANNED_PHRASES = {
-    "produced end-to-end by the real pipeline": "the page is hand-maintained, not rendered",
-    "nothing on this page is a mock-up": "overclaims: the page itself is hand-authored narrative",
+    "produced end-to-end by the real pipeline": "overclaim retired in V1",
+    "nothing on this page is a mock-up": "overclaim retired in V1",
     "independently measures": "the assurance fixture is authored; no assurance run happened",
     "Kriterion runs identically with manual and imported evidence only": (
         "imported evidence is not part of a committee run"
     ),
     "PARTIAL": "not an assurance outcome or a Kriterion decision state",
+    "hand-maintained": "the page is generated now; claiming otherwise is stale",
 }
 
 
-def test_page_makes_no_known_overclaim(page):
+def test_the_page_makes_no_retired_overclaim(page):
     found = {p: why for p, why in BANNED_PHRASES.items() if p in page}
-    assert not found, "docs/index.html contains retired overclaims: " + json.dumps(found, indent=2)
+    assert not found, "docs/index.html contains retired claims: " + json.dumps(found, indent=2)
 
 
-def test_page_states_that_it_is_hand_maintained(page):
-    assert "hand-maintained" in page
-    assert "authored fixture" in page.lower()
+def test_the_page_is_labelled_as_an_authored_fixture(page):
+    assert "AUTHORED FIXTURE" in page
+    assert "authored fixtures" in page
 
 
-def test_what_would_change_section_is_labelled_as_derived_not_stored(page):
-    """`EvidenceRequest.would_change` is only persisted for runs made after
-    2026-09-11; this run predates that, so the page must not present its
-    list as a stored per-seat record."""
-    assert "evidence_requests.json" in page
-    assert "derived from" in page or "reconstructed" in page
+def test_the_page_states_that_the_assurance_evidence_was_not_before_the_committee(state, page):
+    """The imported envelope is not in this run's frozen ledger and the
+    deliberation never saw it. Implying otherwise would attribute reasoning to
+    a committee that could not have done it."""
+    assert "The committee below never saw it" in page
+    ledger_ids = set(state.evidence_by_id)
+    imported_ids = {item.id for item in state.assurance.items}
+    assert not (ledger_ids & imported_ids)
+
+
+def test_the_title_names_the_case_being_decided(state, page):
+    assert f"<title>Kriterion: {state.case.title}</title>" in page
+
+
+def test_no_human_decision_is_fabricated(state, page):
+    assert state.human_decision is None
+    assert not (RUN_DIR / "human_decision.json").exists()
+    assert "No human decision has been recorded" in page
+
+
+def test_the_page_tells_the_reader_what_happens_next(state, page):
+    assert "kriterion decide" in page
+    assert state.case.decision_owner in page
+
+
+# ---------------------------------------------------------------------------
+# The run this page renders
+# ---------------------------------------------------------------------------
+
+
+def test_the_rendered_run_actually_stored_its_evidence_requests(state):
+    """The whole reason this page renders seed 5 rather than the pre-registered
+    seed 0: the V0 demo runs predate `evidence_requests.json`, so a per-seat
+    "what would change my mind" view could only ever have been reconstructed
+    copy on those runs."""
+    assert state.evidence_requests_recorded
+    assert state.stored_evidence_request_count > 0
+    assert all(r.would_change.strip() for s in state.seats for r in s.evidence_requests)
+
+
+def test_the_pre_registered_v0_demo_runs_are_untouched():
+    """V1.1 presentation may only read V0 research data. Seed 0's committed
+    artifacts must still be there, and must still have no evidence-request
+    artifact, since that is the historical fact the page's status line states.
+    """
+    v0 = REPO_ROOT / "runs" / "caseA-condC-s0"
+    assert (v0 / "recommendation.json").is_file()
+    assert not (v0 / "evidence_requests.json").exists()
+
+
+# ---------------------------------------------------------------------------
+# The Lab is not collateral damage
+# ---------------------------------------------------------------------------
+
+
+def test_kriterion_lab_still_carries_the_research_and_its_negative_result():
+    lab = LAB.read_text()
+    for marker in ("Baseline A", "Baseline B", "Treatment C", "Treatment D", "perturbation"):
+        assert marker in lab, f"Kriterion Lab lost {marker!r}"
+    assert "did not beat" in lab or "honest-negative" in lab
+
+
+def test_the_public_page_still_points_at_the_lab(page):
+    assert 'href="lab.html"' in page
