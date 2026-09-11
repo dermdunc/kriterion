@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kriterion Lab: the multi-agent deliberation experiment</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff; --fg: #1a1a1a; --muted: #666; --border: #ddd;
+    --card-bg: #f7f7f7; --accent: #2a4d8f; --warn-bg: #fff3cd; --warn-fg: #6b5200;
+    --dissent-bg: #fdeaea; --dissent-fg: #7a1f1f; --ok-bg: #eaf7ee; --ok-fg: #1f6b3a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --fg: #eee; --muted: #aaa; --border: #444; --card-bg: #262626;
+            --accent: #7fa6ff; --warn-bg: #3a3212; --warn-fg: #e8d27a;
+            --dissent-bg: #3a1f1f; --dissent-fg: #f0a8a8; --ok-bg: #16301f; --ok-fg: #8fd6a8; }
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font-family: -apple-system, "Segoe UI", sans-serif;
+         max-width: 840px; margin: 0 auto; padding: 2rem 1.25rem 4rem; line-height: 1.6; }
+  .banner { background: var(--warn-bg); color: var(--warn-fg); text-align: center; padding: 0.6rem;
+            font-weight: 600; letter-spacing: 0.03em; margin-bottom: 2rem; border-radius: 0.4rem; }
+  h1 { margin-bottom: 0.25rem; }
+  .tagline { color: var(--muted); font-size: 1.1rem; margin-top: 0; }
+  h2 { color: var(--accent); margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 1.5rem; }
+  .lede { font-size: 1.05rem; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  th, td { border: 1px solid var(--border); padding: 0.5rem 0.75rem; text-align: left; }
+  th { background: var(--card-bg); }
+  .result-box { background: var(--ok-bg); color: var(--ok-fg); border-radius: 0.5rem; padding: 1rem 1.25rem;
+                margin: 1rem 0; }
+  .result-box strong { display: block; margin-bottom: 0.4rem; font-size: 1.05rem; }
+  .finding-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 0.5rem;
+                 padding: 1rem 1.25rem; margin: 1rem 0; }
+  .card-grid { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0; }
+  .card { flex: 1; min-width: 220px; background: var(--card-bg); border: 1px solid var(--border);
+          border-radius: 0.5rem; padding: 1rem; }
+  .card a { font-weight: 600; }
+  .card p { color: var(--muted); font-size: 0.9rem; margin: 0.4rem 0 0; }
+  .caveat { color: var(--muted); font-size: 0.9rem; }
+  code { background: var(--card-bg); padding: 0.1rem 0.35rem; border-radius: 0.25rem; font-size: 0.9em; }
+  footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+           color: var(--muted); font-size: 0.9rem; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="banner">AUTHORED FIXTURE CASES · SYNTHETIC DATA, REAL MODEL OUTPUT</div>
+
+<h1>Kriterion Lab</h1>
+<p class="tagline">A pre-registered test of whether multi-agent AI deliberation improves decision hygiene over a single strong AI context.</p>
+
+<p class="caveat">This is the research area of Kriterion. The product itself is a decision instrument;
+see <a href="index.html">the main decision journey</a> for what it produces. Kriterion Lab is where
+Kriterion experiments on its own decision mechanisms rather than assuming fashionable agent
+architectures are superior; the honest-negative finding below is why the AI committee is treated
+as one optional challenge mechanism, not the product.</p>
+
+<p class="lede">Kriterion runs the same evidence-first investment case through four conditions: one
+continuous AI context, five independent one-shot views, a full five-seat committee with structured
+challenge and preserved dissent, and a heterogeneous-model variant of that committee. The
+pre-registered headline comparison below covers the first three (A, B, C); Treatment D is a later,
+exploratory stretch condition outside that criterion. Every deterministic number (NPV, payback,
+tornado sensitivity) is computed by pure code before any model call; the models judge the case, they
+never compute it.</p>
+
+<h2>The four conditions</h2>
+<table>
+  <tr><th>Condition</th><th>Contexts</th><th>Protocol</th><th>Models</th></tr>
+  <tr><td><strong>A</strong>: Baseline</td><td>1</td><td>Full protocol, collapsed into one context</td><td>qwen2.5:14b-instruct</td></tr>
+  <tr><td><strong>B</strong>: Baseline</td><td>5</td><td>Independent one-shot views, deterministic aggregation, no interaction</td><td>qwen2.5:14b-instruct</td></tr>
+  <tr><td><strong>C</strong>: Treatment</td><td>5</td><td>Full committee: independent assessment → structured challenge → revision → synthesis with preserved dissent</td><td>qwen2.5:14b-instruct</td></tr>
+  <tr><td><strong>D</strong>: Treatment</td><td>5</td><td>Same as C</td><td>5 distinct models, one per seat</td></tr>
+</table>
+
+<h2>The result</h2>
+
+<div class="result-box">
+  <strong>The comparison tool's bare-aggregate honest-negative check returned True.</strong>
+  Treatment C did not beat both baselines on ≥2 of the 3 pre-registered sub-metric categories
+  (unsupported-claim rate; a P0-pass-rate proxy for seeded-trap detection; perturbation robustness).
+  On Case A, some data existed for all three categories, but C won only 1: a perturbation-robustness
+  comparison against Baseline A alone (Baseline B was never tested against perturbations, by the
+  pre-registered design). On the evidence measured so far, the provisional descriptive finding is
+  that structured multi-agent deliberation did not justify its complexity on these cases. The
+  project's own pre-registered experiment plan treats that finding as a <em>successful</em> V0
+  outcome, not a failure, only if the still-unmeasured &gt;2× inference-cost condition is also met.
+</div>
+
+<p class="caveat">Case C (the negative-NPV case) is <strong>provisional</strong>: the perturbation-pair
+runs that produce the third sub-metric were only ever run on Case A, per the pre-registered design,
+and only once per perturbation type, at a single seed, not repeated across seeds. Neither case's
+result implements the full pre-registered margin (must beat by &gt;2× seed-to-seed standard
+deviation) or the inference-cost condition (must cost &gt;2× Baseline A); both are disclosed gaps in
+<a href="reports/comparison-case-a.md">the comparison output</a> itself, not hidden in this summary.
+What's reported above as "True" is this weaker, bare-aggregate check, not the full pre-registered
+criterion: adding the missing margin could only reduce how many sub-metrics count as a win for C, but
+the missing cost measurement means the full criterion's actual verdict remains genuinely unevaluated,
+not just unconfirmed.</p>
+
+<h2>The concrete finding</h2>
+
+<div class="finding-box">
+  <p><strong>Framing changed the single-context baseline's decision. It did not change the committee's.</strong></p>
+  <p>The same evidence, reworded in a more optimistic tone with every number and fact held identical,
+  was run against Baseline A and Treatment C on the same case. Baseline A's recommendation flipped from
+  <code>DEFER</code> to <code>PILOT</code>: a funding-adjacent decision, changed by tone alone.
+  Treatment C's recommendation did not move. Across all four perturbation types tested (optimistic
+  reframing, a stated CEO endorsement, a misleading headline number, and evidence reordering), the
+  single-context baseline drifted on 1 of 4; the five-context committee drifted on 0 of 4. Each
+  perturbation type was run once, at a single seed: a concrete illustration of drift under one input
+  change, not a result replicated across seeds.</p>
+</div>
+
+<div class="finding-box">
+  <p><strong>Heterogeneity didn't fix dissent-preservation. It made one model's unreliability
+  measurable.</strong></p>
+  <p>Under Condition D, each of the five committee seats ran a different model (3B to 24B parameters;
+  only the CFO seat kept Baseline A/B/C's default 14B model). Across five seeds, the CISO seat (a 7B
+  model, not the smallest of the five) held its genuine minority position twice and folded fully into
+  the majority three times, and in every fold, it cited only evidence that was already available at
+  the start, never anything new. That's a real, quantifiable reliability gap for that specific
+  model/seat pairing under this protocol, not an argument that mixing models generally is either the
+  problem or the fix.</p>
+</div>
+
+<h2>Read the underlying runs</h2>
+
+<div class="card-grid">
+  <div class="card">
+    <a href="reports/baseline-a.html">Baseline A report →</a>
+    <p>Single continuous context, all five charters collapsed.</p>
+  </div>
+  <div class="card">
+    <a href="reports/baseline-b.html">Baseline B report →</a>
+    <p>Five independent one-shot views, no interaction.</p>
+  </div>
+  <div class="card">
+    <a href="reports/treatment-c.html">Treatment C report →</a>
+    <p>The full committee: challenge, revision, preserved dissent.</p>
+  </div>
+  <div class="card">
+    <a href="reports/treatment-d.html">Treatment D report →</a>
+    <p>The same committee, five different models: this run (seed 0) is one where the CISO seat held; three of five seeds folded (see finding above).</p>
+  </div>
+</div>
+
+<p>
+  <a href="reports/comparison-case-a.md">Full comparison: Case A (all 3 sub-metrics)</a><br>
+  <a href="reports/comparison-case-c.md">Full comparison: Case C (provisional, 2 of 3)</a>
+</p>
+
+<h2>Go deeper</h2>
+<p>Every real bug found while building this, every design decision and why it was made, and the full
+task-by-task build log live in <a href="decisions.md">the project's decision log</a>. The pre-registered
+criteria themselves (written before any comparison batch ran) are in
+<a href="experiment-plan.md">the experiment plan</a>. Nothing here supports a claim about decision
+<em>quality</em>: these are authored fixture cases measuring trap detection and evidence discipline,
+not real-world outcomes.</p>
+
+<footer>
+  Kriterion Lab is the research area of Kriterion, a Hekton factory-output project.
+  <a href="index.html">Back to the decision journey</a>.
+  <a href="https://github.com/dermdunc/kriterion">Source on GitHub</a>.
+</footer>
+
+</body>
+</html>

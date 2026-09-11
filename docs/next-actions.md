@@ -304,3 +304,29 @@ tasks from its Weekend Build Plan (§12), in dependency order. Do not re-plan pr
       {framing_flip,sponsor_endorsement,anchoring,evidence_reorder}/` and
       `runs/compare-caseA-final/` are un-gitignored and committed. Reviewed for local-machine
       paths/identifiers before committing — none found.
+
+## V1: Decision Instrument (started 2026-09-11)
+
+- [x] **ADR-007 assurance adapter** — `src/kriterion/assurance/adapter.py` (generic
+      `AssuranceEvidenceEnvelope` document pair → `EvidenceItem`s, tolerant reader, epistemic
+      mapping preserved, hard anti-laundering guards), `kriterion assurance import` CLI, authored
+      fixture pair on the Case A pack, 16 adapter tests. Done 2026-09-11 (branch
+      `agent/fable/kriterion-decision-instrument`).
+- [x] **Public site leads with the decision journey** — `docs/index.html` rebuilt around the
+      coding-agent-rollout case using only committed run artifacts; the V0 research landing page
+      preserved at `docs/lab.html` with all caveats intact; README/architecture repositioned
+      (instrument first, Lab as the mechanism-evaluation layer). Done 2026-09-11, same branch.
+- [ ] **Persist evidence requests per run** — `EvidenceRequest.would_change` exists as a domain
+      type but no `evidence_requests.json` artifact is written, so "what would change your mind"
+      is currently reconstructed from recommendation conditions + blocking unknowns. Wire phase-3
+      output into a per-run artifact and render it as a first-class per-seat view.
+- [ ] **Ledger ingestion path for imported assurance items** — `assurance import` currently emits
+      items JSON; folding them into a new frozen ledger version (v2 superset via `freeze()`) for a
+      *new* run, without touching the committed V0 demo ledgers, is the natural next slice.
+- [ ] **Human decision + outcome contract demo beat** — needs the accountable human: record a real
+      `kriterion decide` (e.g. modify DEFER → DISCOVERY at £50k) and its outcome contract on a
+      fresh run, then render section 7 of the journey page from it. Not fabricatable by an agent
+      (RISK-0011).
+- [ ] **Decision retrospective (expected vs observed)** — domain model carries `OutcomeContract`
+      measures/review date; the retrospective comparison object and view remain future work
+      (deliberately out of this increment's scope).

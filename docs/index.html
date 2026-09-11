@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kriterion: evidence-first decision instrumentation</title>
+<title>Kriterion: an evidence-backed decision instrument</title>
 <style>
   :root {
     color-scheme: light dark;
@@ -26,19 +26,32 @@
   h2 { color: var(--accent); margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 1.5rem; }
   .lede { font-size: 1.05rem; }
   table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
-  th, td { border: 1px solid var(--border); padding: 0.5rem 0.75rem; text-align: left; }
+  th, td { border: 1px solid var(--border); padding: 0.5rem 0.75rem; text-align: left; vertical-align: top; }
   th { background: var(--card-bg); }
-  .result-box { background: var(--ok-bg); color: var(--ok-fg); border-radius: 0.5rem; padding: 1rem 1.25rem;
-                margin: 1rem 0; }
-  .result-box strong { display: block; margin-bottom: 0.4rem; font-size: 1.05rem; }
-  .finding-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 0.5rem;
-                 padding: 1rem 1.25rem; margin: 1rem 0; }
+  .snapshot { background: var(--card-bg); border: 1px solid var(--border); border-radius: 0.5rem;
+              padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .snapshot dt { font-weight: 600; color: var(--muted); font-size: 0.85rem; text-transform: uppercase;
+                 letter-spacing: 0.04em; margin-top: 0.7rem; }
+  .snapshot dd { margin: 0.1rem 0 0; font-size: 1.02rem; }
+  .insight { background: var(--ok-bg); color: var(--ok-fg); border-radius: 0.5rem;
+             padding: 1rem 1.25rem; margin: 1rem 0; }
+  .warnbox { background: var(--warn-bg); color: var(--warn-fg); border-radius: 0.5rem;
+             padding: 1rem 1.25rem; margin: 1rem 0; }
+  .dissent { background: var(--dissent-bg); color: var(--dissent-fg); border-radius: 0.5rem;
+             padding: 1rem 1.25rem; margin: 1rem 0; }
   .card-grid { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0; }
   .card { flex: 1; min-width: 220px; background: var(--card-bg); border: 1px solid var(--border);
           border-radius: 0.5rem; padding: 1rem; }
-  .card a { font-weight: 600; }
-  .card p { color: var(--muted); font-size: 0.9rem; margin: 0.4rem 0 0; }
+  .card h3 { margin-top: 0; font-size: 1rem; }
+  .card p, .card li { color: var(--muted); font-size: 0.9rem; }
+  .card ul { padding-left: 1.1rem; margin: 0.4rem 0 0; }
+  .ladder { list-style: none; padding: 0; margin: 1rem 0; }
+  .ladder li { border-left: 3px solid var(--accent); padding: 0.4rem 0 0.4rem 1rem; margin: 0; }
+  .ladder li.gate { border-left-style: dotted; color: var(--muted); font-size: 0.9rem; }
   .caveat { color: var(--muted); font-size: 0.9rem; }
+  .label { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em;
+           padding: 0.1rem 0.5rem; border-radius: 0.3rem; background: var(--warn-bg); color: var(--warn-fg);
+           vertical-align: middle; }
   code { background: var(--card-bg); padding: 0.1rem 0.35rem; border-radius: 0.25rem; font-size: 0.9em; }
   footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
            color: var(--muted); font-size: 0.9rem; }
@@ -47,115 +60,262 @@
 </head>
 <body>
 
-<div class="banner">AUTHORED FIXTURE CASES · SYNTHETIC DATA, REAL MODEL OUTPUT</div>
+<div class="banner">AUTHORED FIXTURE CASE · SYNTHETIC DATA, REAL MODEL OUTPUT</div>
 
 <h1>Kriterion</h1>
-<p class="tagline">A pre-registered test of whether multi-agent AI deliberation improves decision hygiene over a single strong AI context.</p>
+<p class="tagline">An evidence-backed decision instrument for uncertain technology investments.</p>
 
-<p class="lede">Kriterion runs the same evidence-first investment case through four conditions: one
-continuous AI context, five independent one-shot views, a full five-seat committee with structured
-challenge and preserved dissent, and a heterogeneous-model variant of that committee. The
-pre-registered headline comparison below covers the first three (A, B, C); Treatment D is a later,
-exploratory stretch condition outside that criterion. Every deterministic number (NPV, payback,
-tornado sensitivity) is computed by pure code before any model call; the models judge the case, they
-never compute it.</p>
+<p class="lede">Kriterion takes a consequential technology investment and makes the things a decision
+actually rests on explicit: what is measured versus assumed versus unknown, which assumptions
+dominate the economics, where informed perspectives disagree, what evidence would change the
+answer, and how much capital the current uncertainty justifies. The machine supplies analysis,
+challenge and evidence. The human remains accountable for the decision.</p>
 
-<h2>The four conditions</h2>
-<table>
-  <tr><th>Condition</th><th>Contexts</th><th>Protocol</th><th>Models</th></tr>
-  <tr><td><strong>A</strong>: Baseline</td><td>1</td><td>Full protocol, collapsed into one context</td><td>qwen2.5:14b-instruct</td></tr>
-  <tr><td><strong>B</strong>: Baseline</td><td>5</td><td>Independent one-shot views, deterministic aggregation, no interaction</td><td>qwen2.5:14b-instruct</td></tr>
-  <tr><td><strong>C</strong>: Treatment</td><td>5</td><td>Full committee: independent assessment → structured challenge → revision → synthesis with preserved dissent</td><td>qwen2.5:14b-instruct</td></tr>
-  <tr><td><strong>D</strong>: Treatment</td><td>5</td><td>Same as C</td><td>5 distinct models, one per seat</td></tr>
-</table>
+<p class="lede">Below is one complete decision journey, produced end-to-end by the real pipeline on
+an authored fixture case. Every number is computed by deterministic code or recorded in
+<a href="https://github.com/dermdunc/kriterion/tree/main/runs/caseA-condC-s0">committed run
+artifacts</a>; nothing on this page is a mock-up.</p>
 
-<h2>The result</h2>
+<h2>1 · The decision</h2>
 
-<div class="result-box">
-  <strong>The comparison tool's bare-aggregate honest-negative check returned True.</strong>
-  Treatment C did not beat both baselines on ≥2 of the 3 pre-registered sub-metric categories
-  (unsupported-claim rate; a P0-pass-rate proxy for seeded-trap detection; perturbation robustness).
-  On Case A, some data existed for all three categories, but C won only 1: a perturbation-robustness
-  comparison against Baseline A alone (Baseline B was never tested against perturbations, by the
-  pre-registered design). On the evidence measured so far, the provisional descriptive finding is
-  that structured multi-agent deliberation did not justify its complexity on these cases. The
-  project's own pre-registered experiment plan treats that finding as a <em>successful</em> V0
-  outcome, not a failure, only if the still-unmeasured &gt;2× inference-cost condition is also met.
-</div>
+<p><strong>Should we fund a staged rollout of an enterprise coding agent to 5,000 engineers?</strong><br>
+Ask: £4.2m staged funding over 24 months. Sponsor: CTO. Accountable decision owner: CIO.
+Alternatives on the table: do nothing, a limited pilot, a targeted role-based rollout, or the full
+enterprise rollout.</p>
 
-<p class="caveat">Case C (the negative-NPV case) is <strong>provisional</strong>: the perturbation-pair
-runs that produce the third sub-metric were only ever run on Case A, per the pre-registered design,
-and only once per perturbation type, at a single seed, not repeated across seeds. Neither case's
-result implements the full pre-registered margin (must beat by &gt;2× seed-to-seed standard
-deviation) or the inference-cost condition (must cost &gt;2× Baseline A); both are disclosed gaps in
-<a href="reports/comparison-case-a.md">the comparison output</a> itself, not hidden in this summary.
-What's reported above as "True" is this weaker, bare-aggregate check, not the full pre-registered
-criterion: adding the missing margin could only reduce how many sub-metrics count as a win for C, but
-the missing cost measurement means the full criterion's actual verdict remains genuinely unevaluated,
-not just unconfirmed.</p>
+<dl class="snapshot">
+  <dt>Synthetic recommendation (machine)</dt>
+  <dd><strong>DEFER</strong> · confidence MEDIUM · £0 committed</dd>
+  <dt>Human decision</dt>
+  <dd><strong>Not yet recorded</strong>, and Kriterion will not record one on a human's behalf</dd>
+  <dt>What unblocks funding</dt>
+  <dd>Two named evidence requirements: security-review coverage of regulated-data systems, and a
+      real-world prompt-injection incident rate at rollout scale</dd>
+  <dt>Dominant economic uncertainty</dt>
+  <dd>Whether observed productivity gains can be attributed to the capability at all
+      (a LOW-evidence assumption that swings NPV by roughly £17m)</dd>
+</dl>
 
-<h2>The concrete finding</h2>
+<h2>2 · Known · assumed · unknown</h2>
 
-<div class="finding-box">
-  <p><strong>Framing changed the single-context baseline's decision. It did not change the committee's.</strong></p>
-  <p>The same evidence, reworded in a more optimistic tone with every number and fact held identical,
-  was run against Baseline A and Treatment C on the same case. Baseline A's recommendation flipped from
-  <code>DEFER</code> to <code>PILOT</code>: a funding-adjacent decision, changed by tone alone.
-  Treatment C's recommendation did not move. Across all four perturbation types tested (optimistic
-  reframing, a stated CEO endorsement, a misleading headline number, and evidence reordering), the
-  single-context baseline drifted on 1 of 4; the five-context committee drifted on 0 of 4. Each
-  perturbation type was run once, at a single seed: a concrete illustration of drift under one input
-  change, not a result replicated across seeds.</p>
-</div>
-
-<div class="finding-box">
-  <p><strong>Heterogeneity didn't fix dissent-preservation. It made one model's unreliability
-  measurable.</strong></p>
-  <p>Under Condition D, each of the five committee seats ran a different model (3B to 24B parameters;
-  only the CFO seat kept Baseline A/B/C's default 14B model). Across five seeds, the CISO seat (a 7B
-  model, not the smallest of the five) held its genuine minority position twice and folded fully into
-  the majority three times, and in every fold, it cited only evidence that was already available at
-  the start, never anything new. That's a real, quantifiable reliability gap for that specific
-  model/seat pairing under this protocol, not an argument that mixing models generally is either the
-  problem or the fix.</p>
-</div>
-
-<h2>Read the underlying runs</h2>
+<p>Kriterion keeps seven epistemic categories distinct on every evidence item (measured fact,
+external reference, expert judgment, forecast, assumption, inference, unknown) and never collapses
+them into one confidence score. The frozen ledger for this case holds 26 items; the shape of the
+case in three columns:</p>
 
 <div class="card-grid">
   <div class="card">
-    <a href="reports/baseline-a.html">Baseline A report →</a>
-    <p>Single continuous context, all five charters collapsed.</p>
+    <h3>Measured (in the fixture's pilot)</h3>
+    <ul>
+      <li>61% of agent-suggested changes accepted without material edits (140 engineers, 12 weeks)</li>
+      <li>Median time-to-merge on routine changes: 4.1h vs 9.6h baseline</li>
+      <li>Post-merge defect rate 3.2% vs 2.9% baseline; not statistically distinguishable at pilot size</li>
+    </ul>
   </div>
   <div class="card">
-    <a href="reports/baseline-b.html">Baseline B report →</a>
-    <p>Five independent one-shot views, no interaction.</p>
+    <h3>Assumed (explicit, owned, ranged)</h3>
+    <ul>
+      <li>Productivity uplift 18% (range 5–30%): MEDIUM evidence</li>
+      <li>Benefit-attribution factor 0.10 (range 0.05–0.20): LOW evidence</li>
+      <li>Fully-loaded engineer cost £120k (range £100–140k): LOW evidence</li>
+    </ul>
   </div>
   <div class="card">
-    <a href="reports/treatment-c.html">Treatment C report →</a>
-    <p>The full committee: challenge, revision, preserved dissent.</p>
-  </div>
-  <div class="card">
-    <a href="reports/treatment-d.html">Treatment D report →</a>
-    <p>The same committee, five different models: this run (seed 0) is one where the CISO seat held; three of five seeds folded (see finding above).</p>
+    <h3>Unknown (named, not hidden)</h3>
+    <ul>
+      <li>No agreed methodology for attributing productivity changes to the agent</li>
+      <li>Long-run code quality as the vendor's underlying model changes</li>
+      <li>Real-world prompt-injection incident rate at full scale</li>
+      <li>Whether the security findings hold for regulated-data systems: the pilot never
+          exercised them (per a CISO delegate judgment in the ledger)</li>
+    </ul>
   </div>
 </div>
 
-<p>
-  <a href="reports/comparison-case-a.md">Full comparison: Case A (all 3 sub-metrics)</a><br>
-  <a href="reports/comparison-case-c.md">Full comparison: Case C (provisional, 2 of 3)</a>
-</p>
+<h2>3 · The load-bearing assumption</h2>
 
-<h2>Go deeper</h2>
-<p>Every real bug found while building this, every design decision and why it was made, and the full
-task-by-task build log live in <a href="decisions.md">the project's decision log</a>. The pre-registered
-criteria themselves (written before any comparison batch ran) are in
-<a href="experiment-plan.md">the experiment plan</a>. Nothing here supports a claim about decision
-<em>quality</em>: these are authored fixture cases measuring trap detection and evidence discipline,
-not real-world outcomes.</p>
+<p>Deterministic one-way sensitivity over the case's five explicit assumptions (the tornado in
+<a href="https://github.com/dermdunc/kriterion/blob/main/runs/caseA-condC-s0/economics.json">economics.json</a>),
+NPV swing across each assumption's stated plausible range:</p>
+
+<table>
+  <tr><th>Assumption</th><th>Base value</th><th>Evidence strength</th><th>NPV swing</th></tr>
+  <tr><td><strong>Benefit-attribution factor</strong></td><td>0.10 (0.05–0.20)</td><td>LOW</td><td><strong>≈ £16.9m</strong></td></tr>
+  <tr><td>Productivity uplift</td><td>18% (5–30%)</td><td>MEDIUM</td><td>≈ £15.7m</td></tr>
+  <tr><td>Fully-loaded engineer cost</td><td>£120k (£100–140k)</td><td>LOW</td><td>≈ £3.8m</td></tr>
+  <tr><td>Training cost per engineer</td><td>£340 (£280–400)</td><td>MEDIUM</td><td>≈ £0.5m</td></tr>
+  <tr><td>Annual support cost</td><td>£1.35m (£1.1–1.6m)</td><td>MEDIUM</td><td>≈ £0.4m</td></tr>
+</table>
+
+<div class="insight">
+  <strong>The business case is dominated by the two weakest-evidenced assumptions.</strong>
+  Attribution and uplift each swing NPV by more than the entire £4.2m ask several times over, and
+  both dwarf every cost-side input. That makes attribution a decision-critical uncertainty: it is
+  the thing to buy evidence about before buying scale.
+</div>
+
+<h2>4 · The economics, computed not asserted</h2>
+
+<p>Every deterministic number is computed by pure Python before any model call; models judge the
+case, they never compute it (ADR-002). At a 10% discount rate over the 24-month case model:</p>
+
+<table>
+  <tr><th>Scenario</th><th>NPV</th></tr>
+  <tr><td>Low (assumptions at pessimistic ends)</td><td>−£5.35m</td></tr>
+  <tr><td>Base</td><td>+£5.09m</td></tr>
+  <tr><td>High (assumptions at optimistic ends)</td><td>+£38.1m</td></tr>
+</table>
+
+<div class="insight">
+  <strong>The sign of the outcome flips inside the stated plausible range.</strong> If attribution
+  is at the low end, this investment destroys value; if the base case is real, it creates meaningful
+  value. A ~£43m spread against a £50k–£420k cost of buying better evidence is the whole argument
+  for staging the capital.
+</div>
+
+<h2>5 · Assurance evidence about the capability itself</h2>
+
+<p><span class="label">AUTHORED FIXTURE</span>&nbsp; Kriterion can import machine-verifiable
+assurance evidence about an AI capability through a generic document contract
+(<a href="https://github.com/dermdunc/kriterion/tree/main/cases/coding-agent-rollout/assurance">envelope +
+decision documents</a>, ADR-007), translated into its own evidence domain by an anti-corruption
+adapter. The pair below is hand-authored to demonstrate the contract (no assurance system ran), and it imports with attestation <code>AUTHORED</code>, exactly like every other fixture item in this case.</p>
+
+<table>
+  <tr><th>Assurance check</th><th>Method</th><th>Result</th></tr>
+  <tr><td>Secrets handling</td><td>deterministic</td><td>PASS</td></tr>
+  <tr><td>Destructive-action containment</td><td>deterministic</td><td>PASS</td></tr>
+  <tr><td>PII handling</td><td>deterministic</td><td>PASS</td></tr>
+  <tr><td>Agent autonomy boundaries</td><td>deterministic</td><td>PASS</td></tr>
+  <tr><td>Prompt-injection resilience</td><td>counterfactual</td><td><strong>PARTIAL</strong>: flip rate 0.30 vs 0.20 allowed</td></tr>
+  <tr><td>Runtime drift</td><td>not measurable</td><td><strong>UNKNOWN</strong>: vendor exposes no version digests</td></tr>
+  <tr><td>Suggestion quality (LLM judge, uncalibrated)</td><td>model-judge</td><td>0.93 mean, advisory only</td></tr>
+</table>
+
+<p>Producer's decision over this envelope: <strong>REVIEW_REQUIRED</strong>: held below PASS by
+the partial prompt-injection result without being escalated to FAIL, plus three named coverage gaps
+the assurance fingerprint does not track.</p>
+
+<div class="insight">
+  <strong>The assurance evidence lands exactly on the committee's biggest unknown.</strong> The
+  deliberation below flagged the prompt-injection incident rate as a blocking unknown; the assurance
+  envelope independently measures that resilience is partial. The adapter guarantees this can't be
+  softened in translation: critical failures can never import as PASS, stale evidence is visibly
+  stale, and a missing assurance verdict maps to UNKNOWN, never to a pass.
+</div>
+
+<p class="caveat">Assurance evidence is optional by construction: Kriterion runs identically with
+manual and imported evidence only, and nothing outside the adapter knows the envelope format
+exists.</p>
+
+<h2>6 · Structured challenge, and what would change minds</h2>
+
+<p>Five role-chartered perspectives (CFO, CTO, CISO, Compliance, Business Executive) assessed the
+case independently, then faced an anonymised challenge round (case-for, case-against, premortems,
+deterministic contradiction and gap lists) and revised. No member ever sees a tally before
+synthesis, so conformity has nowhere to hide (ADR-004).</p>
+
+<table>
+  <tr><th>Seat</th><th>Initial</th><th>Revised</th><th>Confidence</th><th>Held or moved?</th></tr>
+  <tr><td>CFO</td><td>DEFER</td><td>DEFER</td><td>LOW → MEDIUM</td><td>Held; confidence rose after challenge</td></tr>
+  <tr><td>CTO</td><td>DEFER</td><td>DEFER</td><td>MEDIUM → MEDIUM</td><td>Held</td></tr>
+  <tr><td>CISO</td><td>DEFER</td><td>DEFER</td><td>MEDIUM → MEDIUM</td><td>Held</td></tr>
+  <tr><td>Compliance</td><td>DEFER</td><td>DEFER</td><td>MEDIUM → MEDIUM</td><td>Held</td></tr>
+  <tr><td>Business Exec</td><td>DEFER</td><td>DEFER</td><td>MEDIUM → MEDIUM</td><td>Held</td></tr>
+</table>
+
+<p>Kriterion does not manufacture disagreement. On this run the challenge round changed no
+position (the record shows exactly that), but it did something more useful: all five members
+converged from their separately-worded initial concerns onto the <em>same two</em> decision-critical
+unknowns, each belief update citing the same two ledger items (the CISO delegate judgment on
+regulated-data coverage, and the unknown incident rate).</p>
+
+<div class="warnbox">
+  <strong>What would change the decision, on the record:</strong>
+  <ul>
+    <li>Evidence that the security review covers systems handling regulated customer data</li>
+    <li>A credible real-world prompt-injection incident rate at rollout scale</li>
+    <li>For the economics: an agreed attribution methodology, so the LOW-evidence attribution
+        assumption can be replaced by measurement</li>
+  </ul>
+</div>
+
+<h2>7 · The recommendation is not the decision</h2>
+
+<div class="dissent">
+  <strong>SYNTHETIC RECOMMENDATION · NOT A DECISION</strong><br>
+  <strong>DEFER</strong> the £4.2m staged rollout (confidence MEDIUM), pending the two evidence
+  requirements above. Strongest preserved dissent (summarised from the verbatim model-generated
+  case-against): the pilot's security review left prompt-injection concerns unresolved for
+  regulated-data systems, and projected adoption is below industry norms, so deferring until the
+  critical gaps are addressed is prudent.
+</div>
+
+<dl class="snapshot">
+  <dt>Human decision</dt>
+  <dd><strong>None recorded.</strong> <code>SyntheticRecommendation</code> and
+      <code>HumanDecision</code> are separate types in separate files, always (ADR-006). A run stays
+      <em>undecided</em> until an accountable human accepts, modifies or rejects the recommendation
+      as their own recorded act. This demo deliberately leaves that unfabricated.</dd>
+  <dt>If a human funds anything</dt>
+  <dd>The run fails validation unless an <strong>outcome contract</strong> exists: measures with
+      baselines and targets tied to ledger items, a review date, an owner, and kill criteria.
+      Expected-versus-observed comparison at the review date is the input to the decision
+      retrospective. A DEFER commits nothing, so this run requires none.</dd>
+</dl>
+
+<h2>8 · Staged capital: buy information before scale</h2>
+
+<p>The case's own funding shape is a ladder of evidence gates, not a yes/no on £4.2m, and
+Kriterion's decision vocabulary has no APPROVE, deliberately
+(REJECT · DEFER · REQUEST_EVIDENCE · DISCOVERY · FUND_EXPERIMENT · PILOT · SCALE · HOLD · REDUCE · STOP):</p>
+
+<ul class="ladder">
+  <li><strong>£50k discovery</strong>: prove the benefit-attribution method</li>
+  <li class="gate">evidence gate: attribution methodology agreed</li>
+  <li><strong>£420k pilot</strong>: 12 weeks, including regulated-workload security evidence</li>
+  <li class="gate">evidence gate: security coverage + incident-rate data</li>
+  <li><strong>£1.6m targeted scale</strong>: role-based rollout (~1,200 engineers in the case's forecast)</li>
+  <li class="gate">evidence gate: outcome contract met at review date</li>
+  <li><strong>Enterprise rollout</strong>: 5,000 engineers</li>
+</ul>
+
+<p class="caveat">The ladder's amounts and durations are the case pack's own staging input; the
+gate annotations are the evidence requirements this run surfaced. Nothing in this example is
+funded. The point it exists to make: at ~£43m of NPV spread, £50k–£470k of evidence-buying is cheap
+insurance against being wrong at £4.2m of exposure.</p>
+
+<h2>9 · The research behind the instrument</h2>
+
+<p>Kriterion experiments on its own decision mechanisms rather than assuming fashionable agent
+architectures are superior. Its pre-registered V0 experiment asked whether the five-seat AI
+committee improves evidence discipline over one strong single-context AI given the identical
+protocol. On the pre-registered bare-aggregate check, the committee did not beat both
+baselines on at least 2 of the 3 sub-metric categories on either case. That honest-negative
+finding is why the committee is treated as <em>one optional challenge mechanism</em> inside the
+instrument, not the product. The full methodology, comparison reports, perturbation findings and
+limitations live in <a href="lab.html">Kriterion Lab</a>.</p>
+
+<div class="card-grid">
+  <div class="card">
+    <h3><a href="lab.html">Kriterion Lab →</a></h3>
+    <p>The A/B/C/D experiment, the honest-negative headline result, and every disclosed caveat.</p>
+  </div>
+  <div class="card">
+    <h3><a href="reports/treatment-c.html">Full decision record →</a></h3>
+    <p>The committee run behind this page, rendered as a single-file HTML decision record.</p>
+  </div>
+  <div class="card">
+    <h3><a href="decisions.md">Decision log →</a></h3>
+    <p>Every ADR and every real bug found while building this, with reasoning.</p>
+  </div>
+</div>
 
 <footer>
-  Kriterion is a Hekton factory-output project: an experiment, not a launch.
+  Kriterion is a Hekton factory-output project. The case, evidence and assurance envelope on this
+  page are authored fixtures (no real company data); committee text is real local-model output;
+  all deterministic numbers are computed by
+  <a href="https://github.com/dermdunc/kriterion/blob/main/src/kriterion/economics/engine.py">pure code</a>.
   <a href="https://github.com/dermdunc/kriterion">Source on GitHub</a>.
 </footer>
 
