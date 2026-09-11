@@ -5,19 +5,54 @@
 **Owner:** hekton
 **Promotion target:** `none`
 
-> An evidence-backed decision system for uncertain technology investments
+> An evidence-backed decision instrument for uncertain technology investments
 
 ## What this is
 
-Kriterion is a decision-quality laboratory for enterprise technology investment. It ingests an
-investment proposal, separates evidence from assumptions from unknowns, computes the economics
-deterministically, elicits independent role-specific assessments from a five-seat AI committee
-(CFO, CTO, CISO, Compliance, Business Executive), runs a structured adversarial challenge round,
-records how positions changed and why, and produces a synthetic recommendation with preserved
-dissent, which an accountable human then accepts, changes, or rejects as a separate recorded
-decision, never merged with the recommendation itself.
+**Kriterion is an evidence-backed decision instrument for uncertain technology investments.** It
+takes a consequential proposal and makes the things a decision actually rests on explicit:
+structured evidence kept in seven distinct epistemic categories (measured, external reference,
+expert judgment, forecast, assumption, inference, unknown), deterministic economics with named
+load-bearing assumptions and sensitivities, structured adversarial challenge with recorded belief
+updates, a per-seat `EvidenceRequest.would_change` record of what would change each position,
+staged capital allocation instead of a binary approve/reject vocabulary, a synthetic
+recommendation that is never the decision, a separately recorded human decision, and an outcome
+contract for anything that commits resources. The machine supplies analysis, challenge and
+evidence; the human remains accountable for the decision. The live decision journey is at
+[kriterion.theagentictekton.com](https://kriterion.theagentictekton.com/).
 
-It exists to test one falsifiable claim: **does running a case through multiple independent AI
+> **Where that is, and isn't, true yet.** Runs made from 2026-09-11 persist their evidence
+> requests to `evidence_requests.json`; the committed V0 demo runs predate that, so the public
+> page's "what would change the decision" list is *derived* from the blocking unknowns and
+> recommendation conditions those runs did persist, and says so. Rendering the stored per-seat
+> requests as a first-class view is named work in `docs/next-actions.md`. The public page itself
+> is hand-maintained narrative checked against the committed artifacts by
+> `tests/product/test_public_page_coherence.py`; the *generated* artifact is the per-run report.
+
+Kriterion can also, optionally, import machine-verifiable **assurance evidence** about an AI
+capability through a generic document contract (`kriterion assurance import`, ADR-007): an
+assurance envelope plus decision document, translated by an anti-corruption adapter into
+Kriterion's own evidence domain. The adapter refuses rather than guesses: a critical *or gating*
+failure can never import as PASS, an envelope that does not state its `criticalFailures` list at
+all is refused rather than assumed clean, the decision must be identity-bound to the envelope it
+claims to describe, a producer-declared PASS over stale evidence reports as STALE, a missing
+verdict maps to UNKNOWN, and every malformed document shape is a controlled `AssuranceImportError`
+rather than a traceback. With `--into-case`, imported items are frozen into a new ledger version
+and flow through to the generated report. No assurance system is a runtime dependency; Kriterion
+works identically without one.
+
+The mechanics: it ingests an investment proposal, separates evidence from assumptions from
+unknowns, computes the economics deterministically, elicits independent role-specific assessments
+from a five-seat AI committee (CFO, CTO, CISO, Compliance, Business Executive), runs a structured
+adversarial challenge round, records how positions changed and why, and produces a synthetic
+recommendation with preserved dissent, which an accountable human then accepts, changes, or
+rejects as a separate recorded decision, never merged with the recommendation itself.
+
+## Kriterion Lab: the V0 experiment
+
+The five-seat committee is **one challenge mechanism inside Kriterion, not the product itself**,
+and that framing is earned, not asserted: Kriterion Lab is where Kriterion experiments on its own
+decision mechanisms. Its V0 experiment tested one falsifiable claim: **does running a case through multiple independent AI
 contexts improve evidence discipline, challenge quality, and traceability, compared with running
 the same rigorous protocol through a single strong AI context?** The underlying case (evidence,
 economics, decision vocabulary, schemas) and seeds are held constant across three conditions; what
@@ -34,7 +69,12 @@ Everything is fictional (`AUTHORED_FIXTURE` cases, no real company data), and ev
 number (NPV, payback, tornado sensitivity) is computed by pure Python before any model call;
 models judge the case, they never compute it.
 
-## Status: V0 complete, headline result in
+## Status: V0 experiment complete, headline result in; V1 instrument increment underway
+
+The first V1 (decision instrument) increment adds the generic assurance-evidence adapter
+(`src/kriterion/assurance/`, ADR-007) with an authored fixture envelope on the Case A pack, and
+reworks the public site to lead with the decision journey (`docs/index.html`), with the V0
+research preserved intact at `docs/lab.html`. The V0 experiment record below is unchanged.
 
 All ten P0 governance evals pass across the pre-registered 30-run comparison batch (2 cases × 3
 conditions × 5 seeds, live against a local 14B model; both authored case packs, a benefit-uplift
@@ -81,6 +121,9 @@ kriterion econ cases/coding-agent-rollout --run-id my-run
 kriterion ledger freeze cases/coding-agent-rollout --run-id my-run
 kriterion evals my-run --case-id coding-agent-rollout   # P0 governance checks -> run-export.json
 kriterion report my-run cases/coding-agent-rollout      # -> my-run/report.html
+kriterion assurance import cases/coding-agent-rollout/assurance  # assurance envelope -> evidence items
+kriterion assurance import cases/coding-agent-rollout/assurance \
+  --into-case cases/coding-agent-rollout --run-id assurance-run   # ...and freeze them into ledger v2
 kriterion compare --condition-runs A=... --condition-runs B=... --condition-runs C=...  # aggregate a batch
 ```
 
