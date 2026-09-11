@@ -69,4 +69,5 @@ runs/*/
 !*.tfvars.example
 *.tfplan
 *.tfplan.json
-infra/github-pages-dns/terraform/tfplan
+tfplan
+tfplan.json
