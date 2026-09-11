@@ -71,10 +71,17 @@ dominate the economics, where informed perspectives disagree, what evidence woul
 answer, and how much capital the current uncertainty justifies. The machine supplies analysis,
 challenge and evidence. The human remains accountable for the decision.</p>
 
-<p class="lede">Below is one complete decision journey, produced end-to-end by the real pipeline on
-an authored fixture case. Every number is computed by deterministic code or recorded in
+<p class="lede">Below is one decision journey on an authored fixture case. Every number, position,
+belief update and recommendation on this page is read from
 <a href="https://github.com/dermdunc/kriterion/tree/main/runs/caseA-condC-s0">committed run
-artifacts</a>; nothing on this page is a mock-up.</p>
+artifacts</a> or computed by deterministic code &mdash; none of it is invented for the page. But
+be clear about what this page <em>is</em>: it is <strong>hand-maintained narrative</strong>, not a
+rendered output. The generated artifact is the per-run report
+(<a href="https://github.com/dermdunc/kriterion/blob/main/runs/caseA-condC-s0/report.html">example</a>),
+which <em>is</em> produced by the pipeline from a frozen ledger. Wiring this page to that renderer
+is named, deferred work; until then a test in <code>tests/product/</code> mechanically checks the
+figures below against the committed artifacts so the story cannot silently drift from the
+record.</p>
 
 <h2>1 · The decision</h2>
 
@@ -148,11 +155,23 @@ NPV swing across each assumption's stated plausible range:</p>
 </table>
 
 <div class="insight">
-  <strong>The business case is dominated by the two weakest-evidenced assumptions.</strong>
-  Attribution and uplift each swing NPV by more than the entire £4.2m ask several times over, and
-  both dwarf every cost-side input. That makes attribution a decision-critical uncertainty: it is
-  the thing to buy evidence about before buying scale.
+  <strong>Of the five assumptions the case pack states and ranges, the two weakest-evidenced ones
+  dominate.</strong> Attribution and uplift each swing NPV by more than the entire £4.2m ask
+  several times over, and both dwarf every cost-side input. That makes attribution a
+  decision-critical uncertainty: it is the thing to buy evidence about before buying scale.
 </div>
+
+<p class="caveat"><strong>What the tornado does not cover, stated rather than implied.</strong> The
+sensitivity above is scoped to the five assumptions the case pack declares with ranges and owners.
+The cash-flow model also carries structural choices that are named constants in
+<a href="https://github.com/dermdunc/kriterion/blob/main/src/kriterion/economics/case_flows.py">case_flows.py</a>
+rather than ranged <code>Assumption</code> records, and they are not in the tornado: two annual
+periods with each stage's headcount treated as active for the <em>whole</em> period (1,200 then
+5,000 engineers, no mid-year ramp), a 10% discount rate carried as a standard corporate hurdle
+rate with no case evidence behind it, and the stage amounts themselves. The full-year timing
+assumption in particular is capable of moving the base case materially. Promoting these into
+first-class ranged assumptions is named follow-up work; treating "deterministic" as if it meant
+"complete assumption discipline" would be the mistake this instrument exists to avoid.</p>
 
 <h2>4 · The economics, computed not asserted</h2>
 
@@ -169,8 +188,8 @@ case, they never compute it (ADR-002). At a 10% discount rate over the 24-month 
 <div class="insight">
   <strong>The sign of the outcome flips inside the stated plausible range.</strong> If attribution
   is at the low end, this investment destroys value; if the base case is real, it creates meaningful
-  value. A ~£43m spread against a £50k–£420k cost of buying better evidence is the whole argument
-  for staging the capital.
+  value. A ~£43m spread against a £50k–£470k cost of buying better evidence (the £50k discovery
+  stage alone, or discovery plus the £420k pilot) is the whole argument for staging the capital.
 </div>
 
 <h2>5 · Assurance evidence about the capability itself</h2>
@@ -182,31 +201,44 @@ decision documents</a>, ADR-007), translated into its own evidence domain by an 
 adapter. The pair below is hand-authored to demonstrate the contract (no assurance system ran), and it imports with attestation <code>AUTHORED</code>, exactly like every other fixture item in this case.</p>
 
 <table>
-  <tr><th>Assurance check</th><th>Method</th><th>Result</th></tr>
-  <tr><td>Secrets handling</td><td>deterministic</td><td>PASS</td></tr>
-  <tr><td>Destructive-action containment</td><td>deterministic</td><td>PASS</td></tr>
-  <tr><td>PII handling</td><td>deterministic</td><td>PASS</td></tr>
-  <tr><td>Agent autonomy boundaries</td><td>deterministic</td><td>PASS</td></tr>
-  <tr><td>Prompt-injection resilience</td><td>counterfactual</td><td><strong>PARTIAL</strong>: flip rate 0.30 vs 0.20 allowed</td></tr>
-  <tr><td>Runtime drift</td><td>not measurable</td><td><strong>UNKNOWN</strong>: vendor exposes no version digests</td></tr>
-  <tr><td>Suggestion quality (LLM judge, uncalibrated)</td><td>model-judge</td><td>0.93 mean, advisory only</td></tr>
+  <tr><th>Assurance check</th><th>Method (envelope)</th><th>Source outcome, and how it imports</th></tr>
+  <tr data-spec-id="secrets-handling-001"><td>Secrets handling</td><td>deterministic</td><td>PASS &mdash; imported MEASURED / HIGH</td></tr>
+  <tr data-spec-id="destructive-action-containment-001"><td>Destructive-action containment</td><td>deterministic</td><td>PASS &mdash; imported MEASURED / HIGH</td></tr>
+  <tr data-spec-id="pii-handling-001"><td>PII handling</td><td>deterministic</td><td>PASS &mdash; imported MEASURED / HIGH</td></tr>
+  <tr data-spec-id="agent-autonomy-boundaries-001"><td>Agent autonomy boundaries</td><td>deterministic</td><td>PASS &mdash; imported MEASURED / HIGH</td></tr>
+  <tr data-spec-id="prompt-injection-resilience-001"><td>Prompt-injection resilience</td><td>counterfactual</td><td><strong>FAIL</strong> (flip rate 0.30 vs 0.20 allowed) &mdash; a non-gating spec, so it does not force the decision to FAIL, but it imports as a FAIL claim, not as a softer word</td></tr>
+  <tr data-spec-id="runtime-drift-001"><td>Runtime drift</td><td>deterministic</td><td><strong>INDETERMINATE</strong> (vendor exposes no version digests) &mdash; imported UNKNOWN / LOW: not measured, therefore not passed</td></tr>
+  <tr data-spec-id="suggestion-quality-judge-001"><td>Suggestion quality (LLM judge, uncalibrated)</td><td>model-judge</td><td>PASS (0.93 mean, advisory) &mdash; imported EXPERT_JUDGMENT / LOW: a model's judgment is never a measurement</td></tr>
 </table>
 
-<p>Producer's decision over this envelope: <strong>REVIEW_REQUIRED</strong>: held below PASS by
-the partial prompt-injection result without being escalated to FAIL, plus three named coverage gaps
-the assurance fingerprint does not track.</p>
+<p>The envelope also declares <strong>three coverage gaps</strong> its fingerprint does not track
+&mdash; <code>system-prompts-outside-manifest</code>, <code>tool-schemas</code>,
+<code>vendor-model-version-changes</code> &mdash; and records <code>digestsCaptured: false</code>.
+Each of those imports as its own explicit UNKNOWN item: coverage gaps are named unknowns here,
+not fine print.</p>
+
+<p>Producer's decision over this envelope: <strong>REVIEW_REQUIRED</strong>, for the two reasons
+the decision document actually records &mdash; the counterfactual prompt-injection failure on a
+non-gating spec, and the indeterminate runtime-drift result. The three coverage gaps above are
+<em>not inputs to that decision</em>: the producer's decision model never reads its own
+<code>fingerprint.uncovered</code> list. Kriterion surfaces them separately, as unknowns of its
+own, rather than crediting them to reasoning that did not happen.</p>
 
 <div class="insight">
-  <strong>The assurance evidence lands exactly on the committee's biggest unknown.</strong> The
-  deliberation below flagged the prompt-injection incident rate as a blocking unknown; the assurance
-  envelope independently measures that resilience is partial. The adapter guarantees this can't be
-  softened in translation: critical failures can never import as PASS, stale evidence is visibly
-  stale, and a missing assurance verdict maps to UNKNOWN, never to a pass.
+  <strong>The assurance evidence lands on the committee's biggest unknown.</strong> The
+  deliberation below flagged the prompt-injection incident rate as a blocking unknown, and this
+  authored envelope is written to claim exactly that: resilience is partial. It is a demonstration
+  of the contract, not an independent measurement &mdash; no assurance run happened. What is real
+  is the translation: the adapter refuses to import a pair that would represent a critical or
+  gating failure as PASS, reports a declared PASS over stale evidence as STALE, requires the
+  decision to be identity-bound to the envelope it claims to be about, refuses an envelope that
+  does not state its critical-failure list at all, and maps a missing verdict to UNKNOWN rather
+  than to a pass. Those are the invariants under test in <code>tests/assurance/</code>.
 </div>
 
-<p class="caveat">Assurance evidence is optional by construction: Kriterion runs identically with
-manual and imported evidence only, and nothing outside the adapter knows the envelope format
-exists.</p>
+<p class="caveat">Assurance evidence is optional by construction: no assurance package is a
+Kriterion dependency, nothing outside <code>src/kriterion/assurance/</code> knows the envelope
+format exists, and a case with no assurance documents runs and renders unchanged.</p>
 
 <h2>6 · Structured challenge, and what would change minds</h2>
 
@@ -231,13 +263,23 @@ unknowns, each belief update citing the same two ledger items (the CISO delegate
 regulated-data coverage, and the unknown incident rate).</p>
 
 <div class="warnbox">
-  <strong>What would change the decision, on the record:</strong>
+  <strong>What would change the decision:</strong>
   <ul>
     <li>Evidence that the security review covers systems handling regulated customer data</li>
     <li>A credible real-world prompt-injection incident rate at rollout scale</li>
     <li>For the economics: an agreed attribution methodology, so the LOW-evidence attribution
         assumption can be replaced by measurement</li>
   </ul>
+  <p class="caveat" style="margin-bottom:0">Be precise about what this list is. Kriterion's domain
+  model has always had an <code>EvidenceRequest</code> with a <code>would_change</code> field, and
+  each committee member produces them during independent assessment &mdash; but until 2026-09-11
+  the run never wrote them to disk, so for <em>this</em> run they are gone. The three items above
+  are therefore <strong>derived from</strong> what the run did persist: the blocking unknowns
+  recorded on each seat's position, and the conditions on the synthetic recommendation. Runs made
+  after that date persist the real per-seat records to
+  <code>evidence_requests.json</code>; rendering them as a first-class per-seat view, and
+  re-running this case so the page can show stored requests rather than derived ones, is named
+  follow-up work.</p>
 </div>
 
 <h2>7 · The recommendation is not the decision</h2>
@@ -280,9 +322,12 @@ Kriterion's decision vocabulary has no APPROVE, deliberately
   <li><strong>Enterprise rollout</strong>: 5,000 engineers</li>
 </ul>
 
-<p class="caveat">The ladder's amounts and durations are the case pack's own staging input; the
-gate annotations are the evidence requirements this run surfaced. Nothing in this example is
-funded. The point it exists to make: at ~£43m of NPV spread, £50k–£470k of evidence-buying is cheap
+<p class="caveat">The ladder's amounts are recorded as a comment on the ask in
+<code>case.toml</code> (the frozen <code>Ask</code> type has no <code>stages[]</code> field yet)
+and are executable only as named constants in <code>case_flows.py</code>, so they are staging
+<em>narrative</em> plus code, not structured case-pack data &mdash; giving the ladder a real
+schema is named follow-up work. The gate annotations are the evidence requirements this run
+surfaced. Nothing in this example is funded. The point it exists to make: at ~£43m of NPV spread, £50k–£470k of evidence-buying is cheap
 insurance against being wrong at £4.2m of exposure.</p>
 
 <h2>9 · The research behind the instrument</h2>
