@@ -619,6 +619,69 @@ def _cmd_report(args: argparse.Namespace) -> int:
     return 0
 
 
+# The case pack's records need a created_at; the decision page never renders
+# one. Pinning it makes `kriterion decision-page` reproducible, which is what
+# lets a test assert the committed page is exactly what the pipeline emits.
+DECISION_PAGE_CREATED_AT = "1970-01-01T00:00:00Z"
+
+
+def _cmd_decision_page(args: argparse.Namespace) -> int:
+    """Render the public decision experience, and refuse to publish it if any
+    statement on it fails to re-derive from the decision state (ADR-012).
+
+    The rendering timestamp is a fixed constant, not the wall clock: the same
+    committed artifacts must always produce byte-identical HTML, otherwise
+    "this page is generated" is unverifiable.
+    """
+    from kriterion.decision_state import DecisionStateError, load_decision_state
+    from kriterion.narrative import check
+    from kriterion.report.decision_page import render_decision_page
+
+    run_dir = Path(args.runs_dir) / args.run_id
+    out_path = Path(args.out)
+    assurance_path = Path(args.assurance_import) if args.assurance_import else None
+    try:
+        state = load_decision_state(
+            case_dir=Path(args.case_dir),
+            run_dir=run_dir,
+            created_at=DECISION_PAGE_CREATED_AT,
+            assurance_import_path=assurance_path,
+        )
+    except DecisionStateError as exc:
+        print(f"kriterion: decision-page failed: {exc}", file=sys.stderr)
+        return 1
+
+    if args.check_only:
+        if not out_path.is_file():
+            print(f"kriterion: decision-page failed: {out_path} does not exist", file=sys.stderr)
+            return 1
+        html = out_path.read_text()
+    else:
+        html = render_decision_page(state)
+
+    violations = check(state, html)
+    if violations:
+        print(
+            f"kriterion: decision-page refused: {len(violations)} narrative-integrity "
+            f"violation(s) in {out_path}",
+            file=sys.stderr,
+        )
+        for violation in violations[:40]:
+            print(f"  {violation}", file=sys.stderr)
+        if len(violations) > 40:
+            print(f"  ... and {len(violations) - 40} more", file=sys.stderr)
+        return 1
+
+    if args.check_only:
+        print(f"kriterion: {out_path} is faithful to {run_dir}")
+        return 0
+
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(html)
+    print(f"kriterion: wrote {out_path} from {run_dir} ({len(html)} bytes, 0 violations)")
+    return 0
+
+
 def _cmd_perturbation_diff(args: argparse.Namespace) -> int:
     from kriterion.perturbation_diff import diff_paired_runs
 
@@ -650,7 +713,11 @@ def _cmd_assurance_import(args: argparse.Namespace) -> int:
     from kriterion.domain.evidence import Attestation
 
     envelope_dir = Path(args.envelope_dir)
-    created_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    # Defaults to the wall clock, as every other command does. `--created-at`
+    # exists so a *committed* import payload is reproducible: the decision page
+    # renders that payload, and a test asserts it is byte-for-byte what the
+    # adapter emits, which is impossible if every re-run stamps a new time.
+    created_at = args.created_at or datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     try:
         envelope, decision = load_assurance_documents(envelope_dir)
         summary, items = adapt_envelope(
@@ -831,6 +898,29 @@ def build_parser() -> argparse.ArgumentParser:
     report_parser.add_argument("--out", default=None, help="Defaults to <run-dir>/report.html")
     report_parser.set_defaults(func=_cmd_report)
 
+    page_parser = subparsers.add_parser(
+        "decision-page",
+        help="Render the public decision experience from a run's committed state (ADR-011)",
+    )
+    page_parser.add_argument("run_id", help="Run directory name under --runs-dir")
+    page_parser.add_argument("case_dir", help="Path to the case pack directory this run used")
+    page_parser.add_argument("--runs-dir", default="runs", help="Root directory for run artifacts")
+    page_parser.add_argument("--out", default="docs/index.html")
+    page_parser.add_argument(
+        "--assurance-import",
+        default=None,
+        help=(
+            "Path to a committed `kriterion assurance import --out` payload to render alongside "
+            "the run. Omitted means no assurance evidence is shown, and the page says so."
+        ),
+    )
+    page_parser.add_argument(
+        "--check-only",
+        action="store_true",
+        help="Check the existing --out file against the decision state and write nothing",
+    )
+    page_parser.set_defaults(func=_cmd_decision_page)
+
     assurance_parser = subparsers.add_parser(
         "assurance", help="Generic assurance-evidence document operations (ADR-007)"
     )
@@ -873,6 +963,14 @@ def build_parser() -> argparse.ArgumentParser:
         default=2,
         help="Ledger version to write with --into-case. Defaults to 2: the case pack's own "
         "evidence is v1, and imported assurance evidence makes a superset vN+1 (ADR-003).",
+    )
+    assurance_import_parser.add_argument(
+        "--created-at",
+        default=None,
+        help=(
+            "Pin the derived items' created_at (ISO-8601 Z) instead of using the wall clock, so "
+            "a committed import payload is reproducible. Never changes what is imported."
+        ),
     )
     assurance_import_parser.set_defaults(func=_cmd_assurance_import)
 

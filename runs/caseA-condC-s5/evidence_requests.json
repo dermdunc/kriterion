@@ -1,0 +1,92 @@
+[
+  {
+    "created_at": "2026-09-11T20:33:43Z",
+    "description": "Conduct a full security review of the agent against systems handling regulated customer data to ensure compliance with regulatory guidance.",
+    "id": "caseA-condC-s5-cfo-req-0",
+    "member": "cfo",
+    "schema_version": "kriterion/v0.1",
+    "status": "unavailable",
+    "would_change": "Increase confidence in security and compliance readiness"
+  },
+  {
+    "created_at": "2026-09-11T20:33:43Z",
+    "description": "Develop a methodology for attributing observed cycle-time or defect-rate changes at enterprise scale specifically to agent usage versus concurrent process changes.",
+    "id": "caseA-condC-s5-cfo-req-1",
+    "member": "cfo",
+    "schema_version": "kriterion/v0.1",
+    "status": "unavailable",
+    "would_change": "Reduce uncertainty about the true impact of the agent on engineering productivity"
+  },
+  {
+    "created_at": "2026-09-11T20:33:43Z",
+    "description": "Conduct a detailed security review of the agent's performance on systems handling regulated customer data to address concerns raised in ev-015.",
+    "id": "caseA-condC-s5-cto-req-0",
+    "member": "cto",
+    "schema_version": "kriterion/v0.1",
+    "status": "unavailable",
+    "would_change": "Increase confidence in full-scale deployment"
+  },
+  {
+    "created_at": "2026-09-11T20:33:43Z",
+    "description": "Expand pilot scope to include legacy/untyped codebases and systems with higher regulatory scrutiny to better understand adoption challenges and security implications.",
+    "id": "caseA-condC-s5-cto-req-1",
+    "member": "cto",
+    "schema_version": "kriterion/v0.1",
+    "status": "unavailable",
+    "would_change": "Improve generalizability of pilot results to the broader engineering estate"
+  },
+  {
+    "created_at": "2026-09-11T20:33:43Z",
+    "description": "Request evidence that addresses the open prompt-injection concern raised in the pilot security review, demonstrating how it has been resolved.",
+    "id": "caseA-condC-s5-ciso-req-0",
+    "member": "ciso",
+    "schema_version": "kriterion/v0.1",
+    "status": "unavailable",
+    "would_change": "If this evidence resolves the concern, it would allow for a more positive recommendation."
+  },
+  {
+    "created_at": "2026-09-11T20:33:43Z",
+    "description": "Request an expanded security review covering systems handling regulated customer data to ensure findings generalise to a full rollout.",
+    "id": "caseA-condC-s5-ciso-req-1",
+    "member": "ciso",
+    "schema_version": "kriterion/v0.1",
+    "status": "unavailable",
+    "would_change": "This would provide necessary assurance before scaling up the agent's deployment."
+  },
+  {
+    "created_at": "2026-09-11T20:33:43Z",
+    "description": "Detailed plan and timeline for implementing documented human review of AI-suggested changes to regulated systems as per the new regulatory guidance.",
+    "id": "caseA-condC-s5-cro_compliance-req-0",
+    "member": "cro_compliance",
+    "schema_version": "kriterion/v0.1",
+    "status": "unavailable",
+    "would_change": "Recommendation from DEFER to FUND_EXPERIMENT if a robust plan is provided."
+  },
+  {
+    "created_at": "2026-09-11T20:33:43Z",
+    "description": "Further analysis on how the agent performs in legacy/untyped codebases and its impact on overall engineering productivity.",
+    "id": "caseA-condC-s5-cro_compliance-req-1",
+    "member": "cro_compliance",
+    "schema_version": "kriterion/v0.1",
+    "status": "unavailable",
+    "would_change": "Confidence_band from MEDIUM to HIGH if analysis shows consistent performance across all codebases."
+  },
+  {
+    "created_at": "2026-09-11T20:33:43Z",
+    "description": "Conduct a comprehensive security review covering all systems, including those handling regulated customer data, before scaling up the rollout.",
+    "id": "caseA-condC-s5-business_executive-req-0",
+    "member": "business_executive",
+    "schema_version": "kriterion/v0.1",
+    "status": "unavailable",
+    "would_change": "Would provide necessary assurance to proceed with full-scale deployment."
+  },
+  {
+    "created_at": "2026-09-11T20:33:43Z",
+    "description": "Develop an agreed methodology for attributing observed cycle-time or defect-rate changes at enterprise scale specifically to agent usage versus concurrent process changes.",
+    "id": "caseA-condC-s5-business_executive-req-1",
+    "member": "business_executive",
+    "schema_version": "kriterion/v0.1",
+    "status": "unavailable",
+    "would_change": "Would help in accurately measuring the impact of the coding agent on productivity and quality."
+  }
+]
