@@ -1,259 +1,387 @@
 # Kriterion Human Run 001 — Case Design
 
-Public, methodology-only. The case pack's actual content, its decision-rights entries, its
-distribution entries and its economics live in `kriterion-private/human-run-001/`, which is not a
-git repository. This file describes *how* the case was built and where its epistemic boundaries sit,
-not what it says.
+Case id: `northstar-internal-developer-platform`.
+Case pack: `cases/northstar-internal-developer-platform/case.toml`, committed in full.
 
-Case id: `global-platform-engineering`.
+This file records *how* the case was built and where its epistemic boundaries sit. Unlike a case
+built on a real organisation's decision, this one can also describe *what it says*, because
+everything it says is either public research or invented on purpose.
 
 ---
 
 ## Decision
 
-> What global platform-engineering operating model should we invest in for the next 12-18 months so
-> that distributed engineering teams gain sufficient autonomy and responsiveness without duplicating
-> enterprise platforms or fragmenting global standards?
+> Should Northstar Software Group invest approximately £3m–£5m over the next 18 months in an
+> Internal Developer Platform, or pursue a lower-cost programme of incremental improvements to its
+> existing engineering toolchain?
+
+The more important underlying question, and the one the case is actually built around:
+
+> Will reducing developer friction create attributable business value, or primarily move complexity
+> and cost from application teams into a new platform organisation?
 
 ---
 
-## What this replaced, and why the case id changed
+## Northstar Software Group is fictional
 
-A narrower first preparation of this case was built, run and frozen before a materially fuller final
-specification arrived. That preparation framed the question as a binary between a headquarters-owned
-centre and one region, across three operating-model archetypes, with a seven-row decision-rights
-matrix. The final specification frames four peer regions across four operating models, adds a
-distributed-enterprise model in which enterprise-owned platforms are engineered from several regions
-at once, adds an explicit physical-distribution question, and carries a thirteen-row decision-rights
-matrix.
+Stated here, in the case pack header, in every scenario evidence item's claim text, in that item's
+`source` field, and as an `AUTHORED` attestation badge on the generated page. Five places, because
+this is the claim the whole case depends on being unambiguous.
 
-Two consequences worth stating in public, because both are methodology rather than content.
+```text
+Northstar Software Group          FICTIONAL
 
-**The frozen artifacts were archived, not overwritten.** No participant response had been recorded
-against them — every response file was verified still to contain only its "not yet recorded"
-placeholder, and the run directory contained no `human_decision.json` — so nothing was lost. They
-were nonetheless moved intact, with their hashes re-verified after the move, rather than deleted or
-edited in place. Kriterion's own governance rule is that a canonical decision record is never
-mutated; a preparation that rewrote its own frozen run while leaving a manifest describing something
-that no longer existed would be a project applying a standard to its users that it does not apply to
-itself.
+Engineers                         ~2,500
+Primary engineering regions       United States, Europe, India
+Business                          global digital / software products
+Current state                     a substantial but fragmented developer
+                                  toolchain rather than one coherent
+                                  Internal Developer Platform
+```
 
-**The case was renamed.** "International" is a headquarters-relative term: it only means something
-if there is a centre that everything else is international *to*. The new framing has four peer
-regions and a model in which enterprise platforms are engineered from all of them, so a case id that
-presupposes a centre contradicts the case's own first section. The rename touched two registry
-entries in this repository's source, one test module, and every document that names the id. The
-evidence id space was moved as well, so that no evidence reference the participant records during
-this run can be silently matched against the archived one.
+Those numbers are **synthetic scenario inputs**. Northstar is not a real company, is not a
+pseudonym for a real company, and no figure attributed to it anywhere in this repository is an
+observation of any real organisation.
 
 ---
 
-## Why this case
+## Why a fictional case
 
-**Real.** The question belongs to a real organisation and a real accountable human. It is not a
-scenario written to exercise Kriterion.
+Kriterion's first public human run needed a decision that is genuinely hard, genuinely
+consequential, and **publishable in full**. Those three requirements conflict for any real
+decision: the cases most worth instrumenting are exactly the ones whose evidence cannot be
+published.
 
-**Unresolved.** No decision has been taken. The participant holds a research-informed leaning, and
-the research itself explicitly declines to settle several of the load-bearing questions for want of
-internal evidence.
+A fictional case resolves the conflict in one direction and pays for it in another.
 
-**Consequential.** It determines funded capability, where engineering capability physically sits,
-reporting lines, delegated authority over production control planes, and whether regional divergence
-gets encouraged or prevented. It is plausibly irreversible on a 12-18 month horizon: organisations
-are harder to unwind than pilots.
+What it buys:
 
-**Suitable for Kriterion.** It has genuine external evidence, genuine assumptions, genuinely
-unmeasured quantities, and informed parties who would disagree for good reasons. That combination is
-what Kriterion claims to instrument. It also stresses Kriterion in a way the fixtures cannot: it has
-**no measured internal baseline at all**, which the fixtures always had.
+**Full reproducibility.** A reader can read the case pack, re-run the deterministic stages
+(`econ`, `ledger freeze`, `decision-page`) and get byte-identical output, and check every claim the
+page makes against the ledger item it cites. No prior Kriterion run has been inspectable end to end
+by someone outside the project.
+
+**A reduced circularity problem.** The participant has no privileged knowledge of Northstar's
+answer, no organisational stake in the outcome, and no remembered facts to substitute for the
+case's evidence. That is a real improvement over a self-selected real case, though not a cure: the
+participant still authored the scenario.
+
+**A decision that is genuinely open.** The economics come out negative in the base case and
+strongly positive at the optimistic end of the *same declared ranges*. The sign flips inside the
+case's own assumptions. Nothing about the design guarantees an answer.
+
+What it costs:
+
+**It is not a real decision.** Whatever Human Run 001 shows about the instrument's effect on human
+reasoning, it shows it on a decision nobody has to live with. That limitation is not reduced by
+making the scenario realistic, and it is the dominant threat to the run's external validity.
 
 ---
 
-## The three decision dimensions
+## Candidate strategies
 
-The decision is one question spanning three dimensions, and they are separable. Each is recorded
-independently at T0, T1 and T2, so that a run can move one while the others hold.
+Six alternatives, of which five are substantive. None is designed to win.
 
-**1. Operating model.** Which of four models to fund and test next: central platform engineering
-(the status quo); distributed enterprise platform engineering (enterprise-owned platforms,
-engineering capacity deliberately spread across regions on the same products and backlogs);
-federated platform engineering (enterprise retains ownership, regions receive explicit capability
-and decision rights); or greater regional platform autonomy. These map onto
-`DecisionCase.alternatives`, with `do_nothing` carrying the central model.
+| Alternative | What it is |
+|---|---|
+| `do_nothing` | Continue with no incremental investment. Kriterion requires this alternative; here it is genuinely distinct from Option A, which does invest. |
+| `optimise_existing_toolchain` | Option A. Keep the existing CI/CD, cloud tooling, observability, portals, scripts, docs and support teams; invest incrementally in integration, automation and standardisation. |
+| `buy_commercial_platform` | Option B. Adopt a commercial platform/portal/control-plane product and integrate existing enterprise tooling underneath it. |
+| `build_thin_internal_platform` | Option C. A deliberately constrained platform over existing enterprise tools: golden paths, self-service, service templates, environment provisioning, policy automation, deployment abstractions, discovery. Does not attempt to replace the underlying tools. |
+| `build_strategic_idp` | Option D. Developer experience treated as a major internal product: paved roads, self-service control planes, policy-as-code, service lifecycle management, integrated observability, AI-agent interfaces, platform product management. |
+| `staged_hybrid` | Fund discovery and an MVP, then let evidence choose between B, C and D at a gate. |
 
-Two notes recorded rather than worked around. The central model is not strictly "do nothing" — it
-permits regional support to be improved while the organisational model stays centralised, and
-Kriterion's required `do_nothing` label understates that. And regional autonomy is held as a genuine
-alternative rather than a strawman: it carries both supporting and constraining evidence on the same
-terms as every other model, and no item in the pack asserts that it is wrong.
-
-**2. Decision rights.** Thirteen capabilities, each allocated to enterprise, region, joint or
-undecided. These allocations are **part of the decision**, not inputs to it, and the case does not
-assert them. Kriterion has no native representation for a decision-rights allocation, so this
-dimension lives as a case-design artifact alongside the pack, privately, blank. Whether to add a
-product-domain model was re-examined when the matrix nearly doubled in size; the answer held. A
-thirteen-row allocation is still a decision output, and the product would gain a schema it cannot
-validate, cannot economically model and cannot narratively bind.
-
-**2a. Distribution.** A sub-artifact of the same kind, and new. The instrument asks where
-platform-engineering capability should physically exist across four regions, *and separately* what
-engineers in each region would own. Those are kept apart deliberately: the four operating models are
-not distinguished by geography alone, and a position that moves on *where* without moving on *what
-those engineers may decide* is the configuration the external evidence names as a failure mode
-rather than a change.
-
-**3. Investment.** What capability to fund now, where, at what capacity, for how long, and what it
-is allowed to do — with the decision explicitly asked to identify the *smallest* useful commitment
-capable of producing the evidence the next decision needs. This dimension reuses Kriterion's existing
-`DecisionAction` vocabulary unchanged. No parallel stage system was created.
-
-Kriterion natively represents dimension 3 and, through `alternatives`, the *names* of dimension 1.
-It represents neither dimension 2 nor the distribution question. That asymmetry is recorded as a
-finding rather than patched, and it is worse under this specification than the previous one: the
-four models differ chiefly in the authority they allocate, which is exactly what a bare `list[str]`
-of alternative names cannot carry.
+**Option D is deliberately not the obvious winner.** It carries the largest platform-team operating
+cost, the most exposure to the adoption assumption, and the over-platforming failure mode that
+`ev-405` and `ev-419` both name directly. Option A carries the lowest disruption and the lowest
+upfront commitment — and the case contains no costed comparison of it, recorded as `ev-463`, a
+known asymmetry in the case's own construction that makes the platform options look better than a
+fair comparison might.
 
 ---
 
 ## Evidence boundaries
 
-The case preserves epistemic status using Kriterion's existing taxonomy
-(`MEASURED` / `EXTERNAL_REFERENCE` / `EXPERT_JUDGMENT` / `FORECAST` / `ASSUMPTION` / `INFERENCE` /
-`UNKNOWN`), and the boundaries fell as follows.
+The pack has **65 evidence items**, and the boundary that matters most is not the
+`EvidenceCategory` — it is the `Attestation`.
 
-**Externally sourced.** The external evidence comes from a single real document: a deep-research
-whitepaper on international platform engineering in the agentic enterprise, which the participant
-published publicly under their own identity before this experiment existed. It cites named public
-sources (CNCF, AWS, Microsoft, Google Cloud, ING, Uber, JPMorgan Chase, Goldman Sachs, LinkedIn,
-PayPal, Capital One, Spotify, Netflix, Shopify, Meta, Palantir, InnerSource Commons, Team Topologies,
-DORA). These items are classified `EXTERNAL_REFERENCE` and carry `attestation = "REAL"` — the first
-use in Kriterion of the `Attestation.REAL` value that ADR-003 reserved and V0 never used.
+| Attestation | Count | What it means here |
+|---|---|---|
+| `REAL` | 20 | Drawn from a real, named, public source a reader can check. Used **only** on `EXTERNAL_REFERENCE` items. |
+| `AUTHORED` | 45 | A synthetic input invented for this experiment. Every Northstar-specific claim. |
 
-A **provenance ceiling** is now recorded alongside them, which the first preparation did not record
-and should have: that whitepaper attributes every claim to a named organisation in prose but
-contains no URLs, footnotes or bibliography. It is a second-order source, and no item can be traced
-to a primary document from the pack alone. Several items were downgraded in strength on that basis —
-specifically those resting on a single organisation's self-report or carrying the whitepaper's own
-evidentiary caveat.
+ADR-003 made `Attestation` orthogonal to `EvidenceCategory` precisely so that a fixture could
+simulate a measurement without claiming one. Human Run 001 is the first case to use both values in
+one pack, and it is what lets the case be simultaneously evidence-rich and honest: real research
+about platform engineering sitting next to invented facts about Northstar, with the difference
+rendered as a badge on every item rather than explained in a preamble a reader might skip.
 
-**Organisation-specific.** Effectively none, and this is still the single most important fact about
-the case. **The case contains zero `MEASURED` items.** A fuller specification of the *decision* did
-not manufacture observations of the *organisation*.
+`tests/test_northstar_pack.py` enforces the boundary: `REAL` may appear only on
+`EXTERNAL_REFERENCE`, every other item must be `AUTHORED`, and every `MEASURED` item must carry
+`SYNTHETIC SCENARIO INPUT` in its claim text and "fictional" in its source.
 
-The specification names six current-state observation categories to look for. Each was checked
-against the external source before being classified, rather than assumed unavailable, and none is
-supported by it. The one worth naming is **timezone coverage**, because it is the category that most
-looks like a general industry fact a research source could supply. It cannot: the whitepaper's
-timezone reasoning is self-labelled as an inference rather than a measured benchmark, its
-follow-the-sun references are prescriptive cells in its own design matrix rather than findings about
-any organisation, no named source is attached to any timezone claim in it, and it lists the
-corresponding question among its *own* open questions requiring internal evidence. It is an
-`UNKNOWN`, and the item's claim text records that the check was performed and what it found, so a
-later reader cannot mistake the classification for an oversight.
+### By epistemic category
 
-For contrast: Kriterion's canonical fixture opens with seven `MEASURED` telemetry items. The real
-case opens with none. Whether an evidence-first instrument remains useful in that condition is itself
-a Human Run 001 finding, and arguably a more interesting one than the participant's position shift.
+| Category | Count | What it holds |
+|---|---|---|
+| `EXTERNAL_REFERENCE` | 20 | Real public research. |
+| `MEASURED` | 13 | Northstar's synthetic baseline. **Not real observations** — see below. |
+| `UNKNOWN` | 12 | The quantities the decision needs and does not have. |
+| `ASSUMPTION` | 8 | The ranged modelling assumptions the economics spends. |
+| `EXPERT_JUDGMENT` | 6 | Synthetic internal judgments from Northstar roles. |
+| `INFERENCE` | 5 | Derived within the case, each naming what it rests on. |
+| `FORECAST` | 1 | Northstar's own forward-looking planning input on agent-originated change. |
 
-**Assumed.** The six substantive decision assumptions the specification itself names, plus two
-explicitly labelled illustrative sizing assumptions. All are `LOW` evidence strength. **Two** are
-recorded as *contradicted* by the external evidence base, where the first preparation had one,
-because the research names the corresponding failure mode of each proposal directly. Kriterion's
-`contradicts` field carries those tensions structurally rather than leaving them in prose — a choice
-that paid off measurably in the first run, when every seat independently named the contradicted
-assumption as its distrusted one.
+**The `MEASURED` note, because it is the one a reader could get wrong.** Thirteen items describe
+Northstar telemetry — onboarding time, CI/CD pattern count, provisioning lead time, support volume,
+platform headcount, golden-path coverage, lead-time and change-failure comparisons, documentation
+sprawl, policy exceptions, idle cloud spend, AI-agent usage. They are categorised `MEASURED`
+because that is the kind of claim they are *inside the scenario*: telemetry rather than opinion.
+They are attested `AUTHORED` because nobody measured anything. The category describes the claim's
+shape; the attestation describes its reality. Both are rendered on the page.
 
-One of the six deserves naming as a category: the assumption that central platform teams are
-currently a material source of delivery delay. That is the premise the entire decision rests on, it
-carries `LOW` strength, and nothing in the case evidences it. If it is false, all four models answer
-a question the organisation does not have.
+This is the closest honest classification Kriterion's existing vocabulary offers, and it is
+adequate — but only because `Attestation` exists. **`CaseRealism` is not adequate**, and that is
+recorded as a standing product limitation rather than patched: the enum has exactly one value,
+`AUTHORED_FIXTURE`, it is never loaded from `case.toml`, and it is never rendered. A case pack
+cannot declare its own realism and a reader cannot see it. Northstar happens to be correctly
+labelled by the default, which is luck rather than design.
 
-**Unknown.** Eighteen `UNKNOWN` items, up from eleven, covering the quantities the decision would
-need and does not have: dependency-attributable delay and its cost; demand commonality across
-regions; enterprise capacity consumed by regional support; upstream contribution acceptance rate;
-optimal team size and optimal distribution; which control-plane actions are delegable in fact versus
-in principle; the economics of distributed versus central engineering; four current-state categories;
-whether the binding constraint is capacity, decision rights or prioritisation; whether platform
-owners would consent to delegated operation at all; whether agentic execution changes the sizing in
-either direction; which platforms cause the most delay; and the appropriate authority boundary.
+### The external evidence, and what it is allowed to carry
 
-The increase is not padding. The specification names nine unknowns explicitly, adds six current-state
-categories, and requires unpriced amounts to be preserved as unknowns rather than estimated.
+Twenty `REAL` items, cited by title, author and publishing organisation. The substantive clusters:
 
-**Seeded, not authored.** The specification offers seven candidate evidence-request areas. They are
-**not** written into the pack as `EvidenceRequest` objects — those are committee output, and
-authoring them would pre-empt the thing the run measures. Each is present in the ledger as the
-corresponding `UNKNOWN`, so the committee can surface it or fail to. Whether it does is a
-measurement, not a design goal.
+- **Delivery measurement.** DORA / *Accelerate*'s four key metrics (`ev-401`), and the 2024 DORA
+  finding that AI adoption was associated with *decreased* delivery throughput and stability
+  (`ev-402`).
+- **Productivity measurement's limits.** The SPACE framework's claim that no single metric validly
+  represents developer productivity (`ev-403`), and the DevEx three-dimension model — feedback
+  loops, cognitive load, flow state (`ev-404`).
+- **Platform as product.** *Team Topologies* on the thinnest viable platform, and on cognitive load
+  being relocated rather than eliminated (`ev-405`, `ev-406`); the CNCF Platforms White Paper and
+  Platform Engineering Maturity Model (`ev-407`, `ev-408`).
+- **AI and engineering, disagreeing with itself.** A controlled experiment showing a substantial
+  speed-up on a narrow greenfield task (`ev-411`); a randomised trial finding experienced
+  developers *slower* on their own mature repositories while believing they were faster (`ev-412`);
+  an enterprise trial reporting a measurable speed-up (`ev-413`). `ev-411` and `ev-412` carry a
+  structural `contradicts` link to each other, as do `ev-402` and `ev-413`.
+- **Mechanisms.** Paved roads and secure defaults (`ev-416`); policy-as-code and the SSDF
+  (`ev-417`); Conway's Law (`ev-418`); InnerSource's finding that acceptance capacity, not
+  contributor willingness, is the usual bottleneck (`ev-415`).
+- **Cautions.** Practitioner and technology-radar commentary against platforms built without a
+  product mindset and against over-abstraction (`ev-419`); Backstage practitioner accounts that the
+  portal is the small part of the work (`ev-414`).
 
-**Sanitised.** The whitepaper's own analytical judgements are classified `EXPERT_JUDGMENT` and
-attributed to "the research author" rather than to a named individual or employer. No organisation,
-team, system, individual or internal document is named anywhere in the pack. The pack itself is not
-in a git repository. The public artifacts in this directory name the decision *topic*, which is
-already public in the participant's own published research, and nothing more specific.
+Two items are deliberately weak and labelled so in their own `source` field:
+
+- `ev-409`, the analyst prediction that most software engineering organisations will establish
+  platform teams. It is an **adoption forecast, not an outcome measurement** — it says platform
+  teams will be common, not that they will work. `LOW`.
+- `ev-420`, the vendor ROI claim of payback within twelve months on productivity grounds alone.
+  Marked `VENDOR EVIDENCE -- included so that it can be challenged, not relied upon`, `LOW`, and
+  carrying `contradicts` links to the SPACE item and to the attribution unknown. It is in the pack
+  because the CFO seat needs something to push against, following the same pattern as Case C's
+  `ev-105`.
+
+**Provenance ceiling.** The pack carries no URLs. Items cite work by title, author and publisher; a
+reader can find them, but the pack does not resolve them. No claim should be read as stronger than
+the source it names, and several sit at `MEDIUM` rather than `HIGH` on exactly that basis. Survey
+evidence with self-selected respondents and no control group (`ev-410`) is `LOW`.
+
+### Load-bearing assumptions
+
+Eight `ASSUMPTION` items, each mirroring a ranged entry in `[[assumptions]]`. All are synthetic
+scenario inputs and say so. Four carry the decision:
+
+**Productivity attribution** (`as-benefit-attribution-factor`, 0.25, ranged 0.05–0.50). What share
+of saved developer time becomes business value rather than being absorbed elsewhere. Nothing in the
+case evidences any value in that range, and the range's width is the honest statement of that. It
+is contradicted by `ev-403` (no single metric represents productivity) and by `ev-436` (Northstar
+has no methodology for converting engineering time into a booked benefit). **It ranks first in the
+tornado**, which is the case working as intended: the valuation is most sensitive to the question
+the decision is actually about.
+
+**Adoption** (`as-platform-adoption-rate`, 0.60, ranged 0.30–0.85). A platform teams bypass creates
+no value however good it is. Contradicted by `ev-438` (teams bypass anything slower than what they
+already have) and cautioned against by `ev-419`.
+
+**Platform-team operating cost** (`as-platform-team-annual-cost-gbp`, £1.8m/yr, ranged £1.2m–£2.8m).
+Engineers, platform product management, operations, support, maintenance and vendor cost. This is
+the cost that continues after the capital programme ends and that the £4m ask does not include.
+`ev-406` supplies the mechanism: the cognitive load is relocated to this team, not deleted.
+
+**Scope discipline**, carried structurally rather than as a single number:
+`as-engineers-reached-year-1` and `-year-2` separate *reach* from *adoption*, and
+`as-migration-cost-per-engineer-gbp` prices the effort application teams spend moving, which the
+platform's own budget never shows.
+
+### Unknowns
+
+Twelve, covering what the decision needs and does not have: true productivity attribution; the
+adoption rate under voluntary use across heterogeneous workloads; business-value conversion;
+long-term platform-team cost; developer behavioural response; effect on defect rate; the direction
+of the agentic-engineering effect; build-versus-buy total cost of ownership; whether toolchain
+fragmentation is the binding constraint at all; opportunity cost; golden-path control
+effectiveness; and the benefit horizon the two-period model truncates.
+
+Two deserve naming as categories rather than items:
+
+- **`ev-460`** — whether fragmentation is Northstar's binding constraint at all, rather than
+  business prioritisation, architectural coupling or delivery-process overhead. This is the premise
+  the entire decision rests on. If it is false, every option answers a question Northstar does not
+  have.
+- **`ev-463`** — that the incremental option is not costed anywhere in the pack. Recorded as a known
+  asymmetry in the case's construction rather than quietly left out.
+
+**Seeded, not authored.** The seven candidate EvidenceRequest areas the case design contemplates —
+baseline friction, support demand, delivery comparison, attribution, adoption, control
+effectiveness, AI-agent compatibility — are **not** written into the pack as `EvidenceRequest`
+objects. Those are committee output, and authoring them would pre-empt the thing the run measures.
+Each is present as the corresponding `UNKNOWN`, so the committee can surface it or fail to. Whether
+it does is a measurement, not a design goal.
 
 ---
 
-## The Model B question, as a design problem
+## Economics
 
-The specification's distributed-enterprise model states that the change is geography, not platform
-ownership. The case had to represent that faithfully without either endorsing or refuting it, and the
-way it does so is worth recording as methodology.
+`kriterion.economics.case_flows.compute_staged_platform_economics`. Every number the model spends
+comes from the pack's own ranged assumptions; the module holds no Northstar constant.
 
-The geographic evidence base supports non-headquarters sites *owning globally consumed components*.
-It does not demonstrate capacity distributed across regions under unchanged ownership and
-prioritisation — and the same evidence base names that exact configuration as a failure mode, twice.
-Both halves are in the ledger as separate items, and a distinct `INFERENCE` item states the tension
-explicitly: the model is supported as a *location* pattern and constrained on *authority*, so its
-benefit case rests on an authority change the model does not itself specify.
+The benefit chain is deliberately explicit, because each link is a separate place the benefit can
+fail to appear:
 
-That item deliberately stops short of concluding the model is wrong. Whether the organisation wants
-to make that authority change is a live question the human answers in the decision-rights matrix,
-which is precisely why that matrix is an independent dimension rather than something derived from the
-model label.
+```text
+engineers reached
+  x adoption rate                  teams can bypass the platform
+  x hours saved per engineer       the friction actually removed
+  x fully-loaded hourly cost       what an engineer-hour costs
+  x attribution factor             the share of saved time that becomes
+                                   business value rather than being
+                                   absorbed elsewhere
+```
+
+The last multiplier is the point. Monetising a productivity saving at full salary equivalence would
+assert that every recovered engineer-hour converts into delivered value, which is the "secretly an
+ROI calculator" failure mode. Two statements the case makes structurally rather than in prose:
+
+```text
+developer hours saved   !=   business value
+deployment frequency    !=   revenue
+```
+
+### Result
+
+| | |
+|---|---|
+| Ask | £4,000,000 over 18 months (synthetic; midpoint of the £3m–£5m envelope) |
+| NPV, pessimistic | **−£6,624,995** |
+| NPV, base | **−£4,061,178** |
+| NPV, optimistic | **+£11,748,388** |
+| Payback | none within the modelled horizon, on base-case flows |
+| Peak funding | £4,724,500 |
+
+**The sign flips inside the case's own declared ranges.** That is the single most useful property
+of this case's economics: the decision is not resolvable by arithmetic, and a reader who wants a
+number to justify a position can find one in either direction without leaving the ranges the case
+declares.
+
+### Sensitivity
+
+| Rank | Assumption | NPV swing |
+|---|---|---|
+| 1 | `as-benefit-attribution-factor` | £2,949,136 |
+| 2 | `as-friction-hours-saved-per-engineer` | £2,821,705 |
+| 3 | `as-platform-adoption-rate` | £1,501,875 |
+| 4 | `as-platform-team-annual-cost-gbp` | −£1,322,314 |
+| 5 | `as-migration-cost-per-engineer-gbp` | −£1,221,074 |
+| 6 | `as-fully-loaded-hourly-cost-gbp` | £744,731 |
+| 7 | `as-engineers-reached-year-1` | £510,248 |
+| 8 | `as-engineers-reached-year-2` | £386,777 |
+| 9 | `as-precommitted-capital-gbp` | −£280,992 |
+
+Attribution ranks first. The three quantities nobody has measured — attribution, hours saved,
+adoption — occupy the top three places and between them swing the valuation by more than £7m, while
+the entire capital ask is £4m.
+
+### Staged investment, and what the model says about it
+
+The staging ladder the case argues for:
+
+```text
+£100k  discovery            establish baselines, prove friction is real
+   |
+£500k  MVP                  3-5 teams, ~150 engineers
+   |
+   v  evidence gate
+£1.5m  targeted rollout     ~1,000 engineers
+   |
+   v  evidence gate
+       enterprise scale
+```
+
+All synthetic. It enters the economics as `as-precommitted-capital-gbp` — how much of the £4m
+envelope is committed before the first gate — ranged from £600k (discovery and MVP only, everything
+else gated) to £4m (the whole envelope approved up front).
+
+The model's answer is worth stating because it is not the flattering one: **staging moves NPV by
+£280,992, the smallest swing in the tornado, while attribution moves it by £2,949,136.** Total
+capital is identical across the range; only the timing changes. Staging does not save money.
+
+What it buys is the option to stop, and the information on which to exercise it — and the tornado
+shows exactly why that matters, because the quantity staging buys information about is the one the
+valuation is ten times more sensitive to.
+
+> When uncertainty is high, buy information before buying scale.
+
+The economics supports that principle for a reason the NPV column alone does not show, and a reader
+who reads only the NPV column will miss it. Recorded here as something to watch for at T1.
+
+### Modelling limitations, recorded not corrected
+
+- **Two annual periods.** Matching the two existing Kriterion cash-flow models. Platform benefits
+  are generally argued to accrue over longer horizons, so the NPV charges the full build cost
+  against at most two years of benefit. Recorded in the ledger as `ev-464`.
+- **`Ask.amount_gbp` is a single required float.** The £3m–£5m envelope cannot be expressed; £4m is
+  the midpoint. The same limitation the staged ladder runs into, and the reason the ladder lives in
+  an assumption rather than in the ask.
+- **The stage-ladder widget on the generated page is Case-A-only.** `decision_state._stage_ladder`
+  returns an empty list for any other case id, so Northstar's ladder is carried by its evidence and
+  its assumption rather than by the page's ladder component. Not fixed: giving the ladder a
+  first-class case-pack schema is already named follow-up work and is out of scope here.
+- **No avoided-loss band.** This model prices benefits inside the NPV, so there is no separate band
+  to report beside it, and `avoided_loss_*` are `None` meaning "not applicable" — the same as
+  Case A. That is a different `None` from the cost-only model's, which means "cannot honestly be
+  stated". The page renders both identically, which is worth watching at section 5.
 
 ---
 
-## Economic limitations
+## Challenge perspectives
 
-This is where the case pushed hardest on the product, and the result is worth stating without
-softening.
+Kriterion has **five** charter seats. The case design contemplates six perspectives. The mapping,
+and the gap, stated before the run:
 
-The specification's economic frame asks for three quantities: the cost of new capability, the cost
-of the current model, and the risk of decentralisation. Kriterion could honestly represent **the
-first, and nothing else.**
+| Perspective the case wants | Kriterion seat | Present? |
+|---|---|---|
+| CTO | `cto` | yes |
+| CFO | `cfo` | yes |
+| CISO / Risk | `ciso`, `cro_compliance` | yes, split across two seats |
+| Product / Business Leader | `business_executive` | yes |
+| Engineering Leader | — | **no seat** |
+| Developer / Platform Consumer | — | **no seat** |
 
-The cost-only choice was **re-checked against the external source rather than inherited** from the
-first preparation. Every figure in that source was examined for whether it could legitimately price
-any benefit-side driver. None can: each is another organisation's outcome under unstated baseline
-conditions — a numerator without a denominator, or a denominator without a numerator. All the
-quantified ones are outcomes of platform-product and automation investments, while the source's own
-*geographic* evidence is precisely the part it marks as qualitative and non-quantitative. And the
-source states twice in its own voice that external research cannot establish the magnitude of these
-effects. Building an avoided-loss band from any of them would be a category substitution dressed as
-prudence.
+The two missing perspectives are the two closest to the adoption question, which is the case's
+third-most-sensitive assumption and its most plausible failure mode. No new agent was created:
+adding seats is explicitly out of scope for this pivot, and a seat invented to serve one case is
+the coupling this project already has a finding about. The gap is recorded, and `ev-438` carries
+the engineering-leader argument into the ledger as evidence so the committee has access to it even
+without a seat to voice it.
 
-The consequences, all of them deliberate:
-
-- The economics result is **negative in every scenario, by construction**, because only costs are
-  summed. This is the same construction Kriterion's Case C fixture uses.
-- **No benefit band is reported at all.** Case C at least has a risk-modelled avoided-loss band to
-  report alongside (never inside) the NPV table. This case cannot honestly state even a band, so the
-  result carries `None`, not `0`. Absence had to stay absence.
-- The sensitivity analysis ranks **exactly one** assumption, because the cost of the capability is
-  the only quantity the case can vary. A one-entry tornado is the honest output here, not a
-  degenerate one.
-- The ask amount is **illustrative sizing, explicitly labelled**, because `Ask.amount_gbp` is a
-  required non-optional float. A case whose ask has genuinely not been sized cannot record that
-  absence. This pulls against the specification's own instruction to identify the *smallest* useful
-  commitment: a required six-figure ask anchors upward, and the case cannot say "not yet sized".
-- The sizing inputs were **held fixed** at the superseded pack's values rather than re-guessed for
-  the broader scope. There is no basis for any figure, so changing it would have added motion without
-  information and made the two runs incomparable.
-
-No ROI, NPV or payback figure was fabricated to make the engine produce a fuller answer. A reader of
-the generated page should come away understanding that the money side of this decision is one-sided,
-not that the decision is uneconomic.
+**Charter coupling, to be observed rather than fixed.** Every charter's `required_evidence` list
+names Case A evidence ids (`ev-007`, `ev-014`, `as-training-cost-per-engineer-gbp`, and so on).
+Against the Northstar pack those ids do not resolve. The run proceeds — Case C already demonstrates
+that — but the effect on differentiated challenge is a standing open question. **Whether the five
+seats produce genuinely distinct evidence needs on this case, or converge, is a Human Run 001
+observation to record**, not a thing to fix mid-experiment.
 
 ---
 
@@ -261,51 +389,59 @@ not that the decision is uneconomic.
 
 Recorded in advance, none of them eliminated.
 
+**The decision is not real.** The dominant limitation. Whatever the run shows about the
+instrument's effect on reasoning, it shows it on a decision nobody has to live with. No amount of
+scenario realism changes that.
+
+**The participant authored the scenario.** The circularity is reduced relative to a real
+self-selected case — no privileged knowledge of the answer, no stake in the outcome — but not
+eliminated. The participant chose which facts Northstar has.
+
 **Synthetic recommendation anchoring.** The participant may adopt the recommendation and then
-retrofit a rationale from sections 1-7. The T1 checkpoint is the mitigation and it is procedural
-only: the recommendation is present in the frozen artifacts and on the generated page from the
-start, so nothing technically prevents reading ahead. Pre-registered falsification condition 3 exists
-because the mitigation is imperfect.
+retrofit a rationale from earlier sections. The T1 checkpoint is the mitigation and it is
+procedural only. Pre-registered falsification condition 3 exists because the mitigation is
+imperfect.
 
-**Incomplete evidence.** With zero `MEASURED` items, the case may be too thin to move a well-informed
-judgment in any direction, which would make a null result uninformative about Kriterion rather than
-informative. The compensating value is that the evidence gaps are *themselves* the decision-relevant
-content here.
+**The section-1 leak.** The generated page's first section states the recommendation, its
+confidence, the capital at risk and the dominant uncertainty at the top, by V1 homepage design.
+The blind reveal therefore depends on a human withholding four lines. `protocol.md` specifies the
+redaction; if it fails, the run produces no T1 and that must be reported rather than worked around.
 
-**Weak EvidenceRequests.** `EvidenceRequest`s are produced by the committee during the run, not
-authored into the case, so their quality is not under the experimenter's control. Requests without a
-threshold, an owner or a falsifiable outcome are to be recorded as weak, not silently upgraded into
-falsifiable tests when the results are written up.
+**Participant familiarity with Kriterion.** The participant designed the instrument, knows what
+each section is for, knows the hypothesis, and knows what T1 is testing. Demand characteristics
+cannot be excluded.
 
-**Participant familiarity with the subject.** The participant is highly familiar with the
-platform-engineering problem and authored the external research the case draws on. The case's
-`EXPERT_JUDGMENT` items are therefore the participant's own prior judgements, fed back to them as
-evidence — and there are now more of them than in the first preparation, so the circularity grew.
-It biases toward `T0 ≈ T1`, i.e. against the product hypothesis, which makes a movement finding more
-credible and a null finding less so.
+**Weak EvidenceRequests.** `EvidenceRequest`s are committee output, not authored into the case, so
+their quality is not under the experimenter's control. Requests without a threshold, an owner or a
+falsifiable outcome are to be recorded as weak, not silently upgraded when the results are written
+up.
 
-**Participant familiarity with Kriterion.** The participant designed the instrument, knows what each
-section is for, knows the hypothesis, and knows what the T1 checkpoint is testing. Demand
-characteristics cannot be excluded.
+**The incremental option is uncosted.** `ev-463`. The case cannot fairly compare Option A against
+the platform options, and a position that moves toward a platform may be moving partly because the
+alternative was never priced.
 
-**Self-dogfooding bias.** The same person is decision-maker, research author, product designer and
-experimenter. There is no independent observer. This is the dominant limitation of Human Run 001 and
-the reason a later run should use a participant with no involvement in the product.
+---
 
-**Instrument revision before T0.** New to this preparation and worth recording: the case, the
-instrument and the protocol were all rebuilt after a first version had been frozen. That happened
-before any response was recorded, and the superseded version was archived rather than edited, so
-the pre-registration holds. But a specification that can be replaced once can be replaced again, and
-the guard against that is procedural: nothing in this directory is revised after T0.
+## Standing product findings, preserved separately
 
-None of these are worked around. Human Run 001 establishes whether the instrument does anything at
-all on a real decision. A generalisability study is a different experiment.
+These predate Human Run 001 and are **not** to be hidden by the Northstar case's design. If any
+recurs during the run, it is recorded as a recurrence rather than as a new discovery:
+
+- **Charter coupling** — charters name Case A evidence ids; see above.
+- **Inconsistent response to contradiction edges** — the `contradicts` field carries tension
+  structurally, and seats have not responded to it consistently across runs. This case has eight
+  contradiction edges, including two between `REAL` external items.
+- **Narrative Integrity versus upstream epistemic correctness** — Narrative Integrity binds the
+  page's prose to the decision state. It does not check whether the decision state is right. A page
+  can pass with zero violations and still rest on a badly classified ledger.
+- **CaseRealism vocabulary limitation** — one enum value, never loaded from the pack, never
+  rendered. Described above.
 
 ---
 
 ## Product fit
 
-The case ran through Kriterion's existing pipeline with one generic, case-agnostic addition made
-during the first preparation and unchanged here, plus a mechanical case-id rename, and several
-limitations that were recorded rather than fixed. The detail, the verdict and the justification for
-each choice are in `opus-preparation-report.md`.
+The case required **one** product change: a new generic economics model,
+`compute_staged_platform_economics`, plus a shared helper extracted from the existing Case A path
+so the two do not duplicate construction. `opus-pivot-report.md` records why it was necessary
+rather than opportunistic, and what was deliberately not built.
