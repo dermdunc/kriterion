@@ -5,21 +5,25 @@ from kriterion.economics.case_flows import (
     compute_case_c_economics,
     compute_cost_only_economics,
     compute_economics,
+    compute_staged_platform_economics,
 )
 from kriterion.economics.engine import npv, payback_period, peak_funding, tornado_ranking
 
 # Dispatch by case id -- each case's economics function needs different
 # assumption ids, so there is no single generic call shape across cases.
 #
-# global-platform-engineering is the Human Run 001 case (see
-# docs/planning/human-run-001/). Its case pack deliberately lives outside this
-# repository. It uses the generic cost-only model because every benefit-side
-# driver of that decision is an UNKNOWN in its ledger: the cost of the
-# capability is the only quantity the case can honestly vary.
+# northstar-internal-developer-platform is the Human Run 001 case (see
+# docs/planning/human-run-001/). It uses the staged-platform model because its
+# benefit drivers -- adoption, hours saved per engineer, and the share of saved
+# time that converts to business value -- are declared as ranged assumptions the
+# case pack owns and labels as synthetic scenario inputs, so they can honestly
+# be varied. That is precisely the condition compute_cost_only_economics exists
+# for the absence of: a case whose benefit drivers are all UNKNOWN must use the
+# cost-only model instead, and the two are not interchangeable.
 CASE_ECONOMICS_FUNCTIONS = {
     "coding-agent-rollout": compute_economics,
     "invisible-ai-control-plane": compute_case_c_economics,
-    "global-platform-engineering": compute_cost_only_economics,
+    "northstar-internal-developer-platform": compute_staged_platform_economics,
 }
 
 __all__ = [
@@ -27,6 +31,7 @@ __all__ = [
     "compute_case_c_economics",
     "compute_cost_only_economics",
     "compute_economics",
+    "compute_staged_platform_economics",
     "npv",
     "payback_period",
     "peak_funding",
