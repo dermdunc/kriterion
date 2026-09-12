@@ -6,7 +6,12 @@ Do not reconstruct responses after the final decision.
 
 The objective is to identify which parts of Kriterion actually influenced human judgment — and,
 specifically, whether the *synthetic recommendation itself* anchored the human's position rather
-than the analysis (evidence, economics, challenge) that preceded it.
+than the analysis (evidence, assumptions, unknowns, economics, challenge) that preceded it.
+
+The experiment is **not** asking whether Kriterion selected the best operating model. It is asking
+whether Kriterion caused the accountable human to reason more explicitly and effectively about the
+decision. See "Useful outcomes" below before recording T0, so that a null position shift is not
+mistaken for a null result.
 
 This run uses a dedicated Kriterion case built for the decision named below. An earlier plan used
 the `coding-agent-rollout` fixture as the instrument while the participant held a different
@@ -16,67 +21,166 @@ in sections 1–7, and the decision being made are now the same decision.
 
 The case pack, its run artifacts and the generated page are private and are not in this
 repository. See `README.md` for the public/private split, and `protocol.md` for the pre-registered
-design and the two falsification conditions.
+design and the five falsification conditions.
 
 ---
 
 ## Run metadata
 
 **Run:** Human Run 001
-**Decision:** International Platform Engineering Operating Model
-**Kriterion case:** `international-platform-engineering` (pack held privately in `kriterion-private/human-run-001/case/`)
-**Kriterion version:** repo `dermdunc/kriterion` @ `677d668adf285633ee113681ceb233256100f6ad` (branch `agent/opus/human-run-001-prep`, based on `origin/main` @ `5dac579`)
-**Case commit:** not applicable — the private directory is deliberately not a git repository, so the case freeze is a content-hash manifest (`kriterion-private/human-run-001/freeze-manifest.md`). `case.toml` sha256 `200aaa9fbf98221a00605191f5bfd50c32dd1eff5002fb85fe98bb1a7bd5bed1`, frozen 2026-09-12T10:03Z.
-**Canonical run:** `hr001-intl-platform-condC-s1` — condition C, seed 1, evidence ledger v1 fingerprint `421019302391da70b8912d3ba8f3cc9364a01d1aded96a3d6711833ee55b5443`
+**Decision:** 12–18 month global platform-engineering operating model
+**Kriterion case:** `global-platform-engineering` (pack held privately in `kriterion-private/human-run-001/case/`)
+**Kriterion version:** recorded in the private freeze manifest; code commit on branch `agent/opus/human-run-001-prep`
+**Case commit:** not applicable — the private directory is deliberately not a git repository, so the case freeze is a content-hash manifest (`kriterion-private/human-run-001/freeze-manifest.md`)
+**Canonical run:** recorded in the private freeze manifest — condition C, seed 1
 **Date:**
 **Participant:**
-**Decision-rights matrix:** complete the T0/T1/T2 tables in `kriterion-private/human-run-001/decision-rights-matrix.md` at the same three checkpoints as the positions below. Leave rows blank or `Undecided` rather than guessing.
-**Before you start:** do not read `opus-preparation-report.md`, or the private `freeze-manifest.md` / `preparation-report-detail.md`, before T2. The two private files state the synthetic recommendation outright; the public report records page-quality observations that would bias section 5 and the Narrative Integrity retrospective question.
+**Status:** `PRE-REGISTERED`. Next action: `RECORD T0`.
+
+**Three dimensions, recorded independently.** This decision spans operating model, decision rights
+and investment. They are separable and they are recorded separately at T0, T1 and T2. Do not force
+the decision into a single label, and do not let a movement in one dimension be reported as a
+movement in another.
+
+**Decision rights live in a separate private file.** Complete the T0/T1/T2 tables in
+`kriterion-private/human-run-001/decision-rights-matrix.md` at the same three checkpoints as the
+positions below. Leave rows `Undecided` rather than guessing — `Undecided` is a valid state and is
+the expected answer for several rows at T0.
+
+**Distribution lives there too.** The physical-presence question (US / Europe / India / Australia
+and APAC) is recorded in `kriterion-private/human-run-001/distribution.md`, also at all three
+checkpoints.
+
+**Before you start:** do not read `opus-preparation-report.md`, or the private `freeze-manifest.md`
+/ `preparation-report-detail.md`, before T2. The two private files state the synthetic
+recommendation outright; the public report records page-quality observations that would bias
+section 5 and the Narrative Integrity retrospective question.
 
 ---
 
-# T0 — before opening Kriterion
+## Useful outcomes
 
-## Initial decision
+Read this before T0. It is here so that the run's success criteria are fixed in advance rather than
+inferred from whatever happens.
 
-What would you decide if you had to decide now?
+A run in which the position does not move is **not** a failed run. All of the following are useful
+outcomes:
 
-**Preferred operating model:**
+* no decision change, but a substantially better rationale;
+* **lower** confidence, because hidden uncertainty became visible;
+* a **smaller** initial investment, because the decision is to buy evidence first;
+* a different allocation of decision rights;
+* identifying that the bottleneck is authority rather than engineering capacity;
+* identifying that distributed engineering matters more than initially believed.
 
-**Investment / commitment you would make now:**
+What would not be useful is recorded separately, as the five pre-registered falsification
+conditions at the end of this file and in `protocol.md`.
+
+---
+
+# T0 — human prior
+
+**Complete this BEFORE consuming any Kriterion analysis.** Do not open the generated decision page
+first.
+
+## Operating model
+
+**My preferred model today:**
+
+Choose one and name it; do not force a hybrid into a single label if it is genuinely a hybrid.
+
+* CENTRAL
+* DISTRIBUTED ENTERPRISE
+* FEDERATED
+* REGIONAL AUTONOMY
+* HYBRID / OTHER
+
+**Why:**
+
+**Confidence:** ___ / 100
+
+---
+
+## Distribution
+
+Where should platform-engineering capability physically exist?
+
+```text
+US:
+Europe:
+India:
+Australia / APAC:
+Other:
+```
+
+**What should geographically distributed engineers actually own?**
+
+(Record this in `distribution.md` as well, which is where the three checkpoints are compared.)
+
+---
+
+## Decision rights
+
+Complete the blank matrix in `decision-rights-matrix.md` (13 rows, each allocated to
+`ENTERPRISE` / `INTERNATIONAL or REGION` / `JOINT` / `UNDECIDED`).
+
+Do not populate it before recording your T0 operating-model answer above.
+
+**Rows I could not allocate, and why:**
+
+---
+
+## Investment
+
+If I had to decide today, I would commit:
+
+**People / capacity:**
+
+**Regions:**
+
+**Duration:**
+
+**Mandate — what is it allowed to do?:**
 
 **Decision stage:**
 
 * MAINTAIN CURRENT MODEL
-* REQUEST_EVIDENCE
+* REQUEST EVIDENCE
 * DISCOVERY
-* FUND_EXPERIMENT
-* PILOT
+* FUND EXPERIMENT
+* PILOT DISTRIBUTED CAPABILITY
+* ESTABLISH FEDERATED CAPABILITY
 * SCALE
 * HOLD
-* OTHER
+* REDUCE / STOP
 
-**Confidence:** ___ / 100
+---
 
-## Three strongest reasons
-
-1.
-2.
-3.
-
-## Three largest uncertainties
+## My three strongest reasons
 
 1.
 2.
 3.
 
-## What could change your mind?
+---
 
-**Would make me favour greater International autonomy:**
+## My three biggest uncertainties
 
-**Would make me favour a more enterprise-led model:**
+1.
+2.
+3.
 
-**Evidence I believe is required before a larger commitment:**
+---
+
+## What would make me favour greater federation?
+
+---
+
+## What would make me favour greater centralisation?
+
+---
+
+## Evidence required before I would scale further
 
 ---
 
@@ -106,6 +210,8 @@ Do not force an observation if nothing happened.
 **Did Kriterion frame the actual decision correctly?**
 
 YES / PARTLY / NO
+
+**Did it hold all three dimensions — operating model, decision rights, investment — or collapse them?**
 
 **Anything materially missing?**
 
@@ -159,6 +265,8 @@ YES / NO / UNSURE
 
 **Most decision-sensitive assumption:**
 
+**Did the absence of a priced benefit side change how I read the result?**
+
 **Did this change how much resource/capital I would put at risk now?**
 
 YES / NO
@@ -201,43 +309,82 @@ If yes:
 
 ---
 
-# T1 — after evidence, before the recommendation
+# T1 — after the analysis, before the recommendation
 
 **Stop here. Do not scroll to the synthetic recommendation yet.**
 
-Without rereading your T0 answers above, record your position based only on sections 1–7 —
-framing, evidence, assumptions, unknowns, economics, and challenge. You have not yet seen what
-Kriterion recommends.
+You have now consumed evidence, assumptions, unknowns, economics, challenge perspectives and
+EvidenceRequests. You have **not** seen what Kriterion recommends.
+
+Without rereading your T0 answers above, record your position again, in all three dimensions.
 
 This is the checkpoint that separates *the analysis changed my mind* from *the recommendation
 anchored me*. If T1 already matches your eventual final position, the recommendation reveal in
-section 8 is confirming, not persuading. If T1 still matches T0, and only T2 moves, that is a
-signal worth treating with suspicion, not satisfaction.
+section 8 is confirming, not persuading. If T1 still matches T0, and only T2 moves, that is a signal
+worth treating with suspicion, not satisfaction.
 
-## Current preferred decision
+## Operating model
 
-**Preferred operating model:**
+* CENTRAL
+* DISTRIBUTED ENTERPRISE
+* FEDERATED
+* REGIONAL AUTONOMY
+* HYBRID / OTHER
 
-**Investment / commitment you would make now:**
+**Why:**
+
+## Distribution
+
+```text
+US:
+Europe:
+India:
+Australia / APAC:
+Other:
+```
+
+## Decision rights
+
+Complete the T1 matrix in `decision-rights-matrix.md`.
+
+## Investment
+
+**People / capacity:**
+
+**Regions:**
+
+**Duration:**
+
+**Mandate:**
 
 **Decision stage:**
 
-* MAINTAIN CURRENT MODEL
-* REQUEST_EVIDENCE
-* DISCOVERY
-* FUND_EXPERIMENT
-* PILOT
-* SCALE
-* HOLD
-* OTHER
+## Confidence
 
 **Confidence:** ___ / 100
 
-## What moved between T0 and T1, if anything
+---
 
-**Changed:**
+## What specifically moved between T0 and T1?
 
-**Because of (name the specific section/item, not "the evidence" generally):**
+Name the **individual** item. Not "the analysis", not "the evidence generally". One of:
+
+* evidence item;
+* assumption;
+* unknown;
+* economic insight;
+* challenge;
+* EvidenceRequest.
+
+**Dimension that moved (operating model / decision rights / investment / confidence / none):**
+
+**What moved:**
+
+**The specific item that moved it:**
+
+**If nothing moved, record that here:**
+
+A recorded "nothing moved" is a result. An unrecorded one is a gap in the instrument.
 
 ---
 
@@ -257,81 +404,123 @@ Do not edit T0 or T1 answers after seeing this section.
 
 **Impact:**
 
-**Did seeing the recommendation itself move my decision?**
-
-YES / NO
-
-If yes:
-
-**Why?**
-
-**Did I feel anchored by it rather than persuaded by evidence?**
-
-YES / NO / UNSURE
-
 ---
 
-# T2 — final position, before recording `kriterion decide`
+# T2 — immediately after the recommendation
 
-Without rereading T0 or T1 above.
+**Record this before rereading or editing any earlier answer.** The value of T2 depends on it being
+your reaction to the recommendation, not your reconciliation of it with what you wrote before.
 
-## Current preferred decision
+## Operating model
 
-**Decision:**
+* CENTRAL
+* DISTRIBUTED ENTERPRISE
+* FEDERATED
+* REGIONAL AUTONOMY
+* HYBRID / OTHER
 
-**Investment / commitment:**
+## Distribution
+
+```text
+US:
+Europe:
+India:
+Australia / APAC:
+Other:
+```
+
+## Decision rights
+
+Complete the T2 matrix in `decision-rights-matrix.md`.
+
+## Investment
+
+**People / capacity:**
+
+**Regions:**
+
+**Duration:**
+
+**Mandate:**
+
+**Decision stage:**
+
+## Confidence
 
 **Confidence:** ___ / 100
 
-## The single biggest thing that affected my judgment
+---
 
-Choose one:
+## Did the recommendation change the decision?
 
-* evidence
-* assumption
-* unknown
-* economics
-* challenge
-* EvidenceRequest
-* synthetic recommendation
-* nothing material
+YES / NO
 
-**Specific item:**
+**Which dimension(s):**
 
-## What changed?
+## What evidence from sections 1–7 justified that change?
 
-**Initial → final:**
+Name it specifically.
 
-**Why:**
+**If no specific evidence from sections 1–7 can be named, flag possible recommendation anchoring
+here:**
 
-If the decision did not change:
+POSSIBLE ANCHORING: YES / NO
 
-**Did Kriterion strengthen the rationale, reduce confidence, or change what happens next?**
+This is falsification condition 3 checked at the point of measurement rather than in hindsight.
 
 ---
 
 ## Position trajectory (fill in after T2, from what you already wrote above — do not re-decide anything here)
 
-| | Decision | Confidence |
-|---|---|---|
-| **T0** — before Kriterion | | |
-| **T1** — after evidence/economics/challenge, before recommendation | | |
-| **T2** — final, after recommendation | | |
+| | Operating model | Decision rights (rows allocated / 13) | Investment stage | Confidence |
+|---|---|---|---|---|
+| **T0** — before Kriterion | | | | |
+| **T1** — after analysis, before recommendation | | | | |
+| **T2** — after recommendation | | | | |
 
-**Reading this trajectory:** if T0 → T1 differ but T1 → T2 don't (beyond a confidence shift), the
+**Reading this trajectory:** if T0 → T1 differ but T1 → T2 do not (beyond a confidence shift), the
 analysis moved the decision and the recommendation mainly confirmed it. If T0 → T1 are the same and
 only T2 differs, be suspicious that the recommendation itself — not the underlying case — did the
-moving.
+moving. A dimension may move while the others hold; record that rather than averaging it away.
 
 ---
 
-# After `kriterion decide`
+# Human decision
 
-Record the actual HumanDecision separately through Kriterion.
+Only after T2, use:
 
-Then answer:
+```text
+kriterion decide
+```
 
-## Relationship to Kriterion recommendation
+Record the actual accountable human decision. The `HumanDecision` should explicitly contain all five
+of the following. Record the supporting context in
+`kriterion-private/human-run-001/human-decision.md`.
+
+## Operating model
+
+Chosen direction.
+
+## Distribution
+
+Where engineering capability should exist.
+
+## Decision rights
+
+What moves closer to regional teams, and what remains global.
+
+## Investment
+
+What should be funded now. The decision should identify the **smallest useful commitment capable of
+producing the evidence needed for the next decision**, not the largest defensible one.
+
+## Conditions
+
+What must be demonstrated before expanding the model.
+
+---
+
+## Relationship to the Kriterion recommendation
 
 * FOLLOWED
 * MODIFIED
@@ -343,6 +532,46 @@ What did human judgment add that Kriterion did not?
 
 ---
 
+# Outcome Contract
+
+If the decision funds an experiment or pilot, use `kriterion contract`. Candidate measures:
+
+```text
+platform dependency lead time
+
+regional initiatives unblocked
+
+percentage of requests resolved
+without enterprise queueing
+
+upstream contributions accepted
+
+regional forks created
+
+enterprise platform support load
+
+developer satisfaction
+
+time-to-onboard
+
+control exceptions
+
+incident / reliability impact
+
+cost of distributed capability
+```
+
+**Do not commit to metrics without meaningful baselines.** For each measure selected, record:
+
+| Measure | Baseline exists today? | If not, how will it be established? | By when |
+|---|---|---|---|
+| | | | |
+
+A measure with no baseline and no stated method for establishing one is not a measure. Specifying
+how the baseline will be established is part of the contract, not a follow-up.
+
+---
+
 # Decision-quality retrospective
 
 ## Most valuable contribution
@@ -351,7 +580,7 @@ What did Kriterion expose that I probably would otherwise have missed?
 
 ## Most important change in judgment
 
-What changed in my decision, confidence or planned next action?
+What changed in my decision, confidence or planned next action? Answer per dimension.
 
 ## Most important unresolved uncertainty
 
@@ -367,7 +596,8 @@ What made the decision process more elaborate without improving it?
 
 ## Narrative Integrity
 
-Did anything on the page appear more certain, more positive, more negative or more conclusive than the underlying evidence justified?
+Did anything on the page appear more certain, more positive, more negative or more conclusive than
+the underlying evidence justified?
 
 YES / NO
 
@@ -390,19 +620,21 @@ Why?
 
 # Falsification check
 
-Kriterion's current product hypothesis would be weakened if:
+These five conditions were pre-registered in `protocol.md` before T0. **They are not to be
+reinterpreted after the run.** If one fires, it is recorded as having fired.
 
-> The final human rationale merely restates the synthetic recommendation without referring to any specific evidence, assumption, unknown, economic sensitivity, challenge, or evidence requirement surfaced during the session.
+Kriterion has failed to demonstrate useful decision impact if:
 
-A stronger, T1/T2-aware version of the same check:
+| # | Condition | Fired? | Evidence for the answer |
+|---|---|---|---|
+| 1 | The final rationale merely copies the synthetic recommendation. | YES / NO | |
+| 2 | The human cannot identify a specific Kriterion input that affected reasoning. | YES / NO | |
+| 3 | The recommendation changes T1 → T2 without an evidence-based justification. | YES / NO | |
+| 4 | The process generates more structure without materially improving understanding. | YES / NO | |
+| 5 | The operating model becomes more complicated but not more actionable. | YES / NO | |
 
-> The recommendation moved the decision (T1 → T2 differs) but the recorded rationale cannot name which section of sections 1–7 justifies that move.
-
-Did either happen?
-
-YES / NO
-
-Evidence for answer:
+Conditions 4 and 5 are the ones most easily explained away after the fact. Answer them against what
+is written above, not against how the session felt.
 
 ---
 
