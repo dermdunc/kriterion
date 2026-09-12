@@ -116,6 +116,21 @@ BANNED_PHRASES = {
     ),
     "PARTIAL": "not an assurance outcome or a Kriterion decision state",
     "hand-maintained": "the page is generated now; claiming otherwise is stale",
+    # V1-era statements, each verbatim from the page this one replaced. They
+    # were accurate when written; after V1.1 every one of them is false, which
+    # is the most dangerous kind of stale copy - it reads as candour.
+    "hand-authored": "the page is generated now; claiming otherwise is stale",
+    "not a rendered output": "it is a rendered output (ADR-011)",
+    "mechanically checks": (
+        "the coherence test as a drift stand-in is retired; the page is re-derived (ADR-012)"
+    ),
+    "never wrote them to disk": (
+        "the rendered run stores its evidence requests; this was V1's reason for derived copy"
+    ),
+    "what the run did persist": (
+        "per-seat 'what would change my mind' is each seat's own stored answer now, "
+        "not reconstructed from blocking unknowns"
+    ),
 }
 
 
@@ -225,6 +240,116 @@ def test_the_money_is_visible_before_the_fold(state, page):
         assert f'data-kriterion-source="{path}"' in decision
     assert "economics_interpretation" in decision
     assert state.npv_sign_flips is True
+
+
+# ---------------------------------------------------------------------------
+# "How Kriterion earns trust": an advertised promise must have a mechanism
+# ---------------------------------------------------------------------------
+
+
+def _trust_section(page: str) -> str:
+    return page.split('data-kriterion-role="trust"')[1].split("</section>")[0]
+
+
+def test_the_trust_section_states_the_four_commitments(page):
+    trust = _trust_section(page)
+    for commitment in (
+        "One decision state",
+        "Narrative is output, not commentary",
+        "Fail closed",
+        "A human remains accountable",
+    ):
+        assert commitment in trust, f"the trust section dropped {commitment!r}"
+
+
+def test_the_trust_section_cannot_make_a_claim_about_this_decision(state, page):
+    """It explains the instrument, not the case. Nothing in it is bound, which
+    means nothing in it can assert a value from this decision's state - and the
+    unbound-prose rules still police it, so it cannot smuggle one in as text.
+    Enforced structurally rather than by reading it, because a future edit that
+    quietly bound a decision field here would give a claim about the system a
+    false provenance in the record."""
+    from kriterion.narrative import SOURCE_ATTR
+
+    assert SOURCE_ATTR not in _trust_section(page)
+
+
+def test_the_trust_section_is_the_same_for_every_decision(state):
+    """The corollary of the above, checked by rendering rather than asserted:
+    the section is a function of no state at all."""
+    from dataclasses import replace
+
+    other = replace(state, run_id="some-other-run")
+    assert _trust_section(render_decision_page(state)) == _trust_section(
+        render_decision_page(other)
+    )
+
+
+def test_the_advertised_fail_closed_behaviour_actually_bites(state, page):
+    """The section promises Kriterion refuses to publish what it cannot
+    re-derive. That promise is worth exactly as much as the checker behind it,
+    so assert the checker rejects a page whose text no longer matches the
+    record - the same mutation the promise claims to catch."""
+    assert "refuses to publish" in _trust_section(page)
+    tampered = page.replace(
+        ">No human decision has been recorded",
+        ">A human decision has been recorded",
+        1,
+    )
+    assert tampered != page, "the mutation did not apply; the fixture text moved"
+    assert check(state, tampered), "a tampered statement published clean"
+
+
+def test_the_advertised_human_accountability_matches_the_record(state, page):
+    trust = _trust_section(page)
+    assert "will not write that one on" in trust
+    assert state.human_decision is None
+    assert "No human decision has been recorded" in page
+
+
+def test_the_page_places_kriterion_in_its_ecosystem_without_requiring_it(page):
+    """Branding should locate Kriterion inside the Agentic Tekton ecosystem
+    without making Hekton knowledge a prerequisite for reading the page."""
+    trust = _trust_section(page)
+    for name in ("Agentic Tekton", "Hekton factory", "Hekton Assurance"):
+        assert name in trust, f"the ecosystem placement dropped {name!r}"
+    assert "None of that is needed to read this page" in trust
+
+
+# ---------------------------------------------------------------------------
+# Boundaries and house editorial standard
+# ---------------------------------------------------------------------------
+
+
+def test_kriterion_does_not_claim_to_have_produced_the_assurance_evidence(page):
+    """ADR-007's boundary, in product terms: the producer publishes generic
+    documents, an adapter translates them, and Kriterion owns neither the
+    capability nor the assessment of it."""
+    assert "Kriterion did not produce this evidence" in page
+    assert "authored fixtures rather than the output of a real assurance run" in page
+
+
+def test_the_page_says_kriterion_experiments_on_its_own_mechanisms(page):
+    """The Lab is supporting research about how the instrument evolves, not the
+    product experience, and the page should say which is which."""
+    assert "experiments on its own decision mechanisms" in page
+    assert "not the product itself" in page
+
+
+def test_kriterions_own_copy_carries_no_em_dash(page):
+    """The 2026-09-08 editorial pass removed every em-dash from audience-facing
+    copy by hand, and V1.1's renderer silently reintroduced two. Enforced here
+    instead so it cannot regress again.
+
+    Scoped to unbound text by construction: the em-dashes that remain on the
+    page are inside bound values quoting the assurance producer's own fixture
+    text, which is source data and not Kriterion's prose to edit.
+    """
+    from kriterion.narrative import unbound_text
+
+    prose = unbound_text(page)
+    assert "—" not in prose
+    assert "&mdash;" not in prose
 
 
 def test_the_critical_failure_count_says_what_it_does_not_count(state, page):

@@ -79,7 +79,7 @@
 </style>
 </head>
 <body>
-<p class="banner"><span data-kriterion-source="case.case_realism" data-kriterion-format="label">AUTHORED FIXTURE</span> &mdash; this case, its evidence
+<p class="banner"><span data-kriterion-source="case.case_realism" data-kriterion-format="label">AUTHORED FIXTURE</span>: this case, its evidence
   and its assurance documents are authored fixtures. The committee text is real local-model
   output and the arithmetic is real.</p>
 
@@ -104,6 +104,7 @@
     <li><a href="#recommendation">Synthetic recommendation</a></li>
     <li><a href="#human-decision">Human decision</a></li>
     <li><a href="#outcome-contract">Outcome contract</a></li>
+    <li><a href="#trust">How Kriterion earns trust</a></li>
     <li><a href="#provenance">How this was produced</a></li>
   </ol>
 </nav>
@@ -525,9 +526,14 @@
     
     <section data-kriterion-role="assurance" id="assurance" aria-labelledby="h-assurance">
       <h2 id="h-assurance">Machine-checkable evidence about the capability itself</h2>
-      <p>An external assurance system's own documents, translated into Kriterion evidence by an
-         adapter that is allowed to lose detail but never to upgrade a result. Each claim below is
-         the adapter's output, quoted.</p>
+      <p>Kriterion did not produce this evidence and does not claim to have. An external
+         assurance system publishes its own generic documents about the capability; Kriterion
+         reads them through an adapter that is allowed to lose detail but never to upgrade a
+         result, and every claim below is that adapter's output, quoted. The reference producer
+         for the document contract is Hekton Assurance, which is optional: the instrument works
+         the same way when no such documents exist. The documents behind this particular case are
+         authored fixtures rather than the output of a real assurance run, which is why what the
+         producer did not capture is listed here beside what it did.</p>
       
         <p class="note"><span data-kriterion-source="assurance_status" data-kriterion-format="text">Imported through the ADR-007 adapter after this deliberation ran. The committee below never saw it: it is not in this run&#x27;s frozen ledger.</span></p>
         <dl class="snapshot">
@@ -869,7 +875,7 @@
           <dd><span data-kriterion-source="recommendation.amount" data-kriterion-format="gbp">£4,200,000</span> over
               <span data-kriterion-source="recommendation.duration" data-kriterion-format="text">24 months</span></dd>
           <dt>Capital actually at risk under this action</dt>
-          <dd><span data-kriterion-source="capital_at_risk_gbp" data-kriterion-format="gbp">£0</span> &mdash;
+          <dd><span data-kriterion-source="capital_at_risk_gbp" data-kriterion-format="gbp">£0</span>.
               <span data-kriterion-source="capital_at_risk_basis" data-kriterion-format="text">DEFER commits no funding. The recommendation record still carries the full ask as its amount field; that is the ask, not a commitment.</span></dd>
         </dl>
         <blockquote class="dissent">
@@ -897,6 +903,46 @@
       <p class="empty-state"><span data-kriterion-source="outcome_contract_status" data-kriterion-format="text">No outcome contract exists, because no human decision has been recorded. A contract is required only once a human commits funding.</span></p>
     </section>
     
+    <section data-kriterion-role="trust" id="trust" aria-labelledby="h-trust">
+      <h2 id="h-trust">How Kriterion earns trust</h2>
+      <p>Everything above is a view of one record. That is a constraint the build enforces, not
+         a description of good intentions.</p>
+
+      <h3>One decision state</h3>
+      <p>The evidence, the assumptions, the economics, each seat's recorded position and the
+         decision itself live in one structured record for this decision. Every view Kriterion
+         offers reads that record instead of keeping its own copy of the story, because a second
+         copy is where the two versions begin to disagree. This page is the view where that is
+         checked mechanically, on every build.</p>
+
+      <h3>Narrative is output, not commentary</h3>
+      <p>Every material statement a decision-maker reads here is stamped with the field it was
+         rendered from, and is re-derived from that field before the page is allowed out. A
+         sentence cannot quietly strengthen, soften or invent what the record says, because the
+         sentence is not written by hand.</p>
+
+      <h3>Fail closed</h3>
+      <p>If Kriterion cannot re-derive a statement from the record, it refuses to publish the
+         page rather than shipping it with a caveat. A run artifact it cannot read is refused by
+         name, not by traceback. This is intended behaviour: a refusal is recoverable, and a
+         polished page resting on something unreadable is not.</p>
+
+      <h3>A human remains accountable</h3>
+      <p>The machine supplies analysis, challenge and a suggestion. A named human records the
+         decision, in a separate record, in their own words. Kriterion will not write that one on
+         their behalf, and says so plainly when it is missing.</p>
+
+      <h3>Where Kriterion sits</h3>
+      <p>Kriterion belongs to the Agentic Tekton ecosystem: the Hekton factory produces and
+         evolves it, and Hekton Assurance is one optional producer of the machine-checkable
+         evidence shown above. None of that is needed to read this page or to use the
+         instrument. For the mechanics, the
+         <a href="https://github.com/dermdunc/kriterion/blob/main/docs/decisions.md">decision
+         records</a> and the
+         <a href="https://github.com/dermdunc/kriterion/blob/main/docs/architecture.md">architecture
+         notes</a> carry the detail this section deliberately leaves out.</p>
+    </section>
+    
     <section data-kriterion-role="provenance" id="provenance" aria-labelledby="h-provenance">
       <h2 id="h-provenance">How this page was produced</h2>
       <p>This page is generated. It is a projection of one run's committed artifacts, and every
@@ -911,9 +957,12 @@
         <dt>Items recorded as unknown</dt><dd><span data-kriterion-source="unknown_count" data-kriterion-format="count">3</span></dd>
         <dt>Case realism</dt><dd><span data-kriterion-source="case.case_realism" data-kriterion-format="label">AUTHORED FIXTURE</span></dd>
       </dl>
-      <p>The research behind the instrument, including a pre-registered result that did not go the
-         way its authors expected, is preserved separately in
-         <a href="lab.html">Kriterion Lab</a>. The per-run decision record for this run is
+      <p>Kriterion experiments on its own decision mechanisms rather than assuming that
+         fashionable agent architectures improve decision quality. That research, including a
+         pre-registered result that did not go the way its authors expected, is preserved
+         separately in <a href="lab.html">Kriterion Lab</a>, which is supporting evidence about
+         how the instrument evolves and not the product itself. The per-run decision record for
+         this run is
          <a href="reports/decision-record.html">also rendered</a>, and the source is
          <a href="https://github.com/dermdunc/kriterion">on GitHub</a>.</p>
     </section>

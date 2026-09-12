@@ -354,9 +354,14 @@ def _section_assurance(state: DecisionState) -> str:
     return f"""
     <section data-kriterion-role="assurance" id="assurance" aria-labelledby="h-assurance">
       <h2 id="h-assurance">Machine-checkable evidence about the capability itself</h2>
-      <p>An external assurance system's own documents, translated into Kriterion evidence by an
-         adapter that is allowed to lose detail but never to upgrade a result. Each claim below is
-         the adapter's output, quoted.</p>
+      <p>Kriterion did not produce this evidence and does not claim to have. An external
+         assurance system publishes its own generic documents about the capability; Kriterion
+         reads them through an adapter that is allowed to lose detail but never to upgrade a
+         result, and every claim below is that adapter's output, quoted. The reference producer
+         for the document contract is Hekton Assurance, which is optional: the instrument works
+         the same way when no such documents exist. The documents behind this particular case are
+         authored fixtures rather than the output of a real assurance run, which is why what the
+         producer did not capture is listed here beside what it did.</p>
       {body}
     </section>
     """
@@ -534,7 +539,7 @@ def _section_recommendation(state: DecisionState) -> str:
           <dd>{bind(state, "recommendation.amount", fmt="gbp")} over
               {bind(state, "recommendation.duration")}</dd>
           <dt>Capital actually at risk under this action</dt>
-          <dd>{bind(state, "capital_at_risk_gbp", fmt="gbp")} &mdash;
+          <dd>{bind(state, "capital_at_risk_gbp", fmt="gbp")}.
               {bind(state, "capital_at_risk_basis")}</dd>
         </dl>
         <blockquote class="dissent">
@@ -643,11 +648,71 @@ def _section_provenance(state: DecisionState) -> str:
         <dt>Items recorded as unknown</dt><dd>{bind(state, "unknown_count", fmt="count")}</dd>
         <dt>Case realism</dt><dd>{bind(state, "case.case_realism", fmt="label")}</dd>
       </dl>
-      <p>The research behind the instrument, including a pre-registered result that did not go the
-         way its authors expected, is preserved separately in
-         <a href="lab.html">Kriterion Lab</a>. The per-run decision record for this run is
+      <p>Kriterion experiments on its own decision mechanisms rather than assuming that
+         fashionable agent architectures improve decision quality. That research, including a
+         pre-registered result that did not go the way its authors expected, is preserved
+         separately in <a href="lab.html">Kriterion Lab</a>, which is supporting evidence about
+         how the instrument evolves and not the product itself. The per-run decision record for
+         this run is
          <a href="reports/decision-record.html">also rendered</a>, and the source is
          <a href="https://github.com/dermdunc/kriterion">on GitHub</a>.</p>
+    </section>
+    """
+
+
+def _section_trust() -> str:
+    """The architecture, in product language, after the decision experience.
+
+    Takes no `DecisionState` on purpose, and the signature is the point: every
+    statement here is about how the instrument behaves, not about this
+    decision's state, so it *cannot* read one. Binding a claim about the system
+    to a field of the decision would be a false provenance.
+    What keeps these claims honest is the test suite, not the checker -
+    `tests/product/test_public_page_coherence.py` ties each commitment below to
+    the mechanism that implements it, so the promise cannot outlive the code.
+    The unbound-prose rules still apply, which is why this section quotes no
+    figure and no state vocabulary: if it needed either, it would be the wrong
+    section for it.
+    """
+    return """
+    <section data-kriterion-role="trust" id="trust" aria-labelledby="h-trust">
+      <h2 id="h-trust">How Kriterion earns trust</h2>
+      <p>Everything above is a view of one record. That is a constraint the build enforces, not
+         a description of good intentions.</p>
+
+      <h3>One decision state</h3>
+      <p>The evidence, the assumptions, the economics, each seat's recorded position and the
+         decision itself live in one structured record for this decision. Every view Kriterion
+         offers reads that record instead of keeping its own copy of the story, because a second
+         copy is where the two versions begin to disagree. This page is the view where that is
+         checked mechanically, on every build.</p>
+
+      <h3>Narrative is output, not commentary</h3>
+      <p>Every material statement a decision-maker reads here is stamped with the field it was
+         rendered from, and is re-derived from that field before the page is allowed out. A
+         sentence cannot quietly strengthen, soften or invent what the record says, because the
+         sentence is not written by hand.</p>
+
+      <h3>Fail closed</h3>
+      <p>If Kriterion cannot re-derive a statement from the record, it refuses to publish the
+         page rather than shipping it with a caveat. A run artifact it cannot read is refused by
+         name, not by traceback. This is intended behaviour: a refusal is recoverable, and a
+         polished page resting on something unreadable is not.</p>
+
+      <h3>A human remains accountable</h3>
+      <p>The machine supplies analysis, challenge and a suggestion. A named human records the
+         decision, in a separate record, in their own words. Kriterion will not write that one on
+         their behalf, and says so plainly when it is missing.</p>
+
+      <h3>Where Kriterion sits</h3>
+      <p>Kriterion belongs to the Agentic Tekton ecosystem: the Hekton factory produces and
+         evolves it, and Hekton Assurance is one optional producer of the machine-checkable
+         evidence shown above. None of that is needed to read this page or to use the
+         instrument. For the mechanics, the
+         <a href="https://github.com/dermdunc/kriterion/blob/main/docs/decisions.md">decision
+         records</a> and the
+         <a href="https://github.com/dermdunc/kriterion/blob/main/docs/architecture.md">architecture
+         notes</a> carry the detail this section deliberately leaves out.</p>
     </section>
     """
 
@@ -740,6 +805,7 @@ def render_decision_page(state: DecisionState) -> str:
         _section_recommendation(state),
         _section_human_decision(state),
         _section_outcome_contract(state),
+        _section_trust(),
         _section_provenance(state),
     ]
     return f"""<!doctype html>
@@ -752,7 +818,7 @@ def render_decision_page(state: DecisionState) -> str:
 <style>{_STYLE}</style>
 </head>
 <body>
-<p class="banner">{bind(state, "case.case_realism", fmt="label")} &mdash; this case, its evidence
+<p class="banner">{bind(state, "case.case_realism", fmt="label")}: this case, its evidence
   and its assurance documents are authored fixtures. The committee text is real local-model
   output and the arithmetic is real.</p>
 
@@ -777,6 +843,7 @@ def render_decision_page(state: DecisionState) -> str:
     <li><a href="#recommendation">Synthetic recommendation</a></li>
     <li><a href="#human-decision">Human decision</a></li>
     <li><a href="#outcome-contract">Outcome contract</a></li>
+    <li><a href="#trust">How Kriterion earns trust</a></li>
     <li><a href="#provenance">How this was produced</a></li>
   </ol>
 </nav>
