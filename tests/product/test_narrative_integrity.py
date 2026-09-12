@@ -603,3 +603,56 @@ def test_the_headline_sensitivity_and_the_table_cannot_name_different_things(sta
     skewed = _state(economics=unsorted_economics)
     assert skewed.primary_sensitivity_param == skewed.tornado_rows[0]["parameter"]
     assert check(skewed, render_decision_page(skewed)) == []
+
+
+# ---------------------------------------------------------------------------
+# Fixes from reading the finished page as CIO / CFO / CISO / sponsor
+# ---------------------------------------------------------------------------
+
+
+def test_an_unmapped_sensitivity_parameter_is_stated_not_dressed_up(state, page):
+    """This fixture's case id has no parameter->assumption map, so the
+    dominant sensitivity cannot be resolved to a ranged Assumption record. The
+    page must say that plainly rather than implying the swing is backed by a
+    declared, owned assumption.
+
+    (The equivalent assertions for a *mapped* case live in
+    test_public_page_coherence.py, against the real canonical page. This
+    fixture's failure to resolve is a property of the fixture, not a defect.)
+    """
+    assert state.primary_sensitivity_assumption is None
+    decision = page.split('data-kriterion-role="decision"')[1].split("</section>")[0]
+    assert "does not declare as a ranged assumption" in decision
+
+
+def test_the_critical_failure_count_says_what_it_does_not_count(state, page):
+    """A CISO reading "critical failures: 0" above a list of a dozen items
+    will read it as "every check passed". The envelope behind this page
+    records a non-gating failure and a check that returned no verdict."""
+    assert "It is not a count of checks that did not pass" in state.assurance_summary_caveat
+    assert state.assurance_unknown_count > 0
+    assert "assurance_summary_caveat" in page
+
+
+def test_one_field_may_not_be_quoted_two_different_ways(state, page):
+    """The V1 review found one cost quoted as two different ranges. Figures now
+    repeat across sections by design, so the formatter has to be checked."""
+    mutated = page.replace(
+        '<span data-kriterion-source="economics.npv_mid_gbp" data-kriterion-format="gbp_millions"',
+        '<span data-kriterion-source="economics.npv_mid_gbp" data-kriterion-format="gbp"',
+        1,
+    )
+    assert mutated != page
+    assert "numeric.consistency" in _rules(check(state, mutated))
+
+
+def test_repeated_figures_on_the_real_page_agree(state, page):
+    """The base valuation appears in the decision snapshot and again in the
+    economics section. They must be the same characters."""
+    import re as _re
+
+    occurrences = _re.findall(
+        r'data-kriterion-source="economics\.npv_mid_gbp"[^>]*>([^<]*)<', page
+    )
+    assert len(occurrences) >= 2, "expected the base valuation to appear more than once"
+    assert len(set(occurrences)) == 1, f"the same figure rendered differently: {set(occurrences)}"

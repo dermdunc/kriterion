@@ -115,6 +115,62 @@ def _evidence_list(state: DecisionState, items, *, root: str, collapse_below: St
 # ---------------------------------------------------------------------------
 
 
+def _primary_uncertainty_detail(state: DecisionState) -> str:
+    """The dominant assumption's own evidence strength and plausible range.
+
+    Raised by reading the finished page as a CFO: naming the assumption that
+    swings the valuation by more than the ask, without saying how well
+    evidenced it is, leaves the reader to assume it is solid. The strength is
+    the whole point of surfacing it.
+    """
+    assumption = state.primary_sensitivity_assumption
+    if assumption is None:
+        return (
+            "Engine parameter "
+            + bind(state, "primary_sensitivity_param")
+            + ", which the case pack does not declare as a ranged assumption"
+        )
+    path = f"assumptions_by_id[{assumption.id}]"
+    value_fmt, range_fmt = _assumption_format(assumption.id)
+    return (
+        "Recorded evidence strength "
+        + bind(state, f"{path}.evidence_strength", fmt="label")
+        + ", base value "
+        + bind(state, f"{path}.value", fmt=value_fmt)
+        + " across a plausible range of "
+        + bind(state, f"{path}.range", fmt=range_fmt)
+        + ", owned by "
+        + bind(state, f"{path}.owner")
+        + ". Engine parameter "
+        + bind(state, "primary_sensitivity_param")
+        + "."
+    )
+
+
+def _headline_economics(state: DecisionState) -> str:
+    """Base, downside and upside at the top of the page.
+
+    Raised by reading the finished page as a CIO: the single most
+    decision-relevant fact - that the sign flips inside the stated ranges -
+    sat four sections below the fold. Same fields, same formatters as the
+    economics section, so the two cannot disagree.
+    """
+    if state.economics is None:
+        return ""
+    return f"""
+        <dl class="snapshot">
+          <dt>Base valuation</dt>
+          <dd>{bind(state, "economics.npv_mid_gbp", fmt="gbp_millions", cls="headline")}</dd>
+          <dt>Downside, every assumption at its pessimistic end</dt>
+          <dd>{bind(state, "economics.npv_low_gbp", fmt="gbp_millions", cls="headline")}</dd>
+          <dt>Upside, every assumption at its optimistic end</dt>
+          <dd>{bind(state, "economics.npv_high_gbp", fmt="gbp_millions", cls="headline")}</dd>
+          <dt>What that shape means</dt>
+          <dd>{bind(state, "economics_interpretation")}</dd>
+        </dl>
+        """
+
+
 def _section_decision(state: DecisionState) -> str:
     if state.recommendation is None:
         rec_block = (
@@ -136,9 +192,9 @@ def _section_decision(state: DecisionState) -> str:
           <dd>{bind(state, "primary_uncertainty_label")}, worth
               {bind(state, "primary_sensitivity_swing_gbp", fmt="gbp_millions")} of swing on the
               base valuation
-              <span class="basis">Engine parameter
-              {bind(state, "primary_sensitivity_param")}</span></dd>
+              <span class="basis">{_primary_uncertainty_detail(state)}</span></dd>
         </dl>
+        {_headline_economics(state)}
         """
     return f"""
     <section data-kriterion-role="decision" id="decision" aria-labelledby="h-decision">
@@ -281,8 +337,9 @@ def _section_assurance(state: DecisionState) -> str:
           <dd>{bind(state, "assurance.summary.declared_decision_state", fmt="label", cls="headline")}</dd>
           <dt>State Kriterion imported it as</dt>
           <dd>{bind(state, "assurance.summary.decision_state", fmt="label", cls="headline")}</dd>
-          <dt>Critical failures declared</dt>
-          <dd>{bind(state, "assurance.summary.critical_failure_count", fmt="count")}</dd>
+          <dt>Critical failures declared by the producer</dt>
+          <dd>{bind(state, "assurance.summary.critical_failure_count", fmt="count")}
+              <span class="basis">{bind(state, "assurance_summary_caveat")}</span></dd>
           <dt>Checks in the envelope</dt>
           <dd>{bind(state, "assurance.summary.result_count", fmt="count")}</dd>
           <dt>Areas the assurance fingerprint does not track</dt>

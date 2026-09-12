@@ -193,3 +193,45 @@ def test_kriterion_lab_still_carries_the_research_and_its_negative_result():
 
 def test_the_public_page_still_points_at_the_lab(page):
     assert 'href="lab.html"' in page
+
+
+# ---------------------------------------------------------------------------
+# Fixes from reading the finished page as CIO / CFO / CISO / sponsor
+# ---------------------------------------------------------------------------
+
+
+def _decision_section(page: str) -> str:
+    return page.split('data-kriterion-role="decision"')[1].split("</section>")[0]
+
+
+def test_the_dominant_assumption_is_shown_with_its_evidence_strength(state, page):
+    """A CFO reading that one assumption swings the valuation by more than the
+    whole ask, without being told how well evidenced it is, will assume it is
+    solid. The strength is the reason for surfacing it at all."""
+    decision = _decision_section(page)
+    assumption = state.primary_sensitivity_assumption
+    assert assumption is not None, "the canonical case must resolve its dominant assumption"
+    assert assumption.id in decision
+    assert "Recorded evidence strength" in decision
+    for field in ("evidence_strength", "range", "value", "owner"):
+        assert f'data-kriterion-source="assumptions_by_id[{assumption.id}].{field}"' in decision
+
+
+def test_the_money_is_visible_before_the_fold(state, page):
+    """The most decision-relevant fact - that the sign flips inside the stated
+    plausible ranges - must not sit four sections below the decision itself."""
+    decision = _decision_section(page)
+    for path in ("economics.npv_mid_gbp", "economics.npv_low_gbp", "economics.npv_high_gbp"):
+        assert f'data-kriterion-source="{path}"' in decision
+    assert "economics_interpretation" in decision
+    assert state.npv_sign_flips is True
+
+
+def test_the_critical_failure_count_says_what_it_does_not_count(state, page):
+    """A CISO reading "critical failures: 0" above a list of a dozen items will
+    read it as "every check passed". The envelope behind this page records a
+    non-gating failure and a check that returned no verdict at all."""
+    assert state.assurance.summary["critical_failure_count"] == 0
+    assert "It is not a count of checks that did not pass" in state.assurance_summary_caveat
+    assert state.assurance_unknown_count > 0
+    assert 'data-kriterion-source="assurance_summary_caveat"' in page

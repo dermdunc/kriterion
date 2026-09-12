@@ -136,9 +136,20 @@
           <dd><span data-kriterion-source="primary_uncertainty_label" data-kriterion-format="text">as-benefit-attribution-factor</span>, worth
               <span data-kriterion-source="primary_sensitivity_swing_gbp" data-kriterion-format="gbp_millions">£16.92m</span> of swing on the
               base valuation
-              <span class="basis">Engine parameter
-              <span data-kriterion-source="primary_sensitivity_param" data-kriterion-format="text">attribution_factor</span></span></dd>
+              <span class="basis">Recorded evidence strength <span data-kriterion-source="assumptions_by_id[as-benefit-attribution-factor].evidence_strength" data-kriterion-format="label">LOW</span>, base value <span data-kriterion-source="assumptions_by_id[as-benefit-attribution-factor].value" data-kriterion-format="percent">10%</span> across a plausible range of <span data-kriterion-source="assumptions_by_id[as-benefit-attribution-factor].range" data-kriterion-format="range_percent">5%–20%</span>, owned by <span data-kriterion-source="assumptions_by_id[as-benefit-attribution-factor].owner" data-kriterion-format="text">cfo</span>. Engine parameter <span data-kriterion-source="primary_sensitivity_param" data-kriterion-format="text">attribution_factor</span>.</span></dd>
         </dl>
+        
+        <dl class="snapshot">
+          <dt>Base valuation</dt>
+          <dd><span data-kriterion-source="economics.npv_mid_gbp" data-kriterion-format="gbp_millions" class="headline">£5.09m</span></dd>
+          <dt>Downside, every assumption at its pessimistic end</dt>
+          <dd><span data-kriterion-source="economics.npv_low_gbp" data-kriterion-format="gbp_millions" class="headline">-£5.35m</span></dd>
+          <dt>Upside, every assumption at its optimistic end</dt>
+          <dd><span data-kriterion-source="economics.npv_high_gbp" data-kriterion-format="gbp_millions" class="headline">£38.14m</span></dd>
+          <dt>What that shape means</dt>
+          <dd><span data-kriterion-source="economics_interpretation" data-kriterion-format="text">The sign of the outcome flips inside the stated plausible ranges, so the case is not yet decidable on the numbers alone. The widest single swing comes from as-benefit-attribution-factor (LOW evidence), which is therefore the assumption to buy evidence about before buying scale.</span></dd>
+        </dl>
+        
         
       <p class="note">Kriterion's decision vocabulary has no approval verb, by design:
         <span data-kriterion-source="decision_vocabulary" data-kriterion-format="list_dot" class="vocab">REJECT · DEFER · REQUEST_EVIDENCE · DISCOVERY · FUND_EXPERIMENT · PILOT · SCALE · HOLD · REDUCE · STOP</span></p>
@@ -527,8 +538,9 @@
           <dd><span data-kriterion-source="assurance.summary.declared_decision_state" data-kriterion-format="label" class="headline">REVIEW REQUIRED</span></dd>
           <dt>State Kriterion imported it as</dt>
           <dd><span data-kriterion-source="assurance.summary.decision_state" data-kriterion-format="label" class="headline">REVIEW REQUIRED</span></dd>
-          <dt>Critical failures declared</dt>
-          <dd><span data-kriterion-source="assurance.summary.critical_failure_count" data-kriterion-format="count">0</span></dd>
+          <dt>Critical failures declared by the producer</dt>
+          <dd><span data-kriterion-source="assurance.summary.critical_failure_count" data-kriterion-format="count">0</span>
+              <span class="basis"><span data-kriterion-source="assurance_summary_caveat" data-kriterion-format="text">The critical-failure count is the producer&#x27;s own classification, and counts only failures it judged critical. It is not a count of checks that did not pass. Of the 12 items this import produced, 5 are recorded as epistemically unknown, meaning not measured rather than passed. Every item is listed below with the adapter&#x27;s own wording; read them rather than the count.</span></span></dd>
           <dt>Checks in the envelope</dt>
           <dd><span data-kriterion-source="assurance.summary.result_count" data-kriterion-format="count">7</span></dd>
           <dt>Areas the assurance fingerprint does not track</dt>

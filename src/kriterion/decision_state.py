@@ -459,6 +459,33 @@ class DecisionState:
         )
 
     @cached_property
+    def assurance_unknown_count(self) -> int:
+        if self.assurance is None:
+            return 0
+        return sum(1 for i in self.assurance.items if i.category is EvidenceCategory.UNKNOWN)
+
+    @cached_property
+    def assurance_summary_caveat(self) -> str:
+        """What the producer's critical-failure count does *not* count.
+
+        Raised by reading the finished page as a CISO: a summary line saying
+        zero critical failures, above a list of a dozen items, reads as "every
+        check passed". The envelope behind this one records a non-gating
+        failure and a check that returned no verdict at all. Softening by
+        omission is still softening, so the summary says what it covers.
+        """
+        if self.assurance is None:
+            return "No assurance evidence was imported for this case."
+        total = len(self.assurance.items)
+        return (
+            "The critical-failure count is the producer's own classification, and counts only "
+            f"failures it judged critical. It is not a count of checks that did not pass. Of the "
+            f"{total} items this import produced, {self.assurance_unknown_count} are recorded as "
+            "epistemically unknown, meaning not measured rather than passed. Every item is listed "
+            "below with the adapter's own wording; read them rather than the count."
+        )
+
+    @cached_property
     def next_step(self) -> str:
         """What actually has to happen next, named as a concrete act by a
         named party. A decision instrument that stops at "here is the
@@ -518,6 +545,8 @@ class DecisionState:
             "outcome_contract_status": self.outcome_contract_status,
             "next_step": self.next_step,
             "assurance_status": self.assurance_status,
+            "assurance_summary_caveat": self.assurance_summary_caveat,
+            "assurance_unknown_count": self.assurance_unknown_count,
             "stored_evidence_request_count": self.stored_evidence_request_count,
             "evidence_count": len(self.evidence),
             "unknown_count": len(self.unknown_evidence),

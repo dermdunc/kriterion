@@ -467,6 +467,29 @@ def check(state: Any, page: str) -> list[Violation]:
                 )
             )
 
+    # --- N-consistency: one field, one formatting, wherever it appears -----
+    # The V1 review found one cost quoted as two different ranges in two
+    # places. Formatters are total functions of the value, so two renderings
+    # of a field agree *if* they use the same formatter. A decision-relevant
+    # figure now appears in more than one section by design (the headline
+    # economics repeat the economics section), so the "same formatter" part
+    # has to be checked rather than assumed.
+    formats_by_path: dict[str, set[str]] = {}
+    for binding in bindings:
+        if binding["format"] is not None:
+            formats_by_path.setdefault(binding["path"], set()).add(binding["format"])
+    for path, formats in sorted(formats_by_path.items()):
+        if len(formats) > 1:
+            violations.append(
+                Violation(
+                    rule="numeric.consistency",
+                    detail=(
+                        f"{path} is rendered with more than one format ({', '.join(sorted(formats))}), "
+                        "so the same fact is quoted two different ways on one page"
+                    ),
+                )
+            )
+
     # --- N1/N2/N3: unbound prose may carry no claims ----------------------
     # Text a reader receives that is not an HTML text node counts as prose:
     # attribute text (tooltips, screen-reader labels) and CSS-injected content
