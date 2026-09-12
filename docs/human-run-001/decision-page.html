@@ -1,0 +1,1277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kriterion: Northstar Software Group -- Internal Developer Platform investment (FICTIONAL SCENARIO)</title>
+<meta name="description" content="An evidence-backed decision instrument for uncertain technology investments.">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #fff; --fg: #1a1a1a; --muted: #5a5a5a; --border: #dcdcdc;
+    --card: #f6f6f6; --accent: #2a4d8f; --warn-bg: #fff3cd; --warn-fg: #5f4a00;
+    --alert-bg: #fdeaea; --alert-fg: #7a1f1f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #161616; --fg: #ededed; --muted: #a8a8a8; --border: #3a3a3a;
+            --card: #212121; --accent: #8fb0ff; --warn-bg: #3a3212; --warn-fg: #e8d27a;
+            --alert-bg: #3a1f1f; --alert-fg: #f0a8a8; }
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); line-height: 1.6;
+         font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+         max-width: 56rem; margin: 0 auto; padding: 2rem 1.25rem 5rem; }
+  h1 { margin-bottom: 0.2rem; }
+  .tagline { color: var(--muted); font-size: 1.1rem; margin-top: 0; }
+  .banner { background: var(--warn-bg); color: var(--warn-fg); padding: 0.6rem 1rem;
+            border-radius: 0.4rem; font-weight: 600; margin-bottom: 2rem; }
+  nav ol { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.75rem;
+           font-size: 0.9rem; }
+  section { border-top: 1px solid var(--border); margin-top: 2.75rem; padding-top: 1.25rem; }
+  h2 { color: var(--accent); margin-top: 0.5rem; }
+  h3 { margin-bottom: 0.3rem; font-size: 1.05rem; }
+  h4 { margin-bottom: 0.2rem; font-size: 0.85rem; text-transform: uppercase;
+       letter-spacing: 0.06em; color: var(--muted); }
+  .lede { font-size: 1.15rem; font-weight: 600; }
+  .snapshot { background: var(--card); border: 1px solid var(--border); border-radius: 0.5rem;
+              padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .snapshot dt { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em;
+                 color: var(--muted); margin-top: 0.8rem; }
+  .snapshot dt:first-child { margin-top: 0; }
+  .snapshot dd { margin: 0.15rem 0 0; }
+  .headline { font-size: 1.2rem; font-weight: 700; }
+  .basis { display: block; color: var(--muted); font-size: 0.9rem; }
+  .badge { display: inline-block; font-size: 0.7rem; letter-spacing: 0.05em; padding: 0.1rem 0.5rem;
+           border: 1px solid var(--border); border-radius: 0.8rem; background: var(--bg);
+           margin-right: 0.25rem; }
+  .evidence-list { list-style: none; padding: 0; }
+  .evidence-item { background: var(--card); border: 1px solid var(--border);
+                   border-radius: 0.5rem; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+  .evidence-item p { margin: 0.25rem 0; }
+  .evidence-head code { font-size: 0.8rem; color: var(--muted); }
+  .source, .refs, .status, .caveat, .note { color: var(--muted); font-size: 0.88rem; }
+  .contradicts { color: var(--alert-fg); font-size: 0.88rem; }
+  .refs.unsupported { color: var(--alert-fg); }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  caption { text-align: left; color: var(--muted); font-size: 0.88rem; padding-bottom: 0.4rem; }
+  th, td { border: 1px solid var(--border); padding: 0.4rem 0.65rem; text-align: left;
+           vertical-align: top; }
+  th { background: var(--card); }
+  .insight { background: var(--card); border-left: 4px solid var(--accent);
+             padding: 0.85rem 1rem; margin: 1rem 0; }
+  .seats { display: grid; gap: 1rem; }
+  .seat { border: 1px solid var(--border); border-radius: 0.5rem; padding: 1rem 1.25rem; }
+  .seat .field { display: inline-block; font-size: 0.72rem; text-transform: uppercase;
+                 letter-spacing: 0.05em; color: var(--muted); margin-right: 0.35rem; }
+  .requests { list-style: none; padding: 0; }
+  .requests li { border-left: 3px solid var(--accent); padding-left: 0.8rem; margin-bottom: 0.8rem; }
+  .would-change { font-weight: 600; }
+  .machine-banner { background: var(--warn-bg); color: var(--warn-fg); padding: 0.5rem 1rem;
+                    border-radius: 0.4rem; font-weight: 600; }
+  .dissent { background: var(--alert-bg); color: var(--alert-fg); border-radius: 0.5rem;
+             padding: 0.85rem 1.1rem; margin: 1rem 0; border-left: 4px solid currentColor; }
+  .empty-state { border: 2px dashed var(--border); border-radius: 0.5rem; padding: 1rem 1.25rem; }
+  .ladder { padding-left: 1.2rem; }
+  details summary { cursor: pointer; color: var(--accent); margin: 0.5rem 0; }
+  footer { margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 1.25rem;
+           color: var(--muted); font-size: 0.9rem; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<p class="banner"><span data-kriterion-source="case.case_realism" data-kriterion-format="label">AUTHORED FIXTURE</span>: this case, its evidence
+  and its assurance documents are authored fixtures. The committee text is real local-model
+  output and the arithmetic is real.</p>
+
+<h1>Kriterion</h1>
+<p class="tagline">An evidence-backed decision instrument for uncertain technology investments.</p>
+<p>Kriterion makes what a decision actually rests on explicit: what is known, what is assumed,
+   what remains unknown, which assumption dominates the money, where informed perspectives
+   disagree, what evidence would move them, and how much capital the current uncertainty
+   justifies. The machine supplies analysis and challenge. A human remains accountable for the
+   decision.</p>
+
+<nav aria-label="Sections">
+  <ol>
+    <li><a href="#decision">The decision</a></li>
+    <li><a href="#known">What we know</a></li>
+    <li><a href="#assumed">What we are assuming</a></li>
+    <li><a href="#unknown">What we do not know</a></li>
+    <li><a href="#economics">The economics</a></li>
+    <li><a href="#assurance">Capability assurance</a></li>
+    <li><a href="#perspectives">Perspectives</a></li>
+    <li><a href="#what-would-change">What would change this</a></li>
+    <li><a href="#recommendation">Synthetic recommendation</a></li>
+    <li><a href="#human-decision">Human decision</a></li>
+    <li><a href="#outcome-contract">Outcome contract</a></li>
+    <li><a href="#trust">How Kriterion earns trust</a></li>
+    <li><a href="#provenance">How this was produced</a></li>
+  </ol>
+</nav>
+
+    <section data-kriterion-role="decision" id="decision" aria-labelledby="h-decision">
+      <h2 id="h-decision">The decision</h2>
+      <p class="ask"><span data-kriterion-source="case.decision_requested" data-kriterion-format="text" class="lede">Should Northstar Software Group invest approximately GBP3m-GBP5m over the next 18 months in an Internal Developer Platform, or pursue a lower-cost programme of incremental improvements to its existing engineering toolchain?</span></p>
+      <dl class="snapshot">
+        <dt>Amount requested</dt>
+        <dd><span data-kriterion-source="case.ask.amount_gbp" data-kriterion-format="gbp" class="headline">£4,000,000</span>
+            over <span data-kriterion-source="case.ask.duration" data-kriterion-format="text">18 months</span>
+            (<span data-kriterion-source="case.ask.type" data-kriterion-format="label">CAPITAL INVESTMENT</span>)</dd>
+        <dt>Sponsor</dt><dd><span data-kriterion-source="case.sponsor" data-kriterion-format="text">CTO</span></dd>
+        <dt>Accountable decision owner</dt><dd><span data-kriterion-source="case.decision_owner" data-kriterion-format="text">cto</span></dd>
+        <dt>Decision date sought</dt><dd><span data-kriterion-source="case.deadline" data-kriterion-format="text">2027-06-30</span></dd>
+        <dt>Alternatives on the table</dt><dd><span data-kriterion-source="case.alternatives" data-kriterion-format="list_semi">do_nothing; optimise_existing_toolchain; buy_commercial_platform; build_thin_internal_platform; build_strategic_idp; staged_hybrid</span></dd>
+      </dl>
+      
+        <dl class="snapshot">
+          <dt>Synthetic recommendation, machine-generated</dt>
+          <dd><span data-kriterion-source="recommendation.action" data-kriterion-format="label" class="headline" data-kriterion-role="recommendation-action">DEFER</span></dd>
+          <dt>Stated confidence</dt>
+          <dd><span data-kriterion-source="recommendation.confidence_band" data-kriterion-format="label">LOW</span></dd>
+          <dt>Capital the machine's suggestion would put at risk</dt>
+          <dd><span data-kriterion-source="capital_at_risk_gbp" data-kriterion-format="gbp" class="headline">£0</span>
+              <span class="basis"><span data-kriterion-source="capital_at_risk_basis" data-kriterion-format="text">DEFER commits no funding. The recommendation record still carries the full ask as its amount field; that is the ask, not a commitment.</span></span></dd>
+          <dt>What the accountable human has committed</dt>
+          <dd><span class="basis"><span data-kriterion-source="human_capital_commitment" data-kriterion-format="text">No human decision has been recorded, so nothing is committed.</span></span></dd>
+          <dt>Dominant uncertainty</dt>
+          <dd><span data-kriterion-source="primary_uncertainty_label" data-kriterion-format="text">as-benefit-attribution-factor</span>, worth
+              <span data-kriterion-source="primary_sensitivity_swing_gbp" data-kriterion-format="gbp_millions">£2.95m</span> of swing on the
+              base valuation
+              <span class="basis">Recorded evidence strength <span data-kriterion-source="assumptions_by_id[as-benefit-attribution-factor].evidence_strength" data-kriterion-format="label">LOW</span>, base value <span data-kriterion-source="assumptions_by_id[as-benefit-attribution-factor].value" data-kriterion-format="percent">25%</span> across a plausible range of <span data-kriterion-source="assumptions_by_id[as-benefit-attribution-factor].range" data-kriterion-format="range_percent">5%–50%</span>, owned by <span data-kriterion-source="assumptions_by_id[as-benefit-attribution-factor].owner" data-kriterion-format="text">cfo</span>. Engine parameter <span data-kriterion-source="primary_sensitivity_param" data-kriterion-format="text">benefit_attribution_factor</span>.</span></dd>
+        </dl>
+        
+        <dl class="snapshot">
+          <dt>Base valuation</dt>
+          <dd><span data-kriterion-source="economics.npv_mid_gbp" data-kriterion-format="gbp_millions" class="headline">-£4.06m</span></dd>
+          <dt>Downside, every assumption at its pessimistic end</dt>
+          <dd><span data-kriterion-source="economics.npv_low_gbp" data-kriterion-format="gbp_millions" class="headline">-£6.62m</span></dd>
+          <dt>Upside, every assumption at its optimistic end</dt>
+          <dd><span data-kriterion-source="economics.npv_high_gbp" data-kriterion-format="gbp_millions" class="headline">£11.75m</span></dd>
+          <dt>What that shape means</dt>
+          <dd><span data-kriterion-source="economics_interpretation" data-kriterion-format="text">The sign of the outcome flips inside the stated plausible ranges, so the case is not yet decidable on the numbers alone. The widest single swing comes from as-benefit-attribution-factor (LOW evidence), which is therefore the assumption to buy evidence about before buying scale.</span></dd>
+        </dl>
+        
+        
+      <p class="note">Kriterion's decision vocabulary has no approval verb, by design:
+        <span data-kriterion-source="decision_vocabulary" data-kriterion-format="list_dot" class="vocab">REJECT · DEFER · REQUEST_EVIDENCE · DISCOVERY · FUND_EXPERIMENT · PILOT · SCALE · HOLD · REDUCE · STOP</span></p>
+    </section>
+    
+    <section data-kriterion-role="what-we-know" id="known" aria-labelledby="h-known">
+      <h2 id="h-known">What we know</h2>
+      <p>Every item carries its own epistemic class, its recorded strength, and whether it is an
+         observation or an authored fixture. Kriterion never collapses those into one score.</p>
+      <ul class="evidence-list">
+      <li class="evidence-item" data-evidence-id="ev-401">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-401].id" data-kriterion-format="text">ev-401</code>
+          <span data-kriterion-source="evidence_by_id[ev-401].category" data-kriterion-format="text" class="badge category">EXTERNAL_REFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-401].strength" data-kriterion-format="text" class="badge strength">HIGH</span>
+          <span data-kriterion-source="evidence_by_id[ev-401].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-401].claim" data-kriterion-format="text">The four DORA delivery metrics -- deployment frequency, lead time for changes, change failure rate and time to restore service -- are reported as statistically predictive of organisational performance, establishing that software delivery performance is measurable and consequential rather than merely a matter of engineering taste.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-401].source" data-kriterion-format="text">Forsgren, Humble &amp; Kim, &#x27;Accelerate: The Science of Lean Software and DevOps&#x27; (IT Revolution, 2018); DORA / Google Cloud, Accelerate State of DevOps Report series</span> · <span data-kriterion-source="evidence_by_id[ev-401].period" data-kriterion-format="text">2018 onward</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-403">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-403].id" data-kriterion-format="text">ev-403</code>
+          <span data-kriterion-source="evidence_by_id[ev-403].category" data-kriterion-format="text" class="badge category">EXTERNAL_REFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-403].strength" data-kriterion-format="text" class="badge strength">HIGH</span>
+          <span data-kriterion-source="evidence_by_id[ev-403].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-403].claim" data-kriterion-format="text">The SPACE framework argues that developer productivity is multidimensional (satisfaction, performance, activity, communication, efficiency) and that no single metric -- including any activity count or time saved -- validly represents it; measuring one dimension alone reliably produces misleading conclusions.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-403].source" data-kriterion-format="text">Forsgren, Storey, Maddila, Zimmermann, Houck &amp; Butler, &#x27;The SPACE of Developer Productivity&#x27;, ACM Queue, 2021</span> · <span data-kriterion-source="evidence_by_id[ev-403].period" data-kriterion-format="text">2021</span></p>
+        <p class="contradicts">Recorded as contradicting <span data-kriterion-source="evidence_by_id[ev-403].contradicts" data-kriterion-format="list_semi">ev-444</span></p>
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-404">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-404].id" data-kriterion-format="text">ev-404</code>
+          <span data-kriterion-source="evidence_by_id[ev-404].category" data-kriterion-format="text" class="badge category">EXTERNAL_REFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-404].strength" data-kriterion-format="text" class="badge strength">HIGH</span>
+          <span data-kriterion-source="evidence_by_id[ev-404].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-404].claim" data-kriterion-format="text">Developer experience is characterised along three dimensions -- feedback loops, cognitive load and flow state -- and friction in any of them degrades output. This gives platform investment a mechanism of action beyond raw tool consolidation.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-404].source" data-kriterion-format="text">Noda, Storey, Forsgren &amp; Greiler, &#x27;DevEx: What Actually Drives Productivity&#x27;, ACM Queue, 2023</span> · <span data-kriterion-source="evidence_by_id[ev-404].period" data-kriterion-format="text">2023</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-405">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-405].id" data-kriterion-format="text">ev-405</code>
+          <span data-kriterion-source="evidence_by_id[ev-405].category" data-kriterion-format="text" class="badge category">EXTERNAL_REFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-405].strength" data-kriterion-format="text" class="badge strength">HIGH</span>
+          <span data-kriterion-source="evidence_by_id[ev-405].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-405].claim" data-kriterion-format="text">A platform should be treated as a product with its own users, roadmap and adoption problem, and should be the &#x27;thinnest viable platform&#x27; that removes cognitive load -- explicitly warning against platforms that expand to abstract every engineering workflow.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-405].source" data-kriterion-format="text">Skelton &amp; Pais, &#x27;Team Topologies&#x27; (IT Revolution, 2019)</span> · <span data-kriterion-source="evidence_by_id[ev-405].period" data-kriterion-format="text">2019</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-406">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-406].id" data-kriterion-format="text">ev-406</code>
+          <span data-kriterion-source="evidence_by_id[ev-406].category" data-kriterion-format="text" class="badge category">EXTERNAL_REFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-406].strength" data-kriterion-format="text" class="badge strength">HIGH</span>
+          <span data-kriterion-source="evidence_by_id[ev-406].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-406].claim" data-kriterion-format="text">Extraneous cognitive load imposed on stream-aligned teams by infrastructure, tooling and process is a limiting factor on delivery, and reducing it is the stated purpose of a platform team. The load is not eliminated by a platform, only relocated -- to the platform team.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-406].source" data-kriterion-format="text">Skelton &amp; Pais, &#x27;Team Topologies&#x27; (IT Revolution, 2019)</span> · <span data-kriterion-source="evidence_by_id[ev-406].period" data-kriterion-format="text">2019</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-416">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-416].id" data-kriterion-format="text">ev-416</code>
+          <span data-kriterion-source="evidence_by_id[ev-416].category" data-kriterion-format="text" class="badge category">EXTERNAL_REFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-416].strength" data-kriterion-format="text" class="badge strength">HIGH</span>
+          <span data-kriterion-source="evidence_by_id[ev-416].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-416].claim" data-kriterion-format="text">The &#x27;paved road&#x27; pattern -- secure, supported defaults that are the easiest path for a developer to take -- is documented as the practical mechanism by which large engineering organisations achieve consistent security and reliability properties without per-change approval.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-416].source" data-kriterion-format="text">Adkins, Beyer, Blankinship, Lewandowski, Oprea &amp; Stubblefield, &#x27;Building Secure and Reliable Systems&#x27; (Google / O&#x27;Reilly, 2020)</span> · <span data-kriterion-source="evidence_by_id[ev-416].period" data-kriterion-format="text">2020</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-421">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-421].id" data-kriterion-format="text">ev-421</code>
+          <span data-kriterion-source="evidence_by_id[ev-421].category" data-kriterion-format="text" class="badge category">MEASURED</span>
+          <span data-kriterion-source="evidence_by_id[ev-421].strength" data-kriterion-format="text" class="badge strength">HIGH</span>
+          <span data-kriterion-source="evidence_by_id[ev-421].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-421].claim" data-kriterion-format="text">SYNTHETIC SCENARIO INPUT. Northstar employs approximately 2,500 engineers across three primary engineering regions -- United States, Europe and India -- building global digital and software products.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-421].source" data-kriterion-format="text">Northstar scenario definition (fictional). Not an observation of any real organisation</span> · <span data-kriterion-source="evidence_by_id[ev-421].period" data-kriterion-format="text">scenario baseline</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-422">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-422].id" data-kriterion-format="text">ev-422</code>
+          <span data-kriterion-source="evidence_by_id[ev-422].category" data-kriterion-format="text" class="badge category">MEASURED</span>
+          <span data-kriterion-source="evidence_by_id[ev-422].strength" data-kriterion-format="text" class="badge strength">HIGH</span>
+          <span data-kriterion-source="evidence_by_id[ev-422].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-422].claim" data-kriterion-format="text">SYNTHETIC SCENARIO INPUT. Median time from a new Northstar engineer&#x27;s start date to their first independently deployed production change is 6 weeks, with an interquartile range of 4 to 11 weeks depending on business unit.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-422].source" data-kriterion-format="text">Northstar scenario definition (fictional)</span> · <span data-kriterion-source="evidence_by_id[ev-422].period" data-kriterion-format="text">scenario baseline</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-423">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-423].id" data-kriterion-format="text">ev-423</code>
+          <span data-kriterion-source="evidence_by_id[ev-423].category" data-kriterion-format="text" class="badge category">MEASURED</span>
+          <span data-kriterion-source="evidence_by_id[ev-423].strength" data-kriterion-format="text" class="badge strength">HIGH</span>
+          <span data-kriterion-source="evidence_by_id[ev-423].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-423].claim" data-kriterion-format="text">SYNTHETIC SCENARIO INPUT. Northstar engineering runs 7 materially different CI/CD patterns across its business units, with 3 different pipeline technologies and no common deployment interface.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-423].source" data-kriterion-format="text">Northstar scenario definition (fictional)</span> · <span data-kriterion-source="evidence_by_id[ev-423].period" data-kriterion-format="text">scenario baseline</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-424">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-424].id" data-kriterion-format="text">ev-424</code>
+          <span data-kriterion-source="evidence_by_id[ev-424].category" data-kriterion-format="text" class="badge category">MEASURED</span>
+          <span data-kriterion-source="evidence_by_id[ev-424].strength" data-kriterion-format="text" class="badge strength">HIGH</span>
+          <span data-kriterion-source="evidence_by_id[ev-424].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-424].claim" data-kriterion-format="text">SYNTHETIC SCENARIO INPUT. Lead time to provision a new cloud environment at Northstar ranges from 2 days to 21 days depending on business unit and workload type; the variation is driven by which central team must be involved, not by technical difficulty.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-424].source" data-kriterion-format="text">Northstar scenario definition (fictional)</span> · <span data-kriterion-source="evidence_by_id[ev-424].period" data-kriterion-format="text">scenario baseline</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-426">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-426].id" data-kriterion-format="text">ev-426</code>
+          <span data-kriterion-source="evidence_by_id[ev-426].category" data-kriterion-format="text" class="badge category">MEASURED</span>
+          <span data-kriterion-source="evidence_by_id[ev-426].strength" data-kriterion-format="text" class="badge strength">HIGH</span>
+          <span data-kriterion-source="evidence_by_id[ev-426].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-426].claim" data-kriterion-format="text">SYNTHETIC SCENARIO INPUT. Northstar&#x27;s central platform and developer-tooling groups total approximately 95 engineers spread across 6 teams, each owning individual components rather than an end-to-end developer journey.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-426].source" data-kriterion-format="text">Northstar scenario definition (fictional)</span> · <span data-kriterion-source="evidence_by_id[ev-426].period" data-kriterion-format="text">scenario baseline</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-427">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-427].id" data-kriterion-format="text">ev-427</code>
+          <span data-kriterion-source="evidence_by_id[ev-427].category" data-kriterion-format="text" class="badge category">MEASURED</span>
+          <span data-kriterion-source="evidence_by_id[ev-427].strength" data-kriterion-format="text" class="badge strength">HIGH</span>
+          <span data-kriterion-source="evidence_by_id[ev-427].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-427].claim" data-kriterion-format="text">SYNTHETIC SCENARIO INPUT. Documented golden paths exist at Northstar for approximately 31 per cent of production workloads, concentrated in one business unit&#x27;s stateless web services. No golden path exists for data, batch or mobile workloads.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-427].source" data-kriterion-format="text">Northstar scenario definition (fictional)</span> · <span data-kriterion-source="evidence_by_id[ev-427].period" data-kriterion-format="text">scenario baseline</span></p>
+        
+      </li>
+    </ul><details><summary>Remaining items in this group, of lower recorded evidence strength</summary><ul class="evidence-list">
+      <li class="evidence-item" data-evidence-id="ev-402">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-402].id" data-kriterion-format="text">ev-402</code>
+          <span data-kriterion-source="evidence_by_id[ev-402].category" data-kriterion-format="text" class="badge category">EXTERNAL_REFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-402].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-402].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-402].claim" data-kriterion-format="text">DORA&#x27;s 2024 State of DevOps research reports that increased AI adoption was associated with a decrease in delivery throughput and in delivery stability, i.e. the productivity gain individual developers perceive did not appear in team-level delivery outcomes.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-402].source" data-kriterion-format="text">DORA / Google Cloud, Accelerate State of DevOps Report 2024</span> · <span data-kriterion-source="evidence_by_id[ev-402].period" data-kriterion-format="text">2024</span></p>
+        <p class="contradicts">Recorded as contradicting <span data-kriterion-source="evidence_by_id[ev-402].contradicts" data-kriterion-format="list_semi">ev-413</span></p>
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-407">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-407].id" data-kriterion-format="text">ev-407</code>
+          <span data-kriterion-source="evidence_by_id[ev-407].category" data-kriterion-format="text" class="badge category">EXTERNAL_REFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-407].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-407].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-407].claim" data-kriterion-format="text">The CNCF Platforms White Paper defines a platform as an internal product providing self-service capabilities over existing infrastructure, and states that platform success is measured by adoption and by the outcomes of its users, not by capability count.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-407].source" data-kriterion-format="text">CNCF Platforms Working Group, &#x27;Platforms White Paper&#x27; (Cloud Native Computing Foundation)</span> · <span data-kriterion-source="evidence_by_id[ev-407].period" data-kriterion-format="text">2023</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-408">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-408].id" data-kriterion-format="text">ev-408</code>
+          <span data-kriterion-source="evidence_by_id[ev-408].category" data-kriterion-format="text" class="badge category">EXTERNAL_REFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-408].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-408].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-408].claim" data-kriterion-format="text">The CNCF Platform Engineering Maturity Model describes platform adoption as progressing through identifiable stages and treats measurement, product management and user feedback as maturity dimensions in their own right -- implying that a platform funded as a build project rather than a product is structurally under-resourced.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-408].source" data-kriterion-format="text">CNCF Platforms Working Group, &#x27;Platform Engineering Maturity Model&#x27; (Cloud Native Computing Foundation)</span> · <span data-kriterion-source="evidence_by_id[ev-408].period" data-kriterion-format="text">2023-2024</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-411">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-411].id" data-kriterion-format="text">ev-411</code>
+          <span data-kriterion-source="evidence_by_id[ev-411].category" data-kriterion-format="text" class="badge category">EXTERNAL_REFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-411].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-411].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-411].claim" data-kriterion-format="text">A controlled experiment on AI coding assistance found treated developers completed a specific, self-contained programming task substantially faster than the control group. The measured task was narrow and greenfield; the study does not measure delivery of changes into an existing production codebase.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-411].source" data-kriterion-format="text">Peng, Kalliamvakou, Cihon &amp; Demirer, &#x27;The Impact of AI on Developer Productivity: Evidence from GitHub Copilot&#x27; (2023)</span> · <span data-kriterion-source="evidence_by_id[ev-411].period" data-kriterion-format="text">2023</span></p>
+        <p class="contradicts">Recorded as contradicting <span data-kriterion-source="evidence_by_id[ev-411].contradicts" data-kriterion-format="list_semi">ev-412</span></p>
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-412">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-412].id" data-kriterion-format="text">ev-412</code>
+          <span data-kriterion-source="evidence_by_id[ev-412].category" data-kriterion-format="text" class="badge category">EXTERNAL_REFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-412].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-412].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-412].claim" data-kriterion-format="text">A randomised controlled trial with experienced open-source developers working on their own mature repositories found that AI tooling made them SLOWER on real tasks, while the same developers believed it had made them faster. The perception gap is the finding that matters here: self-reported developer time saved is not a reliable measurement of time actually saved.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-412].source" data-kriterion-format="text">METR, randomised controlled trial on the effect of AI tools on experienced open-source developer productivity (2025)</span> · <span data-kriterion-source="evidence_by_id[ev-412].period" data-kriterion-format="text">2025</span></p>
+        <p class="contradicts">Recorded as contradicting <span data-kriterion-source="evidence_by_id[ev-412].contradicts" data-kriterion-format="list_semi">ev-411</span></p>
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-413">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-413].id" data-kriterion-format="text">ev-413</code>
+          <span data-kriterion-source="evidence_by_id[ev-413].category" data-kriterion-format="text" class="badge category">EXTERNAL_REFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-413].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-413].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-413].claim" data-kriterion-format="text">An enterprise randomised controlled trial on AI-assisted development reported a measurable reduction in time to complete assigned development tasks in an industrial setting.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-413].source" data-kriterion-format="text">Paradis et al., enterprise randomised controlled trial on AI impact on development speed (Google)</span> · <span data-kriterion-source="evidence_by_id[ev-413].period" data-kriterion-format="text">2024-2025</span></p>
+        <p class="contradicts">Recorded as contradicting <span data-kriterion-source="evidence_by_id[ev-413].contradicts" data-kriterion-format="list_semi">ev-402</span></p>
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-414">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-414].id" data-kriterion-format="text">ev-414</code>
+          <span data-kriterion-source="evidence_by_id[ev-414].category" data-kriterion-format="text" class="badge category">EXTERNAL_REFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-414].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-414].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-414].claim" data-kriterion-format="text">Backstage, the developer-portal framework open-sourced by Spotify and donated to the CNCF, is widely adopted as a starting point for internal developer portals. Public practitioner accounts consistently report that the portal itself is the small part of the work and that the plugin, catalogue and ownership-data integration is the large part.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-414].source" data-kriterion-format="text">Spotify / CNCF Backstage project, and published practitioner accounts of Backstage adoption</span> · <span data-kriterion-source="evidence_by_id[ev-414].period" data-kriterion-format="text">2020 onward</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-415">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-415].id" data-kriterion-format="text">ev-415</code>
+          <span data-kriterion-source="evidence_by_id[ev-415].category" data-kriterion-format="text" class="badge category">EXTERNAL_REFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-415].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-415].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-415].claim" data-kriterion-format="text">InnerSource practice identifies the Trusted Committer role as the mechanism that makes cross-team contribution work, and identifies review and acceptance capacity -- not contributor willingness -- as the usual bottleneck. A platform that invites contribution without funding acceptance capacity converts a support queue into a pull-request queue.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-415].source" data-kriterion-format="text">InnerSource Commons, InnerSource Patterns (&#x27;Trusted Committer&#x27; and related patterns)</span> · <span data-kriterion-source="evidence_by_id[ev-415].period" data-kriterion-format="text">ongoing</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-417">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-417].id" data-kriterion-format="text">ev-417</code>
+          <span data-kriterion-source="evidence_by_id[ev-417].category" data-kriterion-format="text" class="badge category">EXTERNAL_REFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-417].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-417].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-417].claim" data-kriterion-format="text">Policy-as-code engines (e.g. Open Policy Agent, a CNCF graduated project) provide a documented mechanism for expressing and enforcing controls uniformly across heterogeneous infrastructure, and secure-development frameworks such as NIST SP 800-218 (SSDF) call for controls to be applied consistently and automatically rather than per-project.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-417].source" data-kriterion-format="text">CNCF Open Policy Agent project; NIST Special Publication 800-218, Secure Software Development Framework</span> · <span data-kriterion-source="evidence_by_id[ev-417].period" data-kriterion-format="text">2021-2022</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-418">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-418].id" data-kriterion-format="text">ev-418</code>
+          <span data-kriterion-source="evidence_by_id[ev-418].category" data-kriterion-format="text" class="badge category">EXTERNAL_REFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-418].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-418].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-418].claim" data-kriterion-format="text">Conway&#x27;s Law: a system&#x27;s structure tends to mirror the communication structure of the organisation that builds it. Applied here, it predicts that a platform built by a team without authority over the business units&#x27; delivery priorities will reproduce, not remove, the existing boundaries.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-418].source" data-kriterion-format="text">Melvin E. Conway, &#x27;How Do Committees Invent?&#x27;, Datamation, 1968</span> · <span data-kriterion-source="evidence_by_id[ev-418].period" data-kriterion-format="text">1968</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-419">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-419].id" data-kriterion-format="text">ev-419</code>
+          <span data-kriterion-source="evidence_by_id[ev-419].category" data-kriterion-format="text" class="badge category">EXTERNAL_REFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-419].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-419].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-419].claim" data-kriterion-format="text">Published technology-radar and practitioner commentary repeatedly cautions against internal developer platforms built without a product mindset, against platform teams operating as ticket-takers, and against &#x27;overambitious&#x27; platforms that attempt to abstract every workflow. The named failure mode is a platform that adds an abstraction layer without removing the underlying complexity.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-419].source" data-kriterion-format="text">Thoughtworks Technology Radar entries on platform engineering and internal developer platforms; corroborating practitioner literature</span> · <span data-kriterion-source="evidence_by_id[ev-419].period" data-kriterion-format="text">2020-2024</span></p>
+        <p class="contradicts">Recorded as contradicting <span data-kriterion-source="evidence_by_id[ev-419].contradicts" data-kriterion-format="list_semi">ev-445</span></p>
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-425">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-425].id" data-kriterion-format="text">ev-425</code>
+          <span data-kriterion-source="evidence_by_id[ev-425].category" data-kriterion-format="text" class="badge category">MEASURED</span>
+          <span data-kriterion-source="evidence_by_id[ev-425].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-425].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-425].claim" data-kriterion-format="text">SYNTHETIC SCENARIO INPUT. Northstar&#x27;s central engineering teams receive approximately 1,900 platform and tooling support requests per quarter, of which an estimated 60 per cent are recurring onboarding or configuration requests rather than novel problems.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-425].source" data-kriterion-format="text">Northstar scenario definition (fictional)</span> · <span data-kriterion-source="evidence_by_id[ev-425].period" data-kriterion-format="text">scenario baseline</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-428">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-428].id" data-kriterion-format="text">ev-428</code>
+          <span data-kriterion-source="evidence_by_id[ev-428].category" data-kriterion-format="text" class="badge category">MEASURED</span>
+          <span data-kriterion-source="evidence_by_id[ev-428].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-428].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-428].claim" data-kriterion-format="text">SYNTHETIC SCENARIO INPUT. Northstar teams on an existing golden path show a median change lead time of 2 days against 9 days for teams on bespoke workflows. The comparison is observational: golden-path teams were not randomly assigned and are concentrated in the newest, least entangled part of the estate.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-428].source" data-kriterion-format="text">Northstar scenario definition (fictional). The selection-bias caveat is part of the scenario, not a disclaimer added afterwards</span> · <span data-kriterion-source="evidence_by_id[ev-428].period" data-kriterion-format="text">scenario baseline</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-429">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-429].id" data-kriterion-format="text">ev-429</code>
+          <span data-kriterion-source="evidence_by_id[ev-429].category" data-kriterion-format="text" class="badge category">MEASURED</span>
+          <span data-kriterion-source="evidence_by_id[ev-429].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-429].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-429].claim" data-kriterion-format="text">SYNTHETIC SCENARIO INPUT. Northstar change failure rate is 9 per cent on golden-path workflows and 14 per cent on bespoke workflows. The same selection-bias caveat as ev-428 applies.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-429].source" data-kriterion-format="text">Northstar scenario definition (fictional)</span> · <span data-kriterion-source="evidence_by_id[ev-429].period" data-kriterion-format="text">scenario baseline</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-430">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-430].id" data-kriterion-format="text">ev-430</code>
+          <span data-kriterion-source="evidence_by_id[ev-430].category" data-kriterion-format="text" class="badge category">MEASURED</span>
+          <span data-kriterion-source="evidence_by_id[ev-430].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-430].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-430].claim" data-kriterion-format="text">SYNTHETIC SCENARIO INPUT. Northstar engineering documentation is distributed across 4 wiki systems and an unindexed set of repository README files; an internal survey reports that engineers most often ask a colleague rather than search, because search results are known to be stale.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-430].source" data-kriterion-format="text">Northstar scenario definition (fictional)</span> · <span data-kriterion-source="evidence_by_id[ev-430].period" data-kriterion-format="text">scenario baseline</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-431">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-431].id" data-kriterion-format="text">ev-431</code>
+          <span data-kriterion-source="evidence_by_id[ev-431].category" data-kriterion-format="text" class="badge category">MEASURED</span>
+          <span data-kriterion-source="evidence_by_id[ev-431].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-431].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-431].claim" data-kriterion-format="text">SYNTHETIC SCENARIO INPUT. Northstar records 340 open security or operational policy exceptions, of which 78 per cent sit against workloads outside any golden path. Whether this reflects the golden path preventing exceptions, or simply that newer workloads need fewer, is not established by the count.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-431].source" data-kriterion-format="text">Northstar scenario definition (fictional)</span> · <span data-kriterion-source="evidence_by_id[ev-431].period" data-kriterion-format="text">scenario baseline</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-432">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-432].id" data-kriterion-format="text">ev-432</code>
+          <span data-kriterion-source="evidence_by_id[ev-432].category" data-kriterion-format="text" class="badge category">MEASURED</span>
+          <span data-kriterion-source="evidence_by_id[ev-432].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-432].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-432].claim" data-kriterion-format="text">SYNTHETIC SCENARIO INPUT. Approximately 28 per cent of Northstar&#x27;s non-production cloud spend is attributable to environments idle for more than 14 consecutive days, a consequence of provisioning being difficult enough that teams keep environments alive rather than recreate them.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-432].source" data-kriterion-format="text">Northstar scenario definition (fictional)</span> · <span data-kriterion-source="evidence_by_id[ev-432].period" data-kriterion-format="text">scenario baseline</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-433">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-433].id" data-kriterion-format="text">ev-433</code>
+          <span data-kriterion-source="evidence_by_id[ev-433].category" data-kriterion-format="text" class="badge category">MEASURED</span>
+          <span data-kriterion-source="evidence_by_id[ev-433].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-433].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-433].claim" data-kriterion-format="text">SYNTHETIC SCENARIO INPUT. Roughly 35 per cent of Northstar engineering teams report regular use of AI coding agents, with no common interface to Northstar&#x27;s own deployment, provisioning or policy systems; agents currently operate against raw tooling and human-oriented documentation.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-433].source" data-kriterion-format="text">Northstar scenario definition (fictional)</span> · <span data-kriterion-source="evidence_by_id[ev-433].period" data-kriterion-format="text">scenario baseline</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-434">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-434].id" data-kriterion-format="text">ev-434</code>
+          <span data-kriterion-source="evidence_by_id[ev-434].category" data-kriterion-format="text" class="badge category">EXPERT_JUDGMENT</span>
+          <span data-kriterion-source="evidence_by_id[ev-434].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-434].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-434].claim" data-kriterion-format="text">SYNTHETIC SCENARIO INPUT. Northstar&#x27;s head of platform engineering judges that a deliberately thin platform could deliver golden paths, service templates and environment provisioning over the existing CI/CD, cloud and observability tooling without replacing any of it, and that attempting to replace them would consume the entire budget before any developer saw a benefit.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-434].source" data-kriterion-format="text">Northstar scenario definition (fictional): a synthetic internal judgment, not an observation</span> · <span data-kriterion-source="evidence_by_id[ev-434].period" data-kriterion-format="text">scenario baseline</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-435">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-435].id" data-kriterion-format="text">ev-435</code>
+          <span data-kriterion-source="evidence_by_id[ev-435].category" data-kriterion-format="text" class="badge category">EXPERT_JUDGMENT</span>
+          <span data-kriterion-source="evidence_by_id[ev-435].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-435].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-435].claim" data-kriterion-format="text">SYNTHETIC SCENARIO INPUT. Northstar&#x27;s CISO delegate judges that golden paths would materially improve control consistency only if they are the default and the non-platform route requires an explicit exception; an optional golden path is expected to be adopted by the teams that already had good controls.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-435].source" data-kriterion-format="text">Northstar scenario definition (fictional)</span> · <span data-kriterion-source="evidence_by_id[ev-435].period" data-kriterion-format="text">scenario baseline</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-436">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-436].id" data-kriterion-format="text">ev-436</code>
+          <span data-kriterion-source="evidence_by_id[ev-436].category" data-kriterion-format="text" class="badge category">EXPERT_JUDGMENT</span>
+          <span data-kriterion-source="evidence_by_id[ev-436].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-436].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-436].claim" data-kriterion-format="text">SYNTHETIC SCENARIO INPUT. Northstar&#x27;s finance business partner judges that no agreed methodology currently exists inside Northstar for converting engineering time saved into a booked financial benefit, and that no previous engineering efficiency programme has had its claimed savings traced to a cost line or a delivered revenue outcome.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-436].source" data-kriterion-format="text">Northstar scenario definition (fictional)</span> · <span data-kriterion-source="evidence_by_id[ev-436].period" data-kriterion-format="text">scenario baseline</span></p>
+        <p class="contradicts">Recorded as contradicting <span data-kriterion-source="evidence_by_id[ev-436].contradicts" data-kriterion-format="list_semi">ev-444</span></p>
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-437">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-437].id" data-kriterion-format="text">ev-437</code>
+          <span data-kriterion-source="evidence_by_id[ev-437].category" data-kriterion-format="text" class="badge category">EXPERT_JUDGMENT</span>
+          <span data-kriterion-source="evidence_by_id[ev-437].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-437].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-437].claim" data-kriterion-format="text">SYNTHETIC SCENARIO INPUT. Northstar&#x27;s vendor evaluation judges that a commercial platform product would deliver a service catalogue and a portal quickly, but that the integration to Northstar&#x27;s own provisioning, policy and deployment systems is the majority of the work and is not shortened by the purchase.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-437].source" data-kriterion-format="text">Northstar scenario definition (fictional)</span> · <span data-kriterion-source="evidence_by_id[ev-437].period" data-kriterion-format="text">scenario baseline</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-438">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-438].id" data-kriterion-format="text">ev-438</code>
+          <span data-kriterion-source="evidence_by_id[ev-438].category" data-kriterion-format="text" class="badge category">EXPERT_JUDGMENT</span>
+          <span data-kriterion-source="evidence_by_id[ev-438].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-438].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-438].claim" data-kriterion-format="text">SYNTHETIC SCENARIO INPUT. A Northstar engineering leader judges that teams will bypass any platform path that is slower or less capable than what they use today, and that mandating use before the platform is genuinely better would produce compliance without adoption -- recorded usage without changed behaviour.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-438].source" data-kriterion-format="text">Northstar scenario definition (fictional)</span> · <span data-kriterion-source="evidence_by_id[ev-438].period" data-kriterion-format="text">scenario baseline</span></p>
+        <p class="contradicts">Recorded as contradicting <span data-kriterion-source="evidence_by_id[ev-438].contradicts" data-kriterion-format="list_semi">ev-445</span></p>
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-409">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-409].id" data-kriterion-format="text">ev-409</code>
+          <span data-kriterion-source="evidence_by_id[ev-409].category" data-kriterion-format="text" class="badge category">EXTERNAL_REFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-409].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-409].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-409].claim" data-kriterion-format="text">Gartner has predicted that by 2026 a large majority of software engineering organisations will have established platform teams as internal providers of reusable services and tools. This is an analyst adoption forecast, not a measurement of outcomes: it says platform teams will be common, not that they will work.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-409].source" data-kriterion-format="text">Gartner analyst prediction, widely cited in platform-engineering commentary. ANALYST FORECAST, not primary research</span> · <span data-kriterion-source="evidence_by_id[ev-409].period" data-kriterion-format="text">2023 forecast for 2026</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-410">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-410].id" data-kriterion-format="text">ev-410</code>
+          <span data-kriterion-source="evidence_by_id[ev-410].category" data-kriterion-format="text" class="badge category">EXTERNAL_REFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-410].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-410].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-410].claim" data-kriterion-format="text">Industry survey work on platform engineering reports that platform adoption is widespread and that organisations self-report benefits in delivery speed and standardisation, while also reporting that platform teams struggle with unclear ownership and with proving value to funders.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-410].source" data-kriterion-format="text">Puppet, State of DevOps Report -- Platform Engineering editions. INDUSTRY SURVEY: self-reported, self-selected respondents, no control group</span> · <span data-kriterion-source="evidence_by_id[ev-410].period" data-kriterion-format="text">2023-2024</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-420">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-420].id" data-kriterion-format="text">ev-420</code>
+          <span data-kriterion-source="evidence_by_id[ev-420].category" data-kriterion-format="text" class="badge category">EXTERNAL_REFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-420].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-420].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-420].claim" data-kriterion-format="text">Commercial developer-platform vendors publish ROI models claiming payback within 12 months on developer-productivity grounds alone. Methodologies are typically undisclosed, inputs are vendor-selected, baselines are unstated, and the productivity-to-value conversion is assumed rather than demonstrated.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-420].source" data-kriterion-format="text">Commercial internal-developer-platform vendor marketing collateral, category-level characterisation. VENDOR EVIDENCE -- included so that it can be challenged, not relied upon</span> · <span data-kriterion-source="evidence_by_id[ev-420].period" data-kriterion-format="text">2023-2025</span></p>
+        <p class="contradicts">Recorded as contradicting <span data-kriterion-source="evidence_by_id[ev-420].contradicts" data-kriterion-format="list_semi">ev-403; ev-452</span></p>
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-439">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-439].id" data-kriterion-format="text">ev-439</code>
+          <span data-kriterion-source="evidence_by_id[ev-439].category" data-kriterion-format="text" class="badge category">EXPERT_JUDGMENT</span>
+          <span data-kriterion-source="evidence_by_id[ev-439].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-439].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-439].claim" data-kriterion-format="text">SYNTHETIC SCENARIO INPUT. A Northstar principal architect judges that AI coding agents make machine-operable platform interfaces more valuable, because an agent cannot read a wiki page or raise a ticket, and that the same interfaces are the ones a well-built platform needs regardless. The judgment is explicitly a hypothesis: nobody at Northstar has tested it.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-439].source" data-kriterion-format="text">Northstar scenario definition (fictional)</span> · <span data-kriterion-source="evidence_by_id[ev-439].period" data-kriterion-format="text">scenario baseline</span></p>
+        
+      </li>
+    </ul></details>
+    </section>
+    
+    <section data-kriterion-role="what-we-assume" id="assumed" aria-labelledby="h-assumed">
+      <h2 id="h-assumed">What we are assuming</h2>
+      <p>Each of these carries an owner and a plausible range, so the economics below can be
+         swung across the range rather than quoted as a single confident figure.</p>
+      <table>
+        <caption>Ranged assumptions declared by the case pack</caption>
+        <thead><tr><th>Identifier</th><th>Base value</th><th>Plausible range</th>
+          <th>Evidence strength</th><th>Owner</th></tr></thead>
+        <tbody><tr><td><code data-kriterion-source="assumptions_by_id[as-benefit-attribution-factor].id" data-kriterion-format="text">as-benefit-attribution-factor</code></td><td><span data-kriterion-source="assumptions_by_id[as-benefit-attribution-factor].value" data-kriterion-format="percent">25%</span></td><td><span data-kriterion-source="assumptions_by_id[as-benefit-attribution-factor].range" data-kriterion-format="range_percent">5%–50%</span></td><td><span data-kriterion-source="assumptions_by_id[as-benefit-attribution-factor].evidence_strength" data-kriterion-format="label">LOW</span></td><td><span data-kriterion-source="assumptions_by_id[as-benefit-attribution-factor].owner" data-kriterion-format="text">cfo</span></td></tr><tr><td><code data-kriterion-source="assumptions_by_id[as-platform-adoption-rate].id" data-kriterion-format="text">as-platform-adoption-rate</code></td><td><span data-kriterion-source="assumptions_by_id[as-platform-adoption-rate].value" data-kriterion-format="percent">60%</span></td><td><span data-kriterion-source="assumptions_by_id[as-platform-adoption-rate].range" data-kriterion-format="range_percent">30%–85%</span></td><td><span data-kriterion-source="assumptions_by_id[as-platform-adoption-rate].evidence_strength" data-kriterion-format="label">LOW</span></td><td><span data-kriterion-source="assumptions_by_id[as-platform-adoption-rate].owner" data-kriterion-format="text">cto</span></td></tr><tr><td><code data-kriterion-source="assumptions_by_id[as-friction-hours-saved-per-engineer].id" data-kriterion-format="text">as-friction-hours-saved-per-engineer</code></td><td><span data-kriterion-source="assumptions_by_id[as-friction-hours-saved-per-engineer].value" data-kriterion-format="percent">9000%</span></td><td><span data-kriterion-source="assumptions_by_id[as-friction-hours-saved-per-engineer].range" data-kriterion-format="range_percent">2500%–18000%</span></td><td><span data-kriterion-source="assumptions_by_id[as-friction-hours-saved-per-engineer].evidence_strength" data-kriterion-format="label">LOW</span></td><td><span data-kriterion-source="assumptions_by_id[as-friction-hours-saved-per-engineer].owner" data-kriterion-format="text">cto</span></td></tr><tr><td><code data-kriterion-source="assumptions_by_id[as-fully-loaded-hourly-cost-gbp].id" data-kriterion-format="text">as-fully-loaded-hourly-cost-gbp</code></td><td><span data-kriterion-source="assumptions_by_id[as-fully-loaded-hourly-cost-gbp].value" data-kriterion-format="gbp">£55</span></td><td><span data-kriterion-source="assumptions_by_id[as-fully-loaded-hourly-cost-gbp].range" data-kriterion-format="range_gbp">£45–£70</span></td><td><span data-kriterion-source="assumptions_by_id[as-fully-loaded-hourly-cost-gbp].evidence_strength" data-kriterion-format="label">MEDIUM</span></td><td><span data-kriterion-source="assumptions_by_id[as-fully-loaded-hourly-cost-gbp].owner" data-kriterion-format="text">cfo</span></td></tr><tr><td><code data-kriterion-source="assumptions_by_id[as-engineers-reached-year-1].id" data-kriterion-format="text">as-engineers-reached-year-1</code></td><td><span data-kriterion-source="assumptions_by_id[as-engineers-reached-year-1].value" data-kriterion-format="percent">70000%</span></td><td><span data-kriterion-source="assumptions_by_id[as-engineers-reached-year-1].range" data-kriterion-format="range_percent">30000%–110000%</span></td><td><span data-kriterion-source="assumptions_by_id[as-engineers-reached-year-1].evidence_strength" data-kriterion-format="label">LOW</span></td><td><span data-kriterion-source="assumptions_by_id[as-engineers-reached-year-1].owner" data-kriterion-format="text">cto</span></td></tr><tr><td><code data-kriterion-source="assumptions_by_id[as-engineers-reached-year-2].id" data-kriterion-format="text">as-engineers-reached-year-2</code></td><td><span data-kriterion-source="assumptions_by_id[as-engineers-reached-year-2].value" data-kriterion-format="percent">190000%</span></td><td><span data-kriterion-source="assumptions_by_id[as-engineers-reached-year-2].range" data-kriterion-format="range_percent">90000%–250000%</span></td><td><span data-kriterion-source="assumptions_by_id[as-engineers-reached-year-2].evidence_strength" data-kriterion-format="label">LOW</span></td><td><span data-kriterion-source="assumptions_by_id[as-engineers-reached-year-2].owner" data-kriterion-format="text">cto</span></td></tr><tr><td><code data-kriterion-source="assumptions_by_id[as-platform-team-annual-cost-gbp].id" data-kriterion-format="text">as-platform-team-annual-cost-gbp</code></td><td><span data-kriterion-source="assumptions_by_id[as-platform-team-annual-cost-gbp].value" data-kriterion-format="gbp">£1,800,000</span></td><td><span data-kriterion-source="assumptions_by_id[as-platform-team-annual-cost-gbp].range" data-kriterion-format="range_gbp">£1,200,000–£2,800,000</span></td><td><span data-kriterion-source="assumptions_by_id[as-platform-team-annual-cost-gbp].evidence_strength" data-kriterion-format="label">LOW</span></td><td><span data-kriterion-source="assumptions_by_id[as-platform-team-annual-cost-gbp].owner" data-kriterion-format="text">cfo</span></td></tr><tr><td><code data-kriterion-source="assumptions_by_id[as-migration-cost-per-engineer-gbp].id" data-kriterion-format="text">as-migration-cost-per-engineer-gbp</code></td><td><span data-kriterion-source="assumptions_by_id[as-migration-cost-per-engineer-gbp].value" data-kriterion-format="gbp">£450</span></td><td><span data-kriterion-source="assumptions_by_id[as-migration-cost-per-engineer-gbp].range" data-kriterion-format="range_gbp">£150–£900</span></td><td><span data-kriterion-source="assumptions_by_id[as-migration-cost-per-engineer-gbp].evidence_strength" data-kriterion-format="label">LOW</span></td><td><span data-kriterion-source="assumptions_by_id[as-migration-cost-per-engineer-gbp].owner" data-kriterion-format="text">business_executive</span></td></tr><tr><td><code data-kriterion-source="assumptions_by_id[as-precommitted-capital-gbp].id" data-kriterion-format="text">as-precommitted-capital-gbp</code></td><td><span data-kriterion-source="assumptions_by_id[as-precommitted-capital-gbp].value" data-kriterion-format="gbp">£2,100,000</span></td><td><span data-kriterion-source="assumptions_by_id[as-precommitted-capital-gbp].range" data-kriterion-format="range_gbp">£600,000–£4,000,000</span></td><td><span data-kriterion-source="assumptions_by_id[as-precommitted-capital-gbp].evidence_strength" data-kriterion-format="label">MEDIUM</span></td><td><span data-kriterion-source="assumptions_by_id[as-precommitted-capital-gbp].owner" data-kriterion-format="text">cfo</span></td></tr></tbody>
+      </table>
+      <h3>Modelled and inferred evidence</h3>
+      <ul class="evidence-list">
+      <li class="evidence-item" data-evidence-id="ev-442">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-442].id" data-kriterion-format="text">ev-442</code>
+          <span data-kriterion-source="evidence_by_id[ev-442].category" data-kriterion-format="text" class="badge category">INFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-442].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-442].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-442].claim" data-kriterion-format="text">Inferred from ev-414 and ev-437: buying a commercial platform substitutes for the portal and catalogue layer, which is not where Northstar&#x27;s cost sits, and does not substitute for the integration to Northstar&#x27;s own provisioning, policy and deployment systems, which is. The build-versus-buy choice therefore decides less of the total effort than it appears to.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-442].source" data-kriterion-format="text">Derived within the case from one REAL item and one synthetic scenario judgment</span> · <span data-kriterion-source="evidence_by_id[ev-442].period" data-kriterion-format="text">scenario baseline</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-443">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-443].id" data-kriterion-format="text">ev-443</code>
+          <span data-kriterion-source="evidence_by_id[ev-443].category" data-kriterion-format="text" class="badge category">INFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-443].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-443].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-443].claim" data-kriterion-format="text">Inferred from ev-402, ev-411, ev-412 and ev-413: the public evidence on AI-assisted engineering currently points in both directions, with individual task speed-ups, a team-level throughput decrease, and a measured gap between perceived and actual speed-up all reported. The case therefore cannot ground either AI hypothesis -- that agents raise or that they lower the value of platform abstractions -- and treating either as settled would be unsupported.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-443].source" data-kriterion-format="text">Derived within the case from four REAL items that disagree</span> · <span data-kriterion-source="evidence_by_id[ev-443].period" data-kriterion-format="text">2023-2025</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-444">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-444].id" data-kriterion-format="text">ev-444</code>
+          <span data-kriterion-source="evidence_by_id[ev-444].category" data-kriterion-format="text" class="badge category">INFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-444].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-444].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-444].claim" data-kriterion-format="text">Inferred from ev-428 and ev-429: the golden-path delivery advantage at Northstar is confounded by selection. Golden-path teams are concentrated in the newest part of the estate, so the observed 2-day versus 9-day gap is an upper bound on what a platform could deliver to the rest, and possibly a large overstatement of it.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-444].source" data-kriterion-format="text">Derived within the case; the confound is stated in ev-428&#x27;s own scenario definition</span> · <span data-kriterion-source="evidence_by_id[ev-444].period" data-kriterion-format="text">scenario baseline</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-451">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-451].id" data-kriterion-format="text">ev-451</code>
+          <span data-kriterion-source="evidence_by_id[ev-451].category" data-kriterion-format="text" class="badge category">ASSUMPTION</span>
+          <span data-kriterion-source="evidence_by_id[ev-451].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-451].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-451].claim" data-kriterion-format="text">SYNTHETIC MODELLING ASSUMPTION (as-precommitted-capital-gbp). Assumed GBP2.1m of the GBP4m envelope is committed before the first evidence gate -- roughly GBP100k discovery, GBP500k MVP across 3 to 5 teams and about 150 engineers, then GBP1.5m targeted rollout to about 1,000 engineers -- ranged GBP600k (discovery and MVP only, everything else gated) to GBP4m (the whole envelope approved up front). Total capital is the same in every case; only the timing changes.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-451].source" data-kriterion-format="text">Economics model input. This parameter is how the staged-funding question enters the economics</span> · <span data-kriterion-source="evidence_by_id[ev-451].period" data-kriterion-format="text">n/a (modelling assumption)</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-452">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-452].id" data-kriterion-format="text">ev-452</code>
+          <span data-kriterion-source="evidence_by_id[ev-452].category" data-kriterion-format="text" class="badge category">ASSUMPTION</span>
+          <span data-kriterion-source="evidence_by_id[ev-452].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
+          <span data-kriterion-source="evidence_by_id[ev-452].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-452].claim" data-kriterion-format="text">SYNTHETIC MODELLING ASSUMPTION (as-fully-loaded-hourly-cost-gbp). Assumed GBP55 fully loaded cost per engineer-hour, ranged GBP45 to GBP70, blended across the three engineering regions. Using this to monetise saved hours prices the time; it does not establish that the time became value -- that is what as-benefit-attribution-factor is for, and why the two are separate parameters.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-452].source" data-kriterion-format="text">Economics model input</span> · <span data-kriterion-source="evidence_by_id[ev-452].period" data-kriterion-format="text">n/a (modelling assumption)</span></p>
+        
+      </li>
+    </ul><details><summary>Remaining items in this group, of lower recorded evidence strength</summary><ul class="evidence-list">
+      <li class="evidence-item" data-evidence-id="ev-440">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-440].id" data-kriterion-format="text">ev-440</code>
+          <span data-kriterion-source="evidence_by_id[ev-440].category" data-kriterion-format="text" class="badge category">INFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-440].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-440].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-440].claim" data-kriterion-format="text">Inferred from ev-422, ev-423 and ev-430: a substantial part of Northstar&#x27;s 6-week onboarding time is plausibly attributable to toolchain fragmentation rather than to domain learning. This is an inference from co-occurrence; nothing in the scenario separates the two causes, and a platform that removes the fragmentation would not shorten the domain-learning part at all.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-440].source" data-kriterion-format="text">Derived within the case from the scenario baseline; not independently evidenced</span> · <span data-kriterion-source="evidence_by_id[ev-440].period" data-kriterion-format="text">scenario baseline</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-441">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-441].id" data-kriterion-format="text">ev-441</code>
+          <span data-kriterion-source="evidence_by_id[ev-441].category" data-kriterion-format="text" class="badge category">INFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-441].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-441].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-441].claim" data-kriterion-format="text">Inferred from ev-425 and ev-426: a component-owning team structure and a high recurring-request rate are mutually consistent with support demand being structural -- an artefact of how ownership is drawn -- rather than a staffing shortfall. If so, adding platform capacity without changing the ownership model raises throughput on the queue without shortening it.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-441].source" data-kriterion-format="text">Derived within the case; ev-418 supplies the mechanism, nothing in the scenario measures it</span> · <span data-kriterion-source="evidence_by_id[ev-441].period" data-kriterion-format="text">scenario baseline</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-445">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-445].id" data-kriterion-format="text">ev-445</code>
+          <span data-kriterion-source="evidence_by_id[ev-445].category" data-kriterion-format="text" class="badge category">ASSUMPTION</span>
+          <span data-kriterion-source="evidence_by_id[ev-445].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-445].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-445].claim" data-kriterion-format="text">SYNTHETIC MODELLING ASSUMPTION (as-benefit-attribution-factor). Assumed that 25 per cent of developer time saved converts into business value -- delivered product, improved quality or avoided cost -- rather than being absorbed into other work, ranged 5 to 50 per cent. Nothing in this case evidences any value in that range. It is the assumption the decision rests on.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-445].source" data-kriterion-format="text">Economics model input; the range&#x27;s width is the honest statement of how unevidenced it is</span> · <span data-kriterion-source="evidence_by_id[ev-445].period" data-kriterion-format="text">n/a (modelling assumption)</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-446">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-446].id" data-kriterion-format="text">ev-446</code>
+          <span data-kriterion-source="evidence_by_id[ev-446].category" data-kriterion-format="text" class="badge category">ASSUMPTION</span>
+          <span data-kriterion-source="evidence_by_id[ev-446].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-446].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-446].claim" data-kriterion-format="text">SYNTHETIC MODELLING ASSUMPTION (as-platform-adoption-rate). Assumed that 60 per cent of engineers reached by the rollout actually use the platform for their production work, ranged 30 to 85 per cent. Contradicted by ev-438 and cautioned against by ev-419: a platform that is optional and not yet better than the incumbent path attracts the teams who needed it least.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-446].source" data-kriterion-format="text">Economics model input</span> · <span data-kriterion-source="evidence_by_id[ev-446].period" data-kriterion-format="text">n/a (modelling assumption)</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-447">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-447].id" data-kriterion-format="text">ev-447</code>
+          <span data-kriterion-source="evidence_by_id[ev-447].category" data-kriterion-format="text" class="badge category">ASSUMPTION</span>
+          <span data-kriterion-source="evidence_by_id[ev-447].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-447].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-447].claim" data-kriterion-format="text">SYNTHETIC MODELLING ASSUMPTION (as-friction-hours-saved-per-engineer). Assumed 90 engineer-hours saved per adopting engineer per year, ranged 25 to 180. Note ev-412: developers&#x27; own estimates of time saved have been measured as unreliable, so this quantity cannot be established by asking them.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-447].source" data-kriterion-format="text">Economics model input</span> · <span data-kriterion-source="evidence_by_id[ev-447].period" data-kriterion-format="text">n/a (modelling assumption)</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-448">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-448].id" data-kriterion-format="text">ev-448</code>
+          <span data-kriterion-source="evidence_by_id[ev-448].category" data-kriterion-format="text" class="badge category">ASSUMPTION</span>
+          <span data-kriterion-source="evidence_by_id[ev-448].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-448].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-448].claim" data-kriterion-format="text">SYNTHETIC MODELLING ASSUMPTION (as-platform-team-annual-cost-gbp). Assumed GBP1.8m per year steady-state operating cost for the platform organisation -- engineers, platform product management, operations, support and vendor/licence cost -- ranged GBP1.2m to GBP2.8m. This is an ongoing cost that continues after the 18-month programme ends, and is the cost the capital ask does not include.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-448].source" data-kriterion-format="text">Economics model input</span> · <span data-kriterion-source="evidence_by_id[ev-448].period" data-kriterion-format="text">n/a (modelling assumption)</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-449">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-449].id" data-kriterion-format="text">ev-449</code>
+          <span data-kriterion-source="evidence_by_id[ev-449].category" data-kriterion-format="text" class="badge category">ASSUMPTION</span>
+          <span data-kriterion-source="evidence_by_id[ev-449].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-449].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-449].claim" data-kriterion-format="text">SYNTHETIC MODELLING ASSUMPTION (as-migration-cost-per-engineer-gbp). Assumed GBP450 of one-off migration and re-learning cost per engineer moved onto the platform, ranged GBP150 to GBP900. Migration effort borne by application teams is a real cost of the programme that the platform&#x27;s own budget does not show.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-449].source" data-kriterion-format="text">Economics model input</span> · <span data-kriterion-source="evidence_by_id[ev-449].period" data-kriterion-format="text">n/a (modelling assumption)</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-450">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-450].id" data-kriterion-format="text">ev-450</code>
+          <span data-kriterion-source="evidence_by_id[ev-450].category" data-kriterion-format="text" class="badge category">ASSUMPTION</span>
+          <span data-kriterion-source="evidence_by_id[ev-450].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-450].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-450].claim" data-kriterion-format="text">SYNTHETIC MODELLING ASSUMPTION (as-engineers-reached-year-1 / as-engineers-reached-year-2). Assumed the rollout reaches 700 engineers in year 1 (ranged 300 to 1,100) and 1,900 by the end of year 2 (ranged 900 to 2,500, the whole engineering population). Reach is not adoption: as-platform-adoption-rate applies on top of these numbers.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-450].source" data-kriterion-format="text">Economics model input</span> · <span data-kriterion-source="evidence_by_id[ev-450].period" data-kriterion-format="text">n/a (modelling assumption)</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-465">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-465].id" data-kriterion-format="text">ev-465</code>
+          <span data-kriterion-source="evidence_by_id[ev-465].category" data-kriterion-format="text" class="badge category">FORECAST</span>
+          <span data-kriterion-source="evidence_by_id[ev-465].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-465].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-465].claim" data-kriterion-format="text">SYNTHETIC SCENARIO FORECAST. Northstar&#x27;s own internal planning assumption is that AI agents will originate a materially larger share of code changes within three years than the 35 per cent team-level experimentation reported in ev-433. It is a forward-looking planning input with no calibration behind it, and ev-443 states the external evidence does not support a direction.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-465].source" data-kriterion-format="text">Northstar scenario definition (fictional), forward-looking</span> · <span data-kriterion-source="evidence_by_id[ev-465].period" data-kriterion-format="text">scenario, forward-looking</span></p>
+        
+      </li>
+    </ul></details>
+    </section>
+    
+    <section data-kriterion-role="what-we-do-not-know" id="unknown" aria-labelledby="h-unknown">
+      <h2 id="h-unknown">What we do not know</h2>
+      <p>These stay open. Nothing here is rendered as a zero, an absence of risk, or a low score,
+         and nothing here is collapsed behind a disclosure.</p>
+      <ul class="evidence-list">
+      <li class="evidence-item" data-evidence-id="ev-453">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-453].id" data-kriterion-format="text">ev-453</code>
+          <span data-kriterion-source="evidence_by_id[ev-453].category" data-kriterion-format="text" class="badge category">UNKNOWN</span>
+          <span data-kriterion-source="evidence_by_id[ev-453].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-453].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-453].claim" data-kriterion-format="text">The true productivity attribution -- what share of developer time saved at Northstar becomes delivered business value -- is not established by anything in this case, and ev-436 states no methodology exists to establish it. Every benefit figure in the economics is a multiple of this unknown.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-453].source" data-kriterion-format="text">Gap; no item in this pack resolves it</span> · <span data-kriterion-source="evidence_by_id[ev-453].period" data-kriterion-format="text">n/a</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-454">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-454].id" data-kriterion-format="text">ev-454</code>
+          <span data-kriterion-source="evidence_by_id[ev-454].category" data-kriterion-format="text" class="badge category">UNKNOWN</span>
+          <span data-kriterion-source="evidence_by_id[ev-454].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-454].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-454].claim" data-kriterion-format="text">The adoption rate Northstar would actually achieve, under voluntary use and across heterogeneous workloads, is unknown. ev-427 shows golden paths currently cover only stateless web services; whether data, batch and mobile workloads can be served by the same paths at all is not established.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-454].source" data-kriterion-format="text">Gap; no item in this pack resolves it</span> · <span data-kriterion-source="evidence_by_id[ev-454].period" data-kriterion-format="text">n/a</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-455">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-455].id" data-kriterion-format="text">ev-455</code>
+          <span data-kriterion-source="evidence_by_id[ev-455].category" data-kriterion-format="text" class="badge category">UNKNOWN</span>
+          <span data-kriterion-source="evidence_by_id[ev-455].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-455].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-455].claim" data-kriterion-format="text">The long-term operating cost of the platform organisation is unknown beyond the modelled range. ev-406 predicts cognitive load is relocated to the platform team rather than eliminated, but nothing establishes the steady-state size that relocation implies at Northstar&#x27;s scale.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-455].source" data-kriterion-format="text">Gap; no item in this pack resolves it</span> · <span data-kriterion-source="evidence_by_id[ev-455].period" data-kriterion-format="text">n/a</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-456">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-456].id" data-kriterion-format="text">ev-456</code>
+          <span data-kriterion-source="evidence_by_id[ev-456].category" data-kriterion-format="text" class="badge category">UNKNOWN</span>
+          <span data-kriterion-source="evidence_by_id[ev-456].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-456].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-456].claim" data-kriterion-format="text">The developer behavioural response is unknown: whether engineers freed from toolchain friction spend the recovered time on higher-value delivery, on absorbing more scope, or on work that does not reach a customer. This is the behavioural half of the attribution question and is not answered by measuring the tooling.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-456].source" data-kriterion-format="text">Gap; no item in this pack resolves it</span> · <span data-kriterion-source="evidence_by_id[ev-456].period" data-kriterion-format="text">n/a</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-457">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-457].id" data-kriterion-format="text">ev-457</code>
+          <span data-kriterion-source="evidence_by_id[ev-457].category" data-kriterion-format="text" class="badge category">UNKNOWN</span>
+          <span data-kriterion-source="evidence_by_id[ev-457].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-457].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-457].claim" data-kriterion-format="text">The effect of a platform on Northstar&#x27;s defect and change-failure rate is unknown. ev-429 reports a difference between golden-path and bespoke workflows, and ev-444 states that difference is confounded by selection, so the causal effect is not available from the observational comparison.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-457].source" data-kriterion-format="text">Gap; ev-444 explains why the available comparison does not resolve it</span> · <span data-kriterion-source="evidence_by_id[ev-457].period" data-kriterion-format="text">n/a</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-458">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-458].id" data-kriterion-format="text">ev-458</code>
+          <span data-kriterion-source="evidence_by_id[ev-458].category" data-kriterion-format="text" class="badge category">UNKNOWN</span>
+          <span data-kriterion-source="evidence_by_id[ev-458].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-458].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-458].claim" data-kriterion-format="text">Whether AI coding agents raise or lower the strategic value of platform abstractions is unknown, and ev-443 establishes that the public evidence currently supports neither direction. Both hypotheses are live: agents may need machine-operable golden paths, or may navigate fragmented tooling well enough to make abstractions less valuable.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-458].source" data-kriterion-format="text">Gap; ev-443 states why the external evidence cannot settle it</span> · <span data-kriterion-source="evidence_by_id[ev-458].period" data-kriterion-format="text">n/a</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-459">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-459].id" data-kriterion-format="text">ev-459</code>
+          <span data-kriterion-source="evidence_by_id[ev-459].category" data-kriterion-format="text" class="badge category">UNKNOWN</span>
+          <span data-kriterion-source="evidence_by_id[ev-459].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-459].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-459].claim" data-kriterion-format="text">The total cost of ownership of a commercial platform product versus an internal build, over five years at Northstar&#x27;s scale, is unknown. Licensing is quotable; the integration, the internal enablement and the cost of a later exit are not, and ev-442 argues the quotable part is the smaller one.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-459].source" data-kriterion-format="text">Gap; no item in this pack resolves it</span> · <span data-kriterion-source="evidence_by_id[ev-459].period" data-kriterion-format="text">n/a</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-460">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-460].id" data-kriterion-format="text">ev-460</code>
+          <span data-kriterion-source="evidence_by_id[ev-460].category" data-kriterion-format="text" class="badge category">UNKNOWN</span>
+          <span data-kriterion-source="evidence_by_id[ev-460].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-460].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-460].claim" data-kriterion-format="text">Whether Northstar&#x27;s binding constraint is toolchain fragmentation at all, rather than business prioritisation, architectural coupling or delivery-process overhead, is not established. ev-440 offers an inference, explicitly weak. If fragmentation is not the constraint, every option in this case answers a question Northstar does not have.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-460].source" data-kriterion-format="text">Gap; this is the premise the whole decision rests on and nothing in the pack evidences it</span> · <span data-kriterion-source="evidence_by_id[ev-460].period" data-kriterion-format="text">n/a</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-461">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-461].id" data-kriterion-format="text">ev-461</code>
+          <span data-kriterion-source="evidence_by_id[ev-461].category" data-kriterion-format="text" class="badge category">UNKNOWN</span>
+          <span data-kriterion-source="evidence_by_id[ev-461].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-461].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-461].claim" data-kriterion-format="text">Whether golden paths measurably reduce security and operational policy exceptions at Northstar is unknown. ev-431 gives a distribution of open exceptions but cannot separate the platform&#x27;s effect from workload age and type.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-461].source" data-kriterion-format="text">Gap; no item in this pack resolves it</span> · <span data-kriterion-source="evidence_by_id[ev-461].period" data-kriterion-format="text">n/a</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-462">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-462].id" data-kriterion-format="text">ev-462</code>
+          <span data-kriterion-source="evidence_by_id[ev-462].category" data-kriterion-format="text" class="badge category">UNKNOWN</span>
+          <span data-kriterion-source="evidence_by_id[ev-462].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-462].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-462].claim" data-kriterion-format="text">The opportunity cost is unknown: what Northstar would not fund in order to fund this, and what delivery that displaced work would have produced. No item in this case prices the alternative use of GBP3m-GBP5m and roughly 20 engineers.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-462].source" data-kriterion-format="text">Gap; no item in this pack resolves it</span> · <span data-kriterion-source="evidence_by_id[ev-462].period" data-kriterion-format="text">n/a</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-463">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-463].id" data-kriterion-format="text">ev-463</code>
+          <span data-kriterion-source="evidence_by_id[ev-463].category" data-kriterion-format="text" class="badge category">UNKNOWN</span>
+          <span data-kriterion-source="evidence_by_id[ev-463].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-463].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-463].claim" data-kriterion-format="text">Whether the incremental option -- integrating and standardising the existing toolchain without building a platform -- would deliver a material share of the benefit at a fraction of the cost is unknown. The case contains no costed comparison of the incremental path, which makes the platform options look better than a fair comparison might.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-463].source" data-kriterion-format="text">Gap; recorded as a known asymmetry in the case&#x27;s own construction</span> · <span data-kriterion-source="evidence_by_id[ev-463].period" data-kriterion-format="text">n/a</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-464">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-464].id" data-kriterion-format="text">ev-464</code>
+          <span data-kriterion-source="evidence_by_id[ev-464].category" data-kriterion-format="text" class="badge category">UNKNOWN</span>
+          <span data-kriterion-source="evidence_by_id[ev-464].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-464].attestation" data-kriterion-format="text" class="badge attestation">AUTHORED</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-464].claim" data-kriterion-format="text">The benefit horizon is unmodelled. The economics evaluates two annual periods, matching the existing Kriterion cash-flow models, while platform benefits are generally argued to accrue over longer periods. The NPV therefore charges the full build cost against at most two years of benefit, and how much benefit sits outside that window is not established.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-464].source" data-kriterion-format="text">Gap arising from the modelling horizon, recorded rather than corrected</span> · <span data-kriterion-source="evidence_by_id[ev-464].period" data-kriterion-format="text">n/a</span></p>
+        
+      </li>
+    </ul>
+    </section>
+    
+    <section data-kriterion-role="economics" id="economics" aria-labelledby="h-economics">
+      <h2 id="h-economics">The economics</h2>
+      <p>Every figure here is computed by pure code before any model is called, and no model may
+         overwrite one. A model may explain these numbers; it may not produce them.</p>
+      
+        <dl class="snapshot">
+          <dt>Base valuation</dt>
+          <dd><span data-kriterion-source="economics.npv_mid_gbp" data-kriterion-format="gbp_millions" class="headline">-£4.06m</span></dd>
+          <dt>Downside, every assumption at its pessimistic end</dt>
+          <dd><span data-kriterion-source="economics.npv_low_gbp" data-kriterion-format="gbp_millions" class="headline">-£6.62m</span></dd>
+          <dt>Upside, every assumption at its optimistic end</dt>
+          <dd><span data-kriterion-source="economics.npv_high_gbp" data-kriterion-format="gbp_millions" class="headline">£11.75m</span></dd>
+          <dt>Discount rate applied</dt>
+          <dd><span data-kriterion-source="economics.discount_rate" data-kriterion-format="percent">10%</span></dd>
+        </dl>
+        <p class="insight"><span data-kriterion-source="economics_interpretation" data-kriterion-format="text">The sign of the outcome flips inside the stated plausible ranges, so the case is not yet decidable on the numbers alone. The widest single swing comes from as-benefit-attribution-factor (LOW evidence), which is therefore the assumption to buy evidence about before buying scale.</span></p>
+        <table>
+          <caption>One-way sensitivity: the swing on the base valuation between each assumption's
+            stated low and high bound, widest first. A negative sign means a higher value of that
+            parameter lowers the valuation, so the magnitude is what ranks it.</caption>
+          <thead><tr><th>Case-pack assumption</th><th>Engine parameter</th>
+            <th>Evidence strength</th><th>Owner</th><th>Swing</th></tr></thead>
+          <tbody><tr><td><span data-kriterion-source="tornado_rows[0].assumption_id" data-kriterion-format="text">as-benefit-attribution-factor</span></td><td><span data-kriterion-source="tornado_rows[0].parameter" data-kriterion-format="text">benefit_attribution_factor</span></td><td><span data-kriterion-source="tornado_rows[0].evidence_strength" data-kriterion-format="label">LOW</span></td><td><span data-kriterion-source="tornado_rows[0].owner" data-kriterion-format="text">cfo</span></td><td><span data-kriterion-source="tornado_rows[0].swing_gbp" data-kriterion-format="gbp_millions">£2.95m</span></td></tr><tr><td><span data-kriterion-source="tornado_rows[1].assumption_id" data-kriterion-format="text">as-friction-hours-saved-per-engineer</span></td><td><span data-kriterion-source="tornado_rows[1].parameter" data-kriterion-format="text">friction_hours_saved_per_engineer_per_year</span></td><td><span data-kriterion-source="tornado_rows[1].evidence_strength" data-kriterion-format="label">LOW</span></td><td><span data-kriterion-source="tornado_rows[1].owner" data-kriterion-format="text">cto</span></td><td><span data-kriterion-source="tornado_rows[1].swing_gbp" data-kriterion-format="gbp_millions">£2.82m</span></td></tr><tr><td><span data-kriterion-source="tornado_rows[2].assumption_id" data-kriterion-format="text">as-platform-adoption-rate</span></td><td><span data-kriterion-source="tornado_rows[2].parameter" data-kriterion-format="text">adoption_rate</span></td><td><span data-kriterion-source="tornado_rows[2].evidence_strength" data-kriterion-format="label">LOW</span></td><td><span data-kriterion-source="tornado_rows[2].owner" data-kriterion-format="text">cto</span></td><td><span data-kriterion-source="tornado_rows[2].swing_gbp" data-kriterion-format="gbp_millions">£1.50m</span></td></tr><tr><td><span data-kriterion-source="tornado_rows[3].assumption_id" data-kriterion-format="text">as-platform-team-annual-cost-gbp</span></td><td><span data-kriterion-source="tornado_rows[3].parameter" data-kriterion-format="text">platform_team_annual_cost_gbp</span></td><td><span data-kriterion-source="tornado_rows[3].evidence_strength" data-kriterion-format="label">LOW</span></td><td><span data-kriterion-source="tornado_rows[3].owner" data-kriterion-format="text">cfo</span></td><td><span data-kriterion-source="tornado_rows[3].swing_gbp" data-kriterion-format="gbp_millions">-£1.32m</span></td></tr><tr><td><span data-kriterion-source="tornado_rows[4].assumption_id" data-kriterion-format="text">as-migration-cost-per-engineer-gbp</span></td><td><span data-kriterion-source="tornado_rows[4].parameter" data-kriterion-format="text">migration_cost_per_engineer_gbp</span></td><td><span data-kriterion-source="tornado_rows[4].evidence_strength" data-kriterion-format="label">LOW</span></td><td><span data-kriterion-source="tornado_rows[4].owner" data-kriterion-format="text">business_executive</span></td><td><span data-kriterion-source="tornado_rows[4].swing_gbp" data-kriterion-format="gbp_millions">-£1.22m</span></td></tr><tr><td><span data-kriterion-source="tornado_rows[5].assumption_id" data-kriterion-format="text">as-fully-loaded-hourly-cost-gbp</span></td><td><span data-kriterion-source="tornado_rows[5].parameter" data-kriterion-format="text">fully_loaded_hourly_cost_gbp</span></td><td><span data-kriterion-source="tornado_rows[5].evidence_strength" data-kriterion-format="label">MEDIUM</span></td><td><span data-kriterion-source="tornado_rows[5].owner" data-kriterion-format="text">cfo</span></td><td><span data-kriterion-source="tornado_rows[5].swing_gbp" data-kriterion-format="gbp_millions">£0.74m</span></td></tr><tr><td><span data-kriterion-source="tornado_rows[6].assumption_id" data-kriterion-format="text">as-engineers-reached-year-1</span></td><td><span data-kriterion-source="tornado_rows[6].parameter" data-kriterion-format="text">engineers_reached_year_1</span></td><td><span data-kriterion-source="tornado_rows[6].evidence_strength" data-kriterion-format="label">LOW</span></td><td><span data-kriterion-source="tornado_rows[6].owner" data-kriterion-format="text">cto</span></td><td><span data-kriterion-source="tornado_rows[6].swing_gbp" data-kriterion-format="gbp_millions">£0.51m</span></td></tr><tr><td><span data-kriterion-source="tornado_rows[7].assumption_id" data-kriterion-format="text">as-engineers-reached-year-2</span></td><td><span data-kriterion-source="tornado_rows[7].parameter" data-kriterion-format="text">engineers_reached_year_2</span></td><td><span data-kriterion-source="tornado_rows[7].evidence_strength" data-kriterion-format="label">LOW</span></td><td><span data-kriterion-source="tornado_rows[7].owner" data-kriterion-format="text">cto</span></td><td><span data-kriterion-source="tornado_rows[7].swing_gbp" data-kriterion-format="gbp_millions">£0.39m</span></td></tr><tr><td><span data-kriterion-source="tornado_rows[8].assumption_id" data-kriterion-format="text">as-precommitted-capital-gbp</span></td><td><span data-kriterion-source="tornado_rows[8].parameter" data-kriterion-format="text">precommitted_capital_gbp</span></td><td><span data-kriterion-source="tornado_rows[8].evidence_strength" data-kriterion-format="label">MEDIUM</span></td><td><span data-kriterion-source="tornado_rows[8].owner" data-kriterion-format="text">cfo</span></td><td><span data-kriterion-source="tornado_rows[8].swing_gbp" data-kriterion-format="gbp_millions">-£0.28m</span></td></tr></tbody>
+        </table>
+        <p class="caveat"><span data-kriterion-source="dominance_claim_scope" data-kriterion-format="text">Ranked over the 9 assumption(s) the case pack declares with an explicit range and owner. Structural inputs that are code constants rather than ranged Assumption records are outside this ranking.</span></p>
+        
+    </section>
+    
+    <section data-kriterion-role="assurance" id="assurance" aria-labelledby="h-assurance">
+      <h2 id="h-assurance">Machine-checkable evidence about the capability itself</h2>
+      <p>Kriterion did not produce this evidence and does not claim to have. An external
+         assurance system publishes its own generic documents about the capability; Kriterion
+         reads them through an adapter that is allowed to lose detail but never to upgrade a
+         result, and every claim below is that adapter's output, quoted. The reference producer
+         for the document contract is Hekton Assurance, which is optional: the instrument works
+         the same way when no such documents exist. The documents behind this particular case are
+         authored fixtures rather than the output of a real assurance run, which is why what the
+         producer did not capture is listed here beside what it did.</p>
+      <p class="note"><span data-kriterion-source="assurance_status" data-kriterion-format="text">No assurance evidence was imported for this case.</span></p>
+    </section>
+    
+    <section data-kriterion-role="perspectives" id="perspectives" aria-labelledby="h-perspectives">
+      <h2 id="h-perspectives">Where the perspectives agree and disagree</h2>
+      <p>Five role-chartered seats assessed the case independently, then faced an anonymised
+         challenge round and revised. No seat is shown a tally before synthesis, so agreement
+         cannot be manufactured by visible consensus. Kriterion does not invent disagreement
+         either: a round in which nothing moves is reported as a round in which nothing moved.</p>
+      <div class="seats">
+      <article class="seat" data-seat="cfo">
+        <h3><span data-kriterion-source="seats_by_id[cfo].seat" data-kriterion-format="label" data-kriterion-attributed-to="cfo">CFO</span></h3>
+        <p class="position">
+          <span class="field">Current position</span>
+          <span data-kriterion-source="seats_by_id[cfo].revised.recommendation" data-kriterion-format="label" class="headline" data-kriterion-attributed-to="cfo">DEFER</span>
+          <span class="field">Confidence</span>
+          <span data-kriterion-source="seats_by_id[cfo].revised.confidence_band" data-kriterion-format="label" data-kriterion-attributed-to="cfo">MEDIUM</span>
+        </p>
+        <h4>Why</h4>
+        <ul class="reasons"><li><span data-kriterion-source="seats_by_id[cfo].revised.key_reasons[0].text" data-kriterion-format="text" data-kriterion-attributed-to="cfo">The case lacks a clear understanding of Northstar&#x27;s binding constraint and whether toolchain fragmentation is the primary issue that needs addressing.</span> <span class="refs"><span data-kriterion-source="seats_by_id[cfo].revised.key_reasons[0].evidence_refs" data-kriterion-format="list_semi" data-kriterion-attributed-to="cfo">ev-460</span></span></li><li><span data-kriterion-source="seats_by_id[cfo].revised.key_reasons[1].text" data-kriterion-format="text" data-kriterion-attributed-to="cfo">There are significant unknowns regarding the long-term operating costs, adoption rates, and the true productivity attribution which could significantly impact the economic model&#x27;s projections.</span> <span class="refs"><span data-kriterion-source="seats_by_id[cfo].revised.key_reasons[1].evidence_refs" data-kriterion-format="list_semi" data-kriterion-attributed-to="cfo">ev-453; ev-454; ev-455</span></span></li><li><span data-kriterion-source="seats_by_id[cfo].revised.key_reasons[2].text" data-kriterion-format="text" data-kriterion-attributed-to="cfo">The case does not provide a costed comparison of an incremental option versus building a full platform, which could lead to overestimating the benefits of the proposed solution.</span> <span class="refs"><span data-kriterion-source="seats_by_id[cfo].revised.key_reasons[2].evidence_refs" data-kriterion-format="list_semi" data-kriterion-attributed-to="cfo">ev-463</span></span></li></ul>
+        <h4>What this seat holds open</h4>
+        <ul class="unknowns"><li><span data-kriterion-source="seats_by_id[cfo].revised.blocking_unknowns[0]" data-kriterion-format="text" data-kriterion-attributed-to="cfo">whether toolchain fragmentation is Northstar&#x27;s binding constraint</span></li><li><span data-kriterion-source="seats_by_id[cfo].revised.blocking_unknowns[1]" data-kriterion-format="text" data-kriterion-attributed-to="cfo">the total cost of ownership over five years at Northstar&#x27;s scale</span></li><li><span data-kriterion-source="seats_by_id[cfo].revised.blocking_unknowns[2]" data-kriterion-format="text" data-kriterion-attributed-to="cfo">the opportunity cost of GBP3m-GBP5m and roughly 20 engineers</span></li></ul>
+        
+        <h4>What this seat asked for</h4><ul class="requests"><li><p class="asked"><span data-kriterion-source="seats_by_id[cfo].evidence_requests[0].description" data-kriterion-format="text" data-kriterion-attributed-to="cfo">Clarify whether Northstar&#x27;s primary constraint is toolchain fragmentation or another factor such as architectural coupling, delivery-process overhead, etc.</span></p><p class="would-change"><span class="field">Would change this seat's position if</span> <span data-kriterion-source="seats_by_id[cfo].evidence_requests[0].would_change" data-kriterion-format="text" data-kriterion-attributed-to="cfo">Recommendation to either FUND_EXPERIMENT if the constraint is confirmed or DEFER if not.</span></p><p class="status"><span class="field">Has that evidence arrived?</span> <span data-kriterion-source="seats_by_id[cfo].evidence_requests[0].status" data-kriterion-format="label" data-kriterion-attributed-to="cfo">UNAVAILABLE</span></p></li><li><p class="asked"><span data-kriterion-source="seats_by_id[cfo].evidence_requests[1].description" data-kriterion-format="text" data-kriterion-attributed-to="cfo">Provide a costed comparison of an incremental option (integrating and standardizing the existing toolchain) versus building a full platform.</span></p><p class="would-change"><span class="field">Would change this seat's position if</span> <span data-kriterion-source="seats_by_id[cfo].evidence_requests[1].would_change" data-kriterion-format="text" data-kriterion-attributed-to="cfo">Economic model projections and overall recommendation</span></p><p class="status"><span class="field">Has that evidence arrived?</span> <span data-kriterion-source="seats_by_id[cfo].evidence_requests[1].status" data-kriterion-format="label" data-kriterion-attributed-to="cfo">UNAVAILABLE</span></p></li></ul>
+        
+        <p><span class="field">After the challenge round</span>
+          <span data-kriterion-source="seats_by_id[cfo].belief_update.initial_position" data-kriterion-format="label" data-kriterion-attributed-to="cfo">DEFER</span>
+          &rarr;
+          <span data-kriterion-source="seats_by_id[cfo].belief_update.revised_position" data-kriterion-format="label" data-kriterion-attributed-to="cfo">DEFER</span>,
+          confidence
+          <span data-kriterion-source="seats_by_id[cfo].belief_update.initial_confidence" data-kriterion-format="label" data-kriterion-attributed-to="cfo">LOW</span>
+          &rarr;
+          <span data-kriterion-source="seats_by_id[cfo].belief_update.revised_confidence" data-kriterion-format="label" data-kriterion-attributed-to="cfo">MEDIUM</span>
+          (<span data-kriterion-source="seats_by_id[cfo].belief_update.change_type" data-kriterion-format="label" data-kriterion-attributed-to="cfo">EVIDENCE DRIVEN</span>)</p>
+        <p class="stated-reason"><span data-kriterion-source="seats_by_id[cfo].belief_update.stated_reason" data-kriterion-format="text" data-kriterion-attributed-to="cfo">The critical uncertainty around whether toolchain fragmentation is Northstar&#x27;s binding constraint, as highlighted by ev-460 and reinforced in the business executive&#x27;s challenge artifact (ch:case_against-business_executive), remains unresolved. This foundational ambiguity undermines the economic model&#x27;s projections and the strategic alignment of the proposed investment.</span></p>
+        
+      </article>
+    
+      <article class="seat" data-seat="cto">
+        <h3><span data-kriterion-source="seats_by_id[cto].seat" data-kriterion-format="label" data-kriterion-attributed-to="cto">CTO</span></h3>
+        <p class="position">
+          <span class="field">Current position</span>
+          <span data-kriterion-source="seats_by_id[cto].revised.recommendation" data-kriterion-format="label" class="headline" data-kriterion-attributed-to="cto">DEFER</span>
+          <span class="field">Confidence</span>
+          <span data-kriterion-source="seats_by_id[cto].revised.confidence_band" data-kriterion-format="label" data-kriterion-attributed-to="cto">MEDIUM</span>
+        </p>
+        <h4>Why</h4>
+        <ul class="reasons"><li><span data-kriterion-source="seats_by_id[cto].revised.key_reasons[0].text" data-kriterion-format="text" data-kriterion-attributed-to="cto">The case lacks a clear understanding of Northstar&#x27;s binding constraint and whether toolchain fragmentation is the primary issue that needs addressing.</span> <span class="refs"><span data-kriterion-source="seats_by_id[cto].revised.key_reasons[0].evidence_refs" data-kriterion-format="list_semi" data-kriterion-attributed-to="cto">ev-460</span></span></li><li><span data-kriterion-source="seats_by_id[cto].revised.key_reasons[1].text" data-kriterion-format="text" data-kriterion-attributed-to="cto">There are significant unknowns regarding the long-term operating costs, adoption rates, and the true productivity attribution which could significantly impact the economic model&#x27;s projections.</span> <span class="refs"><span data-kriterion-source="seats_by_id[cto].revised.key_reasons[1].evidence_refs" data-kriterion-format="list_semi" data-kriterion-attributed-to="cto">ev-453; ev-454; ev-455</span></span></li><li><span data-kriterion-source="seats_by_id[cto].revised.key_reasons[2].text" data-kriterion-format="text" data-kriterion-attributed-to="cto">The case does not provide a costed comparison of an incremental option versus building a full platform, which could lead to overestimating the benefits of the proposed solution.</span> <span class="refs"><span data-kriterion-source="seats_by_id[cto].revised.key_reasons[2].evidence_refs" data-kriterion-format="list_semi" data-kriterion-attributed-to="cto">ev-463</span></span></li></ul>
+        <h4>What this seat holds open</h4>
+        <ul class="unknowns"><li><span data-kriterion-source="seats_by_id[cto].revised.blocking_unknowns[0]" data-kriterion-format="text" data-kriterion-attributed-to="cto">whether toolchain fragmentation is Northstar&#x27;s binding constraint</span></li><li><span data-kriterion-source="seats_by_id[cto].revised.blocking_unknowns[1]" data-kriterion-format="text" data-kriterion-attributed-to="cto">the total cost of ownership over five years at Northstar&#x27;s scale</span></li><li><span data-kriterion-source="seats_by_id[cto].revised.blocking_unknowns[2]" data-kriterion-format="text" data-kriterion-attributed-to="cto">the opportunity cost of GBP3m-GBP5m and roughly 20 engineers</span></li></ul>
+        
+        <h4>What this seat asked for</h4><ul class="requests"><li><p class="asked"><span data-kriterion-source="seats_by_id[cto].evidence_requests[0].description" data-kriterion-format="text" data-kriterion-attributed-to="cto">Clarify whether Northstar&#x27;s primary constraint is toolchain fragmentation or another factor such as architectural coupling, delivery-process overhead, etc.</span></p><p class="would-change"><span class="field">Would change this seat's position if</span> <span data-kriterion-source="seats_by_id[cto].evidence_requests[0].would_change" data-kriterion-format="text" data-kriterion-attributed-to="cto">Recommendation to either FUND_EXPERIMENT if the constraint is confirmed or DEFER if not.</span></p><p class="status"><span class="field">Has that evidence arrived?</span> <span data-kriterion-source="seats_by_id[cto].evidence_requests[0].status" data-kriterion-format="label" data-kriterion-attributed-to="cto">UNAVAILABLE</span></p></li><li><p class="asked"><span data-kriterion-source="seats_by_id[cto].evidence_requests[1].description" data-kriterion-format="text" data-kriterion-attributed-to="cto">Provide a costed comparison of an incremental option (integrating and standardizing the existing toolchain) versus building a full platform.</span></p><p class="would-change"><span class="field">Would change this seat's position if</span> <span data-kriterion-source="seats_by_id[cto].evidence_requests[1].would_change" data-kriterion-format="text" data-kriterion-attributed-to="cto">Economic model projections and overall recommendation</span></p><p class="status"><span class="field">Has that evidence arrived?</span> <span data-kriterion-source="seats_by_id[cto].evidence_requests[1].status" data-kriterion-format="label" data-kriterion-attributed-to="cto">UNAVAILABLE</span></p></li></ul>
+        
+        <p><span class="field">After the challenge round</span>
+          <span data-kriterion-source="seats_by_id[cto].belief_update.initial_position" data-kriterion-format="label" data-kriterion-attributed-to="cto">DEFER</span>
+          &rarr;
+          <span data-kriterion-source="seats_by_id[cto].belief_update.revised_position" data-kriterion-format="label" data-kriterion-attributed-to="cto">DEFER</span>,
+          confidence
+          <span data-kriterion-source="seats_by_id[cto].belief_update.initial_confidence" data-kriterion-format="label" data-kriterion-attributed-to="cto">LOW</span>
+          &rarr;
+          <span data-kriterion-source="seats_by_id[cto].belief_update.revised_confidence" data-kriterion-format="label" data-kriterion-attributed-to="cto">MEDIUM</span>
+          (<span data-kriterion-source="seats_by_id[cto].belief_update.change_type" data-kriterion-format="label" data-kriterion-attributed-to="cto">ARGUMENT DRIVEN</span>)</p>
+        <p class="stated-reason"><span data-kriterion-source="seats_by_id[cto].belief_update.stated_reason" data-kriterion-format="text" data-kriterion-attributed-to="cto">The proposal lacks clarity on whether toolchain fragmentation is the primary constraint and significant uncertainties around long-term operating costs, adoption rates, and true productivity attribution cast doubt on the economic model&#x27;s projections. Additionally, the absence of a costed comparison for an incremental option versus building a full platform raises concerns about inflated benefit estimates.</span></p>
+        
+      </article>
+    
+      <article class="seat" data-seat="ciso">
+        <h3><span data-kriterion-source="seats_by_id[ciso].seat" data-kriterion-format="label" data-kriterion-attributed-to="ciso">CISO</span></h3>
+        <p class="position">
+          <span class="field">Current position</span>
+          <span data-kriterion-source="seats_by_id[ciso].revised.recommendation" data-kriterion-format="label" class="headline" data-kriterion-attributed-to="ciso">DEFER</span>
+          <span class="field">Confidence</span>
+          <span data-kriterion-source="seats_by_id[ciso].revised.confidence_band" data-kriterion-format="label" data-kriterion-attributed-to="ciso">LOW</span>
+        </p>
+        <h4>Why</h4>
+        <ul class="reasons"><li><span data-kriterion-source="seats_by_id[ciso].revised.key_reasons[0].text" data-kriterion-format="text" data-kriterion-attributed-to="ciso">The case lacks a clear understanding of Northstar&#x27;s binding constraint and whether toolchain fragmentation is the primary issue that needs addressing.</span> <span class="refs"><span data-kriterion-source="seats_by_id[ciso].revised.key_reasons[0].evidence_refs" data-kriterion-format="list_semi" data-kriterion-attributed-to="ciso">ev-460</span></span></li><li><span data-kriterion-source="seats_by_id[ciso].revised.key_reasons[1].text" data-kriterion-format="text" data-kriterion-attributed-to="ciso">There are significant unknowns regarding the long-term operating costs, adoption rates, and the true productivity attribution which could significantly impact the economic model&#x27;s projections.</span> <span class="refs"><span data-kriterion-source="seats_by_id[ciso].revised.key_reasons[1].evidence_refs" data-kriterion-format="list_semi" data-kriterion-attributed-to="ciso">ev-453; ev-454; ev-455</span></span></li><li><span data-kriterion-source="seats_by_id[ciso].revised.key_reasons[2].text" data-kriterion-format="text" data-kriterion-attributed-to="ciso">The case does not provide a costed comparison of an incremental option versus building a full platform, which could lead to overestimating the benefits of the proposed solution.</span> <span class="refs"><span data-kriterion-source="seats_by_id[ciso].revised.key_reasons[2].evidence_refs" data-kriterion-format="list_semi" data-kriterion-attributed-to="ciso">ev-463</span></span></li></ul>
+        <h4>What this seat holds open</h4>
+        <ul class="unknowns"><li><span data-kriterion-source="seats_by_id[ciso].revised.blocking_unknowns[0]" data-kriterion-format="text" data-kriterion-attributed-to="ciso">whether toolchain fragmentation is Northstar&#x27;s binding constraint</span></li><li><span data-kriterion-source="seats_by_id[ciso].revised.blocking_unknowns[1]" data-kriterion-format="text" data-kriterion-attributed-to="ciso">the total cost of ownership over five years at Northstar&#x27;s scale</span></li><li><span data-kriterion-source="seats_by_id[ciso].revised.blocking_unknowns[2]" data-kriterion-format="text" data-kriterion-attributed-to="ciso">whether golden paths measurably reduce security and operational policy exceptions</span></li></ul>
+        
+        <h4>What this seat asked for</h4><ul class="requests"><li><p class="asked"><span data-kriterion-source="seats_by_id[ciso].evidence_requests[0].description" data-kriterion-format="text" data-kriterion-attributed-to="ciso">Clarify whether Northstar&#x27;s primary constraint is toolchain fragmentation or another factor such as architectural coupling, delivery-process overhead, etc.</span></p><p class="would-change"><span class="field">Would change this seat's position if</span> <span data-kriterion-source="seats_by_id[ciso].evidence_requests[0].would_change" data-kriterion-format="text" data-kriterion-attributed-to="ciso">Recommendation to either FUND_EXPERIMENT if the constraint is confirmed or DEFER if not.</span></p><p class="status"><span class="field">Has that evidence arrived?</span> <span data-kriterion-source="seats_by_id[ciso].evidence_requests[0].status" data-kriterion-format="label" data-kriterion-attributed-to="ciso">UNAVAILABLE</span></p></li><li><p class="asked"><span data-kriterion-source="seats_by_id[ciso].evidence_requests[1].description" data-kriterion-format="text" data-kriterion-attributed-to="ciso">Provide a costed comparison of an incremental option (integrating and standardizing the existing toolchain) versus building a full platform.</span></p><p class="would-change"><span class="field">Would change this seat's position if</span> <span data-kriterion-source="seats_by_id[ciso].evidence_requests[1].would_change" data-kriterion-format="text" data-kriterion-attributed-to="ciso">Economic model projections and overall recommendation</span></p><p class="status"><span class="field">Has that evidence arrived?</span> <span data-kriterion-source="seats_by_id[ciso].evidence_requests[1].status" data-kriterion-format="label" data-kriterion-attributed-to="ciso">UNAVAILABLE</span></p></li></ul>
+        
+        <p><span class="field">After the challenge round</span>
+          <span data-kriterion-source="seats_by_id[ciso].belief_update.initial_position" data-kriterion-format="label" data-kriterion-attributed-to="ciso">DEFER</span>
+          &rarr;
+          <span data-kriterion-source="seats_by_id[ciso].belief_update.revised_position" data-kriterion-format="label" data-kriterion-attributed-to="ciso">DEFER</span>,
+          confidence
+          <span data-kriterion-source="seats_by_id[ciso].belief_update.initial_confidence" data-kriterion-format="label" data-kriterion-attributed-to="ciso">LOW</span>
+          &rarr;
+          <span data-kriterion-source="seats_by_id[ciso].belief_update.revised_confidence" data-kriterion-format="label" data-kriterion-attributed-to="ciso">LOW</span>
+          (<span data-kriterion-source="seats_by_id[ciso].belief_update.change_type" data-kriterion-format="label" data-kriterion-attributed-to="ciso">ARGUMENT DRIVEN</span>)</p>
+        <p class="stated-reason"><span data-kriterion-source="seats_by_id[ciso].belief_update.stated_reason" data-kriterion-format="text" data-kriterion-attributed-to="ciso">The critical uncertainties around Northstar&#x27;s binding constraint and the true productivity attribution, as highlighted in ev-460 and ch:case_against-business_executive, suggest that proceeding with a full platform build may not address the actual root causes of inefficiencies. Additionally, the lack of clarity on long-term operating costs and adoption rates further complicates the economic model&#x27;s projections.</span></p>
+        
+      </article>
+    
+      <article class="seat" data-seat="cro_compliance">
+        <h3><span data-kriterion-source="seats_by_id[cro_compliance].seat" data-kriterion-format="label" data-kriterion-attributed-to="cro_compliance">CRO COMPLIANCE</span></h3>
+        <p class="position">
+          <span class="field">Current position</span>
+          <span data-kriterion-source="seats_by_id[cro_compliance].revised.recommendation" data-kriterion-format="label" class="headline" data-kriterion-attributed-to="cro_compliance">DEFER</span>
+          <span class="field">Confidence</span>
+          <span data-kriterion-source="seats_by_id[cro_compliance].revised.confidence_band" data-kriterion-format="label" data-kriterion-attributed-to="cro_compliance">LOW</span>
+        </p>
+        <h4>Why</h4>
+        <ul class="reasons"><li><span data-kriterion-source="seats_by_id[cro_compliance].revised.key_reasons[0].text" data-kriterion-format="text" data-kriterion-attributed-to="cro_compliance">The case lacks a clear understanding of Northstar&#x27;s binding constraint and whether toolchain fragmentation is the primary issue that needs addressing.</span> <span class="refs"><span data-kriterion-source="seats_by_id[cro_compliance].revised.key_reasons[0].evidence_refs" data-kriterion-format="list_semi" data-kriterion-attributed-to="cro_compliance">ev-460</span></span></li><li><span data-kriterion-source="seats_by_id[cro_compliance].revised.key_reasons[1].text" data-kriterion-format="text" data-kriterion-attributed-to="cro_compliance">There are significant unknowns regarding the long-term operating costs, adoption rates, and the true productivity attribution which could significantly impact the economic model&#x27;s projections.</span> <span class="refs"><span data-kriterion-source="seats_by_id[cro_compliance].revised.key_reasons[1].evidence_refs" data-kriterion-format="list_semi" data-kriterion-attributed-to="cro_compliance">ev-453; ev-454; ev-455</span></span></li><li><span data-kriterion-source="seats_by_id[cro_compliance].revised.key_reasons[2].text" data-kriterion-format="text" data-kriterion-attributed-to="cro_compliance">The case does not provide a costed comparison of an incremental option versus building a full platform, which could lead to overestimating the benefits of the proposed solution.</span> <span class="refs"><span data-kriterion-source="seats_by_id[cro_compliance].revised.key_reasons[2].evidence_refs" data-kriterion-format="list_semi" data-kriterion-attributed-to="cro_compliance">ev-463</span></span></li></ul>
+        <h4>What this seat holds open</h4>
+        <ul class="unknowns"><li><span data-kriterion-source="seats_by_id[cro_compliance].revised.blocking_unknowns[0]" data-kriterion-format="text" data-kriterion-attributed-to="cro_compliance">whether toolchain fragmentation is Northstar&#x27;s binding constraint</span></li><li><span data-kriterion-source="seats_by_id[cro_compliance].revised.blocking_unknowns[1]" data-kriterion-format="text" data-kriterion-attributed-to="cro_compliance">the true productivity attribution of platform investment</span></li></ul>
+        
+        <h4>What this seat asked for</h4><ul class="requests"><li><p class="asked"><span data-kriterion-source="seats_by_id[cro_compliance].evidence_requests[0].description" data-kriterion-format="text" data-kriterion-attributed-to="cro_compliance">Clarify whether Northstar&#x27;s primary constraint is toolchain fragmentation or another factor such as architectural coupling, delivery-process overhead, etc.</span></p><p class="would-change"><span class="field">Would change this seat's position if</span> <span data-kriterion-source="seats_by_id[cro_compliance].evidence_requests[0].would_change" data-kriterion-format="text" data-kriterion-attributed-to="cro_compliance">Recommendation to either FUND_EXPERIMENT if the constraint is confirmed or DEFER if not.</span></p><p class="status"><span class="field">Has that evidence arrived?</span> <span data-kriterion-source="seats_by_id[cro_compliance].evidence_requests[0].status" data-kriterion-format="label" data-kriterion-attributed-to="cro_compliance">UNAVAILABLE</span></p></li><li><p class="asked"><span data-kriterion-source="seats_by_id[cro_compliance].evidence_requests[1].description" data-kriterion-format="text" data-kriterion-attributed-to="cro_compliance">Provide a costed comparison of an incremental option (integrating and standardizing the existing toolchain) versus building a full platform.</span></p><p class="would-change"><span class="field">Would change this seat's position if</span> <span data-kriterion-source="seats_by_id[cro_compliance].evidence_requests[1].would_change" data-kriterion-format="text" data-kriterion-attributed-to="cro_compliance">Economic model projections and overall recommendation</span></p><p class="status"><span class="field">Has that evidence arrived?</span> <span data-kriterion-source="seats_by_id[cro_compliance].evidence_requests[1].status" data-kriterion-format="label" data-kriterion-attributed-to="cro_compliance">UNAVAILABLE</span></p></li></ul>
+        
+        <p><span class="field">After the challenge round</span>
+          <span data-kriterion-source="seats_by_id[cro_compliance].belief_update.initial_position" data-kriterion-format="label" data-kriterion-attributed-to="cro_compliance">DEFER</span>
+          &rarr;
+          <span data-kriterion-source="seats_by_id[cro_compliance].belief_update.revised_position" data-kriterion-format="label" data-kriterion-attributed-to="cro_compliance">DEFER</span>,
+          confidence
+          <span data-kriterion-source="seats_by_id[cro_compliance].belief_update.initial_confidence" data-kriterion-format="label" data-kriterion-attributed-to="cro_compliance">LOW</span>
+          &rarr;
+          <span data-kriterion-source="seats_by_id[cro_compliance].belief_update.revised_confidence" data-kriterion-format="label" data-kriterion-attributed-to="cro_compliance">LOW</span>
+          (<span data-kriterion-source="seats_by_id[cro_compliance].belief_update.change_type" data-kriterion-format="label" data-kriterion-attributed-to="cro_compliance">ARGUMENT DRIVEN</span>)</p>
+        <p class="stated-reason"><span data-kriterion-source="seats_by_id[cro_compliance].belief_update.stated_reason" data-kriterion-format="text" data-kriterion-attributed-to="cro_compliance">The critical uncertainties around whether toolchain fragmentation is the binding constraint and the true productivity attribution of the proposed platform investment remain unresolved. The potential misalignment with actual organizational needs, as highlighted in ch:premortem-cfo and ch:case_against-business_executive, suggests that deferring the decision allows for further investigation into these foundational questions.</span></p>
+        
+      </article>
+    
+      <article class="seat" data-seat="business_executive">
+        <h3><span data-kriterion-source="seats_by_id[business_executive].seat" data-kriterion-format="label" data-kriterion-attributed-to="business_executive">BUSINESS EXECUTIVE</span></h3>
+        <p class="position">
+          <span class="field">Current position</span>
+          <span data-kriterion-source="seats_by_id[business_executive].revised.recommendation" data-kriterion-format="label" class="headline" data-kriterion-attributed-to="business_executive">DEFER</span>
+          <span class="field">Confidence</span>
+          <span data-kriterion-source="seats_by_id[business_executive].revised.confidence_band" data-kriterion-format="label" data-kriterion-attributed-to="business_executive">MEDIUM</span>
+        </p>
+        <h4>Why</h4>
+        <ul class="reasons"><li><span data-kriterion-source="seats_by_id[business_executive].revised.key_reasons[0].text" data-kriterion-format="text" data-kriterion-attributed-to="business_executive">The case lacks a clear understanding of Northstar&#x27;s binding constraint and whether toolchain fragmentation is the primary issue that needs addressing.</span> <span class="refs"><span data-kriterion-source="seats_by_id[business_executive].revised.key_reasons[0].evidence_refs" data-kriterion-format="list_semi" data-kriterion-attributed-to="business_executive">ev-460</span></span></li><li><span data-kriterion-source="seats_by_id[business_executive].revised.key_reasons[1].text" data-kriterion-format="text" data-kriterion-attributed-to="business_executive">There are significant unknowns regarding the long-term operating costs, adoption rates, and the true productivity attribution which could significantly impact the economic model&#x27;s projections.</span> <span class="refs"><span data-kriterion-source="seats_by_id[business_executive].revised.key_reasons[1].evidence_refs" data-kriterion-format="list_semi" data-kriterion-attributed-to="business_executive">ev-453; ev-454; ev-455</span></span></li><li><span data-kriterion-source="seats_by_id[business_executive].revised.key_reasons[2].text" data-kriterion-format="text" data-kriterion-attributed-to="business_executive">The case does not provide a costed comparison of an incremental option versus building a full platform, which could lead to overestimating the benefits of the proposed solution.</span> <span class="refs"><span data-kriterion-source="seats_by_id[business_executive].revised.key_reasons[2].evidence_refs" data-kriterion-format="list_semi" data-kriterion-attributed-to="business_executive">ev-463</span></span></li></ul>
+        <h4>What this seat holds open</h4>
+        <ul class="unknowns"><li><span data-kriterion-source="seats_by_id[business_executive].revised.blocking_unknowns[0]" data-kriterion-format="text" data-kriterion-attributed-to="business_executive">whether toolchain fragmentation is Northstar&#x27;s binding constraint</span></li><li><span data-kriterion-source="seats_by_id[business_executive].revised.blocking_unknowns[1]" data-kriterion-format="text" data-kriterion-attributed-to="business_executive">the true cost of ownership over five years</span></li><li><span data-kriterion-source="seats_by_id[business_executive].revised.blocking_unknowns[2]" data-kriterion-format="text" data-kriterion-attributed-to="business_executive">the incremental option&#x27;s benefit relative to building a full platform</span></li></ul>
+        
+        <h4>What this seat asked for</h4><ul class="requests"><li><p class="asked"><span data-kriterion-source="seats_by_id[business_executive].evidence_requests[0].description" data-kriterion-format="text" data-kriterion-attributed-to="business_executive">Clarify whether Northstar&#x27;s primary constraint is toolchain fragmentation or another factor such as architectural coupling, delivery-process overhead, etc.</span></p><p class="would-change"><span class="field">Would change this seat's position if</span> <span data-kriterion-source="seats_by_id[business_executive].evidence_requests[0].would_change" data-kriterion-format="text" data-kriterion-attributed-to="business_executive">Recommendation to either FUND_EXPERIMENT if the constraint is confirmed or DEFER if not.</span></p><p class="status"><span class="field">Has that evidence arrived?</span> <span data-kriterion-source="seats_by_id[business_executive].evidence_requests[0].status" data-kriterion-format="label" data-kriterion-attributed-to="business_executive">UNAVAILABLE</span></p></li><li><p class="asked"><span data-kriterion-source="seats_by_id[business_executive].evidence_requests[1].description" data-kriterion-format="text" data-kriterion-attributed-to="business_executive">Provide a costed comparison of an incremental option (integrating and standardizing the existing toolchain) versus building a full platform.</span></p><p class="would-change"><span class="field">Would change this seat's position if</span> <span data-kriterion-source="seats_by_id[business_executive].evidence_requests[1].would_change" data-kriterion-format="text" data-kriterion-attributed-to="business_executive">Economic model projections and overall recommendation</span></p><p class="status"><span class="field">Has that evidence arrived?</span> <span data-kriterion-source="seats_by_id[business_executive].evidence_requests[1].status" data-kriterion-format="label" data-kriterion-attributed-to="business_executive">UNAVAILABLE</span></p></li></ul>
+        
+        <p><span class="field">After the challenge round</span>
+          <span data-kriterion-source="seats_by_id[business_executive].belief_update.initial_position" data-kriterion-format="label" data-kriterion-attributed-to="business_executive">DEFER</span>
+          &rarr;
+          <span data-kriterion-source="seats_by_id[business_executive].belief_update.revised_position" data-kriterion-format="label" data-kriterion-attributed-to="business_executive">DEFER</span>,
+          confidence
+          <span data-kriterion-source="seats_by_id[business_executive].belief_update.initial_confidence" data-kriterion-format="label" data-kriterion-attributed-to="business_executive">LOW</span>
+          &rarr;
+          <span data-kriterion-source="seats_by_id[business_executive].belief_update.revised_confidence" data-kriterion-format="label" data-kriterion-attributed-to="business_executive">MEDIUM</span>
+          (<span data-kriterion-source="seats_by_id[business_executive].belief_update.change_type" data-kriterion-format="label" data-kriterion-attributed-to="business_executive">ARGUMENT DRIVEN</span>)</p>
+        <p class="stated-reason"><span data-kriterion-source="seats_by_id[business_executive].belief_update.stated_reason" data-kriterion-format="text" data-kriterion-attributed-to="business_executive">The proposal lacks clarity on whether toolchain fragmentation is the binding constraint and significant uncertainties around long-term costs, adoption rates, and productivity attribution cast doubt on the economic model&#x27;s projections. Premortems highlight potential misalignment with actual constraints and higher-than-estimated operational costs.</span></p>
+        
+      </article>
+    </div>
+    </section>
+    
+    <section data-kriterion-role="what-would-change" id="what-would-change"
+             aria-labelledby="h-change">
+      <h2 id="h-change">What would change this decision</h2>
+      <p>Per-seat answers sit with each seat above. This is the decision-level view: what the
+         synthesised recommendation itself records as outstanding, and what buying the next
+         tranche of evidence would cost.</p>
+      <p class="note"><span data-kriterion-source="evidence_request_status" data-kriterion-format="text">10 per-seat evidence request(s) were recorded for this run, each with the condition its author said would change their position.</span></p><h3>Conditions the synthetic recommendation records as unmet</h3><ul><li><span data-kriterion-source="recommendation.conditions[0]" data-kriterion-format="text">whether toolchain fragmentation is Northstar&#x27;s binding constraint</span></li><li><span data-kriterion-source="recommendation.conditions[1]" data-kriterion-format="text">the total cost of ownership over five years at Northstar&#x27;s scale</span></li><li><span data-kriterion-source="recommendation.conditions[2]" data-kriterion-format="text">the opportunity cost of GBP3m-GBP5m and roughly 20 engineers</span></li><li><span data-kriterion-source="recommendation.conditions[3]" data-kriterion-format="text">whether golden paths measurably reduce security and operational policy exceptions</span></li><li><span data-kriterion-source="recommendation.conditions[4]" data-kriterion-format="text">the true productivity attribution of platform investment</span></li><li><span data-kriterion-source="recommendation.conditions[5]" data-kriterion-format="text">the true cost of ownership over five years</span></li><li><span data-kriterion-source="recommendation.conditions[6]" data-kriterion-format="text">the incremental option&#x27;s benefit relative to building a full platform</span></li></ul><h3>Unknowns it records as still open</h3><ul><li><span data-kriterion-source="recommendation.unresolved_unknowns[0]" data-kriterion-format="text">whether toolchain fragmentation is Northstar&#x27;s binding constraint</span></li><li><span data-kriterion-source="recommendation.unresolved_unknowns[1]" data-kriterion-format="text">the total cost of ownership over five years at Northstar&#x27;s scale</span></li><li><span data-kriterion-source="recommendation.unresolved_unknowns[2]" data-kriterion-format="text">the opportunity cost of GBP3m-GBP5m and roughly 20 engineers</span></li><li><span data-kriterion-source="recommendation.unresolved_unknowns[3]" data-kriterion-format="text">whether golden paths measurably reduce security and operational policy exceptions</span></li><li><span data-kriterion-source="recommendation.unresolved_unknowns[4]" data-kriterion-format="text">the true productivity attribution of platform investment</span></li><li><span data-kriterion-source="recommendation.unresolved_unknowns[5]" data-kriterion-format="text">the true cost of ownership over five years</span></li><li><span data-kriterion-source="recommendation.unresolved_unknowns[6]" data-kriterion-format="text">the incremental option&#x27;s benefit relative to building a full platform</span></li></ul>
+    </section>
+    
+    <section data-kriterion-role="synthetic-recommendation" id="recommendation"
+             aria-labelledby="h-rec">
+      <h2 id="h-rec">Synthetic recommendation</h2>
+      <p class="machine-banner">Machine-generated. This is not a decision, and Kriterion never
+         treats it as one.</p>
+      
+        <dl class="snapshot">
+          <dt>Action</dt>
+          <dd><span data-kriterion-source="recommendation.action" data-kriterion-format="label" class="headline">DEFER</span></dd>
+          <dt>Amount named in the recommendation record</dt>
+          <dd><span data-kriterion-source="recommendation.amount" data-kriterion-format="gbp">£4,000,000</span> over
+              <span data-kriterion-source="recommendation.duration" data-kriterion-format="text">18 months</span></dd>
+          <dt>Capital actually at risk under this action</dt>
+          <dd><span data-kriterion-source="capital_at_risk_gbp" data-kriterion-format="gbp">£0</span>.
+              <span data-kriterion-source="capital_at_risk_basis" data-kriterion-format="text">DEFER commits no funding. The recommendation record still carries the full ask as its amount field; that is the ask, not a commitment.</span></dd>
+        </dl>
+        <blockquote class="dissent">
+          <h3>Strongest preserved dissent, quoted</h3>
+          <p><span data-kriterion-source="recommendation.strongest_dissent.verbatim" data-kriterion-format="text">The proposal lacks clarity on whether toolchain fragmentation is Northstar&#x27;s binding constraint, as ev-460 highlights a critical gap in understanding the root cause of inefficiencies. Additionally, significant uncertainties around long-term operating costs (ev-455), adoption rates (ev-454), and true productivity attribution (ev-453) cast doubt on the economic model&#x27;s projections, potentially overestimating benefits. Furthermore, the absence of a costed comparison for an incremental option versus building a full platform (ev-463) raises concerns about inflated benefit estimates, suggesting that deferring this decision is prudent to address these critical unknowns and ensure alignment with strategic objectives.</span> <span class="refs"><span data-kriterion-source="recommendation.strongest_dissent.refs" data-kriterion-format="list_semi">ev-460; ev-455; ev-454; ev-453; ev-463</span></span></p>
+        </blockquote>
+        
+        
+    </section>
+    
+    <section data-kriterion-role="human-decision" id="human-decision" aria-labelledby="h-human">
+      <h2 id="h-human">Human decision</h2>
+      <p>Kept structurally separate from the machine's suggestion, in a different record type and
+         a different file. An agent may not write this one.</p>
+      <p class="empty-state"><span data-kriterion-source="human_decision_status" data-kriterion-format="text">No human decision has been recorded for this case. Kriterion will not record one on an accountable human&#x27;s behalf.</span></p>
+      <h3>What happens next</h3>
+      <p class="next-step"><span data-kriterion-source="next_step" data-kriterion-format="text">The accountable decision owner for this case (cto) records a decision against this run with `kriterion decide`, stating whether they accept, modify or reject the machine&#x27;s suggestion and why. Until that happens the run is undecided, and Kriterion reports it as undecided.</span></p>
+    </section>
+    
+    <section data-kriterion-role="outcome-contract" id="outcome-contract"
+             aria-labelledby="h-contract">
+      <h2 id="h-contract">Outcome contract</h2>
+      <p>What a funded decision commits to measuring, by when, and what would end it. Kriterion
+         refuses to validate a funded run without one.</p>
+      <p class="empty-state"><span data-kriterion-source="outcome_contract_status" data-kriterion-format="text">No outcome contract exists, because no human decision has been recorded. A contract is required only once a human commits funding.</span></p>
+    </section>
+    
+    <section data-kriterion-role="trust" id="trust" aria-labelledby="h-trust">
+      <h2 id="h-trust">How Kriterion earns trust</h2>
+      <p>Everything above is a view of one record. That is a constraint the build enforces, not
+         a description of good intentions.</p>
+
+      <h3>One decision state</h3>
+      <p>The evidence, the assumptions, the economics, each seat's recorded position and the
+         decision itself live in one structured record for this decision. Every view Kriterion
+         offers reads that record instead of keeping its own copy of the story, because a second
+         copy is where the two versions begin to disagree. This page is the view where that is
+         checked mechanically, on every build.</p>
+
+      <h3>Narrative is output, not commentary</h3>
+      <p>Every material statement a decision-maker reads here is stamped with the field it was
+         rendered from, and is re-derived from that field before the page is allowed out. A
+         sentence cannot quietly strengthen, soften or invent what the record says, because the
+         sentence is not written by hand.</p>
+
+      <h3>Fail closed</h3>
+      <p>If Kriterion cannot re-derive a statement from the record, it refuses to publish the
+         page rather than shipping it with a caveat. A run artifact it cannot read is refused by
+         name, not by traceback. This is intended behaviour: a refusal is recoverable, and a
+         polished page resting on something unreadable is not.</p>
+
+      <h3>A human remains accountable</h3>
+      <p>The machine supplies analysis, challenge and a suggestion. A named human records the
+         decision, in a separate record, in their own words. Kriterion will not write that one on
+         their behalf, and says so plainly when it is missing.</p>
+
+      <h3>Where Kriterion sits</h3>
+      <p>Kriterion belongs to the Agentic Tekton ecosystem: the Hekton factory produces and
+         evolves it, and Hekton Assurance is one optional producer of the machine-checkable
+         evidence shown above. None of that is needed to read this page or to use the
+         instrument. For the mechanics, the
+         <a href="https://github.com/dermdunc/kriterion/blob/main/docs/decisions.md">decision
+         records</a> and the
+         <a href="https://github.com/dermdunc/kriterion/blob/main/docs/architecture.md">architecture
+         notes</a> carry the detail this section deliberately leaves out.</p>
+    </section>
+    
+    <section data-kriterion-role="provenance" id="provenance" aria-labelledby="h-provenance">
+      <h2 id="h-provenance">How this page was produced</h2>
+      <p>This page is generated. It is a projection of one run's committed artifacts, and every
+         value on it carries the state path it was rendered from; a build that cannot re-derive a
+         statement from the record refuses to publish.</p>
+      <dl class="snapshot">
+        <dt>Run rendered</dt><dd><code data-kriterion-source="run_id" data-kriterion-format="text">hr001-northstar-condC-s1</code></dd>
+        <dt>Case</dt><dd><code data-kriterion-source="case.id" data-kriterion-format="text">northstar-internal-developer-platform</code></dd>
+        <dt>Frozen ledger version</dt><dd><span data-kriterion-source="ledger_version" data-kriterion-format="count">1</span></dd>
+        <dt>Ledger fingerprint</dt><dd><code data-kriterion-source="ledger_fingerprint" data-kriterion-format="text">254c00ee4d1edc6c9a0362560ff8d8d5df2f56bf6fec113f686124a82b87b623</code></dd>
+        <dt>Evidence items in this ledger</dt><dd><span data-kriterion-source="evidence_count" data-kriterion-format="count">65</span></dd>
+        <dt>Items recorded as unknown</dt><dd><span data-kriterion-source="unknown_count" data-kriterion-format="count">12</span></dd>
+        <dt>Case realism</dt><dd><span data-kriterion-source="case.case_realism" data-kriterion-format="label">AUTHORED FIXTURE</span></dd>
+      </dl>
+      <p>Kriterion experiments on its own decision mechanisms rather than assuming that
+         fashionable agent architectures improve decision quality. That research, including a
+         pre-registered result that did not go the way its authors expected, is preserved
+         separately in <a href="lab.html">Kriterion Lab</a>, which is supporting evidence about
+         how the instrument evolves and not the product itself. The per-run decision record for
+         this run is
+         <a href="reports/decision-record.html">also rendered</a>, and the source is
+         <a href="https://github.com/dermdunc/kriterion">on GitHub</a>.</p>
+    </section>
+    
+<footer>
+  <p>Kriterion is a Hekton factory-output project. Deterministic figures are computed by code;
+     the narrative around them is generated from the same records and mechanically re-derived
+     before publication.</p>
+</footer>
+</body>
+</html>

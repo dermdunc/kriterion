@@ -62,6 +62,12 @@ runs/*/
 # the evidence_requests.json artifact, and "what would change your mind"
 # cannot be shown from a run that never stored it.
 !runs/caseA-condC-s5/
+# Human Run 001: the frozen Northstar run the public experiment is conducted
+# against. Committed deliberately -- unlike the private practitioner run, this
+# case is meant to be reproducible by a reader, and that requires the run
+# artifacts to be inspectable alongside the case pack.
+!runs/hr001-northstar-condC-s1/
+!runs/run-hr001-northstar-condC-s1.log
 *.bak.*
 .project-setup/
 # Terraform (infra/github-pages-dns): real values and state, never committed.

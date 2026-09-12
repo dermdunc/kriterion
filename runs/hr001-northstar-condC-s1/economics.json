@@ -1,0 +1,52 @@
+{
+  "avoided_loss_high_gbp": null,
+  "avoided_loss_low_gbp": null,
+  "case_id": "northstar-internal-developer-platform",
+  "created_at": "2026-09-12T19:59:48Z",
+  "discount_rate": 0.1,
+  "id": "northstar-internal-developer-platform-economics",
+  "npv_high_gbp": 11748388.429752065,
+  "npv_low_gbp": -6624994.834710743,
+  "npv_mid_gbp": -4061177.685950413,
+  "payback_years": null,
+  "peak_funding_gbp": 4724500.0,
+  "schema_version": "kriterion/v0.1",
+  "tornado": [
+    {
+      "assumption_id": "benefit_attribution_factor",
+      "npv_swing_gbp": 2949136.363636363
+    },
+    {
+      "assumption_id": "friction_hours_saved_per_engineer_per_year",
+      "npv_swing_gbp": 2821704.5454545454
+    },
+    {
+      "assumption_id": "adoption_rate",
+      "npv_swing_gbp": 1501875.0
+    },
+    {
+      "assumption_id": "platform_team_annual_cost_gbp",
+      "npv_swing_gbp": -1322314.0495867766
+    },
+    {
+      "assumption_id": "migration_cost_per_engineer_gbp",
+      "npv_swing_gbp": -1221074.3801652896
+    },
+    {
+      "assumption_id": "fully_loaded_hourly_cost_gbp",
+      "npv_swing_gbp": 744731.404958677
+    },
+    {
+      "assumption_id": "engineers_reached_year_1",
+      "npv_swing_gbp": 510247.9338842975
+    },
+    {
+      "assumption_id": "engineers_reached_year_2",
+      "npv_swing_gbp": 386776.8595041316
+    },
+    {
+      "assumption_id": "precommitted_capital_gbp",
+      "npv_swing_gbp": -280991.73553719046
+    }
+  ]
+}

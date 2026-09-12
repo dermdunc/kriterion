@@ -1,0 +1,763 @@
+# Kriterion Human Run 001 -- Northstar Software Group, Internal Developer Platform.
+#
+# AUTHORED_FIXTURE. Northstar Software Group is FICTIONAL. It is not a real
+# company, it is not a pseudonym for a real company, and no number attributed to
+# it below is an observation of any real organisation.
+#
+# Two attestation values are used here, and the distinction is load-bearing:
+#
+#   attestation = "REAL"      the claim is drawn from a real, named, public
+#                             source that a reader can go and check. Used only
+#                             on EXTERNAL_REFERENCE items.
+#
+#   attestation = "AUTHORED"  the claim is a synthetic scenario input invented
+#                             for this experiment. EVERY Northstar-specific
+#                             fact carries this value, including the ones whose
+#                             EvidenceCategory is MEASURED. `MEASURED` there
+#                             describes what KIND of claim it would be inside
+#                             the scenario -- telemetry rather than opinion --
+#                             not that anyone measured anything. ADR-003 makes
+#                             these two axes orthogonal precisely so a fixture
+#                             can simulate a measurement without claiming one.
+#
+# The generated decision page renders the attestation badge beside every item,
+# so a reader sees REAL or AUTHORED on each claim rather than having to trust
+# this header.
+#
+# Provenance ceiling, stated up front: the REAL items cite public work by
+# title, author and publishing organisation. They were checked against the
+# published sources at freeze time, but the case pack carries no URLs, and no
+# claim below should be treated as stronger than the source it names. Where a
+# source is analyst commentary or vendor material rather than primary research,
+# the item says so in its own `source` field and its strength is set
+# accordingly.
+#
+# Economics: kriterion.economics.case_flows.compute_staged_platform_economics.
+# Every number the model spends comes from this pack's own [[assumptions]].
+
+[case]
+id = "northstar-internal-developer-platform"
+title = "Northstar Software Group -- Internal Developer Platform investment (FICTIONAL SCENARIO)"
+sponsor = "CTO"
+decision_owner = "cto"
+decision_requested = "Should Northstar Software Group invest approximately GBP3m-GBP5m over the next 18 months in an Internal Developer Platform, or pursue a lower-cost programme of incremental improvements to its existing engineering toolchain?"
+alternatives = [
+    "do_nothing",
+    "optimise_existing_toolchain",
+    "buy_commercial_platform",
+    "build_thin_internal_platform",
+    "build_strategic_idp",
+    "staged_hybrid",
+]
+strategic_objectives = [
+    "Reduce the time a new engineer needs before they can independently ship a change to production",
+    "Reduce the engineering effort Northstar spends on repetitive platform onboarding, configuration and support",
+    "Make security and operational controls consistent across business units without adding approval queues",
+    "Establish whether reduced developer friction produces attributable business value before committing to enterprise scale",
+    "Keep the option open to route engineering work through AI coding agents without rebuilding the platform to do it",
+]
+deadline = "2027-06-30"
+
+[case.ask]
+type = "capital_investment"
+amount_gbp = 4_000_000
+duration = "18 months"
+# SYNTHETIC. The midpoint of the scenario's stated GBP3m-GBP5m envelope.
+# `Ask.amount_gbp` is a single required float, so the range itself cannot be
+# expressed here; the staging ladder the case actually argues for is carried by
+# as-precommitted-capital-gbp and by ev-450. Recorded as a product limitation,
+# not worked around.
+
+# --- External reference: public research --------------------------------
+# Real, checkable, public sources. attestation = "REAL".
+
+[[evidence]]
+id = "ev-401"
+category = "EXTERNAL_REFERENCE"
+attestation = "REAL"
+claim = "The four DORA delivery metrics -- deployment frequency, lead time for changes, change failure rate and time to restore service -- are reported as statistically predictive of organisational performance, establishing that software delivery performance is measurable and consequential rather than merely a matter of engineering taste."
+source = "Forsgren, Humble & Kim, 'Accelerate: The Science of Lean Software and DevOps' (IT Revolution, 2018); DORA / Google Cloud, Accelerate State of DevOps Report series"
+period = "2018 onward"
+strength = "HIGH"
+
+[[evidence]]
+id = "ev-402"
+category = "EXTERNAL_REFERENCE"
+attestation = "REAL"
+claim = "DORA's 2024 State of DevOps research reports that increased AI adoption was associated with a decrease in delivery throughput and in delivery stability, i.e. the productivity gain individual developers perceive did not appear in team-level delivery outcomes."
+source = "DORA / Google Cloud, Accelerate State of DevOps Report 2024"
+period = "2024"
+strength = "MEDIUM"
+contradicts = ["ev-413"]
+
+[[evidence]]
+id = "ev-403"
+category = "EXTERNAL_REFERENCE"
+attestation = "REAL"
+claim = "The SPACE framework argues that developer productivity is multidimensional (satisfaction, performance, activity, communication, efficiency) and that no single metric -- including any activity count or time saved -- validly represents it; measuring one dimension alone reliably produces misleading conclusions."
+source = "Forsgren, Storey, Maddila, Zimmermann, Houck & Butler, 'The SPACE of Developer Productivity', ACM Queue, 2021"
+period = "2021"
+strength = "HIGH"
+contradicts = ["ev-444"]
+
+[[evidence]]
+id = "ev-404"
+category = "EXTERNAL_REFERENCE"
+attestation = "REAL"
+claim = "Developer experience is characterised along three dimensions -- feedback loops, cognitive load and flow state -- and friction in any of them degrades output. This gives platform investment a mechanism of action beyond raw tool consolidation."
+source = "Noda, Storey, Forsgren & Greiler, 'DevEx: What Actually Drives Productivity', ACM Queue, 2023"
+period = "2023"
+strength = "HIGH"
+
+[[evidence]]
+id = "ev-405"
+category = "EXTERNAL_REFERENCE"
+attestation = "REAL"
+claim = "A platform should be treated as a product with its own users, roadmap and adoption problem, and should be the 'thinnest viable platform' that removes cognitive load -- explicitly warning against platforms that expand to abstract every engineering workflow."
+source = "Skelton & Pais, 'Team Topologies' (IT Revolution, 2019)"
+period = "2019"
+strength = "HIGH"
+supports = ["ev-434"]
+
+[[evidence]]
+id = "ev-406"
+category = "EXTERNAL_REFERENCE"
+attestation = "REAL"
+claim = "Extraneous cognitive load imposed on stream-aligned teams by infrastructure, tooling and process is a limiting factor on delivery, and reducing it is the stated purpose of a platform team. The load is not eliminated by a platform, only relocated -- to the platform team."
+source = "Skelton & Pais, 'Team Topologies' (IT Revolution, 2019)"
+period = "2019"
+strength = "HIGH"
+
+[[evidence]]
+id = "ev-407"
+category = "EXTERNAL_REFERENCE"
+attestation = "REAL"
+claim = "The CNCF Platforms White Paper defines a platform as an internal product providing self-service capabilities over existing infrastructure, and states that platform success is measured by adoption and by the outcomes of its users, not by capability count."
+source = "CNCF Platforms Working Group, 'Platforms White Paper' (Cloud Native Computing Foundation)"
+period = "2023"
+strength = "MEDIUM"
+
+[[evidence]]
+id = "ev-408"
+category = "EXTERNAL_REFERENCE"
+attestation = "REAL"
+claim = "The CNCF Platform Engineering Maturity Model describes platform adoption as progressing through identifiable stages and treats measurement, product management and user feedback as maturity dimensions in their own right -- implying that a platform funded as a build project rather than a product is structurally under-resourced."
+source = "CNCF Platforms Working Group, 'Platform Engineering Maturity Model' (Cloud Native Computing Foundation)"
+period = "2023-2024"
+strength = "MEDIUM"
+
+[[evidence]]
+id = "ev-409"
+category = "EXTERNAL_REFERENCE"
+attestation = "REAL"
+claim = "Gartner has predicted that by 2026 a large majority of software engineering organisations will have established platform teams as internal providers of reusable services and tools. This is an analyst adoption forecast, not a measurement of outcomes: it says platform teams will be common, not that they will work."
+source = "Gartner analyst prediction, widely cited in platform-engineering commentary. ANALYST FORECAST, not primary research"
+period = "2023 forecast for 2026"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-410"
+category = "EXTERNAL_REFERENCE"
+attestation = "REAL"
+claim = "Industry survey work on platform engineering reports that platform adoption is widespread and that organisations self-report benefits in delivery speed and standardisation, while also reporting that platform teams struggle with unclear ownership and with proving value to funders."
+source = "Puppet, State of DevOps Report -- Platform Engineering editions. INDUSTRY SURVEY: self-reported, self-selected respondents, no control group"
+period = "2023-2024"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-411"
+category = "EXTERNAL_REFERENCE"
+attestation = "REAL"
+claim = "A controlled experiment on AI coding assistance found treated developers completed a specific, self-contained programming task substantially faster than the control group. The measured task was narrow and greenfield; the study does not measure delivery of changes into an existing production codebase."
+source = "Peng, Kalliamvakou, Cihon & Demirer, 'The Impact of AI on Developer Productivity: Evidence from GitHub Copilot' (2023)"
+period = "2023"
+strength = "MEDIUM"
+contradicts = ["ev-412"]
+
+[[evidence]]
+id = "ev-412"
+category = "EXTERNAL_REFERENCE"
+attestation = "REAL"
+claim = "A randomised controlled trial with experienced open-source developers working on their own mature repositories found that AI tooling made them SLOWER on real tasks, while the same developers believed it had made them faster. The perception gap is the finding that matters here: self-reported developer time saved is not a reliable measurement of time actually saved."
+source = "METR, randomised controlled trial on the effect of AI tools on experienced open-source developer productivity (2025)"
+period = "2025"
+strength = "MEDIUM"
+contradicts = ["ev-411"]
+
+[[evidence]]
+id = "ev-413"
+category = "EXTERNAL_REFERENCE"
+attestation = "REAL"
+claim = "An enterprise randomised controlled trial on AI-assisted development reported a measurable reduction in time to complete assigned development tasks in an industrial setting."
+source = "Paradis et al., enterprise randomised controlled trial on AI impact on development speed (Google)"
+period = "2024-2025"
+strength = "MEDIUM"
+contradicts = ["ev-402"]
+
+[[evidence]]
+id = "ev-414"
+category = "EXTERNAL_REFERENCE"
+attestation = "REAL"
+claim = "Backstage, the developer-portal framework open-sourced by Spotify and donated to the CNCF, is widely adopted as a starting point for internal developer portals. Public practitioner accounts consistently report that the portal itself is the small part of the work and that the plugin, catalogue and ownership-data integration is the large part."
+source = "Spotify / CNCF Backstage project, and published practitioner accounts of Backstage adoption"
+period = "2020 onward"
+strength = "MEDIUM"
+supports = ["ev-441"]
+
+[[evidence]]
+id = "ev-415"
+category = "EXTERNAL_REFERENCE"
+attestation = "REAL"
+claim = "InnerSource practice identifies the Trusted Committer role as the mechanism that makes cross-team contribution work, and identifies review and acceptance capacity -- not contributor willingness -- as the usual bottleneck. A platform that invites contribution without funding acceptance capacity converts a support queue into a pull-request queue."
+source = "InnerSource Commons, InnerSource Patterns ('Trusted Committer' and related patterns)"
+period = "ongoing"
+strength = "MEDIUM"
+
+[[evidence]]
+id = "ev-416"
+category = "EXTERNAL_REFERENCE"
+attestation = "REAL"
+claim = "The 'paved road' pattern -- secure, supported defaults that are the easiest path for a developer to take -- is documented as the practical mechanism by which large engineering organisations achieve consistent security and reliability properties without per-change approval."
+source = "Adkins, Beyer, Blankinship, Lewandowski, Oprea & Stubblefield, 'Building Secure and Reliable Systems' (Google / O'Reilly, 2020)"
+period = "2020"
+strength = "HIGH"
+supports = ["ev-434"]
+
+[[evidence]]
+id = "ev-417"
+category = "EXTERNAL_REFERENCE"
+attestation = "REAL"
+claim = "Policy-as-code engines (e.g. Open Policy Agent, a CNCF graduated project) provide a documented mechanism for expressing and enforcing controls uniformly across heterogeneous infrastructure, and secure-development frameworks such as NIST SP 800-218 (SSDF) call for controls to be applied consistently and automatically rather than per-project."
+source = "CNCF Open Policy Agent project; NIST Special Publication 800-218, Secure Software Development Framework"
+period = "2021-2022"
+strength = "MEDIUM"
+
+[[evidence]]
+id = "ev-418"
+category = "EXTERNAL_REFERENCE"
+attestation = "REAL"
+claim = "Conway's Law: a system's structure tends to mirror the communication structure of the organisation that builds it. Applied here, it predicts that a platform built by a team without authority over the business units' delivery priorities will reproduce, not remove, the existing boundaries."
+source = "Melvin E. Conway, 'How Do Committees Invent?', Datamation, 1968"
+period = "1968"
+strength = "MEDIUM"
+
+[[evidence]]
+id = "ev-419"
+category = "EXTERNAL_REFERENCE"
+attestation = "REAL"
+claim = "Published technology-radar and practitioner commentary repeatedly cautions against internal developer platforms built without a product mindset, against platform teams operating as ticket-takers, and against 'overambitious' platforms that attempt to abstract every workflow. The named failure mode is a platform that adds an abstraction layer without removing the underlying complexity."
+source = "Thoughtworks Technology Radar entries on platform engineering and internal developer platforms; corroborating practitioner literature"
+period = "2020-2024"
+strength = "MEDIUM"
+contradicts = ["ev-445"]
+
+[[evidence]]
+id = "ev-420"
+category = "EXTERNAL_REFERENCE"
+attestation = "REAL"
+claim = "Commercial developer-platform vendors publish ROI models claiming payback within 12 months on developer-productivity grounds alone. Methodologies are typically undisclosed, inputs are vendor-selected, baselines are unstated, and the productivity-to-value conversion is assumed rather than demonstrated."
+source = "Commercial internal-developer-platform vendor marketing collateral, category-level characterisation. VENDOR EVIDENCE -- included so that it can be challenged, not relied upon"
+period = "2023-2025"
+strength = "LOW"
+contradicts = ["ev-403", "ev-452"]
+
+# --- Northstar scenario baseline ----------------------------------------
+# EVERY item below is FICTIONAL. attestation = "AUTHORED". `MEASURED` describes
+# the kind of claim within the scenario, never a real observation.
+
+[[evidence]]
+id = "ev-421"
+category = "MEASURED"
+attestation = "AUTHORED"
+claim = "SYNTHETIC SCENARIO INPUT. Northstar employs approximately 2,500 engineers across three primary engineering regions -- United States, Europe and India -- building global digital and software products."
+source = "Northstar scenario definition (fictional). Not an observation of any real organisation"
+period = "scenario baseline"
+strength = "HIGH"
+
+[[evidence]]
+id = "ev-422"
+category = "MEASURED"
+attestation = "AUTHORED"
+claim = "SYNTHETIC SCENARIO INPUT. Median time from a new Northstar engineer's start date to their first independently deployed production change is 6 weeks, with an interquartile range of 4 to 11 weeks depending on business unit."
+source = "Northstar scenario definition (fictional)"
+period = "scenario baseline"
+strength = "HIGH"
+
+[[evidence]]
+id = "ev-423"
+category = "MEASURED"
+attestation = "AUTHORED"
+claim = "SYNTHETIC SCENARIO INPUT. Northstar engineering runs 7 materially different CI/CD patterns across its business units, with 3 different pipeline technologies and no common deployment interface."
+source = "Northstar scenario definition (fictional)"
+period = "scenario baseline"
+strength = "HIGH"
+
+[[evidence]]
+id = "ev-424"
+category = "MEASURED"
+attestation = "AUTHORED"
+claim = "SYNTHETIC SCENARIO INPUT. Lead time to provision a new cloud environment at Northstar ranges from 2 days to 21 days depending on business unit and workload type; the variation is driven by which central team must be involved, not by technical difficulty."
+source = "Northstar scenario definition (fictional)"
+period = "scenario baseline"
+strength = "HIGH"
+
+[[evidence]]
+id = "ev-425"
+category = "MEASURED"
+attestation = "AUTHORED"
+claim = "SYNTHETIC SCENARIO INPUT. Northstar's central engineering teams receive approximately 1,900 platform and tooling support requests per quarter, of which an estimated 60 per cent are recurring onboarding or configuration requests rather than novel problems."
+source = "Northstar scenario definition (fictional)"
+period = "scenario baseline"
+strength = "MEDIUM"
+
+[[evidence]]
+id = "ev-426"
+category = "MEASURED"
+attestation = "AUTHORED"
+claim = "SYNTHETIC SCENARIO INPUT. Northstar's central platform and developer-tooling groups total approximately 95 engineers spread across 6 teams, each owning individual components rather than an end-to-end developer journey."
+source = "Northstar scenario definition (fictional)"
+period = "scenario baseline"
+strength = "HIGH"
+
+[[evidence]]
+id = "ev-427"
+category = "MEASURED"
+attestation = "AUTHORED"
+claim = "SYNTHETIC SCENARIO INPUT. Documented golden paths exist at Northstar for approximately 31 per cent of production workloads, concentrated in one business unit's stateless web services. No golden path exists for data, batch or mobile workloads."
+source = "Northstar scenario definition (fictional)"
+period = "scenario baseline"
+strength = "HIGH"
+
+[[evidence]]
+id = "ev-428"
+category = "MEASURED"
+attestation = "AUTHORED"
+claim = "SYNTHETIC SCENARIO INPUT. Northstar teams on an existing golden path show a median change lead time of 2 days against 9 days for teams on bespoke workflows. The comparison is observational: golden-path teams were not randomly assigned and are concentrated in the newest, least entangled part of the estate."
+source = "Northstar scenario definition (fictional). The selection-bias caveat is part of the scenario, not a disclaimer added afterwards"
+period = "scenario baseline"
+strength = "MEDIUM"
+
+[[evidence]]
+id = "ev-429"
+category = "MEASURED"
+attestation = "AUTHORED"
+claim = "SYNTHETIC SCENARIO INPUT. Northstar change failure rate is 9 per cent on golden-path workflows and 14 per cent on bespoke workflows. The same selection-bias caveat as ev-428 applies."
+source = "Northstar scenario definition (fictional)"
+period = "scenario baseline"
+strength = "MEDIUM"
+
+[[evidence]]
+id = "ev-430"
+category = "MEASURED"
+attestation = "AUTHORED"
+claim = "SYNTHETIC SCENARIO INPUT. Northstar engineering documentation is distributed across 4 wiki systems and an unindexed set of repository README files; an internal survey reports that engineers most often ask a colleague rather than search, because search results are known to be stale."
+source = "Northstar scenario definition (fictional)"
+period = "scenario baseline"
+strength = "MEDIUM"
+
+[[evidence]]
+id = "ev-431"
+category = "MEASURED"
+attestation = "AUTHORED"
+claim = "SYNTHETIC SCENARIO INPUT. Northstar records 340 open security or operational policy exceptions, of which 78 per cent sit against workloads outside any golden path. Whether this reflects the golden path preventing exceptions, or simply that newer workloads need fewer, is not established by the count."
+source = "Northstar scenario definition (fictional)"
+period = "scenario baseline"
+strength = "MEDIUM"
+
+[[evidence]]
+id = "ev-432"
+category = "MEASURED"
+attestation = "AUTHORED"
+claim = "SYNTHETIC SCENARIO INPUT. Approximately 28 per cent of Northstar's non-production cloud spend is attributable to environments idle for more than 14 consecutive days, a consequence of provisioning being difficult enough that teams keep environments alive rather than recreate them."
+source = "Northstar scenario definition (fictional)"
+period = "scenario baseline"
+strength = "MEDIUM"
+
+[[evidence]]
+id = "ev-433"
+category = "MEASURED"
+attestation = "AUTHORED"
+claim = "SYNTHETIC SCENARIO INPUT. Roughly 35 per cent of Northstar engineering teams report regular use of AI coding agents, with no common interface to Northstar's own deployment, provisioning or policy systems; agents currently operate against raw tooling and human-oriented documentation."
+source = "Northstar scenario definition (fictional)"
+period = "scenario baseline"
+strength = "MEDIUM"
+
+# --- Expert judgment: Northstar-internal, synthetic ----------------------
+
+[[evidence]]
+id = "ev-434"
+category = "EXPERT_JUDGMENT"
+attestation = "AUTHORED"
+claim = "SYNTHETIC SCENARIO INPUT. Northstar's head of platform engineering judges that a deliberately thin platform could deliver golden paths, service templates and environment provisioning over the existing CI/CD, cloud and observability tooling without replacing any of it, and that attempting to replace them would consume the entire budget before any developer saw a benefit."
+source = "Northstar scenario definition (fictional): a synthetic internal judgment, not an observation"
+period = "scenario baseline"
+strength = "MEDIUM"
+
+[[evidence]]
+id = "ev-435"
+category = "EXPERT_JUDGMENT"
+attestation = "AUTHORED"
+claim = "SYNTHETIC SCENARIO INPUT. Northstar's CISO delegate judges that golden paths would materially improve control consistency only if they are the default and the non-platform route requires an explicit exception; an optional golden path is expected to be adopted by the teams that already had good controls."
+source = "Northstar scenario definition (fictional)"
+period = "scenario baseline"
+strength = "MEDIUM"
+
+[[evidence]]
+id = "ev-436"
+category = "EXPERT_JUDGMENT"
+attestation = "AUTHORED"
+claim = "SYNTHETIC SCENARIO INPUT. Northstar's finance business partner judges that no agreed methodology currently exists inside Northstar for converting engineering time saved into a booked financial benefit, and that no previous engineering efficiency programme has had its claimed savings traced to a cost line or a delivered revenue outcome."
+source = "Northstar scenario definition (fictional)"
+period = "scenario baseline"
+strength = "MEDIUM"
+contradicts = ["ev-444"]
+
+[[evidence]]
+id = "ev-437"
+category = "EXPERT_JUDGMENT"
+attestation = "AUTHORED"
+claim = "SYNTHETIC SCENARIO INPUT. Northstar's vendor evaluation judges that a commercial platform product would deliver a service catalogue and a portal quickly, but that the integration to Northstar's own provisioning, policy and deployment systems is the majority of the work and is not shortened by the purchase."
+source = "Northstar scenario definition (fictional)"
+period = "scenario baseline"
+strength = "MEDIUM"
+supports = ["ev-441"]
+
+[[evidence]]
+id = "ev-438"
+category = "EXPERT_JUDGMENT"
+attestation = "AUTHORED"
+claim = "SYNTHETIC SCENARIO INPUT. A Northstar engineering leader judges that teams will bypass any platform path that is slower or less capable than what they use today, and that mandating use before the platform is genuinely better would produce compliance without adoption -- recorded usage without changed behaviour."
+source = "Northstar scenario definition (fictional)"
+period = "scenario baseline"
+strength = "MEDIUM"
+contradicts = ["ev-445"]
+
+[[evidence]]
+id = "ev-439"
+category = "EXPERT_JUDGMENT"
+attestation = "AUTHORED"
+claim = "SYNTHETIC SCENARIO INPUT. A Northstar principal architect judges that AI coding agents make machine-operable platform interfaces more valuable, because an agent cannot read a wiki page or raise a ticket, and that the same interfaces are the ones a well-built platform needs regardless. The judgment is explicitly a hypothesis: nobody at Northstar has tested it."
+source = "Northstar scenario definition (fictional)"
+period = "scenario baseline"
+strength = "LOW"
+
+# --- Inference ------------------------------------------------------------
+
+[[evidence]]
+id = "ev-440"
+category = "INFERENCE"
+attestation = "AUTHORED"
+claim = "Inferred from ev-422, ev-423 and ev-430: a substantial part of Northstar's 6-week onboarding time is plausibly attributable to toolchain fragmentation rather than to domain learning. This is an inference from co-occurrence; nothing in the scenario separates the two causes, and a platform that removes the fragmentation would not shorten the domain-learning part at all."
+source = "Derived within the case from the scenario baseline; not independently evidenced"
+period = "scenario baseline"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-441"
+category = "INFERENCE"
+attestation = "AUTHORED"
+claim = "Inferred from ev-425 and ev-426: a component-owning team structure and a high recurring-request rate are mutually consistent with support demand being structural -- an artefact of how ownership is drawn -- rather than a staffing shortfall. If so, adding platform capacity without changing the ownership model raises throughput on the queue without shortening it."
+source = "Derived within the case; ev-418 supplies the mechanism, nothing in the scenario measures it"
+period = "scenario baseline"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-442"
+category = "INFERENCE"
+attestation = "AUTHORED"
+claim = "Inferred from ev-414 and ev-437: buying a commercial platform substitutes for the portal and catalogue layer, which is not where Northstar's cost sits, and does not substitute for the integration to Northstar's own provisioning, policy and deployment systems, which is. The build-versus-buy choice therefore decides less of the total effort than it appears to."
+source = "Derived within the case from one REAL item and one synthetic scenario judgment"
+period = "scenario baseline"
+strength = "MEDIUM"
+
+[[evidence]]
+id = "ev-443"
+category = "INFERENCE"
+attestation = "AUTHORED"
+claim = "Inferred from ev-402, ev-411, ev-412 and ev-413: the public evidence on AI-assisted engineering currently points in both directions, with individual task speed-ups, a team-level throughput decrease, and a measured gap between perceived and actual speed-up all reported. The case therefore cannot ground either AI hypothesis -- that agents raise or that they lower the value of platform abstractions -- and treating either as settled would be unsupported."
+source = "Derived within the case from four REAL items that disagree"
+period = "2023-2025"
+strength = "MEDIUM"
+
+[[evidence]]
+id = "ev-444"
+category = "INFERENCE"
+attestation = "AUTHORED"
+claim = "Inferred from ev-428 and ev-429: the golden-path delivery advantage at Northstar is confounded by selection. Golden-path teams are concentrated in the newest part of the estate, so the observed 2-day versus 9-day gap is an upper bound on what a platform could deliver to the rest, and possibly a large overstatement of it."
+source = "Derived within the case; the confound is stated in ev-428's own scenario definition"
+period = "scenario baseline"
+strength = "MEDIUM"
+
+# --- Assumptions, as evidence items ---------------------------------------
+# Each of these corresponds to a ranged [[assumptions]] entry below. They are
+# ASSUMPTION-category items so that the ledger, and therefore the committee,
+# sees them with the same epistemic weight the economics gives them.
+
+[[evidence]]
+id = "ev-445"
+category = "ASSUMPTION"
+attestation = "AUTHORED"
+claim = "SYNTHETIC MODELLING ASSUMPTION (as-benefit-attribution-factor). Assumed that 25 per cent of developer time saved converts into business value -- delivered product, improved quality or avoided cost -- rather than being absorbed into other work, ranged 5 to 50 per cent. Nothing in this case evidences any value in that range. It is the assumption the decision rests on."
+source = "Economics model input; the range's width is the honest statement of how unevidenced it is"
+period = "n/a (modelling assumption)"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-446"
+category = "ASSUMPTION"
+attestation = "AUTHORED"
+claim = "SYNTHETIC MODELLING ASSUMPTION (as-platform-adoption-rate). Assumed that 60 per cent of engineers reached by the rollout actually use the platform for their production work, ranged 30 to 85 per cent. Contradicted by ev-438 and cautioned against by ev-419: a platform that is optional and not yet better than the incumbent path attracts the teams who needed it least."
+source = "Economics model input"
+period = "n/a (modelling assumption)"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-447"
+category = "ASSUMPTION"
+attestation = "AUTHORED"
+claim = "SYNTHETIC MODELLING ASSUMPTION (as-friction-hours-saved-per-engineer). Assumed 90 engineer-hours saved per adopting engineer per year, ranged 25 to 180. Note ev-412: developers' own estimates of time saved have been measured as unreliable, so this quantity cannot be established by asking them."
+source = "Economics model input"
+period = "n/a (modelling assumption)"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-448"
+category = "ASSUMPTION"
+attestation = "AUTHORED"
+claim = "SYNTHETIC MODELLING ASSUMPTION (as-platform-team-annual-cost-gbp). Assumed GBP1.8m per year steady-state operating cost for the platform organisation -- engineers, platform product management, operations, support and vendor/licence cost -- ranged GBP1.2m to GBP2.8m. This is an ongoing cost that continues after the 18-month programme ends, and is the cost the capital ask does not include."
+source = "Economics model input"
+period = "n/a (modelling assumption)"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-449"
+category = "ASSUMPTION"
+attestation = "AUTHORED"
+claim = "SYNTHETIC MODELLING ASSUMPTION (as-migration-cost-per-engineer-gbp). Assumed GBP450 of one-off migration and re-learning cost per engineer moved onto the platform, ranged GBP150 to GBP900. Migration effort borne by application teams is a real cost of the programme that the platform's own budget does not show."
+source = "Economics model input"
+period = "n/a (modelling assumption)"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-450"
+category = "ASSUMPTION"
+attestation = "AUTHORED"
+claim = "SYNTHETIC MODELLING ASSUMPTION (as-engineers-reached-year-1 / as-engineers-reached-year-2). Assumed the rollout reaches 700 engineers in year 1 (ranged 300 to 1,100) and 1,900 by the end of year 2 (ranged 900 to 2,500, the whole engineering population). Reach is not adoption: as-platform-adoption-rate applies on top of these numbers."
+source = "Economics model input"
+period = "n/a (modelling assumption)"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-451"
+category = "ASSUMPTION"
+attestation = "AUTHORED"
+claim = "SYNTHETIC MODELLING ASSUMPTION (as-precommitted-capital-gbp). Assumed GBP2.1m of the GBP4m envelope is committed before the first evidence gate -- roughly GBP100k discovery, GBP500k MVP across 3 to 5 teams and about 150 engineers, then GBP1.5m targeted rollout to about 1,000 engineers -- ranged GBP600k (discovery and MVP only, everything else gated) to GBP4m (the whole envelope approved up front). Total capital is the same in every case; only the timing changes."
+source = "Economics model input. This parameter is how the staged-funding question enters the economics"
+period = "n/a (modelling assumption)"
+strength = "MEDIUM"
+
+[[evidence]]
+id = "ev-452"
+category = "ASSUMPTION"
+attestation = "AUTHORED"
+claim = "SYNTHETIC MODELLING ASSUMPTION (as-fully-loaded-hourly-cost-gbp). Assumed GBP55 fully loaded cost per engineer-hour, ranged GBP45 to GBP70, blended across the three engineering regions. Using this to monetise saved hours prices the time; it does not establish that the time became value -- that is what as-benefit-attribution-factor is for, and why the two are separate parameters."
+source = "Economics model input"
+period = "n/a (modelling assumption)"
+strength = "MEDIUM"
+
+# --- Unknowns -------------------------------------------------------------
+
+[[evidence]]
+id = "ev-453"
+category = "UNKNOWN"
+attestation = "AUTHORED"
+claim = "The true productivity attribution -- what share of developer time saved at Northstar becomes delivered business value -- is not established by anything in this case, and ev-436 states no methodology exists to establish it. Every benefit figure in the economics is a multiple of this unknown."
+source = "Gap; no item in this pack resolves it"
+period = "n/a"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-454"
+category = "UNKNOWN"
+attestation = "AUTHORED"
+claim = "The adoption rate Northstar would actually achieve, under voluntary use and across heterogeneous workloads, is unknown. ev-427 shows golden paths currently cover only stateless web services; whether data, batch and mobile workloads can be served by the same paths at all is not established."
+source = "Gap; no item in this pack resolves it"
+period = "n/a"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-455"
+category = "UNKNOWN"
+attestation = "AUTHORED"
+claim = "The long-term operating cost of the platform organisation is unknown beyond the modelled range. ev-406 predicts cognitive load is relocated to the platform team rather than eliminated, but nothing establishes the steady-state size that relocation implies at Northstar's scale."
+source = "Gap; no item in this pack resolves it"
+period = "n/a"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-456"
+category = "UNKNOWN"
+attestation = "AUTHORED"
+claim = "The developer behavioural response is unknown: whether engineers freed from toolchain friction spend the recovered time on higher-value delivery, on absorbing more scope, or on work that does not reach a customer. This is the behavioural half of the attribution question and is not answered by measuring the tooling."
+source = "Gap; no item in this pack resolves it"
+period = "n/a"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-457"
+category = "UNKNOWN"
+attestation = "AUTHORED"
+claim = "The effect of a platform on Northstar's defect and change-failure rate is unknown. ev-429 reports a difference between golden-path and bespoke workflows, and ev-444 states that difference is confounded by selection, so the causal effect is not available from the observational comparison."
+source = "Gap; ev-444 explains why the available comparison does not resolve it"
+period = "n/a"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-458"
+category = "UNKNOWN"
+attestation = "AUTHORED"
+claim = "Whether AI coding agents raise or lower the strategic value of platform abstractions is unknown, and ev-443 establishes that the public evidence currently supports neither direction. Both hypotheses are live: agents may need machine-operable golden paths, or may navigate fragmented tooling well enough to make abstractions less valuable."
+source = "Gap; ev-443 states why the external evidence cannot settle it"
+period = "n/a"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-459"
+category = "UNKNOWN"
+attestation = "AUTHORED"
+claim = "The total cost of ownership of a commercial platform product versus an internal build, over five years at Northstar's scale, is unknown. Licensing is quotable; the integration, the internal enablement and the cost of a later exit are not, and ev-442 argues the quotable part is the smaller one."
+source = "Gap; no item in this pack resolves it"
+period = "n/a"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-460"
+category = "UNKNOWN"
+attestation = "AUTHORED"
+claim = "Whether Northstar's binding constraint is toolchain fragmentation at all, rather than business prioritisation, architectural coupling or delivery-process overhead, is not established. ev-440 offers an inference, explicitly weak. If fragmentation is not the constraint, every option in this case answers a question Northstar does not have."
+source = "Gap; this is the premise the whole decision rests on and nothing in the pack evidences it"
+period = "n/a"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-461"
+category = "UNKNOWN"
+attestation = "AUTHORED"
+claim = "Whether golden paths measurably reduce security and operational policy exceptions at Northstar is unknown. ev-431 gives a distribution of open exceptions but cannot separate the platform's effect from workload age and type."
+source = "Gap; no item in this pack resolves it"
+period = "n/a"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-462"
+category = "UNKNOWN"
+attestation = "AUTHORED"
+claim = "The opportunity cost is unknown: what Northstar would not fund in order to fund this, and what delivery that displaced work would have produced. No item in this case prices the alternative use of GBP3m-GBP5m and roughly 20 engineers."
+source = "Gap; no item in this pack resolves it"
+period = "n/a"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-463"
+category = "UNKNOWN"
+attestation = "AUTHORED"
+claim = "Whether the incremental option -- integrating and standardising the existing toolchain without building a platform -- would deliver a material share of the benefit at a fraction of the cost is unknown. The case contains no costed comparison of the incremental path, which makes the platform options look better than a fair comparison might."
+source = "Gap; recorded as a known asymmetry in the case's own construction"
+period = "n/a"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-464"
+category = "UNKNOWN"
+attestation = "AUTHORED"
+claim = "The benefit horizon is unmodelled. The economics evaluates two annual periods, matching the existing Kriterion cash-flow models, while platform benefits are generally argued to accrue over longer periods. The NPV therefore charges the full build cost against at most two years of benefit, and how much benefit sits outside that window is not established."
+source = "Gap arising from the modelling horizon, recorded rather than corrected"
+period = "n/a"
+strength = "LOW"
+
+[[evidence]]
+id = "ev-465"
+category = "FORECAST"
+attestation = "AUTHORED"
+claim = "SYNTHETIC SCENARIO FORECAST. Northstar's own internal planning assumption is that AI agents will originate a materially larger share of code changes within three years than the 35 per cent team-level experimentation reported in ev-433. It is a forward-looking planning input with no calibration behind it, and ev-443 states the external evidence does not support a direction."
+source = "Northstar scenario definition (fictional), forward-looking"
+period = "scenario, forward-looking"
+strength = "LOW"
+
+# --- Assumptions ----------------------------------------------------------
+# Every one of these is a SYNTHETIC scenario input. The corresponding
+# ASSUMPTION-category evidence items (ev-445 to ev-452) carry the reasoning.
+
+[[assumptions]]
+id = "as-benefit-attribution-factor"
+value = 0.25
+range = [0.05, 0.50]
+evidence_strength = "LOW"
+owner = "cfo"
+# SYNTHETIC. Share of saved developer time that becomes business value. The
+# case's central question in one number. Expected to dominate the tornado.
+
+[[assumptions]]
+id = "as-platform-adoption-rate"
+value = 0.60
+range = [0.30, 0.85]
+evidence_strength = "LOW"
+owner = "cto"
+# SYNTHETIC. Contradicted by ev-438 and ev-419.
+
+[[assumptions]]
+id = "as-friction-hours-saved-per-engineer"
+value = 90.0
+range = [25.0, 180.0]
+evidence_strength = "LOW"
+owner = "cto"
+# SYNTHETIC. Engineer-hours per adopting engineer per year.
+
+[[assumptions]]
+id = "as-fully-loaded-hourly-cost-gbp"
+value = 55.0
+range = [45.0, 70.0]
+evidence_strength = "MEDIUM"
+owner = "cfo"
+# SYNTHETIC. Blended across US, Europe and India.
+
+[[assumptions]]
+id = "as-engineers-reached-year-1"
+value = 700.0
+range = [300.0, 1_100.0]
+evidence_strength = "LOW"
+owner = "cto"
+# SYNTHETIC. Reach, not adoption.
+
+[[assumptions]]
+id = "as-engineers-reached-year-2"
+value = 1_900.0
+range = [900.0, 2_500.0]
+evidence_strength = "LOW"
+owner = "cto"
+# SYNTHETIC. Upper bound is the whole engineering population (ev-421).
+
+[[assumptions]]
+id = "as-platform-team-annual-cost-gbp"
+value = 1_800_000.0
+range = [1_200_000.0, 2_800_000.0]
+evidence_strength = "LOW"
+owner = "cfo"
+# SYNTHETIC. Steady-state run cost, continuing after the capital programme.
+
+[[assumptions]]
+id = "as-migration-cost-per-engineer-gbp"
+value = 450.0
+range = [150.0, 900.0]
+evidence_strength = "LOW"
+owner = "business_executive"
+# SYNTHETIC. Borne by application teams, not by the platform budget.
+
+[[assumptions]]
+id = "as-precommitted-capital-gbp"
+value = 2_100_000.0
+range = [600_000.0, 4_000_000.0]
+evidence_strength = "MEDIUM"
+owner = "cfo"
+# SYNTHETIC. How much of the GBP4m envelope is committed before the first
+# evidence gate. Total capital is unchanged across the range; only timing moves.
