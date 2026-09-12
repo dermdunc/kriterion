@@ -117,6 +117,81 @@ beating a single strong context, which is a real result and is treated as one.
 - Is the assurance document contract stable enough to consume a *real* producer artifact,
   rather than the hand-authored facsimile currently committed?
 
+## A finding worth keeping: the last metre
+
+Kriterion exists to reveal when a decision narrative overstates its evidence. Building it
+produced a clean example of the same failure, inside Kriterion itself.
+
+An adversarial review of the V1 increment found four defects in the public decision page. An
+assurance result whose source document said `fail` was displayed as the word "PARTIAL" —
+fourteen lines above a claim that the adapter guarantees failures cannot be softened in
+translation. A producer's `REVIEW_REQUIRED` was attributed to "three named coverage gaps" that
+its decision document does not contain and its decision model never reads. A hand-authored
+fixture was described as independently measuring resilience, when no assurance run had
+happened. And the cost of buying better evidence was quoted as two different ranges in two
+places on the same page.
+
+The striking part is what was *not* wrong. The economics were computed correctly by pure code
+throughout. The evidence ledger kept its seven epistemic categories distinct. The adapter
+mapped a `fail` to a FAIL. Every artifact was right. The sentences describing the artifacts
+were wrong, and nothing tested the prose against the record, so they shipped.
+
+> **In AI-assisted decisions, the dangerous error may not occur in the calculation. It may
+> occur in the final metre between evidence and language.**
+
+That is the reasoning behind treating narrative integrity as an invariant with deterministic
+checks (ADR-012) rather than as careful writing or a better prompt. It is an engineering and
+research finding about where to put the guardrail, not a marketing line, and it is recorded
+here rather than repeated through the product.
+
+Two honest qualifications. First, the guardrail proves a statement is *derived from* the
+record and cannot be hand-edited without detection; it does not prove the derived sentence is
+a *fair* summary. Judging fairness is still a human job. Second, the same failure class showed
+up again while building the guardrail: an adversarial pass over the new projection code found
+every malformed run artifact escaping as a bare traceback rather than a controlled refusal —
+sixteen of sixteen cases — which is the same defect the review had already found once in the
+assurance adapter. Knowing about a failure mode is not the same as being immune to it, which
+is the argument for mechanical checks over vigilance.
+
+### The defect classes worth keeping, not just the story
+
+Building the guardrail produced five distinct classes of last-metre defect, all found by probing
+and executing rather than by reading. They are recorded here because the classes generalise past
+this codebase, and because four of the five were found in code written by someone actively
+thinking about exactly that failure mode:
+
+1. **Malformed input escaping as a traceback rather than a refusal.** Sixteen malformed run
+   artifacts, sixteen bare tracebacks. A traceback is not a refusal, and it destroys the
+   distinction between *unknown* and *crashed* that the whole epistemic model rests on. Now
+   sixteen parameterised regression tests.
+2. **One fact with two answers.** The headline dominant uncertainty was computed by widest swing;
+   the table below it rendered the artifact's stored order under a caption claiming "widest
+   first". Real data happened to agree, so nothing looked wrong. Fed a deliberately unsorted
+   input, the headline and the table's own first row named different parameters. Fixed by
+   ordering in the projection, so both derive from one rule.
+3. **Text escaping validation through an alternate rendering path.** Four routes past the checker,
+   each found by attacking it rather than reading it: a claim in a `title=` tooltip, a claim in an
+   `aria-label` delivered only to a screen-reader user, words injected by a CSS `content:`
+   declaration that no HTML text node contains, and a lowercase recommendation claim slipping
+   under a case-sensitive vocabulary rule. The general lesson: a checker sees only what it is
+   pointed at, and every rendering path is a publication channel.
+4. **A correct figure attributed to the wrong actor.** With a synthetic deferral and a human pilot
+   both recorded, one figure labelled "capital at risk" was correct about the machine's suggestion
+   and read by a human as the decision's own exposure — in the most consequential field on the
+   page. Surfaced only by exercising the human lifecycle end to end, not by reasoning about it.
+   The label now names the actor, and the human's commitment is stated separately, including the
+   honest admission that the record carries an action but no amount.
+5. **A count written from memory instead of calculated.** A draft of the V1.1 report stated the
+   number of traceable bindings on the page from recollection. Counted two ways it was wrong, and
+   it was corrected before the report was committed. This one is worth keeping precisely because
+   it is the smallest: the reflex that puts an unverified number in a report is the reflex that
+   puts an unverified number in front of a decision-maker. What catches it is mechanical
+   counting, not care.
+
+Classes 2, 3 and 4 are all failures of *description* over correct data, which is the pattern the
+box above names. Classes 1 and 5 are the reminder that the pattern applies to the people and tools
+building the instrument, not only to the instrument's output.
+
 ## Next recommended session
 
 Close the loop on a human: record one real `kriterion decide` on a fresh run (even at fixture

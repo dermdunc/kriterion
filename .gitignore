@@ -56,6 +56,12 @@ runs/*/
 !runs/caseA-condC-s0-evidence_reorder/
 !runs/compare-caseA-final/
 !runs/compare-caseC/
+# V1.1: the run the generated public decision page renders. Seed 5 is
+# deliberately OUTSIDE the pre-registered 0-4 experimental grid and takes no
+# part in any comparison. It exists because the committed V0 demo runs predate
+# the evidence_requests.json artifact, and "what would change your mind"
+# cannot be shown from a run that never stored it.
+!runs/caseA-condC-s5/
 *.bak.*
 .project-setup/
 # Terraform (infra/github-pages-dns): real values and state, never committed.

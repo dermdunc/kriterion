@@ -6,10 +6,18 @@ site.
 
 from __future__ import annotations
 
-from kriterion.domain.committee import BeliefUpdate, CommitteePosition, KeyReason
+from kriterion.domain.committee import BeliefUpdate, CommitteePosition, EvidenceRequest, KeyReason
 from kriterion.domain.decision import Dissent, SyntheticRecommendation
 from kriterion.domain.economics import EconomicsResult, TornadoEntry
-from kriterion.domain.enums import ChangeType, CommitteeSeat, ConfidenceBand, DecisionAction, DriftFlag, PositionPhase
+from kriterion.domain.enums import (
+    ChangeType,
+    CommitteeSeat,
+    ConfidenceBand,
+    DecisionAction,
+    DriftFlag,
+    EvidenceRequestStatus,
+    PositionPhase,
+)
 from kriterion.domain.evidence import Attestation, EvidenceCategory, EvidenceItem, Strength
 from kriterion.protocol.aggregate import BaselineBResult
 
@@ -43,6 +51,18 @@ def load_position(data: dict) -> CommitteePosition:
         key_reasons=[KeyReason(text=r["text"], evidence_refs=r["evidence_refs"]) for r in data.get("key_reasons", [])],
         blocking_unknowns=data.get("blocking_unknowns", []),
         distrusted_assumption=data.get("distrusted_assumption"),
+    )
+
+
+def load_evidence_request(data: dict) -> EvidenceRequest:
+    """`would_change` is required, not defaulted: an EvidenceRequest whose
+    would_change is missing is a record with no content, and rendering a blank
+    as "nothing would change this seat's mind" is the softening failure this
+    artifact exists to prevent."""
+    return EvidenceRequest(
+        id=data["id"], created_at=data["created_at"], member=CommitteeSeat(data["member"]),
+        description=data["description"], would_change=data["would_change"],
+        status=EvidenceRequestStatus(data.get("status", EvidenceRequestStatus.UNAVAILABLE.value)),
     )
 
 

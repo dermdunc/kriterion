@@ -10,6 +10,143 @@ Kriterion V1   Decision Instrument    the decision journey a CIO/CFO actually re
 Kriterion V0   Decision Laboratory    the pre-registered multi-agent experiment, preserved intact (docs/lab.html)
 ```
 
+## Architectural principles
+
+Two principles govern everything Kriterion shows a human. They began as decisions about the
+public page (ADR-011, ADR-012) and are **standing principles** as of ADR-013: they bind every
+projection Kriterion adds from here on, including reports, CLI output, any future API and any
+future demo, not just `docs/index.html`.
+
+### Principle 1: There is one decision state. Everything else is a view.
+
+The authoritative state of a Kriterion decision lives in structured domain state and persisted
+artifacts. HTML pages, executive summaries, reports, charts, CLI output, future APIs and demos are
+**projections** of that state. They must not become independent narrative stores.
+
+```text
+Evidence · Assumptions · Economics · Challenges · EvidenceRequests
+SyntheticRecommendation · HumanDecision · OutcomeContract
+                          |
+                          v
+                    DecisionState
+                          |
+                          v
+                     projections
+             +------------+------------+
+             v            v            v
+          website      report         CLI
+```
+
+and never:
+
+```text
+DecisionState + a separately authored executive narrative + a separately authored website
+```
+
+### Principle 2: Narrative is executable output, not commentary.
+
+A human-facing statement about a decision is part of the decision system, and is therefore subject
+to the same integrity expectations as a calculation. A narrative statement must not strengthen,
+soften or invent evidence; change a decision state; attribute reasoning to the wrong actor; convert
+an assumption into a fact or an unknown into an absence of risk; reinterpret deterministic
+economics; or collapse a synthetic recommendation and a human decision into one thing.
+
+```text
+authoritative state -> narrative projection -> integrity bindings -> validation gate -> publish
+```
+
+If integrity validation fails, the build does not publish. That is intended system behaviour, not
+an exceptional inconvenience.
+
+### The consequence: publication is a controlled transformation of decision state
+
+Not a third branded principle, but the operational rule the first two imply:
+
+- an invalid run artifact must not become a polished page;
+- an untraceable executive claim must not publish;
+- a malformed input must fail through a controlled refusal, never a raw traceback;
+- presentation code does not get a weaker trust boundary than calculation code.
+
+The last one is the point most easily lost. Every defect of substance found in the V1 review lived
+in presentation, not calculation (see [`project-walkthrough.md`](project-walkthrough.md)).
+
+### Where the principles are *enforced*, and where they are only *held*
+
+The distinction matters, because claiming mechanical enforcement that does not exist is itself the
+failure mode ADR-010 had to retract:
+
+| Surface | Principle 1 | Principle 2 |
+|---|---|---|
+| `docs/index.html` (`report/decision_page.py`) | Enforced. Rendered from `DecisionState`; a test asserts the committed page is byte-identical to a fresh render | Enforced. Every material value bound and re-derived; unbound prose scanned; `kriterion decision-page` refuses to write on any violation |
+| `runs/*/report.html` (`report/html.py`) | Held by review. Reads the same artifacts, but through its own loaders, not the projection | Not enforced. No bindings, no checker |
+| `docs/lab.html` | Held by review. Hand-authored research page; content-checked by test, not generated | Not enforced |
+| CLI output | Held by review | Not enforced |
+| Future API / demo | Bound by ADR-013 before it is built | Bound by ADR-013 before it is built |
+
+Extending the checker to the other projections is named work in
+[`next-actions.md`](next-actions.md), not done work.
+
+## How the projection works
+
+The decision journey is a **projection**, not a second artifact maintained beside the state
+(ADR-011). There is one decision state; everything a human reads is a view of it:
+
+```text
+    case pack + frozen evidence ledger + assumptions + deterministic economics
+  + per-seat positions, belief updates and evidence requests
+  + synthetic recommendation + human decision + outcome contract
+  + (optional) imported assurance evidence
+                                 |
+                                 v
+                       DecisionState   (one read-only projection;
+                                        derived values computed once, here)
+                                 |
+                                 v
+            renderer  ->  narrative-integrity check  ->  refuse or publish
+                                 |
+                                 v
+                      the decision experience a human reads
+```
+
+rather than:
+
+```text
+              state   +   a hand-authored website describing it
+```
+
+The check in the middle is the load-bearing part (ADR-012): every material statement is stamped
+with the state path it was rendered from and re-derived from the authoritative record before
+publication, and the build refuses to write a page that fails. The Lab keeps its own renderer, so
+frozen research output is never rewritten by a change to the instrument's presentation.
+
+### The public experience, end to end
+
+Website content lives **entirely inside this repository**. There is no separate site repo, no
+static-site generator and no CI build step:
+
+```text
+cases/<id>/ + runs/<run-id>/            committed decision state
+        |
+        v  bash scripts/build-decision-page.sh <run-id>
+        |    1. assurance import  -> cases/<id>/assurance/imported.json
+        |    2. kriterion report  -> docs/reports/decision-record.html
+        |    3. kriterion decision-page  -> narrative check -> docs/index.html
+        v
+docs/  (index.html, lab.html, reports/, CNAME)
+        |
+        v  merge to `main`
+        |
+GitHub Pages (legacy build, source `main:/docs`)  ->  kriterion.theagentictekton.com
+```
+
+Two consequences worth being explicit about:
+
+- **Publication is a git operation, not a build step.** Pages serves `main:/docs` directly, so the
+  public site shows whatever `docs/index.html` is on `main`. A regenerated page on an unmerged
+  branch has not been published, however correct it is.
+- **`infra/github-pages-dns/` is DNS only** (Route53 CNAME + verification TXT, Terraform, applied
+  by a human). It carries no content and does not need to change when the page does.
+
 The five-seat AI committee is one challenge mechanism inside the instrument, not the product.
 That framing is earned, not asserted: V0's own honest-negative finding (the committee did not
 beat both baselines on at least 2 of 3 categories of the pre-registered bare-aggregate check) is
@@ -39,8 +176,10 @@ protocol, experimental design, eval plan, case fixtures, build plan and kill cri
 | `evals/` | Kriterion's own harness — fixtures × conditions, deterministic scorers plus (secondary) judge scorers |
 | `export/` | `kriterion-run-export/v0.1` — application telemetry. Not an assurance contract |
 | `assurance/` | ADR-007 anti-corruption layer: reads a generic `AssuranceEvidenceEnvelope` document pair (`envelope.json` + optional `decision.json`, 0.x shape) with a tolerant parser and maps it into `EvidenceItem`s, epistemic categories preserved. Never imports assurance code |
-| `report/` | Single-file static HTML decision record. No server, no JS build |
-| `cli.py` | `kriterion new｜ledger｜econ｜run｜decide｜contract｜evals｜compare｜report｜doctor｜assurance` |
+| `decision_state.py` | **Principle 1.** `DecisionState`: one read-only projection of a run. Every field either *is* a domain record loaded from a committed artifact or is a pure function of those records; the derived values a decision-maker needs but nobody stores (capital actually at risk, the dominant sensitivity, the economics interpretation, what happens next) are computed here, once, so a checker can re-derive them. Refuses malformed artifacts by name rather than raising a traceback |
+| `narrative.py` | **Principle 2.** `bind()` stamps a rendered value with the state path and formatter it came from; `check()` re-resolves every path against the authoritative state and refuses any element whose text is not exactly what the state says. Plus rules over unbound prose (no retyped figures, no unbound state vocabulary, no softening words, no recommendation claims) and structural rules over attribution and human/AI separation |
+| `report/` | Two renderers, deliberately not shared. `html.py` is the per-run research record; regenerating a committed V0 `report.html` would rewrite a frozen research artifact, so presentation changes to the instrument must not touch it. `decision_page.py` renders the public decision experience from a `DecisionState`, deterministically (pinned timestamp, no wall clock), which is what lets a test assert the committed page is byte-identical to a fresh render |
+| `cli.py` | `kriterion ledger｜econ｜doctor｜run｜decide｜contract｜validate-run｜evals｜compare｜report｜decision-page｜assurance｜perturbation-diff`. `decision-page` runs the narrative-integrity check as a publish gate and exits non-zero without writing on any violation |
 
 **Stack:** Python ≥3.11, **zero runtime dependencies**. Case packs and charters in TOML via stdlib
 `tomllib`; all machine artifacts in canonical JSON. `pytest` is the only dev dependency.

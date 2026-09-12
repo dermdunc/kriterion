@@ -337,16 +337,28 @@ tasks from its Weekend Build Plan (§12), in dependency order. Do not re-plan pr
       fingerprinted ledger version via `freeze()`, and refuses to overwrite an existing frozen
       ledger. Verified end-to-end: import → ledger v2 → `econ` → `report`, with all 12 assurance
       items rendered. Committed V0 demo ledgers untouched. Done 2026-09-11.
-- [ ] **Render the per-seat evidence requests** — the artifact now exists but nothing displays
+- [x] **Render the per-seat evidence requests** — done 2026-09-12 (V1.1). Each seat's card on
+      the generated decision page shows what it asked for and its own `would_change`, from
+      the stored artifact. `report/html.py` was deliberately NOT changed, so the committed V0
+      run reports stay byte-identical frozen research artifacts; the new view lives in the
+      decision-page renderer instead. Superseded detail below:
+- [x] ~~Render the per-seat evidence requests (original entry)~~ — the artifact now exists but nothing displays
       it. Add an `EvidenceRequest` view to `report/html.py` (deferred once already because a new
       report section changes every committed `report.html`, which are frozen research artifacts
       — do this together with a deliberate regeneration pass), and re-run Case A so the journey
       page can show stored per-seat records instead of derived copy.
-- [ ] **Generate the public journey page from the pipeline** — `docs/index.html` is
-      hand-maintained. The coherence test is a mechanical stand-in, not a substitute: it catches
-      drift from the artifacts, not a missing section or a stale narrative. A small renderer
-      reading `runs/caseA-condC-s0/` + `cases/coding-agent-rollout/assurance/` would retire both
-      the hand-maintenance and the test.
+- [x] **Generate the public journey page from the pipeline** — done 2026-09-12 (V1.1),
+      ADR-011. `kriterion decision-page` renders `docs/index.html` from a `DecisionState`
+      projection, with the ADR-012 narrative-integrity check as a publish gate. A test
+      asserts the committed page is byte-identical to a fresh render. Superseded detail:
+- [x] ~~Generate the public journey page (original entry)~~ — **historical wording, no longer
+      true, kept for the audit trail only:** *"`docs/index.html` is hand-maintained. The coherence
+      test is a mechanical stand-in, not a substitute: it catches drift from the artifacts, not a
+      missing section or a stale narrative. A small renderer reading `runs/caseA-condC-s0/` +
+      `cases/coding-agent-rollout/assurance/` would retire both the hand-maintenance and the
+      test."* The renderer exists (entry above), so both the hand-maintenance and the stand-in
+      test are retired. `tests/product/test_public_page_coherence.py` bans the phrase
+      "hand-maintained" from the page outright, so this wording cannot leak back into the product.
 - [ ] **Import a real producer artifact** — Kriterion has only ever consumed the hand-authored
       JSON facsimile in `cases/coding-agent-rollout/assurance/`. Converting Hekton Assurance's
       real committed `2026-09-07T19-31-41Z` FAIL pair (YAML → JSON, losslessly) and importing it
@@ -365,3 +377,148 @@ tasks from its Weekend Build Plan (§12), in dependency order. Do not re-plan pr
 - [ ] **Decision retrospective (expected vs observed)** — domain model carries `OutcomeContract`
       measures/review date; the retrospective comparison object and view remain future work
       (deliberately out of this increment's scope).
+
+## V1.1: Executable Decision Story (2026-09-12)
+
+**Purpose:** ensure the human-facing decision narrative is a faithful projection of the
+underlying evidence, economics and decision state. See
+`docs/planning/kriterion-v1.1-narrative-integrity/opus-plan-and-report.md`.
+
+- [x] **One decision state, everything else a view** — `src/kriterion/decision_state.py`
+      (ADR-011). No second data model; derived values computed once so no template can invent
+      one. Absence stays absence: three genuinely different evidence-request states, four
+      outcome-contract states, and a refusal rather than an empty render when the ledger
+      declares no items.
+- [x] **Narrative integrity as an invariant** — `src/kriterion/narrative.py` (ADR-012).
+      Binding plus re-derivation, unbound-prose rules, structural attribution rules, and
+      `kriterion decision-page` refusing to publish on any violation. **49** regression tests in
+      `tests/product/test_narrative_integrity.py` (counted by collection, 2026-09-12; this entry
+      previously said 45, which was written from memory and was wrong).
+- [x] **Generated public decision page** — `src/kriterion/report/decision_page.py`,
+      `scripts/build-decision-page.sh`, rendering `runs/caseA-condC-s5`.
+- [x] **Controlled refusal on malformed run artifacts** — found by adversarial probing, not
+      review: 16 of 16 malformed artifacts escaped as bare tracebacks. All now refuse cleanly
+      with the artifact and field named. This is the same defect shape ADR-009 closed in the
+      assurance adapter, reproduced in new code.
+- [x] **Human lifecycle verified end to end** — `tests/product/test_human_decision_lifecycle.py`
+      drives `decide` -> `contract` -> `validate-run` -> `decision-page` over a throwaway copy of
+      the canonical run. Found and fixed a real ambiguity: with a synthetic DEFER and a human
+      PILOT both recorded, one "capital at risk" figure read as the decision's exposure while
+      describing only the machine's suggestion.
+
+### Deferred from V1.1, deliberately
+
+- [ ] **A real human decision on the canonical case.** Still the single most valuable next act,
+      still not fabricatable by an agent (RISK-0011). The path is verified and the page states
+      the absence honestly; what is missing is the human.
+- [ ] **Link evidence requirements to the funding stage they unlock.** Kriterion records what
+      each stage costs and what each seat wants, but nothing records which requirement unlocks
+      which stage. The page says so rather than inferring a mapping. Needs a real case-pack
+      schema for the ladder (still a `case.toml` comment plus constants in `case_flows.py`).
+- [ ] **Promote the structural economic assumptions** (discount rate, full-period headcount
+      treatment, stage amounts) into ranged `Assumption` records. Unchanged from V1: the page
+      now states the ranking's scope explicitly, but modelling them changes `economics.json` and
+      needs a deliberate regeneration pass.
+- [ ] **Value-of-information.** The chain `Assumption -> range -> sensitivity -> evidence quality
+      -> EvidenceRequest` is now fully visible on one page, which is the precondition. Building
+      the engine was explicitly out of scope.
+- [ ] **Judge whether a derived sentence is *fair*.** The checker proves a statement is computed
+      from the record and cannot be hand-edited; it cannot prove the English is a fair summary.
+      Named as a limit of the approach, not a bug to fix later.
+- [ ] **Case B, additional treatments, retrospective analytics, portfolio views, more committee
+      agents, provider expansion, hard cross-repo artifact pinning** — all untouched, as scoped.
+
+## V1.1.1: Anchoring the architecture and aligning the public story (2026-09-12)
+
+**Purpose:** make V1.1's two principles durable architecture rather than page-scoped decisions,
+make the public story truthful, and prepare for Human Run 001 without building more machinery. See
+`docs/planning/kriterion-v1.1-narrative-integrity/opus-v1.1.1-anchoring-report.md`.
+
+- [x] **The two principles anchored as standing** — `docs/architecture.md` gains an
+      "Architectural principles" section naming Principle 1 (one decision state, everything else a
+      view) and Principle 2 (narrative is executable output, not commentary), plus the derived
+      consequence that publication is a controlled transformation of decision state. ADR-013
+      generalises both from the public page to every projection. No ADR was created for the
+      principles themselves: ADR-011 and ADR-012 still own those decisions.
+- [x] **Enforcement scope stated honestly** — a per-surface table in `docs/architecture.md` records
+      that only the generated decision page is mechanically checked. `report/html.py`,
+      `docs/lab.html` and the CLI hold the principles by review, not by test.
+- [x] **Deployment path documented** — verified against the GitHub Pages API: legacy build, source
+      `main:/docs`, no Actions workflow, no second repository. Site content lives entirely in this
+      repo; `infra/github-pages-dns/` is DNS only.
+- [x] **"How Kriterion earns trust" on the public page** — the architecture in product language,
+      generated, plus the Agentic Tekton placement. Tied to its mechanisms by test so an advertised
+      promise cannot outlive the code behind it.
+- [x] **Assurance boundary named in product terms** — the page now says Kriterion did not produce
+      that evidence, names Hekton Assurance as the reference producer of the document contract, and
+      labels these documents as authored fixtures rather than a real assurance run.
+- [x] **Stale counts and wording corrected** — the narrative-integrity test count in this file
+      (45 -> 49, verified by collection), the retired "hand-maintained" entry above marked
+      historical, and five more V1-era phrases banned from the page by test.
+- [x] **The editorial standard made mechanical** — the 2026-09-08 em-dash pass was done by hand and
+      V1.1's renderer silently reintroduced two em-dashes into Kriterion's own copy. Now a test,
+      scoped to unbound text so verbatim producer fixture text stays exempt.
+
+### Blocking, and only a human can do it
+
+- [ ] **Publish V1.1 by merging this branch.** GitHub Pages serves `main:/docs` directly, so
+      `kriterion.theagentictekton.com` still shows the pre-V1.1 hand-maintained page while this
+      branch is unmerged. Every V1-era claim the mission asked to remove is still live *on the
+      site* and absent *from this branch*: "hand-maintained narrative", the coherence test as a
+      drift stand-in, "until 2026-09-11 the run never wrote them to disk", and per-seat requests
+      "derived from what the run did persist". Regenerating the page did not publish it, and no
+      agent should push, merge or deploy this. **This is the single highest-value open action.**
+- [ ] **Human Run 001.** Unchanged and still the next real experiment: does Kriterion improve the
+      quality of an accountable human technology investment decision? Nothing in the code now
+      blocks it (see the readiness assessment in the V1.1.1 report). What it needs is the
+      accountable owner, one recorded `kriterion decide` with a rationale in their own words, and
+      their answer to "which section changed your mind", captured before they read the page a
+      second time.
+
+### Interactive Decision Demo — BACKLOG (sequenced after Human Run 001)
+
+Investigated in V1.1.1 and deliberately not built. The boundary it must respect is **ADR-013**.
+
+**User goal.** Let a visitor understand Kriterion in roughly 3 to 5 minutes by exploring one
+synthetic decision, instead of reading a long canonical report.
+
+**Candidate interactions.** Reveal or hide evidence; inspect provenance; vary an assumption within
+its declared range; see deterministic economic sensitivity; satisfy an `EvidenceRequest`; observe
+the resulting decision-state change; compare the synthetic recommendation before and after;
+optionally record a sandbox human decision.
+
+**Must demonstrate.** One decision state; narrative as executable output; known versus assumed
+versus unknown; buying evidence before buying scale; recommendation is not a human decision.
+
+**Must not become.** Agent-chat theatre; portfolio-management software; a generic financial
+modeller; a live LLM playground; an alternate domain model.
+
+**Architectural requirement (ADR-013).** Interactive state is explicitly counterfactual sandbox
+state and can never alter canonical run artifacts. Concretely: start from a copied fixture, never a
+mutable handle on committed artifacts; label scenario-derived figures as scenario figures wherever
+they appear; recompute economics through the existing deterministic engine rather than a second
+implementation of the arithmetic (a JavaScript NPV would be exactly the second source of truth
+Principle 1 forbids, so the honest options are a precomputed scenario grid or a server-side call);
+keep the narrative-integrity discipline, because a scenario sentence can overstate as easily as a
+canonical one; and never write a sandbox human decision anywhere the canonical case can read it.
+
+**Why backlog and not next.** A demo would genuinely help comprehension: the generated page is
+twelve sections and a visitor must read a lot before the mechanism lands. But it is addition on top
+of surface area whose value is still unmeasured. V1.1's own closing argument is that nobody knows
+which of the twelve sections a real CFO actually uses, and that the right next increment might be
+subtraction; interactive scaffolding around sections a real reader ignores would make that
+discovery more expensive. It is also not trivial after inspection: the page is deliberately
+zero-JavaScript and zero-dependency, and the constraint above means a real scenario engine. And it
+is agent-buildable, which is precisely why it must not displace the one act no agent can perform.
+
+### Also named, not done
+
+- [ ] **Extend the narrative-integrity checker beyond the decision page.** `report/html.py`, the
+      Lab page and CLI output hold Principle 2 by review only. Extending the checker to the per-run
+      report would mean regenerating committed V0 `report.html` files, which are frozen research
+      artifacts, so it needs a deliberate regeneration pass rather than a quiet change.
+- [ ] **Aggregate the per-seat evidence requests into one "what would move this decision" view.**
+      The per-seat answers are rendered and the decision-level view exists, but nothing aggregates
+      the requests themselves across seats. Deliberately not added here: an aggregation that
+      implied a stage relationship the authoritative state does not record would be the exact
+      inference ADR-013 forbids, and stage linkage is still backlog work above.

@@ -1,0 +1,74 @@
+[
+  {
+    "author_role": "cfo",
+    "content": "The staged rollout proposal presents a measured approach to scaling the enterprise coding agent, aligning with the pilot's promising cycle-time reduction and engineer satisfaction metrics as evidenced by [ev-001], [ev-002], and [ev-007]. The incremental funding of GBP4.2 million over 24 months allows for iterative learning and adjustment based on real-world data, addressing current uncertainties such as the security review's open prompt-injection concern ([ev-008]) and adoption rates ([ev-017]). This staged approach minimizes financial risk while maximizing the potential to capture productivity gains across a broader engineering base.",
+    "created_at": "2026-09-11T20:33:43Z",
+    "evidence_refs": [
+      "ev-001",
+      "ev-002",
+      "ev-007",
+      "ev-008",
+      "ev-017"
+    ],
+    "id": "ch:case_for-cfo",
+    "schema_version": "kriterion/v0.1",
+    "type": "case_for"
+  },
+  {
+    "author_role": "business_executive",
+    "content": "The proposed staged rollout to 5,000 engineers presents significant uncertainties and risks that outweigh its potential benefits. Evidence [ev-017] suggests a lower-than-industry-average adoption rate due to weaker onboarding support, which could result in suboptimal usage and reduced productivity gains. Additionally, the security review highlighted unresolved concerns, particularly regarding systems handling regulated customer data ([ev-015]), necessitating further comprehensive assessments before scaling up. Given these uncertainties and the high variability in projected financial outcomes (NPV range), it is prudent to defer funding until more robust evidence and risk mitigation strategies are established.",
+    "created_at": "2026-09-11T20:33:43Z",
+    "evidence_refs": [
+      "ev-017",
+      "ev-015"
+    ],
+    "id": "ch:case_against-business_executive",
+    "schema_version": "kriterion/v0.1",
+    "type": "case_against"
+  },
+  {
+    "author_role": "cfo",
+    "content": "Given the CFO's objective of protecting capital efficiency and financial credibility, the staged funding ladder appears proportionate but carries significant uncertainty that needs addressing before proceeding. The NPV range is wide, indicating high variability in projected outcomes, which suggests a need for further validation of key assumptions such as productivity uplift and adoption rates. A single year premortem review reveals that the most plausible reason this decision could be seen as a mistake is due to an underestimation of the complexity involved in scaling from pilot to enterprise level, particularly around security concerns and regulatory compliance, leading to lower-than-expected adoption rates and higher than anticipated costs.",
+    "created_at": "2026-09-11T20:33:43Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-cfo",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "cto",
+    "content": "The staged rollout of the enterprise coding agent to 5,000 engineers was initially seen as promising due to pilot results showing reduced cycle times and improved engineer satisfaction. However, one year later, it turned out to be a mistake because the adoption rate at scale fell below expectations, leading to weaker-than-projected benefits in terms of productivity gains and attrition reduction. Additionally, the complexity and costs associated with onboarding and sustaining support for 5,000 engineers were underestimated, consuming significant engineering capacity that could have been allocated to other critical technical priorities.",
+    "created_at": "2026-09-11T20:33:43Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-cto",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "ciso",
+    "content": "The single most plausible reason why funding the staged rollout of an enterprise coding agent to 5,000 engineers could turn out to be a mistake from my perspective as CISO is that the unresolved prompt-injection security concern, which was identified during the pilot but not fully mitigated or tested in a production environment, could lead to actual exploitation at scale. Additionally, the lack of a comprehensive security review for systems handling regulated customer data means we are vulnerable to regulatory non-compliance and potential breaches affecting sensitive information.",
+    "created_at": "2026-09-11T20:33:43Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-ciso",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "cro_compliance",
+    "content": "The most plausible reason for the staged rollout of the enterprise coding agent being a mistake is that the initial security review did not adequately cover systems handling regulated customer data, leading to unforeseen compliance issues and operational disruptions when these systems were eventually integrated with the agent during later stages of the rollout. This oversight highlights a critical gap in governance and risk management processes, which failed to ensure comprehensive evaluation before committing to further investment phases.",
+    "created_at": "2026-09-11T20:33:43Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-cro_compliance",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "business_executive",
+    "content": "The staged rollout of the enterprise coding agent to 5,000 engineers was initially seen as a strategic move to reduce engineering cycle time and improve engineer retention by reducing low-value toil. However, one year later, it turned out to be a mistake because the full-scale deployment did not achieve the expected adoption rates or productivity gains due to the complexity of integrating with legacy systems and the lack of comprehensive security assessments for regulated data environments, leading to underutilization and higher-than-expected change-management costs.",
+    "created_at": "2026-09-11T20:33:43Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-business_executive",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  }
+]

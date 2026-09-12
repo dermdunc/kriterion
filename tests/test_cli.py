@@ -99,3 +99,56 @@ def test_evidence_requests_are_persisted_as_a_run_artifact(tmp_path):
 
     _write_evidence_requests(tmp_path, [])
     assert _json.loads((tmp_path / "evidence_requests.json").read_text()) == []
+
+
+def test_decision_page_refuses_to_write_a_page_that_fails_the_integrity_check(tmp_path):
+    """`kriterion decision-page --check-only` must exit non-zero, and must not
+    overwrite the file, when the page on disk no longer re-derives from the
+    run. A build step that publishes anyway is not an invariant."""
+    repo_root = Path(__file__).parent.parent
+    page = tmp_path / "index.html"
+    page.write_text((repo_root / "docs" / "index.html").read_text().replace("£5.09m", "£9.05m", 1))
+    before = page.read_text()
+
+    result = subprocess.run(
+        [
+            sys.executable, "-m", "kriterion.cli", "decision-page", "caseA-condC-s5",
+            str(CASE_A_DIR), "--assurance-import",
+            str(CASE_A_DIR / "assurance" / "imported.json"),
+            "--out", str(page), "--check-only",
+        ],
+        capture_output=True, text=True, cwd=repo_root,
+    )
+    assert result.returncode == 1
+    assert "narrative-integrity violation" in result.stderr
+    assert "binding.match" in result.stderr
+    assert page.read_text() == before, "a refused check must not rewrite the page"
+
+
+def test_decision_page_check_only_passes_against_the_committed_page():
+    repo_root = Path(__file__).parent.parent
+    result = subprocess.run(
+        [
+            sys.executable, "-m", "kriterion.cli", "decision-page", "caseA-condC-s5",
+            str(CASE_A_DIR), "--assurance-import",
+            str(CASE_A_DIR / "assurance" / "imported.json"),
+            "--out", "docs/index.html", "--check-only",
+        ],
+        capture_output=True, text=True, cwd=repo_root,
+    )
+    assert result.returncode == 0, result.stderr
+    assert "is faithful to" in result.stdout
+
+
+def test_decision_page_refuses_a_run_it_cannot_load(tmp_path):
+    repo_root = Path(__file__).parent.parent
+    result = subprocess.run(
+        [
+            sys.executable, "-m", "kriterion.cli", "decision-page", "no-such-run",
+            str(CASE_A_DIR), "--out", str(tmp_path / "out.html"),
+        ],
+        capture_output=True, text=True, cwd=repo_root,
+    )
+    assert result.returncode == 1
+    assert "run directory not found" in result.stderr
+    assert not (tmp_path / "out.html").exists()
