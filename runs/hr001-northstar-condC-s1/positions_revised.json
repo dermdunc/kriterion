@@ -6,7 +6,7 @@
       "the opportunity cost of GBP3m-GBP5m and roughly 20 engineers"
     ],
     "confidence_band": "MEDIUM",
-    "created_at": "2026-09-12T19:49:46Z",
+    "created_at": "2026-09-12T20:19:46Z",
     "distrusted_assumption": null,
     "id": "hr001-northstar-condC-s1-cfo-revised",
     "key_reasons": [
@@ -43,7 +43,7 @@
       "the opportunity cost of GBP3m-GBP5m and roughly 20 engineers"
     ],
     "confidence_band": "MEDIUM",
-    "created_at": "2026-09-12T19:49:46Z",
+    "created_at": "2026-09-12T20:19:46Z",
     "distrusted_assumption": null,
     "id": "hr001-northstar-condC-s1-cto-revised",
     "key_reasons": [
@@ -80,7 +80,7 @@
       "whether golden paths measurably reduce security and operational policy exceptions"
     ],
     "confidence_band": "LOW",
-    "created_at": "2026-09-12T19:49:46Z",
+    "created_at": "2026-09-12T20:19:46Z",
     "distrusted_assumption": null,
     "id": "hr001-northstar-condC-s1-ciso-revised",
     "key_reasons": [
@@ -116,7 +116,7 @@
       "the true productivity attribution of platform investment"
     ],
     "confidence_band": "LOW",
-    "created_at": "2026-09-12T19:49:46Z",
+    "created_at": "2026-09-12T20:19:46Z",
     "distrusted_assumption": null,
     "id": "hr001-northstar-condC-s1-cro_compliance-revised",
     "key_reasons": [
@@ -153,7 +153,7 @@
       "the incremental option's benefit relative to building a full platform"
     ],
     "confidence_band": "MEDIUM",
-    "created_at": "2026-09-12T19:49:46Z",
+    "created_at": "2026-09-12T20:19:46Z",
     "distrusted_assumption": null,
     "id": "hr001-northstar-condC-s1-business_executive-revised",
     "key_reasons": [

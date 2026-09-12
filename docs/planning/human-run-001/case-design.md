@@ -56,10 +56,15 @@ A fictional case resolves the conflict in one direction and pays for it in anoth
 
 What it buys:
 
-**Full reproducibility.** A reader can read the case pack, re-run the deterministic stages
-(`econ`, `ledger freeze`, `decision-page`) and get byte-identical output, and check every claim the
-page makes against the ledger item it cites. No prior Kriterion run has been inspectable end to end
-by someone outside the project.
+**Full inspectability.** A reader can read the case pack, re-run the deterministic stages
+(`econ`, `ledger freeze`, `decision-page`) and reproduce every value exactly, and check every claim
+the page makes against the ledger item it cites. No prior Kriterion run has been inspectable end to
+end by someone outside the project.
+
+The reproduction is of values, not bytes — those commands stamp a fresh `created_at` on each write,
+so the artifacts hash differently even when nothing has changed. That is recorded below as a
+product finding rather than smoothed over, because it means the ledger's own fingerprint cannot
+answer whether its evidence has been altered.
 
 **A reduced circularity problem.** The participant has no privileged knowledge of Northstar's
 answer, no organisational stake in the outcome, and no remembered facts to substitute for the
@@ -183,10 +188,32 @@ Two items are deliberately weak and labelled so in their own `source` field:
   because the CFO seat needs something to push against, following the same pattern as Case C's
   `ev-105`.
 
-**Provenance ceiling.** The pack carries no URLs. Items cite work by title, author and publisher; a
-reader can find them, but the pack does not resolve them. No claim should be read as stronger than
-the source it names, and several sit at `MEDIUM` rather than `HIGH` on exactly that basis. Survey
-evidence with self-selected respondents and no control group (`ev-410`) is `LOW`.
+### Provenance: what verification actually changed
+
+Every `REAL` item was independently verified against its published source during preparation —
+existence, exact title, authors, publisher, year, and the specific figure quoted. This is recorded
+because the check **changed the pack**, which is a more useful fact than a claim of diligence:
+
+| Item | What verification caught |
+|---|---|
+| `ev-416` | **Misattribution.** "Paved road" is Netflix terminology; the Google/O'Reilly security text does not use the phrase. The item now cites Netflix for the paved road and Google for secure-by-default, separately. |
+| `ev-402` | **One-sided.** DORA 2024 reports decreased team-level throughput and stability *and* increased individual productivity, satisfaction and code quality. Quoting only the half that suited this case's tension would have misrepresented the source. Both halves are now stated, with the figures. |
+| `ev-419` | **One-sided.** The Thoughtworks Radar puts three platform anti-patterns on Hold but has had "Platform engineering product teams" on Adopt since 2021. Citing only the Holds read as a verdict against internal platforms, which is not the source's position. |
+| `ev-415` | **Overclaim.** That acceptance capacity is the dominant InnerSource bottleneck is codified pattern experience, not a measured finding. Labelled as such and downgraded to `LOW`. |
+| `ev-417` | **Overclaim.** The policy-as-code mechanism is documented; the effect on drift and exception rates is an open evidence gap. The item now says so. |
+| `ev-409`–`ev-414` | Exact figures, sample sizes, confidence intervals and status corrections added — including that Backstage is CNCF *Incubating*, not graduated. |
+
+Three of those six were the case's own bias showing: `ev-402`, `ev-419` and `ev-415` had each been
+written in the direction that made the case's tension sharper. That is exactly the failure an
+evidence-first instrument is supposed to catch in its users, and it was caught here only because
+the sources were checked rather than recalled.
+
+**Residual ceilings, not softened.** The pack carries no URLs, so a reader must resolve sources by
+name. And `ev-412`'s magnitude is explicitly provisional: METR has reported that a replication on
+newer tools did not reproduce a reliable signal, so the durable claim there is the perception gap,
+not the 19 per cent. No claim should be read as stronger than the source it names. Vendor-sponsored
+survey evidence (`ev-410`), analyst forecast (`ev-409`), vendor marketing (`ev-420`) and pattern
+literature (`ev-415`) are all `LOW`.
 
 ### Load-bearing assumptions
 
@@ -436,6 +463,12 @@ recurs during the run, it is recorded as a recurrence rather than as a new disco
   can pass with zero violations and still rest on a badly classified ledger.
 - **CaseRealism vocabulary limitation** — one enum value, never loaded from the pack, never
   rendered. Described above.
+- **The evidence-ledger fingerprint is not a content fingerprint** — new, found during this
+  preparation. `econ`, `ledger freeze` and `decision-page` reproduce every value exactly but stamp
+  a fresh `created_at` on each write, and the fingerprint is computed over the items including
+  those timestamps. It therefore changes on every freeze even when no evidence has changed, so it
+  cannot answer the question a frozen ledger's fingerprint exists to answer. `freeze-manifest.md`
+  records the measurement and says to compare values rather than bytes.
 
 ---
 

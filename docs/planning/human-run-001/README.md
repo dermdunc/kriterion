@@ -89,11 +89,18 @@ than take on trust. Everything required to reproduce the analysis is committed:
 * the generated decision page;
 * the freeze manifest, with content hashes and the exact commands.
 
-**What a reader can reproduce exactly:** `kriterion econ`, `kriterion ledger freeze` and
-`kriterion decision-page` are deterministic. Re-running them against the committed case pack
-reproduces `economics.json`, `ledger.frozen.json` and the page byte-for-byte.
+**What a reader can reproduce:** `kriterion econ`, `kriterion ledger freeze` and
+`kriterion decision-page` reproduce every *value* exactly — the NPV triple, peak funding, payback,
+all nine tornado entries in order, all 65 ledger items, and the whole page once timestamps are
+masked. This was tested by running each twice and diffing, not assumed.
 
-**What a reader cannot reproduce exactly:** `kriterion run` calls a local language model. Re-running
+They do **not** reproduce byte-for-byte: each stamps a fresh `created_at` at write time. A
+consequence worth knowing before you rely on it — the evidence-ledger fingerprint is computed over
+the items *including* those timestamps, so **it changes on every freeze even when no evidence has
+changed.** It is a freeze identifier, not a content fingerprint. To verify this case, compare
+values, not hashes. `freeze-manifest.md` says which artifacts are stable and which are not.
+
+**What a reader cannot reproduce at all:** `kriterion run` calls a local language model. Re-running
 it will produce different positions, challenges and possibly a different recommendation. The hashes
 in the freeze manifest are a freeze, not a reproducibility claim about the model.
 

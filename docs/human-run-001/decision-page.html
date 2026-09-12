@@ -228,8 +228,8 @@
           <span data-kriterion-source="evidence_by_id[ev-416].strength" data-kriterion-format="text" class="badge strength">HIGH</span>
           <span data-kriterion-source="evidence_by_id[ev-416].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
         </p>
-        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-416].claim" data-kriterion-format="text">The &#x27;paved road&#x27; pattern -- secure, supported defaults that are the easiest path for a developer to take -- is documented as the practical mechanism by which large engineering organisations achieve consistent security and reliability properties without per-change approval.</span></p>
-        <p class="source"><span data-kriterion-source="evidence_by_id[ev-416].source" data-kriterion-format="text">Adkins, Beyer, Blankinship, Lewandowski, Oprea &amp; Stubblefield, &#x27;Building Secure and Reliable Systems&#x27; (Google / O&#x27;Reilly, 2020)</span> · <span data-kriterion-source="evidence_by_id[ev-416].period" data-kriterion-format="text">2020</span></p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-416].claim" data-kriterion-format="text">Two separate sources, correctly attributed. The &#x27;paved road&#x27; term -- a supported, secure default path that is the easiest one for a developer to take -- is NETFLIX engineering terminology from their application-security practice. Separately, Google&#x27;s security and reliability text argues for &#x27;security and reliability by default&#x27;, i.e. building the safe behaviour into the platform and frameworks so that individual teams do not re-derive it. Together they describe the mechanism by which large engineering organisations obtain consistent properties without per-change approval.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-416].source" data-kriterion-format="text">Netflix engineering publications for &#x27;paved road&#x27;; Adkins, Beyer, Blankinship, Lewandowski, Oprea &amp; Stubblefield, &#x27;Building Secure and Reliable Systems&#x27; (Google / O&#x27;Reilly, 2020) for secure-by-default. NOTE: the Google text does not use the phrase &#x27;paved road&#x27;; conflating the two is a common misattribution and is avoided here deliberately</span> · <span data-kriterion-source="evidence_by_id[ev-416].period" data-kriterion-format="text">2020</span></p>
         
       </li>
     
@@ -312,8 +312,8 @@
           <span data-kriterion-source="evidence_by_id[ev-402].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
           <span data-kriterion-source="evidence_by_id[ev-402].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
         </p>
-        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-402].claim" data-kriterion-format="text">DORA&#x27;s 2024 State of DevOps research reports that increased AI adoption was associated with a decrease in delivery throughput and in delivery stability, i.e. the productivity gain individual developers perceive did not appear in team-level delivery outcomes.</span></p>
-        <p class="source"><span data-kriterion-source="evidence_by_id[ev-402].source" data-kriterion-format="text">DORA / Google Cloud, Accelerate State of DevOps Report 2024</span> · <span data-kriterion-source="evidence_by_id[ev-402].period" data-kriterion-format="text">2024</span></p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-402].claim" data-kriterion-format="text">DORA&#x27;s 2024 research reports that per 25-point increase in AI adoption, delivery throughput fell an estimated 1.5% and delivery stability an estimated 7.2% -- WHILE the same report found AI adoption associated with INCREASED individual productivity, job satisfaction and code quality. Both halves are the finding: the gain individuals perceive is real and did not appear in team-level delivery outcomes. DORA frames this as correlational, not causal, and attributes it to larger batch sizes without matching delivery discipline.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-402].source" data-kriterion-format="text">DORA / Google Cloud, Accelerate State of DevOps Report 2024. Correlational survey research, not a controlled trial. Quoting only the negative half misrepresents the report, so both halves are stated here</span> · <span data-kriterion-source="evidence_by_id[ev-402].period" data-kriterion-format="text">2024</span></p>
         <p class="contradicts">Recorded as contradicting <span data-kriterion-source="evidence_by_id[ev-402].contradicts" data-kriterion-format="list_semi">ev-413</span></p>
       </li>
     
@@ -348,8 +348,8 @@
           <span data-kriterion-source="evidence_by_id[ev-411].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
           <span data-kriterion-source="evidence_by_id[ev-411].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
         </p>
-        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-411].claim" data-kriterion-format="text">A controlled experiment on AI coding assistance found treated developers completed a specific, self-contained programming task substantially faster than the control group. The measured task was narrow and greenfield; the study does not measure delivery of changes into an existing production codebase.</span></p>
-        <p class="source"><span data-kriterion-source="evidence_by_id[ev-411].source" data-kriterion-format="text">Peng, Kalliamvakou, Cihon &amp; Demirer, &#x27;The Impact of AI on Developer Productivity: Evidence from GitHub Copilot&#x27; (2023)</span> · <span data-kriterion-source="evidence_by_id[ev-411].period" data-kriterion-format="text">2023</span></p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-411].claim" data-kriterion-format="text">A controlled experiment found treated developers completed a task 55.8 per cent faster than controls. The scope matters more than the headline: ONE narrow greenfield task (implementing an HTTP server in JavaScript), 70 recruited freelance developers, and a 95 per cent confidence interval of 21 to 89 per cent. It is not a general productivity measurement and does not measure delivery into an existing production codebase.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-411].source" data-kriterion-format="text">Peng, Kalliamvakou, Cihon &amp; Demirer, &#x27;The Impact of AI on Developer Productivity: Evidence from GitHub Copilot&#x27;, arXiv:2302.06590 (2023)</span> · <span data-kriterion-source="evidence_by_id[ev-411].period" data-kriterion-format="text">2023</span></p>
         <p class="contradicts">Recorded as contradicting <span data-kriterion-source="evidence_by_id[ev-411].contradicts" data-kriterion-format="list_semi">ev-412</span></p>
       </li>
     
@@ -360,8 +360,8 @@
           <span data-kriterion-source="evidence_by_id[ev-412].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
           <span data-kriterion-source="evidence_by_id[ev-412].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
         </p>
-        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-412].claim" data-kriterion-format="text">A randomised controlled trial with experienced open-source developers working on their own mature repositories found that AI tooling made them SLOWER on real tasks, while the same developers believed it had made them faster. The perception gap is the finding that matters here: self-reported developer time saved is not a reliable measurement of time actually saved.</span></p>
-        <p class="source"><span data-kriterion-source="evidence_by_id[ev-412].source" data-kriterion-format="text">METR, randomised controlled trial on the effect of AI tools on experienced open-source developer productivity (2025)</span> · <span data-kriterion-source="evidence_by_id[ev-412].period" data-kriterion-format="text">2025</span></p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-412].claim" data-kriterion-format="text">A randomised controlled trial -- 16 experienced open-source developers, 246 real tasks on their own mature repositories -- found AI tooling made them 19 per cent SLOWER, while the same developers believed both beforehand and afterwards that it had sped them up by roughly 20 per cent. The perception gap is the finding that matters here: self-reported developer time saved is not a reliable measurement of time actually saved. Treat the 19 per cent itself as provisional -- METR has since reported that a replication attempt on newer tools did not reproduce a reliable signal.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-412].source" data-kriterion-format="text">METR, arXiv:2507.09089 (July 2025), and METR&#x27;s own subsequent replication note. Small n; the durable claim is the perception gap, not the magnitude</span> · <span data-kriterion-source="evidence_by_id[ev-412].period" data-kriterion-format="text">2025</span></p>
         <p class="contradicts">Recorded as contradicting <span data-kriterion-source="evidence_by_id[ev-412].contradicts" data-kriterion-format="list_semi">ev-411</span></p>
       </li>
     
@@ -372,8 +372,8 @@
           <span data-kriterion-source="evidence_by_id[ev-413].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
           <span data-kriterion-source="evidence_by_id[ev-413].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
         </p>
-        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-413].claim" data-kriterion-format="text">An enterprise randomised controlled trial on AI-assisted development reported a measurable reduction in time to complete assigned development tasks in an industrial setting.</span></p>
-        <p class="source"><span data-kriterion-source="evidence_by_id[ev-413].source" data-kriterion-format="text">Paradis et al., enterprise randomised controlled trial on AI impact on development speed (Google)</span> · <span data-kriterion-source="evidence_by_id[ev-413].period" data-kriterion-format="text">2024-2025</span></p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-413].claim" data-kriterion-format="text">An enterprise randomised controlled trial with 96 Google engineers found roughly 21 per cent faster completion of an assigned development task with AI features enabled. The authors explicitly flag a wide confidence interval and state the result will not necessarily generalise beyond that internal tooling and that point in time.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-413].source" data-kriterion-format="text">Paradis et al., &#x27;How much does AI impact development speed? An enterprise-based randomized controlled trial&#x27;, arXiv:2410.12944 (October 2024)</span> · <span data-kriterion-source="evidence_by_id[ev-413].period" data-kriterion-format="text">2024</span></p>
         <p class="contradicts">Recorded as contradicting <span data-kriterion-source="evidence_by_id[ev-413].contradicts" data-kriterion-format="list_semi">ev-402</span></p>
       </li>
     
@@ -384,20 +384,8 @@
           <span data-kriterion-source="evidence_by_id[ev-414].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
           <span data-kriterion-source="evidence_by_id[ev-414].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
         </p>
-        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-414].claim" data-kriterion-format="text">Backstage, the developer-portal framework open-sourced by Spotify and donated to the CNCF, is widely adopted as a starting point for internal developer portals. Public practitioner accounts consistently report that the portal itself is the small part of the work and that the plugin, catalogue and ownership-data integration is the large part.</span></p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-414].claim" data-kriterion-format="text">Backstage, the developer-portal framework open-sourced by Spotify in March 2020 and a CNCF INCUBATING project since March 2022 (not graduated), is widely adopted as a starting point for internal developer portals. Published practitioner accounts consistently report that the portal itself is the small part of the work and that the plugin, catalogue and ownership-data integration is the large part. Widely circulated adoption counts are vendor-marketing figures, not independently audited.</span></p>
         <p class="source"><span data-kriterion-source="evidence_by_id[ev-414].source" data-kriterion-format="text">Spotify / CNCF Backstage project, and published practitioner accounts of Backstage adoption</span> · <span data-kriterion-source="evidence_by_id[ev-414].period" data-kriterion-format="text">2020 onward</span></p>
-        
-      </li>
-    
-      <li class="evidence-item" data-evidence-id="ev-415">
-        <p class="evidence-head">
-          <code data-kriterion-source="evidence_by_id[ev-415].id" data-kriterion-format="text">ev-415</code>
-          <span data-kriterion-source="evidence_by_id[ev-415].category" data-kriterion-format="text" class="badge category">EXTERNAL_REFERENCE</span>
-          <span data-kriterion-source="evidence_by_id[ev-415].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
-          <span data-kriterion-source="evidence_by_id[ev-415].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
-        </p>
-        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-415].claim" data-kriterion-format="text">InnerSource practice identifies the Trusted Committer role as the mechanism that makes cross-team contribution work, and identifies review and acceptance capacity -- not contributor willingness -- as the usual bottleneck. A platform that invites contribution without funding acceptance capacity converts a support queue into a pull-request queue.</span></p>
-        <p class="source"><span data-kriterion-source="evidence_by_id[ev-415].source" data-kriterion-format="text">InnerSource Commons, InnerSource Patterns (&#x27;Trusted Committer&#x27; and related patterns)</span> · <span data-kriterion-source="evidence_by_id[ev-415].period" data-kriterion-format="text">ongoing</span></p>
         
       </li>
     
@@ -408,8 +396,8 @@
           <span data-kriterion-source="evidence_by_id[ev-417].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
           <span data-kriterion-source="evidence_by_id[ev-417].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
         </p>
-        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-417].claim" data-kriterion-format="text">Policy-as-code engines (e.g. Open Policy Agent, a CNCF graduated project) provide a documented mechanism for expressing and enforcing controls uniformly across heterogeneous infrastructure, and secure-development frameworks such as NIST SP 800-218 (SSDF) call for controls to be applied consistently and automatically rather than per-project.</span></p>
-        <p class="source"><span data-kriterion-source="evidence_by_id[ev-417].source" data-kriterion-format="text">CNCF Open Policy Agent project; NIST Special Publication 800-218, Secure Software Development Framework</span> · <span data-kriterion-source="evidence_by_id[ev-417].period" data-kriterion-format="text">2021-2022</span></p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-417].claim" data-kriterion-format="text">Policy-as-code engines (Open Policy Agent graduated in the CNCF in January 2021) provide a documented MECHANISM for expressing and enforcing controls uniformly across heterogeneous infrastructure, and NIST SP 800-218 (SSDF v1.1, February 2022) calls for automation to improve the accuracy and reproducibility of secure-development practices. What is NOT established is the EFFECT: published evidence that policy-as-code measurably reduces configuration drift or policy-exception rates is thin and largely vendor-authored, and the academic literature names this as an open evidence gap. The mechanism is real; the magnitude is not evidenced.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-417].source" data-kriterion-format="text">CNCF Open Policy Agent project; NIST Special Publication 800-218 v1.1, Secure Software Development Framework. The effect-size caveat is stated because no source establishes it</span> · <span data-kriterion-source="evidence_by_id[ev-417].period" data-kriterion-format="text">2021-2022</span></p>
         
       </li>
     
@@ -432,8 +420,8 @@
           <span data-kriterion-source="evidence_by_id[ev-419].strength" data-kriterion-format="text" class="badge strength">MEDIUM</span>
           <span data-kriterion-source="evidence_by_id[ev-419].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
         </p>
-        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-419].claim" data-kriterion-format="text">Published technology-radar and practitioner commentary repeatedly cautions against internal developer platforms built without a product mindset, against platform teams operating as ticket-takers, and against &#x27;overambitious&#x27; platforms that attempt to abstract every workflow. The named failure mode is a platform that adds an abstraction layer without removing the underlying complexity.</span></p>
-        <p class="source"><span data-kriterion-source="evidence_by_id[ev-419].source" data-kriterion-format="text">Thoughtworks Technology Radar entries on platform engineering and internal developer platforms; corroborating practitioner literature</span> · <span data-kriterion-source="evidence_by_id[ev-419].period" data-kriterion-format="text">2020-2024</span></p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-419].claim" data-kriterion-format="text">The Thoughtworks Technology Radar places three distinct platform ANTI-PATTERNS on Hold: &#x27;Ticket-driven platform operating models&#x27; and &#x27;Layered platform teams&#x27; (Vol. 24, April 2021), and &#x27;Miscellaneous platform teams&#x27; (Vol. 26, March 2022). The shared failure mode is a platform that adds an abstraction or a queue without removing underlying complexity. Crucially, this is NOT a verdict against internal platforms: the same Radar has placed &#x27;Platform engineering product teams&#x27; on Adopt since 2021. The caution is about the operating model, not the investment.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-419].source" data-kriterion-format="text">Thoughtworks Technology Radar, Vols. 24 and 26. The Adopt blip is cited alongside the Hold blips deliberately, because quoting only the Holds would misrepresent the source&#x27;s position</span> · <span data-kriterion-source="evidence_by_id[ev-419].period" data-kriterion-format="text">2021-2022</span></p>
         <p class="contradicts">Recorded as contradicting <span data-kriterion-source="evidence_by_id[ev-419].contradicts" data-kriterion-format="list_semi">ev-445</span></p>
       </li>
     
@@ -588,8 +576,8 @@
           <span data-kriterion-source="evidence_by_id[ev-409].strength" data-kriterion-format="text" class="badge strength">LOW</span>
           <span data-kriterion-source="evidence_by_id[ev-409].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
         </p>
-        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-409].claim" data-kriterion-format="text">Gartner has predicted that by 2026 a large majority of software engineering organisations will have established platform teams as internal providers of reusable services and tools. This is an analyst adoption forecast, not a measurement of outcomes: it says platform teams will be common, not that they will work.</span></p>
-        <p class="source"><span data-kriterion-source="evidence_by_id[ev-409].source" data-kriterion-format="text">Gartner analyst prediction, widely cited in platform-engineering commentary. ANALYST FORECAST, not primary research</span> · <span data-kriterion-source="evidence_by_id[ev-409].period" data-kriterion-format="text">2023 forecast for 2026</span></p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-409].claim" data-kriterion-format="text">Gartner predicted that by 2026, 80 per cent of software engineering organisations will establish platform teams as internal providers of reusable services and tools. This is an analyst adoption forecast, not a measurement of outcomes: it says platform teams will be common, not that they will work. Note also that &#x27;established a platform team&#x27; is a far lower bar than &#x27;achieved a measurable benefit&#x27;.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-409].source" data-kriterion-format="text">Gartner press release, 28 November 2023, accompanying the Hype Cycle for Software Engineering 2023. ANALYST FORECAST, not primary research</span> · <span data-kriterion-source="evidence_by_id[ev-409].period" data-kriterion-format="text">2023 forecast for 2026</span></p>
         
       </li>
     
@@ -600,8 +588,20 @@
           <span data-kriterion-source="evidence_by_id[ev-410].strength" data-kriterion-format="text" class="badge strength">LOW</span>
           <span data-kriterion-source="evidence_by_id[ev-410].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
         </p>
-        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-410].claim" data-kriterion-format="text">Industry survey work on platform engineering reports that platform adoption is widespread and that organisations self-report benefits in delivery speed and standardisation, while also reporting that platform teams struggle with unclear ownership and with proving value to funders.</span></p>
-        <p class="source"><span data-kriterion-source="evidence_by_id[ev-410].source" data-kriterion-format="text">Puppet, State of DevOps Report -- Platform Engineering editions. INDUSTRY SURVEY: self-reported, self-selected respondents, no control group</span> · <span data-kriterion-source="evidence_by_id[ev-410].period" data-kriterion-format="text">2023-2024</span></p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-410].claim" data-kriterion-format="text">Industry survey work reports platform-team adoption as widespread but young: 51 per cent of respondents had adopted a platform team within three years and 68 per cent self-reported increased developer velocity (2023 edition); 43 per cent had operated one for three to five years or more (2024 edition). These are self-reported sentiment figures, not measured before-and-after deltas.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-410].source" data-kriterion-format="text">Puppet by Perforce, State of DevOps Report -- Platform Engineering editions, 2023 and 2024. VENDOR-SPONSORED INDUSTRY SURVEY: self-selected respondents, self-reported outcomes, no control group</span> · <span data-kriterion-source="evidence_by_id[ev-410].period" data-kriterion-format="text">2023-2024</span></p>
+        
+      </li>
+    
+      <li class="evidence-item" data-evidence-id="ev-415">
+        <p class="evidence-head">
+          <code data-kriterion-source="evidence_by_id[ev-415].id" data-kriterion-format="text">ev-415</code>
+          <span data-kriterion-source="evidence_by_id[ev-415].category" data-kriterion-format="text" class="badge category">EXTERNAL_REFERENCE</span>
+          <span data-kriterion-source="evidence_by_id[ev-415].strength" data-kriterion-format="text" class="badge strength">LOW</span>
+          <span data-kriterion-source="evidence_by_id[ev-415].attestation" data-kriterion-format="text" class="badge attestation">REAL</span>
+        </p>
+        <p class="claim"><span data-kriterion-source="evidence_by_id[ev-415].claim" data-kriterion-format="text">InnerSource pattern literature identifies the Trusted Committer role as the mechanism that makes cross-team contribution work, and treats review and acceptance capacity -- rather than contributor willingness -- as the constraint to fund. The pattern originates at Nike and is documented in use at PayPal, Bosch and Mercado Libre. It is codified practitioner experience, NOT a measured finding: no study quantifies acceptance capacity as the dominant barrier, and any circulated percentage for it should be treated as unverified. The implication for this case is still worth holding: a platform that invites contribution without funding acceptance converts a support queue into a pull-request queue.</span></p>
+        <p class="source"><span data-kriterion-source="evidence_by_id[ev-415].source" data-kriterion-format="text">InnerSource Commons, InnerSource Patterns (&#x27;Trusted Committer&#x27;). PATTERN LITERATURE: codified practice, not empirical measurement</span> · <span data-kriterion-source="evidence_by_id[ev-415].period" data-kriterion-format="text">ongoing</span></p>
         
       </li>
     
@@ -1253,7 +1253,7 @@
         <dt>Run rendered</dt><dd><code data-kriterion-source="run_id" data-kriterion-format="text">hr001-northstar-condC-s1</code></dd>
         <dt>Case</dt><dd><code data-kriterion-source="case.id" data-kriterion-format="text">northstar-internal-developer-platform</code></dd>
         <dt>Frozen ledger version</dt><dd><span data-kriterion-source="ledger_version" data-kriterion-format="count">1</span></dd>
-        <dt>Ledger fingerprint</dt><dd><code data-kriterion-source="ledger_fingerprint" data-kriterion-format="text">254c00ee4d1edc6c9a0362560ff8d8d5df2f56bf6fec113f686124a82b87b623</code></dd>
+        <dt>Ledger fingerprint</dt><dd><code data-kriterion-source="ledger_fingerprint" data-kriterion-format="text">bad57982921a5a0a94dd5a86b4601fd243866819b89d6f910667bd0b2941221c</code></dd>
         <dt>Evidence items in this ledger</dt><dd><span data-kriterion-source="evidence_count" data-kriterion-format="count">65</span></dd>
         <dt>Items recorded as unknown</dt><dd><span data-kriterion-source="unknown_count" data-kriterion-format="count">12</span></dd>
         <dt>Case realism</dt><dd><span data-kriterion-source="case.case_realism" data-kriterion-format="label">AUTHORED FIXTURE</span></dd>

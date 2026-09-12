@@ -24,13 +24,41 @@
 # so a reader sees REAL or AUTHORED on each claim rather than having to trust
 # this header.
 #
-# Provenance ceiling, stated up front: the REAL items cite public work by
-# title, author and publishing organisation. They were checked against the
-# published sources at freeze time, but the case pack carries no URLs, and no
-# claim below should be treated as stronger than the source it names. Where a
-# source is analyst commentary or vendor material rather than primary research,
-# the item says so in its own `source` field and its strength is set
-# accordingly.
+# Provenance, stated up front. Every REAL item below was independently verified
+# against its published source during preparation: existence, exact title,
+# authors, publishing organisation, year, and the specific figure quoted. That
+# check changed the pack, which is the reason for recording it rather than
+# asserting diligence in the abstract. What it caught:
+#
+#   - ev-416 was MISATTRIBUTED. "Paved road" is Netflix terminology; the
+#     Google/O'Reilly security text does not use the phrase. The item now cites
+#     both sources for the parts each actually supports.
+#   - ev-402 was ONE-SIDED. DORA 2024 reports decreased team-level throughput
+#     and stability AND increased individual productivity, satisfaction and
+#     code quality. Quoting only the half that suited the case's tension would
+#     have misrepresented the source. Both halves are now stated.
+#   - ev-419 was ONE-SIDED. The Thoughtworks Radar puts three platform
+#     anti-patterns on Hold but has had "Platform engineering product teams" on
+#     Adopt since 2021. Citing only the Holds would have read as a verdict
+#     against internal platforms, which is not the source's position.
+#   - ev-415 OVERCLAIMED. That acceptance capacity is the dominant InnerSource
+#     bottleneck is codified pattern experience, not a measured finding, and is
+#     now labelled and downgraded to LOW.
+#   - ev-417 OVERCLAIMED. The policy-as-code MECHANISM is documented; the
+#     EFFECT on drift and exception rates is an open evidence gap, and the item
+#     now says so.
+#   - ev-409, ev-410, ev-411, ev-412, ev-413 and ev-414 gained exact figures,
+#     sample sizes, confidence intervals and status corrections.
+#
+# Two residual ceilings remain, and neither is softened. The pack carries NO
+# URLs, so a reader must resolve sources by name. And ev-412's magnitude is
+# explicitly provisional: METR has reported that a replication on newer tools
+# did not reproduce a reliable signal, so the durable claim there is the
+# perception gap, not the 19 per cent.
+#
+# No item should be treated as stronger than the source it names. Where a source
+# is analyst commentary, vendor-sponsored survey or vendor marketing rather than
+# primary research, the item says so in its own `source` field and is set LOW.
 #
 # Economics: kriterion.economics.case_flows.compute_staged_platform_economics.
 # Every number the model spends comes from this pack's own [[assumptions]].
@@ -84,8 +112,8 @@ strength = "HIGH"
 id = "ev-402"
 category = "EXTERNAL_REFERENCE"
 attestation = "REAL"
-claim = "DORA's 2024 State of DevOps research reports that increased AI adoption was associated with a decrease in delivery throughput and in delivery stability, i.e. the productivity gain individual developers perceive did not appear in team-level delivery outcomes."
-source = "DORA / Google Cloud, Accelerate State of DevOps Report 2024"
+claim = "DORA's 2024 research reports that per 25-point increase in AI adoption, delivery throughput fell an estimated 1.5% and delivery stability an estimated 7.2% -- WHILE the same report found AI adoption associated with INCREASED individual productivity, job satisfaction and code quality. Both halves are the finding: the gain individuals perceive is real and did not appear in team-level delivery outcomes. DORA frames this as correlational, not causal, and attributes it to larger batch sizes without matching delivery discipline."
+source = "DORA / Google Cloud, Accelerate State of DevOps Report 2024. Correlational survey research, not a controlled trial. Quoting only the negative half misrepresents the report, so both halves are stated here"
 period = "2024"
 strength = "MEDIUM"
 contradicts = ["ev-413"]
@@ -150,8 +178,8 @@ strength = "MEDIUM"
 id = "ev-409"
 category = "EXTERNAL_REFERENCE"
 attestation = "REAL"
-claim = "Gartner has predicted that by 2026 a large majority of software engineering organisations will have established platform teams as internal providers of reusable services and tools. This is an analyst adoption forecast, not a measurement of outcomes: it says platform teams will be common, not that they will work."
-source = "Gartner analyst prediction, widely cited in platform-engineering commentary. ANALYST FORECAST, not primary research"
+claim = "Gartner predicted that by 2026, 80 per cent of software engineering organisations will establish platform teams as internal providers of reusable services and tools. This is an analyst adoption forecast, not a measurement of outcomes: it says platform teams will be common, not that they will work. Note also that 'established a platform team' is a far lower bar than 'achieved a measurable benefit'."
+source = "Gartner press release, 28 November 2023, accompanying the Hype Cycle for Software Engineering 2023. ANALYST FORECAST, not primary research"
 period = "2023 forecast for 2026"
 strength = "LOW"
 
@@ -159,8 +187,8 @@ strength = "LOW"
 id = "ev-410"
 category = "EXTERNAL_REFERENCE"
 attestation = "REAL"
-claim = "Industry survey work on platform engineering reports that platform adoption is widespread and that organisations self-report benefits in delivery speed and standardisation, while also reporting that platform teams struggle with unclear ownership and with proving value to funders."
-source = "Puppet, State of DevOps Report -- Platform Engineering editions. INDUSTRY SURVEY: self-reported, self-selected respondents, no control group"
+claim = "Industry survey work reports platform-team adoption as widespread but young: 51 per cent of respondents had adopted a platform team within three years and 68 per cent self-reported increased developer velocity (2023 edition); 43 per cent had operated one for three to five years or more (2024 edition). These are self-reported sentiment figures, not measured before-and-after deltas."
+source = "Puppet by Perforce, State of DevOps Report -- Platform Engineering editions, 2023 and 2024. VENDOR-SPONSORED INDUSTRY SURVEY: self-selected respondents, self-reported outcomes, no control group"
 period = "2023-2024"
 strength = "LOW"
 
@@ -168,8 +196,8 @@ strength = "LOW"
 id = "ev-411"
 category = "EXTERNAL_REFERENCE"
 attestation = "REAL"
-claim = "A controlled experiment on AI coding assistance found treated developers completed a specific, self-contained programming task substantially faster than the control group. The measured task was narrow and greenfield; the study does not measure delivery of changes into an existing production codebase."
-source = "Peng, Kalliamvakou, Cihon & Demirer, 'The Impact of AI on Developer Productivity: Evidence from GitHub Copilot' (2023)"
+claim = "A controlled experiment found treated developers completed a task 55.8 per cent faster than controls. The scope matters more than the headline: ONE narrow greenfield task (implementing an HTTP server in JavaScript), 70 recruited freelance developers, and a 95 per cent confidence interval of 21 to 89 per cent. It is not a general productivity measurement and does not measure delivery into an existing production codebase."
+source = "Peng, Kalliamvakou, Cihon & Demirer, 'The Impact of AI on Developer Productivity: Evidence from GitHub Copilot', arXiv:2302.06590 (2023)"
 period = "2023"
 strength = "MEDIUM"
 contradicts = ["ev-412"]
@@ -178,8 +206,8 @@ contradicts = ["ev-412"]
 id = "ev-412"
 category = "EXTERNAL_REFERENCE"
 attestation = "REAL"
-claim = "A randomised controlled trial with experienced open-source developers working on their own mature repositories found that AI tooling made them SLOWER on real tasks, while the same developers believed it had made them faster. The perception gap is the finding that matters here: self-reported developer time saved is not a reliable measurement of time actually saved."
-source = "METR, randomised controlled trial on the effect of AI tools on experienced open-source developer productivity (2025)"
+claim = "A randomised controlled trial -- 16 experienced open-source developers, 246 real tasks on their own mature repositories -- found AI tooling made them 19 per cent SLOWER, while the same developers believed both beforehand and afterwards that it had sped them up by roughly 20 per cent. The perception gap is the finding that matters here: self-reported developer time saved is not a reliable measurement of time actually saved. Treat the 19 per cent itself as provisional -- METR has since reported that a replication attempt on newer tools did not reproduce a reliable signal."
+source = "METR, arXiv:2507.09089 (July 2025), and METR's own subsequent replication note. Small n; the durable claim is the perception gap, not the magnitude"
 period = "2025"
 strength = "MEDIUM"
 contradicts = ["ev-411"]
@@ -188,9 +216,9 @@ contradicts = ["ev-411"]
 id = "ev-413"
 category = "EXTERNAL_REFERENCE"
 attestation = "REAL"
-claim = "An enterprise randomised controlled trial on AI-assisted development reported a measurable reduction in time to complete assigned development tasks in an industrial setting."
-source = "Paradis et al., enterprise randomised controlled trial on AI impact on development speed (Google)"
-period = "2024-2025"
+claim = "An enterprise randomised controlled trial with 96 Google engineers found roughly 21 per cent faster completion of an assigned development task with AI features enabled. The authors explicitly flag a wide confidence interval and state the result will not necessarily generalise beyond that internal tooling and that point in time."
+source = "Paradis et al., 'How much does AI impact development speed? An enterprise-based randomized controlled trial', arXiv:2410.12944 (October 2024)"
+period = "2024"
 strength = "MEDIUM"
 contradicts = ["ev-402"]
 
@@ -198,7 +226,7 @@ contradicts = ["ev-402"]
 id = "ev-414"
 category = "EXTERNAL_REFERENCE"
 attestation = "REAL"
-claim = "Backstage, the developer-portal framework open-sourced by Spotify and donated to the CNCF, is widely adopted as a starting point for internal developer portals. Public practitioner accounts consistently report that the portal itself is the small part of the work and that the plugin, catalogue and ownership-data integration is the large part."
+claim = "Backstage, the developer-portal framework open-sourced by Spotify in March 2020 and a CNCF INCUBATING project since March 2022 (not graduated), is widely adopted as a starting point for internal developer portals. Published practitioner accounts consistently report that the portal itself is the small part of the work and that the plugin, catalogue and ownership-data integration is the large part. Widely circulated adoption counts are vendor-marketing figures, not independently audited."
 source = "Spotify / CNCF Backstage project, and published practitioner accounts of Backstage adoption"
 period = "2020 onward"
 strength = "MEDIUM"
@@ -208,17 +236,17 @@ supports = ["ev-441"]
 id = "ev-415"
 category = "EXTERNAL_REFERENCE"
 attestation = "REAL"
-claim = "InnerSource practice identifies the Trusted Committer role as the mechanism that makes cross-team contribution work, and identifies review and acceptance capacity -- not contributor willingness -- as the usual bottleneck. A platform that invites contribution without funding acceptance capacity converts a support queue into a pull-request queue."
-source = "InnerSource Commons, InnerSource Patterns ('Trusted Committer' and related patterns)"
+claim = "InnerSource pattern literature identifies the Trusted Committer role as the mechanism that makes cross-team contribution work, and treats review and acceptance capacity -- rather than contributor willingness -- as the constraint to fund. The pattern originates at Nike and is documented in use at PayPal, Bosch and Mercado Libre. It is codified practitioner experience, NOT a measured finding: no study quantifies acceptance capacity as the dominant barrier, and any circulated percentage for it should be treated as unverified. The implication for this case is still worth holding: a platform that invites contribution without funding acceptance converts a support queue into a pull-request queue."
+source = "InnerSource Commons, InnerSource Patterns ('Trusted Committer'). PATTERN LITERATURE: codified practice, not empirical measurement"
 period = "ongoing"
-strength = "MEDIUM"
+strength = "LOW"
 
 [[evidence]]
 id = "ev-416"
 category = "EXTERNAL_REFERENCE"
 attestation = "REAL"
-claim = "The 'paved road' pattern -- secure, supported defaults that are the easiest path for a developer to take -- is documented as the practical mechanism by which large engineering organisations achieve consistent security and reliability properties without per-change approval."
-source = "Adkins, Beyer, Blankinship, Lewandowski, Oprea & Stubblefield, 'Building Secure and Reliable Systems' (Google / O'Reilly, 2020)"
+claim = "Two separate sources, correctly attributed. The 'paved road' term -- a supported, secure default path that is the easiest one for a developer to take -- is NETFLIX engineering terminology from their application-security practice. Separately, Google's security and reliability text argues for 'security and reliability by default', i.e. building the safe behaviour into the platform and frameworks so that individual teams do not re-derive it. Together they describe the mechanism by which large engineering organisations obtain consistent properties without per-change approval."
+source = "Netflix engineering publications for 'paved road'; Adkins, Beyer, Blankinship, Lewandowski, Oprea & Stubblefield, 'Building Secure and Reliable Systems' (Google / O'Reilly, 2020) for secure-by-default. NOTE: the Google text does not use the phrase 'paved road'; conflating the two is a common misattribution and is avoided here deliberately"
 period = "2020"
 strength = "HIGH"
 supports = ["ev-434"]
@@ -227,8 +255,8 @@ supports = ["ev-434"]
 id = "ev-417"
 category = "EXTERNAL_REFERENCE"
 attestation = "REAL"
-claim = "Policy-as-code engines (e.g. Open Policy Agent, a CNCF graduated project) provide a documented mechanism for expressing and enforcing controls uniformly across heterogeneous infrastructure, and secure-development frameworks such as NIST SP 800-218 (SSDF) call for controls to be applied consistently and automatically rather than per-project."
-source = "CNCF Open Policy Agent project; NIST Special Publication 800-218, Secure Software Development Framework"
+claim = "Policy-as-code engines (Open Policy Agent graduated in the CNCF in January 2021) provide a documented MECHANISM for expressing and enforcing controls uniformly across heterogeneous infrastructure, and NIST SP 800-218 (SSDF v1.1, February 2022) calls for automation to improve the accuracy and reproducibility of secure-development practices. What is NOT established is the EFFECT: published evidence that policy-as-code measurably reduces configuration drift or policy-exception rates is thin and largely vendor-authored, and the academic literature names this as an open evidence gap. The mechanism is real; the magnitude is not evidenced."
+source = "CNCF Open Policy Agent project; NIST Special Publication 800-218 v1.1, Secure Software Development Framework. The effect-size caveat is stated because no source establishes it"
 period = "2021-2022"
 strength = "MEDIUM"
 
@@ -245,9 +273,9 @@ strength = "MEDIUM"
 id = "ev-419"
 category = "EXTERNAL_REFERENCE"
 attestation = "REAL"
-claim = "Published technology-radar and practitioner commentary repeatedly cautions against internal developer platforms built without a product mindset, against platform teams operating as ticket-takers, and against 'overambitious' platforms that attempt to abstract every workflow. The named failure mode is a platform that adds an abstraction layer without removing the underlying complexity."
-source = "Thoughtworks Technology Radar entries on platform engineering and internal developer platforms; corroborating practitioner literature"
-period = "2020-2024"
+claim = "The Thoughtworks Technology Radar places three distinct platform ANTI-PATTERNS on Hold: 'Ticket-driven platform operating models' and 'Layered platform teams' (Vol. 24, April 2021), and 'Miscellaneous platform teams' (Vol. 26, March 2022). The shared failure mode is a platform that adds an abstraction or a queue without removing underlying complexity. Crucially, this is NOT a verdict against internal platforms: the same Radar has placed 'Platform engineering product teams' on Adopt since 2021. The caution is about the operating model, not the investment."
+source = "Thoughtworks Technology Radar, Vols. 24 and 26. The Adopt blip is cited alongside the Hold blips deliberately, because quoting only the Holds would misrepresent the source's position"
+period = "2021-2022"
 strength = "MEDIUM"
 contradicts = ["ev-445"]
 

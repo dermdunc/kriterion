@@ -11,7 +11,7 @@
     "the incremental option's benefit relative to building a full platform"
   ],
   "confidence_band": "LOW",
-  "created_at": "2026-09-12T19:49:46Z",
+  "created_at": "2026-09-12T20:19:46Z",
   "duration": "18 months",
   "id": "hr001-northstar-condC-s1-synthesis-recommendation",
   "schema_version": "kriterion/v0.1",

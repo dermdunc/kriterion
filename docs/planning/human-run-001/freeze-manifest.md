@@ -26,12 +26,12 @@ the case.
 | Condition | C (full committee, phases 0–8) |
 | Seed | 1 |
 | Evidence ledger version | 1 |
-| Evidence ledger fingerprint | `254c00ee4d1edc6c9a0362560ff8d8d5df2f56bf6fec113f686124a82b87b623` (65 items) |
+| Evidence ledger fingerprint | `bad57982921a5a0a94dd5a86b4601fd243866819b89d6f910667bd0b2941221c` (65 items) — see the reproducibility note below before treating this as a content hash |
 | Executor | `HektonLocalExecutor` (local Ollama, `qwen2.5:14b-instruct`) |
 | Members responding | 5/5 initial, 5/5 revised |
 | Narrative Integrity | **0 violations**; `kriterion decision-page` refuses to write a failing page, so the written page *is* the pass |
 | Governance | `kriterion validate-run` reports clean, no violations |
-| Generated page | `docs/human-run-001/decision-page.html`, 168,268 bytes on disk (the CLI reports 168,142 — that is the character count of the rendered string; the file is UTF-8 and contains multi-byte characters) |
+| Generated page | `docs/human-run-001/decision-page.html`, 171,281 bytes on disk (the CLI reports 171,155 — that is the character count of the rendered string; the file is UTF-8 and contains multi-byte characters) |
 
 ## Evidence ledger composition
 
@@ -94,15 +94,33 @@ $K -m kriterion.cli decision-page hr001-northstar-condC-s1 $C --runs-dir runs \
 `load_all_charters` is called with the literal relative path `charters`, with no flag to override
 it.
 
-**What reproduces exactly.** `kriterion econ`, `kriterion ledger freeze` and
-`kriterion decision-page` are deterministic. Re-running them against the committed case pack and
-the committed run artifacts reproduces `economics.json`, `ledger.frozen.json` and the page
-byte-for-byte, and their hashes below are a reproducibility claim.
+### What reproduces, and what does not — measured, not assumed
 
-**What does not.** `kriterion run` calls a local language model, so re-running it will not
-reproduce `positions_*.json`, `challenges.json`, `belief_updates.json`, `evidence_requests.json`,
-`narrative.txt` or `recommendation.json` byte-for-byte. Their hashes below are a freeze, not a
-reproducibility claim about the model.
+**`kriterion econ`, `ledger freeze` and `decision-page` are deterministic in value but not in
+bytes.** This was tested by running each twice against unchanged inputs and diffing the output.
+
+Every decision-relevant value is identical across runs: the NPV triple, peak funding, payback, all
+nine tornado entries in the same order, all 65 ledger items with the same categories, attestations
+and ordering, and the whole generated page once timestamps and hashes are masked.
+
+What differs is `created_at`, which each command stamps with the wall-clock time of the write.
+
+**Consequence, and it is a product finding rather than a caveat:** because the ledger fingerprint
+is computed as `fingerprint(ledger.items)` and each item carries its own freshly stamped
+`created_at`, **the fingerprint changes on every freeze even when no evidence has changed.** It is
+therefore a freeze identifier, not a content fingerprint, and it cannot be used to detect whether a
+ledger's evidence has been altered between two freezes — which is the job a fingerprint on a frozen
+evidence ledger would be expected to do. Recorded in `opus-pivot-report.md`; not fixed here,
+because changing the identity semantics of a frozen ledger is not a change to make while
+pre-registering an experiment.
+
+So: **to verify this case, compare values, not bytes.** The hashes below pin the exact artifacts the
+participant responded to. They are a freeze. Re-running the deterministic commands will reproduce
+every number and every claim, and will not reproduce these hashes.
+
+**`kriterion run` is not deterministic at all.** It calls a local language model, so re-running it
+will not reproduce `positions_*.json`, `challenges.json`, `belief_updates.json`,
+`evidence_requests.json`, `narrative.txt` or `recommendation.json` — in value or in bytes.
 
 To verify the page against the committed run without rewriting it:
 
@@ -123,18 +141,23 @@ find runs/hr001-northstar-condC-s1 -type f | sort \
 ## Content hashes (sha256)
 
 ```text
-b34472ca751986646a6347eb45d016b40f192c0d0636f9541c41a2df6244fc83  cases/northstar-internal-developer-platform/case.toml
-9be5e9cd59d44c42891ecf4c1144da60336483786725099f39506775fe8d3b88  docs/human-run-001/decision-page.html
-c92fc131973cb84baf7fc555f50182cf196ca99b7d647f3e3277d5dae6a0cf1f  runs/hr001-northstar-condC-s1/belief_updates.json
-7084179f942b6cc5295787fe20fd7a7be8d566912bf0223d0a354c9f871d60ec  runs/hr001-northstar-condC-s1/challenges.json
-790f5ae328b0dca15ed8195a42d60ebcff3935f511eebc3ec685c31d457ec838  runs/hr001-northstar-condC-s1/economics.json
-2405e14d65010de5d4f682ce87eb819ee32a1cc6d0c3ada7216c73eb067ce063  runs/hr001-northstar-condC-s1/evidence_requests.json
-7b491e42e99e3a7fd9fa68964102fcabf8ae131d198b9169f58f6b5772400985  runs/hr001-northstar-condC-s1/ledger.frozen.json
+69dbd1f692dcfdbc78c6c2b48686b48174c67c6e90bdde36c165f3fbb64e1f26  cases/northstar-internal-developer-platform/case.toml
+570b36fc44ea3b88342ce4a4886a2c583c6634e69d57242022abed73413af3c5  docs/human-run-001/decision-page.html
+7a7052a7ad36478900a6591150d3cd7600fd766f268c4ca829b3e1b0e2f74e54  runs/hr001-northstar-condC-s1/belief_updates.json
+23fb42dd2cce3e25ad418405f1cc714599d2279e46215d055807fdc16506ee8f  runs/hr001-northstar-condC-s1/challenges.json
+a23583c00c4ce2a674ec23d99b8506557a47bb31b1546ab7c26da39b6b9e8f57  runs/hr001-northstar-condC-s1/economics.json
+f94adb95b2341553887f974e19787d47d50c8bead62bb92ed9e688987f92ee48  runs/hr001-northstar-condC-s1/evidence_requests.json
+88f3d097a564141b9cde18c8329aae82794bbdc6bc3d2c9f4991731a10315294  runs/hr001-northstar-condC-s1/ledger.frozen.json
 193478b601a3919b98ffff7181f46f59a20c2e660a41066b55d72f1c5f96454d  runs/hr001-northstar-condC-s1/narrative.txt
-c7a5d2c9c85073da5d08cf7be0fb9881f531619074a894f301ce5fc9b4f76c92  runs/hr001-northstar-condC-s1/positions_initial.json
-818a05a66631d8ce967725e77b1299fbd701552a43e0e730b2952bb0931f0f5e  runs/hr001-northstar-condC-s1/positions_revised.json
-954942441646a31f240574abfbd046f30268cf442000a7a7927cfd7694a96b85  runs/hr001-northstar-condC-s1/recommendation.json
+d4e4934027b8423a9b534ed21969165a19ee1a57479bf4fa5852576652fba61a  runs/hr001-northstar-condC-s1/positions_initial.json
+328dd07556c5097094846dab8c734179f268b219c33921cdfdd42f2f7a0576b6  runs/hr001-northstar-condC-s1/positions_revised.json
+685307bea2c44896e8c6bf93e4854a445f7db95058945c1969fa6b787c66f56d  runs/hr001-northstar-condC-s1/recommendation.json
 ```
+
+`case.toml`, `challenges.json`, `belief_updates.json`, `evidence_requests.json`, `narrative.txt`,
+`positions_*.json` and `recommendation.json` are stable — nothing rewrites them.
+`ledger.frozen.json`, `economics.json` and the page carry a write-time `created_at` and will hash
+differently if regenerated, per the note above.
 
 `recommendation.json` is hashed here but **must not be opened before T1**. Neither must
 `narrative.txt` or either `positions_*.json` — they state or imply the recommendation.
