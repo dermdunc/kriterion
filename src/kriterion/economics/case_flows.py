@@ -156,11 +156,29 @@ def case_c_cash_flows(*, ask_amount_gbp: float, ongoing_annual_cost_gbp: float =
     return [year_1, year_2]
 
 
-def compute_case_c_economics(
+def compute_cost_only_economics(
     case_id: str, ask_amount_gbp: float, assumptions_by_id: dict[str, Assumption]
 ) -> EconomicsResult:
+    """Cost-only economics for any case whose benefit side cannot be priced.
+
+    Same construction as Case C -- only costs are summed, so NPV is negative in
+    every scenario and `payback_years` is always None -- with one difference:
+    `as-avoided-loss-band-gbp` is OPTIONAL here.
+
+    That option exists because a real decision can be worse-evidenced than a
+    fixture. Case C at least has a risk-modelled avoided-loss band to report
+    alongside (never inside) the NPV table. A case whose every benefit driver
+    is an UNKNOWN cannot honestly state even a band, and the only faithful
+    representation is to carry no benefit figure at all: `avoided_loss_*` stay
+    None, and every view must then say the benefit side is unquantified rather
+    than render a zero. Inventing a band to fill the field would be exactly the
+    fabrication the evidence taxonomy exists to prevent.
+
+    The cash-flow shape is `case_c_cash_flows` -- that function is not in fact
+    Case-C-specific, only its name is historical.
+    """
     ongoing = assumptions_by_id["as-ongoing-annual-cost-gbp"]
-    avoided_loss = assumptions_by_id["as-avoided-loss-band-gbp"]
+    avoided_loss = assumptions_by_id.get("as-avoided-loss-band-gbp")
 
     base_flows = case_c_cash_flows(ask_amount_gbp=ask_amount_gbp, ongoing_annual_cost_gbp=ongoing.value)
     low_cost, high_cost = ongoing.range
@@ -186,6 +204,21 @@ def compute_case_c_economics(
         payback_years=payback_period(base_flows),  # always None -- no positive inflow, ever
         peak_funding_gbp=peak_funding(base_flows),
         tornado=tornado,
-        avoided_loss_low_gbp=avoided_loss.range[0],
-        avoided_loss_high_gbp=avoided_loss.range[1],
+        avoided_loss_low_gbp=avoided_loss.range[0] if avoided_loss is not None else None,
+        avoided_loss_high_gbp=avoided_loss.range[1] if avoided_loss is not None else None,
     )
+
+
+def compute_case_c_economics(
+    case_id: str, ask_amount_gbp: float, assumptions_by_id: dict[str, Assumption]
+) -> EconomicsResult:
+    """Case C (invisible-ai-control-plane). Cost-only, plus the avoided-loss
+    band Case C does declare -- required here rather than optional, because
+    Case C's whole point is that rejecting on NPV alone while an avoided-loss
+    band sits beside it is the failure mode."""
+    if "as-avoided-loss-band-gbp" not in assumptions_by_id:
+        raise KeyError(
+            "as-avoided-loss-band-gbp is required for Case C's economics "
+            "(use compute_cost_only_economics for a case with no benefit band)"
+        )
+    return compute_cost_only_economics(case_id, ask_amount_gbp, assumptions_by_id)

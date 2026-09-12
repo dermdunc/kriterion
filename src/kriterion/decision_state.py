@@ -63,6 +63,13 @@ def _build_param_maps() -> None:
     _PARAM_TO_ASSUMPTION_ID["invisible-ai-control-plane"] = {
         "ongoing_annual_cost_gbp": "as-ongoing-annual-cost-gbp",
     }
+    # Human Run 001's case uses the same cost-only model, so the same single
+    # parameter. Without this entry the page would name the raw engine
+    # parameter instead of the case pack's own ranged assumption, and the
+    # dominant-sensitivity claim would lose its evidence strength and owner.
+    _PARAM_TO_ASSUMPTION_ID["international-platform-engineering"] = {
+        "ongoing_annual_cost_gbp": "as-ongoing-annual-cost-gbp",
+    }
 
 
 _build_param_maps()
