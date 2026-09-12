@@ -67,7 +67,7 @@ def _build_param_maps() -> None:
     # parameter. Without this entry the page would name the raw engine
     # parameter instead of the case pack's own ranged assumption, and the
     # dominant-sensitivity claim would lose its evidence strength and owner.
-    _PARAM_TO_ASSUMPTION_ID["international-platform-engineering"] = {
+    _PARAM_TO_ASSUMPTION_ID["global-platform-engineering"] = {
         "ongoing_annual_cost_gbp": "as-ongoing-annual-cost-gbp",
     }
 

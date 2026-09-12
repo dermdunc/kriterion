@@ -1,7 +1,7 @@
 """The cost-only economics model, and the one thing it adds over Case C's:
 a case with no benefit band at all must report absence, never zero.
 
-Human Run 001's case (`international-platform-engineering`) is the reason this
+Human Run 001's case (`global-platform-engineering`) is the reason this
 exists. Its ledger has no MEASURED items and every benefit-side driver is an
 UNKNOWN, so it cannot honestly declare even an avoided-loss band. The case pack
 itself lives outside this repository (docs/planning/human-run-001/README.md
@@ -16,7 +16,7 @@ from kriterion.economics import CASE_ECONOMICS_FUNCTIONS, compute_cost_only_econ
 from kriterion.economics.case_flows import compute_case_c_economics
 
 ASK_GBP = 1_200_000
-HUMAN_RUN_001_CASE_ID = "international-platform-engineering"
+HUMAN_RUN_001_CASE_ID = "global-platform-engineering"
 
 
 def _ongoing_only() -> dict[str, Assumption]:
