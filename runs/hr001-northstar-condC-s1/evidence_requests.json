@@ -1,0 +1,92 @@
+[
+  {
+    "created_at": "2026-09-12T20:19:46Z",
+    "description": "Clarify whether Northstar's primary constraint is toolchain fragmentation or another factor such as architectural coupling, delivery-process overhead, etc.",
+    "id": "hr001-northstar-condC-s1-cfo-req-0",
+    "member": "cfo",
+    "schema_version": "kriterion/v0.1",
+    "status": "unavailable",
+    "would_change": "Recommendation to either FUND_EXPERIMENT if the constraint is confirmed or DEFER if not."
+  },
+  {
+    "created_at": "2026-09-12T20:19:46Z",
+    "description": "Provide a costed comparison of an incremental option (integrating and standardizing the existing toolchain) versus building a full platform.",
+    "id": "hr001-northstar-condC-s1-cfo-req-1",
+    "member": "cfo",
+    "schema_version": "kriterion/v0.1",
+    "status": "unavailable",
+    "would_change": "Economic model projections and overall recommendation"
+  },
+  {
+    "created_at": "2026-09-12T20:19:46Z",
+    "description": "Clarify whether Northstar's primary constraint is toolchain fragmentation or another factor such as architectural coupling, delivery-process overhead, etc.",
+    "id": "hr001-northstar-condC-s1-cto-req-0",
+    "member": "cto",
+    "schema_version": "kriterion/v0.1",
+    "status": "unavailable",
+    "would_change": "Recommendation to either FUND_EXPERIMENT if the constraint is confirmed or DEFER if not."
+  },
+  {
+    "created_at": "2026-09-12T20:19:46Z",
+    "description": "Provide a costed comparison of an incremental option (integrating and standardizing the existing toolchain) versus building a full platform.",
+    "id": "hr001-northstar-condC-s1-cto-req-1",
+    "member": "cto",
+    "schema_version": "kriterion/v0.1",
+    "status": "unavailable",
+    "would_change": "Economic model projections and overall recommendation"
+  },
+  {
+    "created_at": "2026-09-12T20:19:46Z",
+    "description": "Clarify whether Northstar's primary constraint is toolchain fragmentation or another factor such as architectural coupling, delivery-process overhead, etc.",
+    "id": "hr001-northstar-condC-s1-ciso-req-0",
+    "member": "ciso",
+    "schema_version": "kriterion/v0.1",
+    "status": "unavailable",
+    "would_change": "Recommendation to either FUND_EXPERIMENT if the constraint is confirmed or DEFER if not."
+  },
+  {
+    "created_at": "2026-09-12T20:19:46Z",
+    "description": "Provide a costed comparison of an incremental option (integrating and standardizing the existing toolchain) versus building a full platform.",
+    "id": "hr001-northstar-condC-s1-ciso-req-1",
+    "member": "ciso",
+    "schema_version": "kriterion/v0.1",
+    "status": "unavailable",
+    "would_change": "Economic model projections and overall recommendation"
+  },
+  {
+    "created_at": "2026-09-12T20:19:46Z",
+    "description": "Clarify whether Northstar's primary constraint is toolchain fragmentation or another factor such as architectural coupling, delivery-process overhead, etc.",
+    "id": "hr001-northstar-condC-s1-cro_compliance-req-0",
+    "member": "cro_compliance",
+    "schema_version": "kriterion/v0.1",
+    "status": "unavailable",
+    "would_change": "Recommendation to either FUND_EXPERIMENT if the constraint is confirmed or DEFER if not."
+  },
+  {
+    "created_at": "2026-09-12T20:19:46Z",
+    "description": "Provide a costed comparison of an incremental option (integrating and standardizing the existing toolchain) versus building a full platform.",
+    "id": "hr001-northstar-condC-s1-cro_compliance-req-1",
+    "member": "cro_compliance",
+    "schema_version": "kriterion/v0.1",
+    "status": "unavailable",
+    "would_change": "Economic model projections and overall recommendation"
+  },
+  {
+    "created_at": "2026-09-12T20:19:46Z",
+    "description": "Clarify whether Northstar's primary constraint is toolchain fragmentation or another factor such as architectural coupling, delivery-process overhead, etc.",
+    "id": "hr001-northstar-condC-s1-business_executive-req-0",
+    "member": "business_executive",
+    "schema_version": "kriterion/v0.1",
+    "status": "unavailable",
+    "would_change": "Recommendation to either FUND_EXPERIMENT if the constraint is confirmed or DEFER if not."
+  },
+  {
+    "created_at": "2026-09-12T20:19:46Z",
+    "description": "Provide a costed comparison of an incremental option (integrating and standardizing the existing toolchain) versus building a full platform.",
+    "id": "hr001-northstar-condC-s1-business_executive-req-1",
+    "member": "business_executive",
+    "schema_version": "kriterion/v0.1",
+    "status": "unavailable",
+    "would_change": "Economic model projections and overall recommendation"
+  }
+]

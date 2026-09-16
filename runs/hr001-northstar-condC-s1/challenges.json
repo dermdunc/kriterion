@@ -1,0 +1,73 @@
+[
+  {
+    "author_role": "cfo",
+    "content": "Despite significant uncertainties around Northstar's binding constraint and the true productivity attribution, the proposed platform investment could unlock substantial developer efficiency gains. The economics model projects potential benefits exceeding costs over a multi-year horizon, even with conservative assumptions on hourly cost savings and adoption rates. Staging funding to validate initial outcomes mitigates risk while preserving upside potential, aligning with prudent capital allocation principles.",
+    "created_at": "2026-09-12T20:19:46Z",
+    "evidence_refs": [],
+    "id": "ch:case_for-cfo",
+    "schema_version": "kriterion/v0.1",
+    "type": "case_for"
+  },
+  {
+    "author_role": "business_executive",
+    "content": "The proposal lacks clarity on whether toolchain fragmentation is Northstar's binding constraint, as ev-460 highlights a critical gap in understanding the root cause of inefficiencies. Additionally, significant uncertainties around long-term operating costs (ev-455), adoption rates (ev-454), and true productivity attribution (ev-453) cast doubt on the economic model's projections, potentially overestimating benefits. Furthermore, the absence of a costed comparison for an incremental option versus building a full platform (ev-463) raises concerns about inflated benefit estimates, suggesting that deferring this decision is prudent to address these critical unknowns and ensure alignment with strategic objectives.",
+    "created_at": "2026-09-12T20:19:46Z",
+    "evidence_refs": [
+      "ev-460",
+      "ev-455",
+      "ev-454",
+      "ev-453",
+      "ev-463"
+    ],
+    "id": "ch:case_against-business_executive",
+    "schema_version": "kriterion/v0.1",
+    "type": "case_against"
+  },
+  {
+    "author_role": "cfo",
+    "content": "One year after funding the Northstar platform initiative, it becomes clear that the initial assumption about toolchain fragmentation being the primary constraint was incorrect. This misalignment means that the resources allocated to address this specific issue are not addressing Northstar's actual binding constraints, leading to wasted investment and delayed progress on higher-priority initiatives. The lack of a robust costed comparison for incremental improvements versus building a full platform further exacerbates the issue, as the chosen solution proves to be more expensive and less effective than alternative approaches.",
+    "created_at": "2026-09-12T20:19:46Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-cfo",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "cto",
+    "content": "One year after funding the Northstar platform rollout, it becomes clear that the adoption rate among developers is significantly lower than projected due to the complexity and heterogeneity of real-world workloads beyond stateless web services. This underwhelming uptake means that the anticipated productivity gains and cost savings do not materialize, while the ongoing operational costs for sustaining the platform at scale are much higher than estimated, consuming valuable engineering resources that could have been allocated to other critical technical priorities.",
+    "created_at": "2026-09-12T20:19:46Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-cto",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "ciso",
+    "content": "One year after funding the platform build, it becomes evident that the actual adoption rate among developers is significantly lower than projected, leading to underutilized resources and missed security standardization opportunities. This results in a higher-than-expected number of security and operational policy exceptions across diverse workloads, undermining the intended reduction in risk exposure and compliance assurance.",
+    "created_at": "2026-09-12T20:19:46Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-ciso",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "cro_compliance",
+    "content": "The decision to fund Northstar's platform initiative without a clear understanding of its binding constraint and the potential long-term operating costs led to an overestimation of benefits and underestimation of risks. Additionally, the lack of a documented human review process for AI-suggested changes to regulated systems, as recommended by new regulatory guidance, created compliance vulnerabilities that were not adequately addressed in the decision-making process.",
+    "created_at": "2026-09-12T20:19:46Z",
+    "evidence_refs": [],
+    "id": "ch:premortem-cro_compliance",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  },
+  {
+    "author_role": "business_executive",
+    "content": "One year after funding Northstar, it becomes clear that the rollout fails to address the actual binding constraints of the organization, as identified by ev-460. The initiative overemphasizes toolchain fragmentation while neglecting other critical issues like architectural coupling and delivery-process overhead, leading to a misallocation of resources and minimal impact on strategic objectives such as cycle-time reduction and retention.",
+    "created_at": "2026-09-12T20:19:46Z",
+    "evidence_refs": [
+      "ev-460"
+    ],
+    "id": "ch:premortem-business_executive",
+    "schema_version": "kriterion/v0.1",
+    "type": "premortem"
+  }
+]

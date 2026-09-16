@@ -1,0 +1,187 @@
+[
+  {
+    "blocking_unknowns": [
+      "Whether Northstar's binding constraint is toolchain fragmentation at all",
+      "The long-term operating cost of the platform organisation beyond the modelled range",
+      "The true productivity attribution -- what share of developer time saved becomes delivered business value"
+    ],
+    "confidence_band": "LOW",
+    "created_at": "2026-09-12T20:19:46Z",
+    "distrusted_assumption": null,
+    "id": "hr001-northstar-condC-s1-cfo-initial",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-460"
+        ],
+        "text": "The case lacks a clear understanding of Northstar's binding constraint and whether toolchain fragmentation is the primary issue that needs addressing."
+      },
+      {
+        "evidence_refs": [
+          "ev-453",
+          "ev-454",
+          "ev-455"
+        ],
+        "text": "There are significant unknowns regarding the long-term operating costs, adoption rates, and the true productivity attribution which could significantly impact the economic model's projections."
+      },
+      {
+        "evidence_refs": [
+          "ev-463"
+        ],
+        "text": "The case does not provide a costed comparison of an incremental option versus building a full platform, which could lead to overestimating the benefits of the proposed solution."
+      }
+    ],
+    "member": "cfo",
+    "phase": "initial",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  },
+  {
+    "blocking_unknowns": [
+      "Whether Northstar's binding constraint is toolchain fragmentation at all",
+      "The long-term operating cost of the platform organisation beyond the modelled range",
+      "The true productivity attribution -- what share of developer time saved becomes delivered business value"
+    ],
+    "confidence_band": "LOW",
+    "created_at": "2026-09-12T20:19:46Z",
+    "distrusted_assumption": null,
+    "id": "hr001-northstar-condC-s1-cto-initial",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-460"
+        ],
+        "text": "The case lacks a clear understanding of Northstar's binding constraint and whether toolchain fragmentation is the primary issue that needs addressing."
+      },
+      {
+        "evidence_refs": [
+          "ev-453",
+          "ev-454",
+          "ev-455"
+        ],
+        "text": "There are significant unknowns regarding the long-term operating costs, adoption rates, and the true productivity attribution which could significantly impact the economic model's projections."
+      },
+      {
+        "evidence_refs": [
+          "ev-463"
+        ],
+        "text": "The case does not provide a costed comparison of an incremental option versus building a full platform, which could lead to overestimating the benefits of the proposed solution."
+      }
+    ],
+    "member": "cto",
+    "phase": "initial",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  },
+  {
+    "blocking_unknowns": [
+      "Whether Northstar's binding constraint is toolchain fragmentation at all",
+      "The long-term operating cost of the platform organisation beyond the modelled range",
+      "The true productivity attribution -- what share of developer time saved becomes delivered business value"
+    ],
+    "confidence_band": "LOW",
+    "created_at": "2026-09-12T20:19:46Z",
+    "distrusted_assumption": null,
+    "id": "hr001-northstar-condC-s1-ciso-initial",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-460"
+        ],
+        "text": "The case lacks a clear understanding of Northstar's binding constraint and whether toolchain fragmentation is the primary issue that needs addressing."
+      },
+      {
+        "evidence_refs": [
+          "ev-453",
+          "ev-454",
+          "ev-455"
+        ],
+        "text": "There are significant unknowns regarding the long-term operating costs, adoption rates, and the true productivity attribution which could significantly impact the economic model's projections."
+      },
+      {
+        "evidence_refs": [
+          "ev-463"
+        ],
+        "text": "The case does not provide a costed comparison of an incremental option versus building a full platform, which could lead to overestimating the benefits of the proposed solution."
+      }
+    ],
+    "member": "ciso",
+    "phase": "initial",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  },
+  {
+    "blocking_unknowns": [
+      "Whether Northstar's binding constraint is toolchain fragmentation at all",
+      "The long-term operating cost of the platform organisation beyond the modelled range",
+      "The true productivity attribution -- what share of developer time saved becomes delivered business value"
+    ],
+    "confidence_band": "LOW",
+    "created_at": "2026-09-12T20:19:46Z",
+    "distrusted_assumption": null,
+    "id": "hr001-northstar-condC-s1-cro_compliance-initial",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-460"
+        ],
+        "text": "The case lacks a clear understanding of Northstar's binding constraint and whether toolchain fragmentation is the primary issue that needs addressing."
+      },
+      {
+        "evidence_refs": [
+          "ev-453",
+          "ev-454",
+          "ev-455"
+        ],
+        "text": "There are significant unknowns regarding the long-term operating costs, adoption rates, and the true productivity attribution which could significantly impact the economic model's projections."
+      },
+      {
+        "evidence_refs": [
+          "ev-463"
+        ],
+        "text": "The case does not provide a costed comparison of an incremental option versus building a full platform, which could lead to overestimating the benefits of the proposed solution."
+      }
+    ],
+    "member": "cro_compliance",
+    "phase": "initial",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  },
+  {
+    "blocking_unknowns": [
+      "Whether Northstar's binding constraint is toolchain fragmentation at all",
+      "The long-term operating cost of the platform organisation beyond the modelled range",
+      "The true productivity attribution -- what share of developer time saved becomes delivered business value"
+    ],
+    "confidence_band": "LOW",
+    "created_at": "2026-09-12T20:19:46Z",
+    "distrusted_assumption": null,
+    "id": "hr001-northstar-condC-s1-business_executive-initial",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-460"
+        ],
+        "text": "The case lacks a clear understanding of Northstar's binding constraint and whether toolchain fragmentation is the primary issue that needs addressing."
+      },
+      {
+        "evidence_refs": [
+          "ev-453",
+          "ev-454",
+          "ev-455"
+        ],
+        "text": "There are significant unknowns regarding the long-term operating costs, adoption rates, and the true productivity attribution which could significantly impact the economic model's projections."
+      },
+      {
+        "evidence_refs": [
+          "ev-463"
+        ],
+        "text": "The case does not provide a costed comparison of an incremental option versus building a full platform, which could lead to overestimating the benefits of the proposed solution."
+      }
+    ],
+    "member": "business_executive",
+    "phase": "initial",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  }
+]

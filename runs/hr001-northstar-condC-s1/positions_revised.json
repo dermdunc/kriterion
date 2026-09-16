@@ -1,0 +1,186 @@
+[
+  {
+    "blocking_unknowns": [
+      "whether toolchain fragmentation is Northstar's binding constraint",
+      "the total cost of ownership over five years at Northstar's scale",
+      "the opportunity cost of GBP3m-GBP5m and roughly 20 engineers"
+    ],
+    "confidence_band": "MEDIUM",
+    "created_at": "2026-09-12T20:19:46Z",
+    "distrusted_assumption": null,
+    "id": "hr001-northstar-condC-s1-cfo-revised",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-460"
+        ],
+        "text": "The case lacks a clear understanding of Northstar's binding constraint and whether toolchain fragmentation is the primary issue that needs addressing."
+      },
+      {
+        "evidence_refs": [
+          "ev-453",
+          "ev-454",
+          "ev-455"
+        ],
+        "text": "There are significant unknowns regarding the long-term operating costs, adoption rates, and the true productivity attribution which could significantly impact the economic model's projections."
+      },
+      {
+        "evidence_refs": [
+          "ev-463"
+        ],
+        "text": "The case does not provide a costed comparison of an incremental option versus building a full platform, which could lead to overestimating the benefits of the proposed solution."
+      }
+    ],
+    "member": "cfo",
+    "phase": "revised",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  },
+  {
+    "blocking_unknowns": [
+      "whether toolchain fragmentation is Northstar's binding constraint",
+      "the total cost of ownership over five years at Northstar's scale",
+      "the opportunity cost of GBP3m-GBP5m and roughly 20 engineers"
+    ],
+    "confidence_band": "MEDIUM",
+    "created_at": "2026-09-12T20:19:46Z",
+    "distrusted_assumption": null,
+    "id": "hr001-northstar-condC-s1-cto-revised",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-460"
+        ],
+        "text": "The case lacks a clear understanding of Northstar's binding constraint and whether toolchain fragmentation is the primary issue that needs addressing."
+      },
+      {
+        "evidence_refs": [
+          "ev-453",
+          "ev-454",
+          "ev-455"
+        ],
+        "text": "There are significant unknowns regarding the long-term operating costs, adoption rates, and the true productivity attribution which could significantly impact the economic model's projections."
+      },
+      {
+        "evidence_refs": [
+          "ev-463"
+        ],
+        "text": "The case does not provide a costed comparison of an incremental option versus building a full platform, which could lead to overestimating the benefits of the proposed solution."
+      }
+    ],
+    "member": "cto",
+    "phase": "revised",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  },
+  {
+    "blocking_unknowns": [
+      "whether toolchain fragmentation is Northstar's binding constraint",
+      "the total cost of ownership over five years at Northstar's scale",
+      "whether golden paths measurably reduce security and operational policy exceptions"
+    ],
+    "confidence_band": "LOW",
+    "created_at": "2026-09-12T20:19:46Z",
+    "distrusted_assumption": null,
+    "id": "hr001-northstar-condC-s1-ciso-revised",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-460"
+        ],
+        "text": "The case lacks a clear understanding of Northstar's binding constraint and whether toolchain fragmentation is the primary issue that needs addressing."
+      },
+      {
+        "evidence_refs": [
+          "ev-453",
+          "ev-454",
+          "ev-455"
+        ],
+        "text": "There are significant unknowns regarding the long-term operating costs, adoption rates, and the true productivity attribution which could significantly impact the economic model's projections."
+      },
+      {
+        "evidence_refs": [
+          "ev-463"
+        ],
+        "text": "The case does not provide a costed comparison of an incremental option versus building a full platform, which could lead to overestimating the benefits of the proposed solution."
+      }
+    ],
+    "member": "ciso",
+    "phase": "revised",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  },
+  {
+    "blocking_unknowns": [
+      "whether toolchain fragmentation is Northstar's binding constraint",
+      "the true productivity attribution of platform investment"
+    ],
+    "confidence_band": "LOW",
+    "created_at": "2026-09-12T20:19:46Z",
+    "distrusted_assumption": null,
+    "id": "hr001-northstar-condC-s1-cro_compliance-revised",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-460"
+        ],
+        "text": "The case lacks a clear understanding of Northstar's binding constraint and whether toolchain fragmentation is the primary issue that needs addressing."
+      },
+      {
+        "evidence_refs": [
+          "ev-453",
+          "ev-454",
+          "ev-455"
+        ],
+        "text": "There are significant unknowns regarding the long-term operating costs, adoption rates, and the true productivity attribution which could significantly impact the economic model's projections."
+      },
+      {
+        "evidence_refs": [
+          "ev-463"
+        ],
+        "text": "The case does not provide a costed comparison of an incremental option versus building a full platform, which could lead to overestimating the benefits of the proposed solution."
+      }
+    ],
+    "member": "cro_compliance",
+    "phase": "revised",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  },
+  {
+    "blocking_unknowns": [
+      "whether toolchain fragmentation is Northstar's binding constraint",
+      "the true cost of ownership over five years",
+      "the incremental option's benefit relative to building a full platform"
+    ],
+    "confidence_band": "MEDIUM",
+    "created_at": "2026-09-12T20:19:46Z",
+    "distrusted_assumption": null,
+    "id": "hr001-northstar-condC-s1-business_executive-revised",
+    "key_reasons": [
+      {
+        "evidence_refs": [
+          "ev-460"
+        ],
+        "text": "The case lacks a clear understanding of Northstar's binding constraint and whether toolchain fragmentation is the primary issue that needs addressing."
+      },
+      {
+        "evidence_refs": [
+          "ev-453",
+          "ev-454",
+          "ev-455"
+        ],
+        "text": "There are significant unknowns regarding the long-term operating costs, adoption rates, and the true productivity attribution which could significantly impact the economic model's projections."
+      },
+      {
+        "evidence_refs": [
+          "ev-463"
+        ],
+        "text": "The case does not provide a costed comparison of an incremental option versus building a full platform, which could lead to overestimating the benefits of the proposed solution."
+      }
+    ],
+    "member": "business_executive",
+    "phase": "revised",
+    "recommendation": "DEFER",
+    "schema_version": "kriterion/v0.1"
+  }
+]

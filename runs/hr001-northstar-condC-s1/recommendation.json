@@ -1,0 +1,38 @@
+{
+  "action": "DEFER",
+  "amount": 4000000,
+  "conditions": [
+    "whether toolchain fragmentation is Northstar's binding constraint",
+    "the total cost of ownership over five years at Northstar's scale",
+    "the opportunity cost of GBP3m-GBP5m and roughly 20 engineers",
+    "whether golden paths measurably reduce security and operational policy exceptions",
+    "the true productivity attribution of platform investment",
+    "the true cost of ownership over five years",
+    "the incremental option's benefit relative to building a full platform"
+  ],
+  "confidence_band": "LOW",
+  "created_at": "2026-09-12T20:19:46Z",
+  "duration": "18 months",
+  "id": "hr001-northstar-condC-s1-synthesis-recommendation",
+  "schema_version": "kriterion/v0.1",
+  "stop_conditions": [],
+  "strongest_dissent": {
+    "refs": [
+      "ev-460",
+      "ev-455",
+      "ev-454",
+      "ev-453",
+      "ev-463"
+    ],
+    "verbatim": "The proposal lacks clarity on whether toolchain fragmentation is Northstar's binding constraint, as ev-460 highlights a critical gap in understanding the root cause of inefficiencies. Additionally, significant uncertainties around long-term operating costs (ev-455), adoption rates (ev-454), and true productivity attribution (ev-453) cast doubt on the economic model's projections, potentially overestimating benefits. Furthermore, the absence of a costed comparison for an incremental option versus building a full platform (ev-463) raises concerns about inflated benefit estimates, suggesting that deferring this decision is prudent to address these critical unknowns and ensure alignment with strategic objectives."
+  },
+  "unresolved_unknowns": [
+    "whether toolchain fragmentation is Northstar's binding constraint",
+    "the total cost of ownership over five years at Northstar's scale",
+    "the opportunity cost of GBP3m-GBP5m and roughly 20 engineers",
+    "whether golden paths measurably reduce security and operational policy exceptions",
+    "the true productivity attribution of platform investment",
+    "the true cost of ownership over five years",
+    "the incremental option's benefit relative to building a full platform"
+  ]
+}

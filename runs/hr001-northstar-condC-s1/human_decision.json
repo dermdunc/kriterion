@@ -1,0 +1,13 @@
+{
+  "action": "FUND_EXPERIMENT",
+  "created_at": "2026-09-16T20:56:46Z",
+  "decided_at": "2026-09-16T20:56:46Z",
+  "disposition": "modify",
+  "id": "hr001-northstar-condC-s1-human-decision",
+  "overrides": [
+    "Recommendation was DEFER (\u00a30 committed, full \u00a34m ask deferred). Human decision funds the bounded \u00a31.5m first-stage validation instead of deferring everything."
+  ],
+  "owner": "cto",
+  "rationale": "T1 and T2 both independently concluded a bounded ~\u00a31.5m, 9-month first-stage investment was warranted, before and after seeing the recommendation -- not the full \u00a34m ask, and not zero. The synthetic recommendation's DEFER is compatible with that in substance (it defers the full ask, which was never the plan), but recording DEFER as the literal human decision would misrepresent a real, deliberate funding action as no action. Funding proceeds against the 13-point evidence gate recorded at T1/T2: causal evidence fragmentation is the binding constraint, per-region adoption thresholds, empirical benefit-attribution measurement, a costed incremental-option comparison, and a credible cross-BU operating model -- before any further capital is released.",
+  "schema_version": "kriterion/v0.1"
+}
