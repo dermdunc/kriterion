@@ -468,12 +468,42 @@ make the public story truthful, and prepare for Human Run 001 without building m
       drift stand-in, "until 2026-09-11 the run never wrote them to disk", and per-seat requests
       "derived from what the run did persist". Regenerating the page did not publish it, and no
       agent should push, merge or deploy this. **This is the single highest-value open action.**
-- [ ] **Human Run 001.** Unchanged and still the next real experiment: does Kriterion improve the
-      quality of an accountable human technology investment decision? Nothing in the code now
-      blocks it (see the readiness assessment in the V1.1.1 report). What it needs is the
-      accountable owner, one recorded `kriterion decide` with a rationale in their own words, and
-      their answer to "which section changed your mind", captured before they read the page a
-      second time.
+- [x] **Human Run 001.** Done 2026-09-16, merged in #7. Ran on a fully public, fully reproducible
+      fictional case (`northstar-internal-developer-platform` — Northstar Software Group, an
+      Internal Developer Platform investment) rather than the real operating-model decision
+      originally prepared, which is preserved privately and paused after T0 as
+      `kriterion-private/practitioner-run-p01/`, not part of this repo. T0/T1/T2 recorded live:
+      confidence 62→52→52, evidence gate tightened 10→13 conditions between T0 and T1 (adding a
+      causal-vs-correlational distinction on whether the case's premise — toolchain fragmentation —
+      is even the binding constraint, and per-region rather than aggregate adoption thresholds); the
+      recommendation reveal (`DEFER`, `LOW`) then changed nothing. Real `kriterion decide`
+      (`FUND_EXPERIMENT`, disposition `MODIFY` — explicitly not the recommendation's literal defer)
+      and real `kriterion contract` followed. Falsification conditions 1/2/3/5 did not fire;
+      condition 4 fired *partially* and is reported as such. Full private record:
+      `kriterion-private/human-run-001-northstar/completed-impact-log.md`.
+- [ ] **Fix the ranged-assumption percent-formatting bug**, caught live during Human Run 001:
+      `as-friction-hours-saved-per-engineer` and `as-engineers-reached-year-1`/`year-2` render with
+      `data-kriterion-format="percent"` in the "Ranged assumptions" table (showing "9000%",
+      "70000%", "190000%") when they are raw counts, not percentages. The accompanying prose has the
+      correct values throughout, so nothing downstream is wrong — only this one table's format tag.
+      Narrative Integrity's binding/check machinery does not catch this class of bug: it verifies a
+      bound value is faithfully re-derived from state, not that the *formatter chosen for it* is the
+      right one. Worth naming as a real gap in what the checker can catch, not just fixing the three
+      rows.
+- [ ] **Charter coupling, now confirmed live on two independent cases** (the private practitioner
+      run and this Northstar run): all five role-chartered seats return word-for-word identical
+      reasoning and evidence requests, both before and after the anonymised challenge round. This is
+      the single most-replicated finding in the project and has never been fixed, only observed.
+      Deliberately not fixed during Human Run 001 (per its own scope guard) — now the strongest
+      remaining candidate for the next real engineering increment.
+- [ ] **Outcome-contract `--measure` format cannot express a per-region target.** Human Run 001's
+      real contract needed "≥70% adoption in *each* region", and the `name:baseline:target:source`
+      format only holds one aggregate figure; the per-region intent had to be pushed into prose
+      instead of the structured record. A real, small domain-model gap surfaced by actually using
+      the CLI for a real decision, not a synthetic one.
+- [ ] **Resume Practitioner Run P01** (`kriterion-private/practitioner-run-p01/`, real Global
+      Platform Engineering decision, paused after T0, not part of this repo) when there is time for
+      a private continuation — T1/T2/decision were deliberately never recorded against it.
 
 ### Interactive Decision Demo — BACKLOG (sequenced after Human Run 001)
 
