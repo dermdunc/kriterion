@@ -132,7 +132,7 @@
           <dd><span data-kriterion-source="capital_at_risk_gbp" data-kriterion-format="gbp" class="headline">£0</span>
               <span class="basis"><span data-kriterion-source="capital_at_risk_basis" data-kriterion-format="text">DEFER commits no funding. The recommendation record still carries the full ask as its amount field; that is the ask, not a commitment.</span></span></dd>
           <dt>What the accountable human has committed</dt>
-          <dd><span class="basis"><span data-kriterion-source="human_capital_commitment" data-kriterion-format="text">No human decision has been recorded, so nothing is committed.</span></span></dd>
+          <dd><span class="basis"><span data-kriterion-source="human_capital_commitment" data-kriterion-format="text">FUND_EXPERIMENT authorises funding. The human-decision record carries an action but no amount, so the committed sum is not recorded on it; what binds this decision is the outcome contract&#x27;s measures and review date.</span></span></dd>
           <dt>Dominant uncertainty</dt>
           <dd><span data-kriterion-source="primary_uncertainty_label" data-kriterion-format="text">as-benefit-attribution-factor</span>, worth
               <span data-kriterion-source="primary_sensitivity_swing_gbp" data-kriterion-format="gbp_millions">£2.95m</span> of swing on the
@@ -1191,9 +1191,22 @@
       <h2 id="h-human">Human decision</h2>
       <p>Kept structurally separate from the machine's suggestion, in a different record type and
          a different file. An agent may not write this one.</p>
-      <p class="empty-state"><span data-kriterion-source="human_decision_status" data-kriterion-format="text">No human decision has been recorded for this case. Kriterion will not record one on an accountable human&#x27;s behalf.</span></p>
+      
+        <dl class="snapshot">
+          <dt>Action taken</dt>
+          <dd><span data-kriterion-source="human_decision.action" data-kriterion-format="label" class="headline">FUND EXPERIMENT</span></dd>
+          <dt>Disposition toward the machine's suggestion</dt>
+          <dd><span data-kriterion-source="human_decision.disposition" data-kriterion-format="label">MODIFY</span></dd>
+          <dt>Accountable owner</dt><dd><span data-kriterion-source="human_decision.owner" data-kriterion-format="text">cto</span></dd>
+          <dt>Recorded on</dt><dd><span data-kriterion-source="human_decision.decided_at" data-kriterion-format="text">2026-09-16T20:56:46Z</span></dd>
+          <dt>What this commits</dt>
+          <dd><span data-kriterion-source="human_capital_commitment" data-kriterion-format="text">FUND_EXPERIMENT authorises funding. The human-decision record carries an action but no amount, so the committed sum is not recorded on it; what binds this decision is the outcome contract&#x27;s measures and review date.</span></dd>
+        </dl>
+        <p class="rationale"><span data-kriterion-source="human_decision.rationale" data-kriterion-format="text">T1 and T2 both independently concluded a bounded ~£1.5m, 9-month first-stage investment was warranted, before and after seeing the recommendation -- not the full £4m ask, and not zero. The synthetic recommendation&#x27;s DEFER is compatible with that in substance (it defers the full ask, which was never the plan), but recording DEFER as the literal human decision would misrepresent a real, deliberate funding action as no action. Funding proceeds against the 13-point evidence gate recorded at T1/T2: causal evidence fragmentation is the binding constraint, per-region adoption thresholds, empirical benefit-attribution measurement, a costed incremental-option comparison, and a credible cross-BU operating model -- before any further capital is released.</span></p>
+        <h3>Overrides</h3><ul><li><span data-kriterion-source="human_decision.overrides[0]" data-kriterion-format="text">Recommendation was DEFER (£0 committed, full £4m ask deferred). Human decision funds the bounded £1.5m first-stage validation instead of deferring everything.</span></li></ul>
+        
       <h3>What happens next</h3>
-      <p class="next-step"><span data-kriterion-source="next_step" data-kriterion-format="text">The accountable decision owner for this case (cto) records a decision against this run with `kriterion decide`, stating whether they accept, modify or reject the machine&#x27;s suggestion and why. Until that happens the run is undecided, and Kriterion reports it as undecided.</span></p>
+      <p class="next-step"><span data-kriterion-source="next_step" data-kriterion-format="text">At the review date recorded in the outcome contract (2027-06-16), the recorded measures are compared against what actually happened, and the next decision (SCALE the platform investment if the evidence gate is met; HOLD or STOP and return to incremental toolchain improvements if not) is taken on that evidence.</span></p>
     </section>
     
     <section data-kriterion-role="outcome-contract" id="outcome-contract"
@@ -1201,7 +1214,16 @@
       <h2 id="h-contract">Outcome contract</h2>
       <p>What a funded decision commits to measuring, by when, and what would end it. Kriterion
          refuses to validate a funded run without one.</p>
-      <p class="empty-state"><span data-kriterion-source="outcome_contract_status" data-kriterion-format="text">No outcome contract exists, because no human decision has been recorded. A contract is required only once a human commits funding.</span></p>
+      
+        <dl class="snapshot">
+          <dt>Baseline date</dt><dd><span data-kriterion-source="outcome_contract.baseline_date" data-kriterion-format="text">2026-09-16</span></dd>
+          <dt>Review date</dt><dd><span data-kriterion-source="outcome_contract.review_date" data-kriterion-format="text">2027-06-16</span></dd>
+          <dt>Owner</dt><dd><span data-kriterion-source="outcome_contract.owner" data-kriterion-format="text">cto</span></dd>
+          <dt>Next decision due</dt><dd><span data-kriterion-source="outcome_contract.next_decision" data-kriterion-format="text">SCALE the platform investment if the evidence gate is met; HOLD or STOP and return to incremental toolchain improvements if not</span></dd>
+        </dl>
+        <h3>Measures</h3><ul><li><span data-kriterion-source="outcome_contract.measures[0].name" data-kriterion-format="text">onboarding_time_weeks</span>: <span data-kriterion-source="outcome_contract.measures[0].baseline" data-kriterion-format="text">6</span> &rarr; <span data-kriterion-source="outcome_contract.measures[0].target" data-kriterion-format="text">4.2</span> (<code data-kriterion-source="outcome_contract.measures[0].source_ref" data-kriterion-format="text">ev-422</code>)</li><li><span data-kriterion-source="outcome_contract.measures[1].name" data-kriterion-format="text">provisioning_days_p50</span>: <span data-kriterion-source="outcome_contract.measures[1].baseline" data-kriterion-format="text">2</span> &rarr; <span data-kriterion-source="outcome_contract.measures[1].target" data-kriterion-format="text">2</span> (<code data-kriterion-source="outcome_contract.measures[1].source_ref" data-kriterion-format="text">ev-424</code>)</li><li><span data-kriterion-source="outcome_contract.measures[2].name" data-kriterion-format="text">support_requests_per_quarter</span>: <span data-kriterion-source="outcome_contract.measures[2].baseline" data-kriterion-format="text">1900</span> &rarr; <span data-kriterion-source="outcome_contract.measures[2].target" data-kriterion-format="text">1330</span> (<code data-kriterion-source="outcome_contract.measures[2].source_ref" data-kriterion-format="text">ev-425</code>)</li><li><span data-kriterion-source="outcome_contract.measures[3].name" data-kriterion-format="text">platform_adoption_rate</span>: <span data-kriterion-source="outcome_contract.measures[3].baseline" data-kriterion-format="text">0</span> &rarr; <span data-kriterion-source="outcome_contract.measures[3].target" data-kriterion-format="text">70</span> (<code data-kriterion-source="outcome_contract.measures[3].source_ref" data-kriterion-format="text">as-platform-adoption-rate</code>)</li></ul>
+        <h3>Kill criteria</h3><ul><li><span data-kriterion-source="outcome_contract.kill_criteria[0]" data-kriterion-format="text">Fragmentation not shown to be a material, causal driver of delivery delay across &gt;=2 regions and &gt;=2 workload types; or as-benefit-attribution-factor cannot be empirically estimated above the assumed 25% base case; or adoption falls below 70% in any participating region with no credible remediation; or a costed incremental-toolchain comparison shows equivalent benefit at materially lower cost</span></li></ul>
+        
     </section>
     
     <section data-kriterion-role="trust" id="trust" aria-labelledby="h-trust">

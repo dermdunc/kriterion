@@ -1,0 +1,38 @@
+{
+  "baseline_date": "2026-09-16",
+  "created_at": "2026-09-16T20:58:31Z",
+  "id": "hr001-northstar-condC-s1-outcome-contract",
+  "kill_criteria": [
+    "Fragmentation not shown to be a material, causal driver of delivery delay across >=2 regions and >=2 workload types; or as-benefit-attribution-factor cannot be empirically estimated above the assumed 25% base case; or adoption falls below 70% in any participating region with no credible remediation; or a costed incremental-toolchain comparison shows equivalent benefit at materially lower cost"
+  ],
+  "measures": [
+    {
+      "baseline": "6",
+      "name": "onboarding_time_weeks",
+      "source_ref": "ev-422",
+      "target": "4.2"
+    },
+    {
+      "baseline": "2",
+      "name": "provisioning_days_p50",
+      "source_ref": "ev-424",
+      "target": "2"
+    },
+    {
+      "baseline": "1900",
+      "name": "support_requests_per_quarter",
+      "source_ref": "ev-425",
+      "target": "1330"
+    },
+    {
+      "baseline": "0",
+      "name": "platform_adoption_rate",
+      "source_ref": "as-platform-adoption-rate",
+      "target": "70"
+    }
+  ],
+  "next_decision": "SCALE the platform investment if the evidence gate is met; HOLD or STOP and return to incremental toolchain improvements if not",
+  "owner": "cto",
+  "review_date": "2027-06-16",
+  "schema_version": "kriterion/v0.1"
+}
